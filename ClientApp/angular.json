@@ -127,6 +127,15 @@
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "ExamPortal:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ExamPortal:serve:production"
+            },
+            "ci": {
+              "devServerTarget": "ExamPortal:serve:production",
+              "protractorConfig": "e2e/protractor-ci.conf.js"
+            }
           }
         },
         "lint": {

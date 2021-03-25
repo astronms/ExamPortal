@@ -1,6 +1,8 @@
-name: Build
+name: BuildClientApp
 on:
   push:
+    paths:
+      - 'ClientApp/*'
 
 jobs:
   build:
