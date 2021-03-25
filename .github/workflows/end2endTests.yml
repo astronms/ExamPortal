@@ -4,7 +4,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  build:
+  e2e:
     runs-on: ubuntu-latest
     env:
       working-directory: ./ClientApp

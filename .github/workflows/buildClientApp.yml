@@ -5,7 +5,7 @@ on:
       - 'ClientApp/*'
 
 jobs:
-  build:
+  build-angular:
     runs-on: ubuntu-latest
     env:
       working-directory: ./ClientApp
