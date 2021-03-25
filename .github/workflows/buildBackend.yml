@@ -8,8 +8,6 @@ on:
 jobs:
   build-dotnet:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./ClientApp
     strategy:
       matrix:
         dotnet: [5.x]
