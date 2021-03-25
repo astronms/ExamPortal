@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet: [5.x]
+        dotnet: [5.0.201]
     
     name: Dotnet ${{ matrix.dotnet }} sample
     steps:
