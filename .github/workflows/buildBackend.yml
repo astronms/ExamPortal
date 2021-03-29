@@ -1,0 +1,22 @@
+name: BuildBackend
+on:
+  push:
+    paths-ignore:
+      - 'ClientApp/**'
+      - '.github/**'
+
+jobs:
+  build-dotnet:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: [5.0.201]
+    
+    name: Dotnet ${{ matrix.dotnet }} sample
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - run: dotnet build

@@ -1,0 +1,36 @@
+name: BuildClientApp
+on:
+  push:
+    paths:
+      - 'ClientApp/*'
+
+jobs:
+  build-angular:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./ClientApp
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: npm install and npm run build
+        run: |
+          npm ci
+          npm run build:ci
+        working-directory: ${{env.working-directory}}
