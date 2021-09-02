@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of, pipe } from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -10,21 +13,22 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent {
   invalidLogin: boolean;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor( private router: Router, private authService: AuthService ) { }
 
-  login(form: NgForm) {
-    const credentials = JSON.stringify(form.value);
-    this.http.post("http://localhost:5000/api/auth/login", credentials, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    }).subscribe(response => {
-      const token = (<any>response).token;
-      localStorage.setItem("jwt", token);
-      this.invalidLogin = false;
-      this.router.navigate(["/"]);
-    }, err => {
-      this.invalidLogin = true;
-    });
+  signIn(form: NgForm) {
+    this.authService.login(form.value)
+      .subscribe(result => {
+        const token = (<any>result).token;
+        if(result && token) {
+          localStorage.setItem("jwt", token);
+          this.router.navigate(["/"]);
+        }
+        else {
+          this.invalidLogin = true;
+        }
+      },
+      err => {
+        this.invalidLogin = true;
+      });
   }
-}
+ }

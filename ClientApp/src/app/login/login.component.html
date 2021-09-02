@@ -1,4 +1,4 @@
-<form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+<form class="form-signin" #loginForm="ngForm" (ngSubmit)="signIn(loginForm)">
   <div class="container-fluid">
     <h2 class="form-signin-heading">Login</h2>
     <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password.</div>

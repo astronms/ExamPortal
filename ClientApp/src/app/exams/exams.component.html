@@ -1,0 +1,19 @@
+<h1>Dostępne egzaminy</h1>
+<p *ngIf="!exams"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="exams">
+  <thead>
+    <tr>
+      <th>Tytuł</th>
+      <th>Czas trwania</th>
+      <th>Ilość pytań</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exam of exams">
+      <td>{{ exam.title }}</td>
+      <td>{{ exam.duration }}</td>
+      <td>{{ exam.questionsNumber }}</td>
+    </tr>
+  </tbody>
+</table>
