@@ -1,12 +1,14 @@
 <h1>Dostępne egzaminy</h1>
-<p *ngIf="!exams"><em>Loading...</em></p>
+<p *ngIf="!exams"><em>Brak.</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="exams">
   <thead>
     <tr>
       <th>Tytuł</th>
-      <th>Czas trwania</th>
+      <th>Czas trwanias</th>
       <th>Ilość pytań</th>
+      <th>Data</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +16,8 @@
       <td>{{ exam.title }}</td>
       <td>{{ exam.duration }}</td>
       <td>{{ exam.questionsNumber }}</td>
+      <td>{{ exam.startDate }}</td>
+      <button type="button" class="btn btn-dark" *ngIf="isExamAvailable(exam.id)" (click)="startExam(exam.id)">Start</button>
     </tr>
   </tbody>
 </table>

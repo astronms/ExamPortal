@@ -16,6 +16,7 @@ import { ExamsComponent } from './exams/exams.component';
 import { AuthService } from './services/auth.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
+import { ExamComponent } from './exam/exam.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -29,7 +30,8 @@ export function tokenGetter() {
     CounterComponent,
     FetchDataComponent,
     LoginComponent,
-    ExamsComponent
+    ExamsComponent,
+    ExamComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,6 +43,7 @@ export function tokenGetter() {
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent },
       { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard]},
+      { path: 'exam', component: ExamComponent, canActivate: [AuthGuard]},
     ]),
     JwtModule.forRoot({
       config: {

@@ -1,0 +1,10 @@
+<h1 *ngIf="question">{{ question.content }}</h1>
+<p>
+  Pozostały czas: <label *ngIf="question">{{ timeLeft }}</label>
+</p>
+<div *ngIf="question">
+  <div *ngFor="let answer of question.answers">
+    <label>{{ answer.content }}</label>
+    <label><input type="checkbox" checked data-toggle="toggle"></label>
+  </div>
+</div>

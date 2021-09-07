@@ -1,3 +1,5 @@
+using System;
+
 namespace ExamPortal.Models
 {
     public class ExamModel
@@ -6,5 +8,6 @@ namespace ExamPortal.Models
         public string Title { get; set; }
         public int Duration { get; set; }
         public int QuestionsNumber { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }
