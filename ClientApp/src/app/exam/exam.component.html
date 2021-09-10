@@ -1,0 +1,16 @@
+<div *ngIf="!examFinished">
+  <h1 *ngIf="question">#{{ question.id }}: {{ question.content }}</h1>
+  <p>
+    Pozostały czas: <label *ngIf="question">{{ timeLeft }}</label>
+  </p>
+  <div *ngIf="question">
+    <div *ngFor="let answer of question.answers">
+      <label>{{ answer.content }}</label>
+      <input type="checkbox" checked data-toggle="toggle">
+    </div>
+    <button type="button" class="btn btn-dark" (click)="sendAnswers()">Zapisz</button>
+  </div>
+</div>
+<div *ngIf="examFinished">
+  <h1>Egzamin zakończył się!</h1>
+</div>
