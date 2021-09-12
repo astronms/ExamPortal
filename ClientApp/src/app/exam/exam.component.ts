@@ -32,14 +32,23 @@ export class ExamComponent {
       
   }
 
+  ngOnDestroy() {
+    clearInterval(this.interval);
+  }
+
   sendAnswers()
   {
+    console.log("answers sent.");
     clearInterval(this.interval);
     this.http.get(this.baseUrl + "api/exam/saveanswers", {params: {
       id: this.question.id.toString()
-    }});
-    this.finishExamIfNeeded();
-    this.ngOnInit();
+    }}).subscribe(result => {
+      this.finishExamIfNeeded();
+      this.ngOnInit();
+    }, error => {
+      console.log(error);
+    });
+    
   }
 
   private getQuestion() {
@@ -56,7 +65,7 @@ export class ExamComponent {
           if(this.timeLeft > 0) {
             this.timeLeft--;
           } else {
-            this.sendAnswers;
+            this.sendAnswers();
           }
         },1000)
       }, error => {

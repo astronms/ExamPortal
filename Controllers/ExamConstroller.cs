@@ -87,13 +87,14 @@ namespace ExamPortal.Controllers
             {
                 string json = System.IO.File.ReadAllText("state.txt");
                 var state = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                if(state["answered"] == "true" || Int32.Parse(state["time_start"]) + Questions[Int32.Parse(state["question_number"])].Time < new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()) {
+                if(state["answered"] == "true" || Convert.ToInt64(state["time_start"]) + Questions[Int32.Parse(state["question_number"])].Time < new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds()) {
                     int next_question = Int32.Parse(state["question_number"]) + 1;
                     if(next_question < 3)
                     {
                         state["question_number"] = next_question.ToString();
                         state["question_id"] = Questions[next_question].Id.ToString();
                         state["time_start"] = "";
+                        state["answered"] = "false";
                         System.IO.File.WriteAllText("state.txt", JsonConvert.SerializeObject( state ));
                         var reply = new GetQuestionReplyModel();
                         reply.ExamQuestionQuantity = 3;
@@ -105,11 +106,10 @@ namespace ExamPortal.Controllers
                     return BadRequest("Exam already passed.");
                 }
                 else {
-                    Console.WriteLine("Refresh");
                     var reply = new GetQuestionReplyModel();
                     reply.ExamQuestionQuantity = 3;
                     reply.CurrentQuestionNumber = Int32.Parse(state["question_number"]) + 1;
-                    reply.LeftTime = Convert.ToInt32(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() - Int32.Parse(state["time_start"]));
+                    reply.LeftTime = Convert.ToInt32(Convert.ToInt64(state["time_start"]) + Questions[Int32.Parse(state["question_number"])].Time - new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds());
                     reply.Question = Questions[Int32.Parse(state["question_number"])];
                     return Ok(reply);
                 }
