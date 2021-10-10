@@ -1,7 +1,7 @@
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -10,10 +10,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, @Inject('BASE_URL')private baseUrl: string,) { }
 
   login(credentials) : Observable<any> {
-    let response = this.http.post("http://localhost:5000/api/auth/login", JSON.stringify(credentials))
+    let response = this.http.post(this.baseUrl + 'api/auth/login', JSON.stringify(credentials))
       .pipe(map(response => {
         const token = (<any>response).token;
         if(response && token)
