@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from "@auth0/angular-jwt";
+import localPl from '@angular/common/locales/pl';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -12,13 +13,17 @@ import { LoginComponent } from './login/login.component';
 import { ExamsComponent } from './exams/exams.component';
 
 import { AuthService } from './services/auth.service';
+import { ExamService } from './services/exam.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { ExamComponent } from './exam/exam.component';
+import { registerLocaleData } from '@angular/common';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
+
+registerLocaleData(localPl);
 
 @NgModule({
   declarations: [
@@ -48,7 +53,9 @@ export function tokenGetter() {
     })
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'pl' },
     AuthService,
+    ExamService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
