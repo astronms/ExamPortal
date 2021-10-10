@@ -1,10 +1,9 @@
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { __core_private_testing_placeholder__ } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +13,27 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   login(credentials) : Observable<any> {
-    return this.http.post("http://localhost:5000/api/auth/login", JSON.stringify(credentials), {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    }).pipe(
-      catchError(this.handleError)
-    );
+    let response = this.http.post("http://localhost:5000/api/auth/login", JSON.stringify(credentials))
+      .pipe(map(response => {
+        const token = (<any>response).token;
+        if(response && token)
+        {
+          localStorage.setItem("jwt", token);
+          return true;
+        }
+        return false;
+
+    }), catchError(this.handleError));
+    
+    return response;
   }
 
   isUserAuthenticated() {
     const token: string = localStorage.getItem("jwt");
-    if (token && !this.jwtHelper.isTokenExpired(token)) {
+    if (token && !this.jwtHelper.isTokenExpired(token))
       return true;
-    }
-    else {
+    else
       return false;
-    }
   }
   
   public logOut() {

@@ -1,10 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { catchError, map } from 'rxjs/operators';
-import { Observable, of, pipe } from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -18,17 +15,13 @@ export class LoginComponent {
   signIn(form: NgForm) {
     this.authService.login(form.value)
       .subscribe(result => {
-        const token = (<any>result).token;
-        if(result && token) {
-          localStorage.setItem("jwt", token);
+        if(result)
           this.router.navigate(["/"]);
-        }
-        else {
+        else
           this.invalidLogin = true;
-        }
       },
-      err => {
-        this.invalidLogin = true;
-      });
+      err =>
+        this.invalidLogin = true
+      );
   }
  }
