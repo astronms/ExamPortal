@@ -10,10 +10,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, @Inject('BASE_URL')private baseUrl: string,) { }
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, @Inject('BASE_URL')private baseUrl: string) { }
 
   login(credentials) : Observable<any> {
-    let response = this.http.post(this.baseUrl + 'api/auth/login', JSON.stringify(credentials))
+    return this.http.post(this.baseUrl + 'api/auth/login', JSON.stringify(credentials), {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })})
       .pipe(map(response => {
         const token = (<any>response).token;
         if(response && token)
@@ -24,8 +27,6 @@ export class AuthService {
         return false;
 
     }), catchError(this.handleError));
-    
-    return response;
   }
 
   isUserAuthenticated() {
