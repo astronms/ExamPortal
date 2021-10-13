@@ -42,24 +42,10 @@ export class ExamService {
       this.questionReply = result;
       this.timeLeft = result.leftTime;
       this.question = result.question;
+      this.setQuestionTimer();
       return result.question;
     }), catchError(this.handleError)); //ToDo: Catch 404 Response(Exam has been passed). 
   }
-
-  setQuestionTimer() 
-  {
-    this.timeout = setTimeout(() => {
-      console.log("Tiimer xd");
-      this.sendAnswers();
-    }, this.timeLeft * 1000); 
-
-    this.http.get(this.baseUrl + "api/exam/starttime", {params: {
-      id: this.question.id.toString()
-    }}).subscribe(result => {}, error => {
-      console.log(error);
-    });
-  }
-
 
   sendAnswers() : void
   {
@@ -78,6 +64,20 @@ export class ExamService {
 
   removeTimer() : void {
     clearTimeout(this.timeout);
+  }
+
+  private setQuestionTimer() 
+  {
+    this.timeout = setTimeout(() => {
+      console.log("Timer xd");
+      this.sendAnswers();
+    }, this.timeLeft * 1000); 
+
+    this.http.get(this.baseUrl + "api/exam/starttime", {params: {
+      id: this.question.id.toString()
+    }}).subscribe(result => {}, error => {
+      console.log(error);
+    });
   }
 
   private finishExamIfNeeded() : void {

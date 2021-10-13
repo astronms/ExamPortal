@@ -44,7 +44,6 @@ export class ExamComponent {
       this.examService.getQuestion().subscribe(result => {
         this.question = result; //TODO: handle error
         this.timeLeft = this.examService.getLeftTime();
-        this.examService.setQuestionTimer(); //I know that this rather should be in service but I want to start timeout (on server) when we load a full view to the user. It still is not sure so this need to be reworked. 
         this.setViewTimer();
       }); 
     }
