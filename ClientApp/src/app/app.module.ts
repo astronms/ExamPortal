@@ -13,7 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { ExamsComponent } from './exams/exams.component';
 
 import { AuthService } from './services/auth.service';
-import { ExamService } from './services/exam.service';
+import { ExamsService } from './services/exams.service';
+import { ExamFactoryService } from './services/exam-factory.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { ExamComponent } from './exam/exam.component';
@@ -55,7 +56,8 @@ registerLocaleData(localPl);
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },
     AuthService,
-    ExamService,
+    ExamsService,
+    ExamFactoryService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
