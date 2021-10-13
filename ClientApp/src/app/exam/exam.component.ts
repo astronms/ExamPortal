@@ -1,7 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, Query } from '@angular/core';
-import { Router } from '@angular/router';
+import { QuestionModel } from '../models/question.model';
+import { GetQuestionReplyModel } from '../models/get-question-reply.model';
 import { AuthService } from '../services/auth.service';
+import { ExamService } from '../services/exam.service';
+
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-exam',
@@ -15,87 +19,52 @@ export class ExamComponent {
 
   public examFinished: boolean = false;
 
-  private interval: any;
+  private interval: any = null;
 
-  constructor(private router: Router, @Inject('BASE_URL')private baseUrl: string, private authService: AuthService, private http: HttpClient ) { }
+  constructor(private router: Router, private authService: AuthService, private examService: ExamService) { }
 
   ngOnInit() {
-    var pendingExam = localStorage.getItem("pendingExam");
-
-    if(pendingExam != "true")
+    if(!this.examService.isPendingExam())
       this.router.navigate(["/exams"]);
-    
-    if(!this.examFinished)
-      this.getQuestion();
     else
-      localStorage.removeItem("pendingExam");
-      
+      this.nextQuestion();
   }
 
   ngOnDestroy() {
+    this.examService.removeTimer();
     clearInterval(this.interval);
   }
 
-  sendAnswers()
-  {
-    console.log("answers sent.");
-    clearInterval(this.interval);
-    this.http.get(this.baseUrl + "api/exam/saveanswers", {params: {
-      id: this.question.id.toString()
-    }}).subscribe(result => {
-      this.finishExamIfNeeded();
-      this.ngOnInit();
-    }, error => {
-      console.log(error);
-    });
-    
-  }
+  nextQuestion() : void {
 
-  private getQuestion() {
-    this.http.get<GetQuestionReplyModel>(this.baseUrl + 'api/exam/getquestion').subscribe(result => {
+    if(this.interval != null)
+      clearInterval(this.interval);
 
-      this.questionReply = result;
-      this.question = result.question;
-      this.http.get(this.baseUrl + "api/exam/starttime", {params: {
-        id: this.question.id.toString()
-      }}).subscribe(result => {
-        this.timeLeft = this.questionReply.leftTime;
-
-        this.interval = setInterval(() => {
-          if(this.timeLeft > 0) {
-            this.timeLeft--;
-          } else {
-            this.sendAnswers();
-          }
-        },1000)
-      }, error => {
-        console.error(error);
-      })
-      
-    }, error => console.error(error)); //ToDo: move logic to exam.service and catch 404 Response(Exam has been passed). 
-  }
-
-  private finishExamIfNeeded() {
-    if(this.questionReply.currentQuestionNumber == this.questionReply.examQuestionQuantity)
+    if(this.examService.isPendingExam()) {
+      this.examService.getQuestion().subscribe(result => {
+        this.question = result; //TODO: handle error
+        this.timeLeft = this.examService.getLeftTime();
+        this.examService.setQuestionTimer(); //I know that this rather should be in service but I want to start timeout (on server) when we load a full view to the user. It still is not sure so this need to be reworked. 
+        this.setViewTimer();
+      }); 
+    }
+    else
       this.examFinished = true;
   }
-}
 
-interface GetQuestionReplyModel {
-  examQuestionQuantity: number;
-  currentQuestionNumber: number;
-  leftTime: number;
-  question: QuestionModel;
-}
-interface QuestionModel {
-  id: number;
-  content: string;
-  time: number;
-  answers: AnswerModel[];
-}
+  sendAnswers() : void
+  {
+    this.examService.sendAnswers() //TODO: send real answers and handle errors 
+    this.nextQuestion();
+  }
 
-interface AnswerModel {
-  id: number;
-  content: string;
-  selectedOption: boolean;
+  private setViewTimer() : void
+  {
+    this.interval = setInterval(() => {
+      this.timeLeft--;
+      if(this.timeLeft <= 0)
+        this.nextQuestion();
+    }, 1000)
+  }
+  
 }

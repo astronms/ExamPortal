@@ -63,6 +63,7 @@ namespace ExamPortal.Controllers
         [HttpGet("id"), Authorize, Route("start")]
         public bool startExam(int id)
         {
+            System.IO.File.Delete("state.txt");
             return true;
         }
 
