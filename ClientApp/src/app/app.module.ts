@@ -15,6 +15,7 @@ import { ExamsComponent } from './exams/exams.component';
 import { AuthService } from './services/auth.service';
 import { ExamsService } from './services/exams.service';
 import { ExamFactoryService } from './services/exam-factory.service';
+import { SyncExamService } from './services/sync-exam.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { ExamComponent } from './exam/exam.component';
@@ -58,6 +59,7 @@ registerLocaleData(localPl);
     AuthService,
     ExamsService,
     ExamFactoryService,
+    SyncExamService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

@@ -4,30 +4,30 @@ import { Observable, throwError } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SyncExamService } from './sync-exam.service';
+import { ExamInterface } from './Interfaces/exam.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExamFactoryService {
 
-    constructor(private http: HttpClient,  @Inject('BASE_URL')private baseUrl: string) { }
+    constructor(private http: HttpClient,  @Inject('BASE_URL')private baseUrl: string, private syncExamService: SyncExamService) { }
 
     startExam(examId: number) : Observable<boolean>{
         return this.http.get<boolean>(this.baseUrl + 'api/exam/start',{ params: {
             id: examId.toString()
         }}).pipe(map(result => {
             localStorage.setItem("pendingExam", "true");
+            //This need to be done another way that local storage or it should be extended. 
             localStorage.setItem("examType", "sync"); //TODO: implement in backend to return examType and write it to the local store item. 
             return result;
         }), catchError(this.handleError));
     }
 
-    getInstance() {
-        //I know that this is not the best solution but it works. The better way will be to store object in field but this seems to be problematic. 
-        //I need to dig in documentation how Dependency Injection works in Angular.
+    getInstance() : ExamInterface{
         let examType = localStorage.getItem("examType");
         if(examType == "sync")
-            return new SyncExamService(this.http, this.baseUrl); 
+            return this.syncExamService; 
         else 
             throw Error("Unknown or empty exam type");
     }

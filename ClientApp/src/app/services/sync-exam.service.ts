@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { GetQuestionReplyModel } from '../models/get-question-reply.model';
 import { QuestionModel } from '../models/question.model';
-import { IExam } from './Interfaces/exam.interface';
+import { ExamInterface } from './Interfaces/exam.interface';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class SyncExamService implements IExam{
+export class SyncExamService implements ExamInterface{
 
   private questionReply: GetQuestionReplyModel;
   private question: QuestionModel;

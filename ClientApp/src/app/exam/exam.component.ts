@@ -5,6 +5,7 @@ import { ExamFactoryService } from '../services/exam-factory.service';
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ExamInterface } from '../services/Interfaces/exam.interface';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ExamComponent {
 
-  private examService;
+  private examService : ExamInterface;
 
   public question: QuestionModel;
   public questionReply: GetQuestionReplyModel;
