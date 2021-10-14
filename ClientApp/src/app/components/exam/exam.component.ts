@@ -1,11 +1,12 @@
-import { QuestionModel } from '../models/question.model';
-import { GetQuestionReplyModel } from '../models/get-question-reply.model';
-import { AuthService } from '../services/auth.service';
-import { ExamFactoryService } from '../services/exam-factory.service';
+import { QuestionModel } from '../../models/question.model';
+import { GetQuestionReplyModel } from '../../models/get-question-reply.model';
+import { AuthService } from '../../services/auth.service';
+import { ExamFactoryService } from '../../services/exam-factory.service';
+import { ExamStatusEnum } from '../../enums/exam-status.enum';
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ExamInterface } from '../services/Interfaces/exam.interface';
+import { ExamInterface } from '../../interfaces/exam.interface';
 
 
 @Component({
@@ -27,8 +28,17 @@ export class ExamComponent {
   constructor(private router: Router, private authService: AuthService, private examFactoryService: ExamFactoryService) { }
 
   ngOnInit() {
+
     try {
       this.examService = this.examFactoryService.getInstance();
+
+      this.examService.examStatusObservable.subscribe(result => {
+        if(result == ExamStatusEnum.EndQuestionTime)
+          this.nextQuestion();
+        else if(result == ExamStatusEnum.Finished)
+          this.examFinished = true;
+      });
+
       if(!this.examService.isPendingExam())
         this.router.navigate(["/exams"]);
       else
@@ -50,15 +60,12 @@ export class ExamComponent {
     if(this.interval != null)
       clearInterval(this.interval);
 
-    if(this.examService.isPendingExam()) {
-      this.examService.getQuestion().subscribe(result => {
-        this.question = result; //TODO: handle error
-        this.timeLeft = this.examService.getLeftTime();
-        this.setViewTimer();
-      }); 
-    }
-    else
-      this.examFinished = true;
+    this.examService.getQuestion().subscribe(result => {
+      this.question = result; //TODO: handle error
+      this.timeLeft = this.examService.getLeftTime();
+      this.setViewTimer();
+    }); 
+      
   }
 
   sendAnswers() : void
@@ -71,8 +78,6 @@ export class ExamComponent {
   {
     this.interval = setInterval(() => {
       this.timeLeft--;
-      if(this.timeLeft <= 0)
-        this.nextQuestion();
     }, 1000)
   }
   

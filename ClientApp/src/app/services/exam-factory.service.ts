@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SyncExamService } from './sync-exam.service';
-import { ExamInterface } from './Interfaces/exam.interface';
+import { ExamInterface } from '../interfaces/exam.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,10 @@
-import { ExamModel } from '../models/exams.model';
+import { ExamModel } from '../../models/exams.model';
 
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { ExamsService } from '../services/exams.service';
-import { ExamFactoryService } from '../services/exam-factory.service';
+import { ExamsService } from '../../services/exams.service';
+import { ExamFactoryService } from '../../services/exam-factory.service';
 
 @Component({
   selector: 'exams',

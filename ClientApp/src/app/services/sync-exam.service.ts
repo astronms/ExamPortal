@@ -1,9 +1,10 @@
 import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 
 import { GetQuestionReplyModel } from '../models/get-question-reply.model';
 import { QuestionModel } from '../models/question.model';
-import { ExamInterface } from './Interfaces/exam.interface';
+import { ExamInterface } from '../interfaces/exam.interface';
+import { ExamStatusEnum } from '../enums/exam-status.enum';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -16,7 +17,10 @@ export class SyncExamService implements ExamInterface{
   private questionReply: GetQuestionReplyModel;
   private question: QuestionModel;
   private timeLeft: number;
-  private timeout: any;
+  private timeoutHandle: any;
+
+  private examStatusSubject = new Subject<any>();
+  examStatusObservable = this.examStatusSubject.asObservable();
 
   constructor(private http: HttpClient,  @Inject('BASE_URL')private baseUrl: string) { }
 
@@ -36,7 +40,7 @@ export class SyncExamService implements ExamInterface{
 
   sendAnswers() : void
   {
-    clearTimeout(this.timeout);
+    clearTimeout(this.timeoutHandle);
     this.finishExamIfNeeded();
     this.http.get(this.baseUrl + "api/exam/saveanswers", {params: {
       id: this.question.id.toString()
@@ -50,13 +54,14 @@ export class SyncExamService implements ExamInterface{
   }
 
   removeTimer() : void {
-    clearTimeout(this.timeout);
+    clearTimeout(this.timeoutHandle);
   }
 
   private setQuestionTimer() 
   {
-    this.timeout = setTimeout(() => {
+    this.timeoutHandle = setTimeout(() => {
       this.sendAnswers();
+      this.examStatusSubject.next(ExamStatusEnum.EndQuestionTime);
     }, this.timeLeft * 1000); 
 
     this.http.get(this.baseUrl + "api/exam/starttime", {params: {
@@ -69,6 +74,7 @@ export class SyncExamService implements ExamInterface{
   private finishExamIfNeeded() : void {
     if(this.questionReply.currentQuestionNumber == this.questionReply.examQuestionQuantity) {
       this.removeTimer();
+      this.examStatusSubject.next(ExamStatusEnum.Finished);
       localStorage.removeItem("pendingExam");
     }
   }

@@ -7,10 +7,10 @@ import { JwtModule } from "@auth0/angular-jwt";
 import localPl from '@angular/common/locales/pl';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { ExamsComponent } from './exams/exams.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { ExamsComponent } from './components/exams/exams.component';
 
 import { AuthService } from './services/auth.service';
 import { ExamsService } from './services/exams.service';
@@ -18,7 +18,7 @@ import { ExamFactoryService } from './services/exam-factory.service';
 import { SyncExamService } from './services/sync-exam.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
-import { ExamComponent } from './exam/exam.component';
+import { ExamComponent } from './components/exam/exam.component';
 import { registerLocaleData } from '@angular/common';
 
 export function tokenGetter() {
