@@ -54,7 +54,8 @@ namespace ExamPortal.Controllers
                 Title = Titles[rng.Next(Titles.Length)],
                 Duration = rng.Next(0, 1000),
                 QuestionsNumber = rng.Next(10, 30), 
-                StartDate = DateTime.Now
+                StartDate = DateTime.Now, 
+                Available = true
             })
             .ToArray();
         }
@@ -62,6 +63,7 @@ namespace ExamPortal.Controllers
         [HttpGet("id"), Authorize, Route("start")]
         public bool startExam(int id)
         {
+            System.IO.File.Delete("state.txt");
             return true;
         }
 

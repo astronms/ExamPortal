@@ -9,5 +9,6 @@ namespace ExamPortal.Models
         public int Duration { get; set; }
         public int QuestionsNumber { get; set; }
         public DateTime StartDate { get; set; }
+        public bool Available {get; set; }
     }
 }

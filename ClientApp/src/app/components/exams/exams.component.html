@@ -17,7 +17,7 @@
       <td>{{ exam.duration }}</td>
       <td>{{ exam.questionsNumber }}</td>
       <td>{{ exam.startDate }}</td>
-      <button type="button" class="btn btn-dark" *ngIf="isExamAvailable(exam.id)" (click)="startExam(exam.id)">Start</button>
+      <button type="button" class="btn btn-dark" *ngIf="exam.available" (click)="startExam(exam.id)">Start</button>
     </tr>
   </tbody>
 </table>
