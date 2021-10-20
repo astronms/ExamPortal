@@ -1,37 +1,28 @@
 import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 
-import { ExamModel } from '../models/exams.model';
 import { GetQuestionReplyModel } from '../models/get-question-reply.model';
-
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { QuestionModel } from '../models/question.model';
+import { ExamInterface } from '../interfaces/exam.interface';
+import { ExamStatusEnum } from '../enums/exam-status.enum';
+
+import { Inject, Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExamService {
+export class SyncExamService implements ExamInterface{
 
   private questionReply: GetQuestionReplyModel;
   private question: QuestionModel;
   private timeLeft: number;
-  private timeout: any;
+  private timeoutHandle: any;
+
+  private examStatusSubject = new Subject<any>();
+  examStatusObservable = this.examStatusSubject.asObservable();
 
   constructor(private http: HttpClient,  @Inject('BASE_URL')private baseUrl: string) { }
-
-  getListOfExams() : Observable<ExamModel[]>{
-    return this.http.get<ExamModel[]>(this.baseUrl + 'api/exam/getlist').pipe(catchError(this.handleError));
-  }
-
-  startExam(examId: number) : Observable<boolean>{
-    return this.http.get<boolean>(this.baseUrl + 'api/exam/start',{ params: {
-        id: examId.toString()
-    }}).pipe(map(result => {
-        localStorage.setItem("pendingExam", "true");
-        return result;
-    }), catchError(this.handleError));
-  }
 
   isPendingExam() : boolean{
     return JSON.parse(localStorage.getItem("pendingExam"));
@@ -49,7 +40,7 @@ export class ExamService {
 
   sendAnswers() : void
   {
-    clearTimeout(this.timeout);
+    clearTimeout(this.timeoutHandle);
     this.finishExamIfNeeded();
     this.http.get(this.baseUrl + "api/exam/saveanswers", {params: {
       id: this.question.id.toString()
@@ -63,14 +54,14 @@ export class ExamService {
   }
 
   removeTimer() : void {
-    clearTimeout(this.timeout);
+    clearTimeout(this.timeoutHandle);
   }
 
   private setQuestionTimer() 
   {
-    this.timeout = setTimeout(() => {
-      console.log("Timer xd");
+    this.timeoutHandle = setTimeout(() => {
       this.sendAnswers();
+      this.examStatusSubject.next(ExamStatusEnum.EndQuestionTime);
     }, this.timeLeft * 1000); 
 
     this.http.get(this.baseUrl + "api/exam/starttime", {params: {
@@ -83,6 +74,7 @@ export class ExamService {
   private finishExamIfNeeded() : void {
     if(this.questionReply.currentQuestionNumber == this.questionReply.examQuestionQuantity) {
       this.removeTimer();
+      this.examStatusSubject.next(ExamStatusEnum.Finished);
       localStorage.removeItem("pendingExam");
     }
   }

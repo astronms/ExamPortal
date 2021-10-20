@@ -1,10 +1,10 @@
-import { ExamModel } from '../models/exams.model';
+import { ExamModel } from '../../models/exams.model';
 
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ExamService } from '../services/exam.service';
+import { ExamsService } from '../../services/exams.service';
+import { ExamFactoryService } from '../../services/exam-factory.service';
 
 @Component({
   selector: 'exams',
@@ -14,12 +14,13 @@ import { ExamService } from '../services/exam.service';
 export class ExamsComponent implements OnInit {
   public exams: ExamModel[];
 
-  constructor(private examService: ExamService, private router: Router, @Inject(LOCALE_ID)private locale: string) { }
+  constructor(private examsService: ExamsService, private examFactoryService: ExamFactoryService, private router: Router, @Inject(LOCALE_ID)private locale: string) { }
 
   ngOnInit() {
+
     const datepipe: DatePipe = new DatePipe(this.locale);
 
-    this.examService.getListOfExams().subscribe(result => {
+    this.examsService.getListOfExams().subscribe(result => {
       result.forEach( exam => {
         exam.startDate =  datepipe.transform(exam.startDate, 'dd-MMM-yyyy HH:mm');
       });
@@ -29,7 +30,7 @@ export class ExamsComponent implements OnInit {
   }
 
   startExam(examId: number) {
-    this.examService.startExam(examId).subscribe(result => {
+    this.examFactoryService.startExam(examId).subscribe(result => {
       if(result)
         this.router.navigate(["/exam"]); 
       else
