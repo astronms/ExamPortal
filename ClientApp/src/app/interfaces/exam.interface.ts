@@ -9,5 +9,4 @@ export interface ExamInterface{
     getQuestion() : Observable<QuestionModel>;
     sendAnswers() : void;
     getLeftTime() : number;
-    removeTimer() : void;
 }
