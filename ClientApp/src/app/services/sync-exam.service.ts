@@ -17,6 +17,7 @@ export class SyncExamService implements ExamInterface{
   private questionReply: GetQuestionReplyModel;
   private question: QuestionModel;
   private timeLeft: number;
+  private timeoutHandle: any;
 
   private examStatusSubject = new Subject<any>();
   examStatusObservable = this.examStatusSubject.asObservable();
@@ -39,6 +40,7 @@ export class SyncExamService implements ExamInterface{
 
   sendAnswers() : void
   {
+    clearTimeout(this.timeoutHandle);
     this.finishExamIfNeeded();
     this.http.get(this.baseUrl + "api/exam/saveanswers", {params: {
       id: this.question.id.toString()
@@ -51,20 +53,27 @@ export class SyncExamService implements ExamInterface{
     return this.timeLeft;
   }
 
+  removeTimer() : void {
+    clearTimeout(this.timeoutHandle);
+  }
+
   private setQuestionTimer() 
   {
-    this.http.get(this.baseUrl + "api/exam/timer", {params: {
-      id: this.question.id.toString()
-    }}).subscribe(result => {
+    this.timeoutHandle = setTimeout(() => {
       this.sendAnswers();
       this.examStatusSubject.next(ExamStatusEnum.EndQuestionTime);
-    }, error => {
+    }, this.timeLeft * 1000); 
+
+    this.http.get(this.baseUrl + "api/exam/starttime", {params: {
+      id: this.question.id.toString()
+    }}).subscribe(result => {}, error => {
       console.log(error);
     });
   }
 
   private finishExamIfNeeded() : void {
     if(this.questionReply.currentQuestionNumber == this.questionReply.examQuestionQuantity) {
+      this.removeTimer();
       this.examStatusSubject.next(ExamStatusEnum.Finished);
       localStorage.removeItem("pendingExam");
     }

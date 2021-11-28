@@ -42,9 +42,11 @@ registerLocaleData(localPl);
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
+      { path: 'login', component: LoginComponent},
       { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard]},
       { path: 'exam', component: ExamComponent, canActivate: [AuthGuard]},
+      { path: 'exam', component: ExamComponent},
+      { path: 'profile', component: ExamComponent},
     ]),
     JwtModule.forRoot({
       config: {

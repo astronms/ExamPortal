@@ -12,6 +12,7 @@ import { ExamInterface } from '../../interfaces/exam.interface';
 @Component({
   selector: 'app-exam',
   templateUrl: './exam.component.html',
+  styleUrls: [],
 })
 export class ExamComponent {
 
@@ -51,6 +52,7 @@ export class ExamComponent {
   }
 
   ngOnDestroy() {
+    this.examService.removeTimer();
     clearInterval(this.interval);
   }
 
@@ -58,7 +60,7 @@ export class ExamComponent {
 
     if(this.interval != null)
       clearInterval(this.interval);
-      
+
     this.examService.getQuestion().subscribe(result => {
       this.question = result; //TODO: handle error
       this.timeLeft = this.examService.getLeftTime();
@@ -70,6 +72,7 @@ export class ExamComponent {
   sendAnswers() : void
   {
     this.examService.sendAnswers() //TODO: send real answers and handle errors 
+    this.nextQuestion();
   }
 
   private setViewTimer() : void
