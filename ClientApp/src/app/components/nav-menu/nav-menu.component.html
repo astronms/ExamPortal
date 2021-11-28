@@ -23,13 +23,22 @@
           <!-- <li
             class="nav-item"
             [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
+            [routerLinkActiveOptions]="{ exact: tru e }"
           >
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li> -->
           <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
           </li>
+          <!-- Button Exam_creator -->
+          <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['/exam-creator']">Exam Creator</a>
+          </li> 
+          <!-- Button Profile -->
+          <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['/profile']">Profile</a>
+          </li> 
+          <!-- Button Logout -->
           <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
             <a class="nav-link text-dark" (click)="logout()">Logout</a>
           </li> 

@@ -12,6 +12,7 @@ import { ExamInterface } from '../../interfaces/exam.interface';
 @Component({
   selector: 'app-exam',
   templateUrl: './exam.component.html',
+  styleUrls: [],
 })
 export class ExamComponent {
 
