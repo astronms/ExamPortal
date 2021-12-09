@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ExamsComponent } from './student/components/exams/exams.component';
 import { ExamComponent } from './student/components/exam/exam.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
@@ -34,7 +35,8 @@ registerLocaleData(localPl);
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -46,6 +48,7 @@ registerLocaleData(localPl);
       { path: 'login', component: LoginComponent },
       { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
       { path: 'exam', component: ExamComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
+      { path: '**', component: PageNotFoundComponent }
     ]),
     JwtModule.forRoot({
       config: {
