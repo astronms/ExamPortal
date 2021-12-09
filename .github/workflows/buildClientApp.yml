@@ -2,8 +2,6 @@ name: BuildClientApp
 on:
   pull_request:
     types: [opened, synchronize]
-    paths:
-      - 'ClientApp/*'
 
 jobs:
   build-angular:
