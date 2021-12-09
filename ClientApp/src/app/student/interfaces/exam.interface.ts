@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { QuestionModel } from "src/app/models/question.model";
+import { QuestionModel } from "src/app/student/models/question.model";
 
 export interface ExamInterface{
 

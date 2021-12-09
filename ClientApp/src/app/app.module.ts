@@ -7,18 +7,16 @@ import { JwtModule } from "@auth0/angular-jwt";
 import localPl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 
+import { StudentModule } from './student/student.module';
+
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { ExamsComponent } from './components/exams/exams.component';
-import { ExamComponent } from './components/exam/exam.component';
+import { ExamsComponent } from './student/components/exams/exams.component';
+import { ExamComponent } from './student/components/exam/exam.component';
 
 import { AuthService } from './services/auth.service';
-import { ExamsService } from './services/exams.service';
-import { ExamFactoryService } from './services/exam-factory.service';
-import { SyncExamService } from './services/sync-exam.service';
-
 import { AuthGuard } from './guards/auth-guard.service';
 import { UserModel} from './models/user.model'
 import { RoleEnum } from './enums/role.enum';
@@ -36,14 +34,13 @@ registerLocaleData(localPl);
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    LoginComponent,
-    ExamsComponent,
-    ExamComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    StudentModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
@@ -61,9 +58,6 @@ registerLocaleData(localPl);
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },
     AuthService,
-    ExamsService,
-    ExamFactoryService,
-    SyncExamService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
