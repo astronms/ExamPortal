@@ -1,6 +1,7 @@
 name: BuildClientApp
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize]
     paths:
       - 'ClientApp/*'
 
