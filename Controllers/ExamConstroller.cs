@@ -14,7 +14,7 @@ using System.Threading;
 namespace ExamPortal.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController, Authorize(Roles = "User")]
     public class ExamController : ControllerBase
     {
         private IMemoryCache _cache;
@@ -52,7 +52,7 @@ namespace ExamPortal.Controllers
         };
 
         // GET api/values
-        [HttpGet, Authorize, Route("getlist")]
+        [HttpGet, Route("getlist")]
         public IEnumerable<ExamModel> getlist()
         {
             var rng = new Random();
@@ -68,14 +68,14 @@ namespace ExamPortal.Controllers
             .ToArray();
         }
 
-        [HttpGet("id"), Authorize, Route("start")]
+        [HttpGet("id"), Route("start")]
         public bool startExam(int id)
         {
             System.IO.File.Delete("state.txt");
             return true;
         }
 
-        [HttpGet, Authorize, Route("getquestion")]
+        [HttpGet, Route("getquestion")]
         public IActionResult getNextQuestion()
         {
             if(!System.IO.File.Exists("state.txt"))
@@ -125,7 +125,7 @@ namespace ExamPortal.Controllers
             }
         }
 
-        [HttpGet("id"), Authorize, Route("saveanswers")]
+        [HttpGet("id"), Route("saveanswers")]
         public IActionResult saveAnswers(int id) {
             CancellationTokenSource token = null;
             if(this._cache.TryGetValue("_cancelToken", out token))
@@ -140,7 +140,7 @@ namespace ExamPortal.Controllers
             return BadRequest("No pennding question.");
         }
 
-        [HttpGet("id"), Authorize, Route("timer")]
+        [HttpGet("id"), Route("timer")]
         public async Task<IActionResult> runTimer(int id) {
             
             //Update czasu wystartowania czasu pytania

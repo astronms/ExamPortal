@@ -5,12 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from "@auth0/angular-jwt";
 import localPl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ExamsComponent } from './components/exams/exams.component';
+import { ExamComponent } from './components/exam/exam.component';
 
 import { AuthService } from './services/auth.service';
 import { ExamsService } from './services/exams.service';
@@ -18,11 +20,13 @@ import { ExamFactoryService } from './services/exam-factory.service';
 import { SyncExamService } from './services/sync-exam.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
-import { ExamComponent } from './components/exam/exam.component';
-import { registerLocaleData } from '@angular/common';
+import { UserModel} from './models/user.model'
+import { RoleEnum } from './enums/role.enum';
+
 
 export function tokenGetter() {
-  return localStorage.getItem("jwt");
+  var user: UserModel = JSON.parse(localStorage.getItem("user"));
+  return (user ? user.token : null);
 }
 
 registerLocaleData(localPl);
@@ -43,8 +47,8 @@ registerLocaleData(localPl);
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard]},
-      { path: 'exam', component: ExamComponent, canActivate: [AuthGuard]},
+      { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
+      { path: 'exam', component: ExamComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
     ]),
     JwtModule.forRoot({
       config: {

@@ -10,7 +10,9 @@ export class HomeComponent {
   constructor(private router: Router, private authService: AuthService ) { }
 
   ngOnInit() {
-    if(this.authService.isUserAuthenticated())
-      this.router.navigate(["/exams"]);
+    //if(this.authService.isUserAuthenticated())
+      //this.router.navigate(["/exams"]);
+
+    //this.authService.getUserRole();
   }
 }
