@@ -1,7 +1,8 @@
 name: BuildClientApp
 on:
-  pull_request:
-    types: [opened, synchronize]
+  push:
+    paths-ignore:
+      - '.github/**'
 
 jobs:
   build-angular:
