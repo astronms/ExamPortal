@@ -1,49 +1,114 @@
-<header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">ExamPortal</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <!-- <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: tru e }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li> -->
-          <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
-          </li>
-          <!-- Button Exam_creator -->
-          <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
-            <a class="nav-link text-dark" [routerLink]="['/exam-creator']">Exam Creator</a>
-          </li> 
-          <!-- Button Profile -->
-          <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
-            <a class="nav-link text-dark" [routerLink]="['/profile']">Profile</a>
-          </li> 
-          <!-- Button Logout -->
-          <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
-            <a class="nav-link text-dark" (click)="logout()">Logout</a>
-          </li> 
-        </ul>
-      </div>
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand logo-text" [routerLink]="['/']">ExamPortal</a>
+    <button
+      class="navbar-toggler p-0 border-0"
+      type="button"
+      id="navbarSideCollapse"
+      data-toggle="collapse"
+      data-target=".navbar-collapse"
+      aria-label="Toggle navigation"
+      [attr.aria-expanded]="isExpanded"
+      (click)="toggle()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse offcanvas-collapse" id="navbarsExampleDefault" [ngClass]="{ show: isExpanded }">
+      <ul class="navbar-nav ms-auto navbar-nav-scroll">
+        <!-- <li
+          class="nav-item"
+          [routerLinkActive]="['link-active']"
+          [routerLinkActiveOptions]="{ exact: tru e }"
+        >
+        </li> -->
+        <!-- Button About -->
+        <li class="nav-item" >
+          <a class="nav-link" [routerLink]="['/about']">O projekcie</a>
+        </li>
+        <!-- Button Login -->
+        <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
+          <a class="nav-link" [routerLink]="['/login']">Logowanie</a>
+        </li>
+        <!-- Button Exam_creator -->
+        <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
+          <a class="nav-link" [routerLink]="['/exam-creator']">Kreator</a>
+        </li> 
+        <!-- Button Profile -->
+        <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
+          <a class="nav-link" [routerLink]="['/profile']">Profil</a>
+        </li> 
+        <!-- Button Logout -->
+        <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
+          <a class="nav-link" (click)="logout()">Wyloguj</a>
+        </li> 
+      </ul>
+      <span class="nav-item social-icons">
+        <span class="fa-stack">
+            <a href="https://pg.edu.pl/">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-facebook-f fa-stack-1x"></i>
+            </a>
+        </span>
+      </span>
     </div>
-  </nav>
-</header>
+  </div>
+</nav>
+
+
+
+
+<!--
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand logo-text" href="index.html">Mirko</a>
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#header">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#plans">Plans</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Drop</a>
+                        
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" href="article.html">Article Details</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href="terms.html">Terms Conditions</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <span class="nav-item social-icons">
+                    <span class="fa-stack">
+                        <a href="#your-link">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-facebook-f fa-stack-1x"></i>
+                        </a>
+                    </span>
+                    <span class="fa-stack">
+                        <a href="#your-link">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-twitter fa-stack-1x"></i>
+                        </a>
+                    </span>
+                </span>
+            </div> 
+        </div> 
+    </nav>
+  -->

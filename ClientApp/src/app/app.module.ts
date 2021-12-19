@@ -11,6 +11,8 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ExamsComponent } from './components/exams/exams.component';
+import { ProfileComponent } from './components/profile/profile.component'
+import { AboutComponent } from './components/about/about.component';
 
 import { AuthService } from './services/auth.service';
 import { ExamsService } from './services/exams.service';
@@ -45,8 +47,9 @@ registerLocaleData(localPl);
       { path: 'login', component: LoginComponent},
       { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard]},
       { path: 'exam', component: ExamComponent, canActivate: [AuthGuard]},
-      { path: 'exam', component: ExamComponent},
+      { path: 'exam-creator', component: ExamComponent},
       { path: 'profile', component: ExamComponent},
+      { path: 'about', component: ExamComponent},
     ]),
     JwtModule.forRoot({
       config: {
