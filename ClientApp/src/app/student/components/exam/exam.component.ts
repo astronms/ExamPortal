@@ -1,6 +1,6 @@
 import { QuestionModel } from '../../models/question.model';
 import { GetQuestionReplyModel } from '../../models/get-question-reply.model';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { ExamFactoryService } from '../../services/exam-factory.service';
 import { ExamStatusEnum } from '../../enums/exam-status.enum';
 
