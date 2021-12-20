@@ -11,6 +11,7 @@ import { ExamComponent } from './student/components/exam/exam.component';
 import { ExamSessionsListComponent } from './teacher/components/exam-sessions-list/exam-sessions-list.component';
 import { ExamCreatorComponent } from './teacher/components/exam-creator/exam-creator.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CoursesListComponent } from './teacher/components/courses-list/courses-list.component';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { RoleEnum } from './enums/role.enum';
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'student/exam', component: ExamComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
   { path: 'teacher/exams', component: ExamSessionsListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/exam-creator', component: ExamCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/courses-list', component: CoursesListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: '**', component: PageNotFoundComponent }
 ]
 
