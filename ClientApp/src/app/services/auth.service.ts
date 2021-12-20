@@ -1,5 +1,6 @@
 import { catchError, map } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -13,7 +14,7 @@ export class AuthService {
   private userSubject: BehaviorSubject<UserModel>;
   public user: Observable<UserModel>;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL')private baseUrl: string) { 
+  constructor(private http: HttpClient, @Inject('BASE_URL')private baseUrl: string, private jwtHelper: JwtHelperService) { 
     this.userSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
   }
@@ -36,7 +37,8 @@ export class AuthService {
 
   public isUserAuthenticated() : boolean {
     if(this.userSubject.value)
-      return true;
+      if(!this.jwtHelper.isTokenExpired(this.userSubject.value.token))
+        return true;
 
     return false;
   }
