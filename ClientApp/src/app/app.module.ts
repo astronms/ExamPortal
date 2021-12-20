@@ -7,17 +7,19 @@ import localPl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 
 import { StudentModule } from './student/student.module';
+import { AppRoutingModule } from './app-routing.module';
+import { TeacherModule } from './teacher/teacher.module';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ProfileComponent } from './components/profile/profile.component'
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
-import { UserModel } from './models/user.model'
-import { AppRoutingModule } from './app-routing.module';
+import { UserModel } from './models/user.model';
 
 
 export function tokenGetter() {
@@ -33,7 +35,8 @@ registerLocaleData(localPl);
     NavMenuComponent,
     HomeComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -47,7 +50,8 @@ registerLocaleData(localPl);
         whitelistedDomains: ["localhost:5000"],
         blacklistedRoutes: []
       }
-    })
+    }),
+    TeacherModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },
