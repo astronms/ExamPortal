@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent {
 
-  private user: UserModel;
+  public user: UserModel;
 
   constructor(public authService: AuthService) {
   }
