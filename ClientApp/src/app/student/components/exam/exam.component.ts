@@ -1,6 +1,6 @@
 import { QuestionModel } from '../../models/question.model';
 import { GetQuestionReplyModel } from '../../models/get-question-reply.model';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { ExamFactoryService } from '../../services/exam-factory.service';
 import { ExamStatusEnum } from '../../enums/exam-status.enum';
 
@@ -52,7 +52,6 @@ export class ExamComponent {
   }
 
   ngOnDestroy() {
-    this.examService.removeTimer();
     clearInterval(this.interval);
   }
 
@@ -60,7 +59,7 @@ export class ExamComponent {
 
     if(this.interval != null)
       clearInterval(this.interval);
-
+      
     this.examService.getQuestion().subscribe(result => {
       this.question = result; //TODO: handle error
       this.timeLeft = this.examService.getLeftTime();
@@ -72,7 +71,6 @@ export class ExamComponent {
   sendAnswers() : void
   {
     this.examService.sendAnswers() //TODO: send real answers and handle errors 
-    this.nextQuestion();
   }
 
   private setViewTimer() : void

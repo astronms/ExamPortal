@@ -1,28 +1,52 @@
-<div class="container">
-    <div class="row justify-content-md-left ">
-      <div class="col-md-auto">
-        <h1>Student Profile</h1>
-      </div>
-    </div>
-    <div class="row justify-content-md-left">
-        <div class="border">
-            <div class="col-md-3">
-                <p>Imie</p>
+<form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
+    <div class="container">
+        <div class="row">
+            <h1>Twój profil</h1>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <strong>Imię:</strong> 
             </div>
-            <div class="col-md-auto">
-                <p>Tomek</p>
-            </div>
-        </div>  
-    </div>
-    <div class="row justify-content-md-left">
-        <div class="border">
-            <div class="col-md-3">
-                <p>Nazwisko</p>
-            </div>
-            <div class="col-md-auto">
-                <p>Kowalski</p>
+            <div class="col">
+                {{ this.user.firstName }}
             </div>
         </div>
-      </div>
-  </div>
-  
+        <div class="row">
+            <div class="col-2">
+                <strong>Nazwisko:</strong> 
+            </div>
+            <div class="col">
+                {{ this.user.lastName }}
+            </div>
+        </div>
+        <div class="row" *ngIf="user.index">
+            <div class="col-2">
+                <strong>Nr. indeksu:</strong> 
+            </div>
+            <div class="col">
+                {{ this.user.index }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <strong>Zmień hasło:</strong> 
+            </div>
+            <div class="col-2">
+                <input type="password" id="passwordChange" name="passwordChange" ngModel class="form-control" placeholder="hasło" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <strong>Potwierdź hasło:</strong> 
+            </div>
+            <div class="col-2">
+                <input type="password" id="passwordChange2" name="passwordChange2" ngModel class="form-control" placeholder="powtórz hasło" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</form>

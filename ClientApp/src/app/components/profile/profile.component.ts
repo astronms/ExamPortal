@@ -1,19 +1,28 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { UserModel } from 'src/app/models/user.model';
+
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: []
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  constructor(private router: Router, private authService: AuthService ) { }
 
-  ngOnInit() {
-    
-    if(this.authService.isUserAuthenticated())
-      this.router.navigate(["/profile"]);
-      
+  public user: UserModel;
+
+  constructor(public authService: AuthService) {
   }
+
+  ngOnInit()
+  {
+    this.user = this.authService.userValue;
+  }
+
+  changePassword(data)
+  {
+    
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { QuestionModel } from "src/app/models/question.model";
+import { QuestionModel } from "src/app/student/models/question.model";
 
 export interface ExamInterface{
 
@@ -9,5 +9,4 @@ export interface ExamInterface{
     getQuestion() : Observable<QuestionModel>;
     sendAnswers() : void;
     getLeftTime() : number;
-    removeTimer() : void;
 }

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
+  selector: 'app-exam-creator',
+  templateUrl: './exam-creator.component.html',
   styleUrls: []
 })
-export class AboutComponent {
+export class ExamCreatorComponent {
   constructor() { }
 
   ngOnInit() {
