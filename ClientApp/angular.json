@@ -38,7 +38,7 @@
               "src/assets/js/aos.js",
               "src/assets/js/purecounter.min.js",
               "src/assets/js/script.js",
-              "src/assets/js/swiper.js"
+              "src/assets/js/swiper.min.js"
             ]
           },
           "configurations": {
