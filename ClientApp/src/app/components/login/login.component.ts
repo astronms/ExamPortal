@@ -5,7 +5,8 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: []
 })
 export class LoginComponent {
   invalidLogin: boolean;
