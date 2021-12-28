@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { AboutComponent } from './components/about/about.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './components/profile/profile.component'
 
@@ -39,7 +40,8 @@ registerLocaleData(localPl);
     HomeComponent,
     LoginComponent,
     PageNotFoundComponent,
-    ProfileComponent
+    ProfileComponent, 
+    AboutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
