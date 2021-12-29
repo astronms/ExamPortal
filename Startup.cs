@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ExamPortal.Configuration;
+using ExamPortal.Data;
+using ExamPortal.IRepository;
+using ExamPortal.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace ExamPortal
 {
@@ -23,6 +30,13 @@ namespace ExamPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DatabaseContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"));
+                }
+               );
+
+
             services.AddAuthentication(opt => {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -51,7 +65,13 @@ namespace ExamPortal
                 });
             });
 
-            services.AddControllersWithViews();
+            services.AddControllers();
+            services.AddAutoMapper(typeof(MapperInitializer));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ExamPortal", Version = "v1" });
+            });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -65,6 +85,8 @@ namespace ExamPortal
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ExamPortal v1"));
             }
             else
             {
