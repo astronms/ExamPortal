@@ -1,0 +1,177 @@
+﻿2021-11-30 00:07:30.059 +01:00 [INF] Application is starting
+2021-11-30 00:07:30.029 +01:00 [ERR] 
+ERROR: The element 'exam' has incomplete content. List of possible elements expected: 'task'.
+2021-11-30 00:07:30.063 +01:00 [FTL] XmlDocumentValidationExample.XmlSchemaValidationException: The element 'exam' has incomplete content. List of possible elements expected: 'task'.
+2021-11-30 00:07:30.882 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-30 00:07:30.067 +01:00 [INF] Starting @angular/cli on port 58743...
+2021-11-30 00:07:30.206 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-30 00:07:30.213 +01:00 [INF] Hosting environment: "Development"
+2021-11-30 00:07:30.213 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-11-30 00:07:30.235 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-11-30 00:07:30.608 +01:00 [INF] > examportal@0.0.0 start E:\github\moje\ExamPortal\ClientApp
+
+2021-11-30 00:07:30.608 +01:00 [INF] > ng serve "--port" "58743"
+
+2021-11-30 00:07:30.863 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:58743/webpack-dev-server/
+
+2021-11-30 00:07:30.863 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-11-30 00:07:30.863 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-11-30 00:07:30.044 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.9 kB [initial] [rendered]
+
+2021-11-30 00:07:30.044 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-11-30 00:07:30.044 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-11-30 00:07:30.044 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-11-30 00:07:30.044 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-11-30 00:07:30.044 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-11-30 00:07:30.044 +01:00 [INF] Date: 2021-11-29T23:07:44.041Z - Hash: 41aff370897132c9b280 - Time: 7100ms
+
+2021-11-30 00:07:30.045 +01:00 [INF] ** Angular Live Development Server is listening on localhost:58743, open your browser on http://localhost:58743/ **
+
+2021-11-30 00:07:30.141 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-11-30 00:07:30.016 +01:00 [INF] Application is starting
+2021-11-30 00:07:30.357 +01:00 [ERR] 
+ERROR: The element 'exam' has incomplete content. List of possible elements expected: 'task'.
+2021-11-30 00:08:30.780 +01:00 [FTL] XmlDocumentValidationExample.XmlSchemaValidationException: The element 'exam' has incomplete content. List of possible elements expected: 'task'.
+2021-11-30 00:08:30.425 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-30 00:08:30.582 +01:00 [INF] Starting @angular/cli on port 65260...
+2021-11-30 00:08:30.693 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-30 00:08:30.693 +01:00 [INF] Hosting environment: "Development"
+2021-11-30 00:08:30.693 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-11-30 00:08:30.719 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-11-30 00:08:30.128 +01:00 [INF] > examportal@0.0.0 start E:\github\moje\ExamPortal\ClientApp
+
+2021-11-30 00:08:30.128 +01:00 [INF] > ng serve "--port" "65260"
+
+2021-11-30 00:08:30.386 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:65260/webpack-dev-server/
+
+2021-11-30 00:08:30.386 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-11-30 00:08:30.386 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-11-30 00:08:30.429 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.9 kB [initial] [rendered]
+
+2021-11-30 00:08:30.429 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-11-30 00:08:30.429 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-11-30 00:08:30.429 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-11-30 00:08:30.429 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-11-30 00:08:30.429 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-11-30 00:08:30.429 +01:00 [INF] Date: 2021-11-29T23:08:27.427Z - Hash: 41aff370897132c9b280 - Time: 6946ms
+
+2021-11-30 00:08:30.429 +01:00 [INF] ** Angular Live Development Server is listening on localhost:65260, open your browser on http://localhost:65260/ **
+
+2021-11-30 00:08:30.509 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-11-30 00:08:30.186 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/ - - - 200 620 text/html;+charset=utf-8 16468.0002ms
+2021-11-30 00:08:30.201 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-11-30 00:08:30.201 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-11-30 00:08:30.201 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-11-30 00:08:30.201 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-11-30 00:08:30.241 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/styles.css - -
+2021-11-30 00:08:30.245 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-11-30 00:08:30.284 +01:00 [INF] CORS policy execution successful.
+2021-11-30 00:08:30.284 +01:00 [INF] CORS policy execution successful.
+2021-11-30 00:08:30.284 +01:00 [INF] CORS policy execution successful.
+2021-11-30 00:08:30.284 +01:00 [INF] CORS policy execution successful.
+2021-11-30 00:08:30.286 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 304 - - 41.5441ms
+2021-11-30 00:08:30.341 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 304 - - 140.4733ms
+2021-11-30 00:08:30.316 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/styles.css - - - 304 - - 2075.1506ms
+2021-11-30 00:08:30.385 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 304 - - 2184.7390ms
+2021-11-30 00:08:30.385 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 304 - - 2184.7389ms
+2021-11-30 00:08:30.392 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-11-30 00:08:30.405 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 304 - - 2204.7046ms
+2021-11-30 00:08:30.430 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 304 - - 37.8602ms
+2021-11-30 00:08:30.432 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-11-30 00:08:30.460 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 304 - - 28.0654ms
+2021-11-30 00:08:30.675 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638227315668 - -
+2021-11-30 00:08:30.703 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638227315668 - - - 200 - application/json;+charset=utf-8 28.1179ms
+2021-11-30 00:08:30.710 +01:00 [INF] Request starting HTTP/1.1 GET https://localhost:44319/sockjs-node/312/u4qscdxr/websocket - -
+2021-11-30 00:08:30.710 +01:00 [INF] CORS policy execution successful.
+2021-11-30 00:08:30.444 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44319/sockjs-node/312/avzr0xij/xhr_streaming?t=1638227316440 - 0
+2021-11-30 00:08:30.445 +01:00 [INF] CORS policy execution successful.
+2021-11-30 00:08:30.445 +01:00 [INF] Request finished HTTP/1.1 GET https://localhost:44319/sockjs-node/312/u4qscdxr/websocket - - - 0 - - 734.9468ms
+2021-11-30 19:17:30.039 +01:00 [INF] Application is starting
+2021-11-30 19:17:30.238 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-30 19:17:30.844 +01:00 [INF] Starting @angular/cli on port 53988...
+2021-11-30 19:17:30.065 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-30 19:17:30.066 +01:00 [INF] Hosting environment: "Development"
+2021-11-30 19:17:30.066 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-11-30 19:17:30.110 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-11-30 19:17:30.610 +01:00 [INF] > examportal@0.0.0 start E:\github\moje\ExamPortal\ClientApp
+
+2021-11-30 19:17:30.610 +01:00 [INF] > ng serve "--port" "53988"
+
+2021-11-30 19:17:30.731 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:53988/webpack-dev-server/
+
+2021-11-30 19:17:30.731 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-11-30 19:17:30.731 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-11-30 19:17:30.776 +01:00 [INF] chunk {main} main.js, main.js.map (main) 47.8 kB [initial] [rendered]
+
+2021-11-30 19:17:30.776 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-11-30 19:17:30.776 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-11-30 19:17:30.776 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-11-30 19:17:30.776 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-11-30 19:17:30.776 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.48 MB [initial] [rendered]
+
+2021-11-30 19:17:30.777 +01:00 [INF] Date: 2021-11-30T18:17:24.774Z - Hash: ee5c3586cfc0122e2080 - Time: 6883ms
+
+2021-11-30 19:17:30.777 +01:00 [INF] ** Angular Live Development Server is listening on localhost:53988, open your browser on http://localhost:53988/ **
+
+2021-11-30 19:17:30.905 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-11-30 19:17:30.634 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/ - - - 200 - text/html;+charset=utf-8 18521.2429ms
+2021-11-30 19:17:30.652 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-11-30 19:17:30.652 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-11-30 19:17:30.653 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/styles.css - -
+2021-11-30 19:17:30.674 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-11-30 19:17:30.674 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-11-30 19:17:30.699 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-11-30 19:17:30.699 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-11-30 19:17:30.737 +01:00 [INF] CORS policy execution successful.
+2021-11-30 19:17:30.737 +01:00 [INF] CORS policy execution successful.
+2021-11-30 19:17:30.737 +01:00 [INF] CORS policy execution successful.
+2021-11-30 19:17:30.737 +01:00 [INF] CORS policy execution successful.
+2021-11-30 19:17:30.790 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-11-30 19:17:30.793 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 139.8329ms
+2021-11-30 19:17:30.795 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 4.6478ms
+2021-11-30 19:17:30.798 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/styles.css - - - 304 - - 145.3098ms
+2021-11-30 19:17:30.848 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 304 - - 2150.7705ms
+2021-11-30 19:17:30.866 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-11-30 19:17:30.901 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 304 - - 2226.5853ms
+2021-11-30 19:17:30.901 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 304 - - 2248.5129ms
+2021-11-30 19:17:30.901 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 200 48979 application/javascript;+charset=UTF-8 2226.8836ms
+2021-11-30 19:17:30.917 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-11-30 19:17:30.917 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-11-30 19:17:30.917 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-11-30 19:17:30.976 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 304 - - 114.7863ms
+2021-11-30 19:17:30.995 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 304 - - 77.8735ms
+2021-11-30 19:17:30.995 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 304 - - 78.2902ms
+2021-11-30 19:17:30.996 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 200 48979 application/javascript;+charset=UTF-8 79.1275ms
+2021-11-30 19:17:30.060 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 200 4694748 application/javascript;+charset=UTF-8 2361.8687ms
+2021-11-30 19:17:30.067 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-11-30 19:17:30.163 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 200 4694748 application/javascript;+charset=UTF-8 95.9933ms
+2021-11-30 19:17:30.309 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638296253301 - -
+2021-11-30 19:17:30.344 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638296253301 - - - 200 - application/json;+charset=utf-8 34.9530ms
+2021-11-30 19:17:30.350 +01:00 [INF] Request starting HTTP/1.1 GET https://localhost:44319/sockjs-node/383/y0dylbcz/websocket - -
+2021-11-30 19:17:30.350 +01:00 [INF] CORS policy execution successful.
+2021-11-30 19:17:30.098 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44319/sockjs-node/383/3c4czbyl/xhr_streaming?t=1638296254095 - 0
+2021-11-30 19:17:30.098 +01:00 [INF] CORS policy execution successful.
+2021-11-30 19:17:30.098 +01:00 [INF] Request finished HTTP/1.1 GET https://localhost:44319/sockjs-node/383/y0dylbcz/websocket - - - 0 - - 748.2773ms

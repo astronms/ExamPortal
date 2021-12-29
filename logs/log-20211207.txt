@@ -1,0 +1,160 @@
+﻿2021-12-07 20:21:07.825 +01:00 [FTL] Application Failed to start
+System.InvalidOperationException: There is an error in XML document (2, 2).
+ ---> System.InvalidOperationException: <exam xmlns=''> was not expected.
+   at Microsoft.Xml.Serialization.GeneratedAssembly.XmlSerializationReaderSession.Read7_session()
+   --- End of inner exception stack trace ---
+   at System.Xml.Serialization.XmlSerializer.Deserialize(XmlReader xmlReader, String encodingStyle, XmlDeserializationEvents events)
+   at System.Xml.Serialization.XmlSerializer.Deserialize(Stream stream)
+   at ExamPortal.Program.Main(String[] args) in E:\github\moje\ExamPortal\Program.cs:line 42
+2021-12-07 20:22:07.171 +01:00 [INF] Application is starting
+2021-12-07 20:22:07.910 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-07 20:22:07.358 +01:00 [INF] Starting @angular/cli on port 49764...
+2021-12-07 20:22:07.578 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-07 20:22:07.579 +01:00 [INF] Hosting environment: "Development"
+2021-12-07 20:22:07.579 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-12-07 20:22:07.627 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-12-07 20:22:07.653 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The constraint reference 'id' could not be resolved to a type. Register the constraint type with 'Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap'.
+   at Microsoft.AspNetCore.Routing.DefaultParameterPolicyFactory.Create(RoutePatternParameterPart parameter, String inlineText)
+   at Microsoft.AspNetCore.Routing.ParameterPolicyFactory.Create(RoutePatternParameterPart parameter, RoutePatternParameterPolicyReference reference)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.CreateCandidate(Endpoint endpoint, Int32 score)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.CreateCandidates(IReadOnlyList`1 endpoints)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.AddNode(DfaNode node, DfaState[] states, Int32 exitDestination)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.AddNode(DfaNode node, DfaState[] states, Int32 exitDestination)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.AddNode(DfaNode node, DfaState[] states, Int32 exitDestination)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.AddNode(DfaNode node, DfaState[] states, Int32 exitDestination)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.AddNode(DfaNode node, DfaState[] states, Int32 exitDestination)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder.Build()
+   at Microsoft.AspNetCore.Routing.Matching.DataSourceDependentMatcher.CreateMatcher(IReadOnlyList`1 endpoints)
+   at Microsoft.AspNetCore.Routing.DataSourceDependentCache`1.Initialize()
+   at System.Threading.LazyInitializer.EnsureInitializedCore[T](T& target, Boolean& initialized, Object& syncLock, Func`1 valueFactory)
+   at System.Threading.LazyInitializer.EnsureInitialized[T](T& target, Boolean& initialized, Object& syncLock, Func`1 valueFactory)
+   at Microsoft.AspNetCore.Routing.Matching.DataSourceDependentMatcher..ctor(EndpointDataSource dataSource, Lifetime lifetime, Func`1 matcherBuilderFactory)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcherFactory.CreateMatcher(EndpointDataSource dataSource)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.InitializeCoreAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.<Invoke>g__AwaitMatcher|8_0(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task`1 matcherTask)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-12-07 20:22:07.780 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/ - - - 500 - text/html;+charset=utf-8 153.5055ms
+2021-12-07 20:22:07.777 +01:00 [INF] > examportal@0.0.0 start
+
+2021-12-07 20:22:07.777 +01:00 [INF] > ng serve "--port" "49764"
+
+2021-12-07 20:22:07.211 +01:00 [ERR] (node:33804) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+
+2021-12-07 20:22:07.212 +01:00 [ERR] (Use `node --trace-deprecation ...` to show where the warning was created)
+
+2021-12-07 20:22:07.214 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:49764/webpack-dev-server/
+
+2021-12-07 20:22:07.214 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-07 20:22:07.214 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-07 20:22:07.648 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.6 kB [initial] [rendered]
+
+2021-12-07 20:22:07.648 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-12-07 20:22:07.648 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-07 20:22:07.648 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-12-07 20:22:07.648 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-12-07 20:22:07.648 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-07 20:22:07.648 +01:00 [INF] Date: 2021-12-07T19:22:53.646Z - Hash: 9dc0039790e3b3493991 - Time: 8490ms
+
+2021-12-07 20:22:07.649 +01:00 [INF] ** Angular Live Development Server is listening on localhost:49764, open your browser on http://localhost:49764/ **
+
+2021-12-07 20:22:07.768 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-07 20:24:07.079 +01:00 [INF] Application is starting
+2021-12-07 20:24:07.187 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-07 20:24:07.420 +01:00 [INF] Starting @angular/cli on port 53843...
+2021-12-07 20:24:07.537 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-07 20:24:07.538 +01:00 [INF] Hosting environment: "Development"
+2021-12-07 20:24:07.538 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-12-07 20:24:07.576 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-12-07 20:24:07.337 +01:00 [INF] > examportal@0.0.0 start
+
+2021-12-07 20:24:07.337 +01:00 [INF] > ng serve "--port" "53843"
+
+2021-12-07 20:24:07.224 +01:00 [ERR] (node:36120) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+
+2021-12-07 20:24:07.225 +01:00 [ERR] (Use `node --trace-deprecation ...` to show where the warning was created)
+
+2021-12-07 20:24:07.227 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:53843/webpack-dev-server/
+
+2021-12-07 20:24:07.227 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-07 20:24:07.227 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-07 20:24:07.374 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.6 kB [initial] [rendered]
+
+2021-12-07 20:24:07.374 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-12-07 20:24:07.374 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-07 20:24:07.374 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-12-07 20:24:07.374 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-12-07 20:24:07.374 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-07 20:24:07.375 +01:00 [INF] Date: 2021-12-07T19:24:47.372Z - Hash: 9dc0039790e3b3493991 - Time: 8189ms
+
+2021-12-07 20:24:07.375 +01:00 [INF] ** Angular Live Development Server is listening on localhost:53843, open your browser on http://localhost:53843/ **
+
+2021-12-07 20:24:07.484 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-07 20:24:07.138 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/ - - - 200 620 text/html;+charset=utf-8 18564.2601ms
+2021-12-07 20:24:07.173 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/styles.css - -
+2021-12-07 20:24:07.173 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-12-07 20:24:07.174 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-12-07 20:24:07.174 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-12-07 20:24:07.190 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-12-07 20:24:07.209 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-12-07 20:24:07.267 +01:00 [INF] CORS policy execution successful.
+2021-12-07 20:24:07.267 +01:00 [INF] CORS policy execution successful.
+2021-12-07 20:24:07.267 +01:00 [INF] CORS policy execution successful.
+2021-12-07 20:24:07.267 +01:00 [INF] CORS policy execution successful.
+2021-12-07 20:24:07.338 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/styles.css - - - 200 365189 text/css;+charset=UTF-8 165.0410ms
+2021-12-07 20:24:07.310 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 200 221648 application/javascript;+charset=UTF-8 2101.0782ms
+2021-12-07 20:24:07.320 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-12-07 20:24:07.348 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 200 221648 application/javascript;+charset=UTF-8 28.4711ms
+2021-12-07 20:24:07.415 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 200 6299 application/javascript;+charset=UTF-8 2242.3200ms
+2021-12-07 20:24:07.416 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 200 66158 application/javascript;+charset=UTF-8 2225.5298ms
+2021-12-07 20:24:07.420 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 200 262012 application/javascript;+charset=UTF-8 2246.5651ms
+2021-12-07 20:24:07.420 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-12-07 20:24:07.420 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-12-07 20:24:07.452 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-12-07 20:24:07.494 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 200 6299 application/javascript;+charset=UTF-8 73.4554ms
+2021-12-07 20:24:07.506 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 200 66158 application/javascript;+charset=UTF-8 84.9612ms
+2021-12-07 20:24:07.514 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 200 262012 application/javascript;+charset=UTF-8 61.9595ms
+2021-12-07 20:24:07.574 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 200 4708514 application/javascript;+charset=UTF-8 2399.7995ms
+2021-12-07 20:24:07.582 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-12-07 20:24:07.784 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 200 4708514 application/javascript;+charset=UTF-8 201.7417ms
+2021-12-07 20:24:07.980 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638905095969 - -
+2021-12-07 20:24:07.011 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638905095969 - - - 200 - application/json;+charset=utf-8 31.4272ms
+2021-12-07 20:24:07.019 +01:00 [INF] Request starting HTTP/1.1 GET https://localhost:44319/sockjs-node/204/au2neztk/websocket - -
+2021-12-07 20:24:07.019 +01:00 [INF] CORS policy execution successful.
+2021-12-07 20:24:07.783 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44319/sockjs-node/204/jzz4dtit/xhr_streaming?t=1638905096776 - 0
+2021-12-07 20:24:07.784 +01:00 [INF] CORS policy execution successful.
+2021-12-07 20:24:07.799 +01:00 [INF] Request finished HTTP/1.1 GET https://localhost:44319/sockjs-node/204/au2neztk/websocket - - - 0 - - 780.6121ms
+2021-12-07 20:25:07.995 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44319/sockjs-node/204/jzz4dtit/xhr_streaming?t=1638905096776 - 0 - 200 - application/javascript;+charset=UTF-8 38212.0067ms
+2021-12-07 20:44:07.760 +01:00 [INF] Application is starting
+2021-12-07 20:44:07.868 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-07 20:44:07.122 +01:00 [INF] Starting @angular/cli on port 54725...
+2021-12-07 20:44:07.268 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-07 20:44:07.268 +01:00 [INF] Hosting environment: "Development"
+2021-12-07 20:44:07.268 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-12-07 20:44:07.312 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-12-07 20:44:07.040 +01:00 [INF] > examportal@0.0.0 start
+
+2021-12-07 20:44:07.040 +01:00 [INF] > ng serve "--port" "54725"
+
+2021-12-07 20:50:07.023 +01:00 [INF] Application is starting
+2021-12-07 20:50:07.286 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-07 20:58:07.095 +01:00 [INF] Application is starting
+2021-12-07 21:01:07.020 +01:00 [INF] Application is starting
+2021-12-07 21:01:07.189 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.

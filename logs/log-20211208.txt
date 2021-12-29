@@ -1,0 +1,218 @@
+﻿2021-12-08 00:16:08.209 +01:00 [INF] Application is starting
+2021-12-08 00:16:08.611 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-08 00:16:08.235 +01:00 [INF] Starting @angular/cli on port 58851...
+2021-12-08 00:16:08.470 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-08 00:16:08.470 +01:00 [INF] Hosting environment: "Development"
+2021-12-08 00:16:08.470 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-12-08 00:16:08.516 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-12-08 00:16:08.301 +01:00 [INF] > examportal@0.0.0 start
+
+2021-12-08 00:16:08.301 +01:00 [INF] > ng serve "--port" "58851"
+
+2021-12-08 00:17:08.631 +01:00 [ERR] (node:21404) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+
+2021-12-08 00:17:08.632 +01:00 [ERR] (Use `node --trace-deprecation ...` to show where the warning was created)
+
+2021-12-08 00:17:08.634 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:58851/webpack-dev-server/
+
+2021-12-08 00:17:08.634 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-08 00:17:08.634 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-08 00:17:08.787 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.6 kB [initial] [rendered]
+
+2021-12-08 00:17:08.787 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-12-08 00:17:08.787 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-08 00:17:08.787 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-12-08 00:17:08.787 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-12-08 00:17:08.787 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-08 00:17:08.788 +01:00 [INF] Date: 2021-12-07T23:17:06.785Z - Hash: 9dc0039790e3b3493991 - Time: 8189ms
+
+2021-12-08 00:17:08.788 +01:00 [INF] ** Angular Live Development Server is listening on localhost:58851, open your browser on http://localhost:58851/ **
+
+2021-12-08 00:17:08.930 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-08 00:17:08.634 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/ - - - 200 - text/html;+charset=utf-8 21118.5767ms
+2021-12-08 00:17:08.667 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/styles.css - -
+2021-12-08 00:17:08.667 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:17:08.667 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-12-08 00:17:08.668 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-12-08 00:17:08.689 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-12-08 00:17:08.689 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-12-08 00:17:08.763 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-12-08 00:17:08.763 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/index.html - -
+2021-12-08 00:17:08.763 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:17:08.763 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:17:08.763 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:17:08.763 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:17:08.839 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:17:08.845 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 175.8745ms
+2021-12-08 00:17:08.851 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 12.6809ms
+2021-12-08 00:17:08.857 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/styles.css - - - 200 365189 text/css;+charset=UTF-8 189.7695ms
+2021-12-08 00:17:08.042 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 0 - - 278.8512ms
+2021-12-08 00:17:08.044 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 0 - - 376.9946ms
+2021-12-08 00:17:08.059 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 0 - - 355.0857ms
+2021-12-08 00:17:08.083 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 0 - - 415.3499ms
+2021-12-08 00:17:08.083 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 0 - - 394.4272ms
+2021-12-08 00:17:08.086 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/index.html - - - 200 - text/html;charset=utf-8 323.9209ms
+2021-12-08 00:17:08.089 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:17:08.090 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/swagger-ui-bundle.js - -
+2021-12-08 00:17:08.090 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/swagger-ui-standalone-preset.js - -
+2021-12-08 00:17:08.090 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/swagger-ui.css - -
+2021-12-08 00:17:08.090 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 1.0211ms
+2021-12-08 00:17:08.114 +01:00 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"'
+2021-12-08 00:17:08.114 +01:00 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"'
+2021-12-08 00:17:08.116 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/swagger-ui.css - - - 200 143632 text/css 25.7550ms
+2021-12-08 00:17:08.119 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 29.2721ms
+2021-12-08 00:17:08.119 +01:00 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"'
+2021-12-08 00:17:08.124 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/swagger-ui-standalone-preset.js - -
+2021-12-08 00:17:08.129 +01:00 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"'
+2021-12-08 00:17:08.133 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 9.0484ms
+2021-12-08 00:17:08.136 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 46.1361ms
+2021-12-08 00:17:08.151 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/swagger-ui-bundle.js - -
+2021-12-08 00:17:08.160 +01:00 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"'
+2021-12-08 00:17:08.175 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 24.1748ms
+2021-12-08 00:17:08.288 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/v1/swagger.json - -
+2021-12-08 00:17:08.310 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/favicon-32x32.png - -
+2021-12-08 00:17:08.310 +01:00 [INF] Sending file. Request path: '"/favicon-32x32.png"'. Physical path: '"N/A"'
+2021-12-08 00:17:08.311 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/favicon-32x32.png - - - 200 628 image/png 1.1773ms
+2021-12-08 00:17:08.354 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 65.5131ms
+2021-12-08 00:18:08.592 +01:00 [INF] Application is starting
+2021-12-08 00:18:08.526 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-08 00:18:08.757 +01:00 [INF] Starting @angular/cli on port 58985...
+2021-12-08 00:18:08.886 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-08 00:18:08.886 +01:00 [INF] Hosting environment: "Development"
+2021-12-08 00:18:08.886 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-12-08 00:18:08.932 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-12-08 00:18:08.928 +01:00 [INF] > examportal@0.0.0 start
+
+2021-12-08 00:18:08.928 +01:00 [INF] > ng serve "--port" "58985"
+
+2021-12-08 00:18:08.794 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/index.html - -
+2021-12-08 00:18:08.948 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/index.html - - - 200 - text/html;charset=utf-8 153.2474ms
+2021-12-08 00:18:08.951 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:18:08.961 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 10.0433ms
+2021-12-08 00:18:08.967 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:18:08.969 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 1.8109ms
+2021-12-08 00:18:08.188 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/v1/swagger.json - -
+2021-12-08 00:18:08.236 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 47.8211ms
+2021-12-08 00:18:08.895 +01:00 [ERR] (node:31096) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+
+2021-12-08 00:18:08.895 +01:00 [ERR] (Use `node --trace-deprecation ...` to show where the warning was created)
+
+2021-12-08 00:18:08.898 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:58985/webpack-dev-server/
+
+2021-12-08 00:18:08.898 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-08 00:18:08.898 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-08 00:18:08.120 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.6 kB [initial] [rendered]
+
+2021-12-08 00:18:08.121 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-12-08 00:18:08.121 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-08 00:18:08.121 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-12-08 00:18:08.121 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-12-08 00:18:08.121 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-08 00:18:08.121 +01:00 [INF] Date: 2021-12-07T23:18:31.119Z - Hash: 9dc0039790e3b3493991 - Time: 8207ms
+
+2021-12-08 00:18:08.121 +01:00 [INF] ** Angular Live Development Server is listening on localhost:58985, open your browser on http://localhost:58985/ **
+
+2021-12-08 00:18:08.195 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-08 00:18:08.048 +01:00 [INF] Application is starting
+2021-12-08 00:18:08.032 +01:00 [INF] User profile is available. Using '"C:\Users\astro\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-08 00:18:08.289 +01:00 [INF] Starting @angular/cli on port 59054...
+2021-12-08 00:18:08.465 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-08 00:18:08.465 +01:00 [INF] Hosting environment: "Development"
+2021-12-08 00:18:08.465 +01:00 [INF] Content root path: "E:\github\moje\ExamPortal"
+2021-12-08 00:18:08.504 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/ - -
+2021-12-08 00:18:08.353 +01:00 [INF] > examportal@0.0.0 start
+
+2021-12-08 00:18:08.354 +01:00 [INF] > ng serve "--port" "59054"
+
+2021-12-08 00:18:08.360 +01:00 [ERR] (node:26940) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+
+2021-12-08 00:18:08.361 +01:00 [ERR] (Use `node --trace-deprecation ...` to show where the warning was created)
+
+2021-12-08 00:18:08.363 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:59054/webpack-dev-server/
+
+2021-12-08 00:18:08.363 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-08 00:18:08.363 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-08 00:18:08.552 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.6 kB [initial] [rendered]
+
+2021-12-08 00:18:08.552 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 256 kB [initial] [rendered]
+
+2021-12-08 00:18:08.552 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-08 00:18:08.552 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-12-08 00:18:08.552 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 357 kB [initial] [rendered]
+
+2021-12-08 00:18:08.552 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-08 00:18:08.553 +01:00 [INF] Date: 2021-12-07T23:18:54.549Z - Hash: 9dc0039790e3b3493991 - Time: 8360ms
+
+2021-12-08 00:18:08.553 +01:00 [INF] ** Angular Live Development Server is listening on localhost:59054, open your browser on http://localhost:59054/ **
+
+2021-12-08 00:18:08.660 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-08 00:19:08.347 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/ - - - 200 - text/html;+charset=utf-8 19846.0551ms
+2021-12-08 00:19:08.367 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-12-08 00:19:08.367 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-12-08 00:19:08.367 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/styles.css - -
+2021-12-08 00:19:08.367 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-12-08 00:19:08.401 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:19:08.411 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-12-08 00:19:08.411 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-12-08 00:19:08.463 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:19:08.463 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:19:08.463 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:19:08.463 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:19:08.477 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 64.4426ms
+2021-12-08 00:19:08.516 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/styles.css - - - 304 - - 148.3233ms
+2021-12-08 00:19:08.539 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 200 66158 application/javascript;+charset=UTF-8 172.1097ms
+2021-12-08 00:19:08.542 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/main.js - -
+2021-12-08 00:19:08.573 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/main.js - - - 200 66158 application/javascript;+charset=UTF-8 31.1203ms
+2021-12-08 00:19:08.492 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 200 221648 application/javascript;+charset=UTF-8 2081.3102ms
+2021-12-08 00:19:08.495 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/scripts.js - -
+2021-12-08 00:19:08.525 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/scripts.js - - - 200 221648 application/javascript;+charset=UTF-8 30.0510ms
+2021-12-08 00:19:08.586 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 200 6299 application/javascript;+charset=UTF-8 2219.2000ms
+2021-12-08 00:19:08.591 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/runtime.js - -
+2021-12-08 00:19:08.610 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 200 262012 application/javascript;+charset=UTF-8 2242.6858ms
+2021-12-08 00:19:08.610 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/polyfills.js - -
+2021-12-08 00:19:08.640 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/runtime.js - - - 200 6299 application/javascript;+charset=UTF-8 48.5419ms
+2021-12-08 00:19:08.659 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/polyfills.js - - - 200 262012 application/javascript;+charset=UTF-8 48.2436ms
+2021-12-08 00:19:08.705 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 200 4708514 application/javascript;+charset=UTF-8 2294.2838ms
+2021-12-08 00:19:08.712 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/vendor.js - -
+2021-12-08 00:19:08.835 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/vendor.js - - - 200 4708514 application/javascript;+charset=UTF-8 123.0109ms
+2021-12-08 00:19:08.999 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638919142990 - -
+2021-12-08 00:19:08.016 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/favicon.ico - -
+2021-12-08 00:19:08.033 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/sockjs-node/info?t=1638919142990 - - - 200 - application/json;+charset=utf-8 34.7663ms
+2021-12-08 00:19:08.048 +01:00 [INF] Sending file. Request path: '"/favicon.ico"'. Physical path: '"E:\github\moje\ExamPortal\wwwroot\favicon.ico"'
+2021-12-08 00:19:08.049 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/favicon.ico - - - 200 5430 image/x-icon 32.3678ms
+2021-12-08 00:19:08.081 +01:00 [INF] Request starting HTTP/1.1 GET https://localhost:44319/sockjs-node/697/xwcynbu4/websocket - -
+2021-12-08 00:19:08.082 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:19:08.992 +01:00 [INF] Request finished HTTP/1.1 GET https://localhost:44319/sockjs-node/697/xwcynbu4/websocket - - - 0 - - 910.7888ms
+2021-12-08 00:19:08.016 +01:00 [INF] Request starting HTTP/2 POST https://localhost:44319/sockjs-node/697/jo0lje1h/xhr_streaming?t=1638919144013 - 0
+2021-12-08 00:19:08.017 +01:00 [INF] CORS policy execution successful.
+2021-12-08 00:19:08.705 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/index.html - -
+2021-12-08 00:19:08.772 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/index.html - - - 200 - text/html;charset=utf-8 67.3451ms
+2021-12-08 00:19:08.773 +01:00 [INF] Request finished HTTP/2 POST https://localhost:44319/sockjs-node/697/jo0lje1h/xhr_streaming?t=1638919144013 - 0 - 200 - application/javascript;+charset=UTF-8 4756.9887ms
+2021-12-08 00:19:08.792 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:19:08.793 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 1.5459ms
+2021-12-08 00:19:08.807 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - -
+2021-12-08 00:19:08.808 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/_framework/aspnetcore-browser-refresh.js - - - 200 11944 application/javascript;+charset=utf-8 1.0452ms
+2021-12-08 00:19:08.931 +01:00 [INF] Request starting HTTP/2 GET https://localhost:44319/swagger/v1/swagger.json - -
+2021-12-08 00:19:08.990 +01:00 [INF] Request finished HTTP/2 GET https://localhost:44319/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 58.9050ms
