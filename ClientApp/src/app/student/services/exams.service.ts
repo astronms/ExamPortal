@@ -1,7 +1,7 @@
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { ExamModel } from '../models/exams.model';
+import { ExamModel } from '../../models/exam.model';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';

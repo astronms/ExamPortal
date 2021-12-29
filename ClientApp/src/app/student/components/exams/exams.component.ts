@@ -1,4 +1,4 @@
-import { ExamModel } from '../../models/exams.model';
+import { ExamModel } from '../../../models/exam.model';
 
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';

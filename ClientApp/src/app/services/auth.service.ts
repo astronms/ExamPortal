@@ -1,44 +1,58 @@
 import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, @Inject('BASE_URL')private baseUrl: string) { }
+  private userSubject: BehaviorSubject<UserModel>;
+  public user: Observable<UserModel>;
 
-  login(credentials) : Observable<any> {
-    return this.http.post(this.baseUrl + 'api/auth/login', JSON.stringify(credentials), {
+  constructor(private http: HttpClient, @Inject('BASE_URL')private baseUrl: string, private jwtHelper: JwtHelperService) { 
+    this.userSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('user')));
+    this.user = this.userSubject.asObservable();
+  }
+
+  public login(credentials) : Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'api/auth/login', JSON.stringify(credentials), {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })})
-      .pipe(map(response => {
-        const token = (<any>response).token;
-        if(response && token)
-        {
-          localStorage.setItem("jwt", token);
-          return true;
-        }
-        return false;
-
+      .pipe(map(user => {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.userSubject.next(user);
+        return true;
     }), catchError(this.handleError));
   }
 
-  isUserAuthenticated() {
-    const token: string = localStorage.getItem("jwt");
-    if (token && !this.jwtHelper.isTokenExpired(token))
-      return true;
-    else
-      return false;
+  public get userValue(): UserModel {
+    return this.userSubject.value;
   }
+
+  public isUserAuthenticated() : boolean {
+    if(this.userSubject.value)
+      if(!this.jwtHelper.isTokenExpired(this.userSubject.value.token))
+        return true;
+
+    return false;
+  }
+
+  /*public getUserRole() : UserRole {
+    const token: string = localStorage.getItem("jwt");
+    const decodedToken: { [key: string]: string }= jwt_decode(token);
+    console.log(decodedToken);
+    return UserRole.User;
+  }*/
   
-  public logOut() {
-    localStorage.removeItem("jwt");
+  public logOut() : void {
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
   }
 
   private handleError(error: HttpErrorResponse) {
