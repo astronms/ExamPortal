@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 
 import { AuthService } from 'src/app/services/auth.service';

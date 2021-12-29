@@ -20,12 +20,18 @@ Table Of Contents:
 /**************************/
 /*     General Styles     */
 /**************************/
+
 :root {
 	--primary: #1c262f;
 	--primary-light: #212d37;
 	--secondary: #0ee951;
 	--tertiary: #00dabf;
 	--gradient: linear-gradient(to right, #0ee951, #00dabf);
+}
+
+body {
+	background-color: var(--primary-light);
+	color: white;
 }
 
 h1,
@@ -91,6 +97,9 @@ li {
 
 .bottom {
   	background-color: black;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 }
 
 /* Gradient Border And Background On Icons */
