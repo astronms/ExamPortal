@@ -20,15 +20,25 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/assets"],
+            "assets": ["src/assets", 
+            "src/assets/webfonts",
+            "src/assets/assets/images"],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/fontawesome-all.min.css",
+              "src/assets/css/swiper.css",
+              "src/assets/css/aos.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery/dist/jquery.slim.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "src/assets/js/aos.js",
+              "src/assets/js/purecounter.min.js",
+              "src/assets/js/script.js",
+              "src/assets/js/swiper.min.js"
             ]
           },
           "configurations": {

@@ -1,8 +1,8 @@
 name: BuildClientApp
 on:
   push:
-    paths:
-      - 'ClientApp/*'
+    paths-ignore:
+      - '.github/**'
 
 jobs:
   build-angular:

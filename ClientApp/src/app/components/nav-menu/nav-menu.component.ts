@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+  styleUrls: []
 })
 export class NavMenuComponent {
   isExpanded = false;
