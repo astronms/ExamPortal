@@ -41,12 +41,12 @@ namespace ExamPortal.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetExams()
+        public async Task<IActionResult> GetCourse()
         {
             try
             {
-                var exams = await _unitOfWork.Exams.GetAll();
-                var results = _mapper.Map<IList<ExamDTO>>(exams);
+                var courses = await _unitOfWork.Courses.GetAll();
+                var results = _mapper.Map<IList<CourseDTO>>(courses);
                 return Ok(results);
             }
             catch (Exception ex)
