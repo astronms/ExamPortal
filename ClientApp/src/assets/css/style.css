@@ -20,6 +20,7 @@ Table Of Contents:
 /**************************/
 /*     General Styles     */
 /**************************/
+
 :root {
 	--primary: #1c262f;
 	--primary-light: #212d37;
@@ -96,6 +97,9 @@ li {
 
 .bottom {
   	background-color: black;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 }
 
 /* Gradient Border And Background On Icons */

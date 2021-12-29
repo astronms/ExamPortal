@@ -22,9 +22,6 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { UserModel } from './models/user.model';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material';
-
 
 export function tokenGetter() {
   var user: UserModel = JSON.parse(localStorage.getItem("user"));
@@ -56,9 +53,7 @@ registerLocaleData(localPl);
         blacklistedRoutes: []
       }
     }),
-    TeacherModule,
-    BrowserAnimationsModule,
-    MatTableModule
+    TeacherModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },

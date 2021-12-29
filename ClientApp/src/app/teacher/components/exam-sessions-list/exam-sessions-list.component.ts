@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ExamModel } from 'src/app/models/exam.model';
+import { TableActionsModel } from 'src/app/models/table-actions.model';
 import { ExamSessionService } from '../../services/exam-session.service';
 
 @Component({
@@ -12,6 +13,12 @@ export class ExamSessionsListComponent implements OnInit {
 
   public examSessions: ExamModel[];
   public displayedColumns: string[] = ['id', 'title', 'duration', 'questionsNumber', 'startDate', 'available', 'actions'];
+  public teacherActions: TableActionsModel[] = [
+    {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-exam" },
+    {actionType: "edit", tooltip: "Edytuj", url: "\\" },
+    {actionType: "delete", tooltip: "Kasuj", url: "\\" }
+  ];
+
 
   constructor(private examSessionService: ExamSessionService, @Inject(LOCALE_ID)private locale: string) { }
 
@@ -26,8 +33,6 @@ export class ExamSessionsListComponent implements OnInit {
 
       this.examSessions = result;
     });
-
-    console.log(this.examSessions)
   }
 
 }
