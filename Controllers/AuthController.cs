@@ -9,11 +9,11 @@ using System.Text;
 
 namespace ExamPortal.Controllers
 {
-    [Route("api/auth")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
-        // GET api/values
+        //// GET api/values
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody] LoginModel user)
         {

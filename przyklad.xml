@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<session>
+	<exam id="767f440d-ec1f-4286-9d44-835db9e55fe6">
+		<task id="1" type="Yes-No" time="60">
+			<title><![CDATA[ Dla poniższych pytań zaznacz 'Tak' lub 'Nie' ]]></title>
+			<questions>
+				<value><![CDATA[ W drzewie binarnym największe elementy znajdują się po prawej stronie ]]></value>
+				<value><![CDATA[ W kopcu dwumianowym, operacja findmin wymaga O(n^2) operacji ]]></value>
+				<value><![CDATA[ Czas operacji na BST jest proporcjonalny do wysokości drzewa ]]></value>
+			</questions>
+		</task>
+		<task id="2" type="Yes-No" time="60">
+			<title><![CDATA[ Dla poniższych pytań zaznacz 'Tak' lub 'Nie' ]]></title>
+			<questions>
+				<value><![CDATA[ Dla kopca fibonacciego zamortyzowany czas łączenia - O(1) ]]></value>
+				<value><![CDATA[ Drzewo doskonale zrównoważone – dla dowolnego wierzchołka rozmiar lewego i prawego poddrzewa są równe. ]]></value>
+			</questions>
+		</task>
+		<task id="3" type="Closed" time="60">
+			<title><![CDATA[ Jaka jest złożoność czasowa sortowania bąbelkowego w najgorszym przypadku? ]]></title>
+			<questions>
+				<value><![CDATA[ O(n) ]]></value>
+				<value><![CDATA[ O(logn) ]]></value>
+				<value><![CDATA[ O(nlogn) ]]></value>
+				<value><![CDATA[ O(n^2) ]]></value>
+			</questions>
+		</task>
+		<task id="4" type="Opened" time="60">
+			<title><![CDATA[ Dany jest poniższy graf ]]></title>
+			<image><![CDATA[graf1.png]]></image>
+			<questions>
+				<value regex="^[0-9]\d*$"><![CDATA[ Podaj liczbę wierzchołków ]]></value>
+				<value regex="^[0-9]\d*$"><![CDATA[ Podaj stopień grafu ]]></value>
+				<value regex="^[0-9]\d*$"><![CDATA[ Podaj liczbę chromatyczną ]]></value>
+				<value regex="[A-Z]:[1-9],[A-Z]:[1-9],[A-Z]:[1-9]"><![CDATA[ Podaj kolejne wierzchołki wybierane przy poszukiwaniu min. drogi od wierzchołka A przez alg. Dijkstry i przyznawane im odległości (w formacie B:1,C:2,D:4) ]]></value>
+			</questions>
+		</task>
+	</exam>
+</session>
