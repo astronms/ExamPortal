@@ -231,5 +231,5 @@ _Pvt_Extensions
 .fake/
 
 # Custom
-logs/
+**/logs
 
