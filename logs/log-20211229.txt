@@ -1,0 +1,603 @@
+﻿2021-12-29 15:45:29.635 +01:00 [INF] Application is starting
+2021-12-29 15:45:29.513 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:45:29.653 +01:00 [INF] Starting @angular/cli on port 64742...
+2021-12-29 15:45:29.743 +01:00 [INF] Now listening on: "http://localhost:5000"
+2021-12-29 15:45:29.743 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-29 15:45:29.743 +01:00 [INF] Hosting environment: "Development"
+2021-12-29 15:45:29.743 +01:00 [INF] Content root path: "C:\Users\Dawid\Desktop\studia\inz\ExamPortal"
+2021-12-29 15:45:29.445 +01:00 [INF] > examportal@0.0.0 start C:\Users\Dawid\Desktop\studia\inz\ExamPortal\ClientApp
+
+2021-12-29 15:45:29.445 +01:00 [INF] > ng serve "--port" "64742"
+
+2021-12-29 15:45:29.628 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:64742/webpack-dev-server/
+
+2021-12-29 15:45:29.628 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-29 15:45:29.628 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-29 15:45:29.067 +01:00 [INF] chunk {main} main.js, main.js.map (main) 64.6 kB [initial] [rendered]
+
+2021-12-29 15:45:29.068 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 283 kB [initial] [rendered]
+
+2021-12-29 15:45:29.068 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-29 15:45:29.068 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 216 kB [entry] [rendered]
+
+2021-12-29 15:45:29.068 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 359 kB [initial] [rendered]
+
+2021-12-29 15:45:29.068 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-29 15:45:29.068 +01:00 [INF] Date: 2021-12-29T14:45:32.064Z - Hash: 1ed92d7c458e96e364c2 - Time: 9376ms
+
+2021-12-29 15:45:29.071 +01:00 [INF] ** Angular Live Development Server is listening on localhost:64742, open your browser on http://localhost:64742/ **
+
+2021-12-29 15:45:29.172 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-29 15:45:29.365 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger - -
+2021-12-29 15:45:29.396 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger - - - 301 0 - 36.3740ms
+2021-12-29 15:45:29.405 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html - -
+2021-12-29 15:45:29.468 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 63.4984ms
+2021-12-29 15:45:29.518 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - -
+2021-12-29 15:45:29.519 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - -
+2021-12-29 15:45:29.520 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - -
+2021-12-29 15:45:29.548 +01:00 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"'
+2021-12-29 15:45:29.548 +01:00 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"'
+2021-12-29 15:45:29.548 +01:00 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"'
+2021-12-29 15:45:29.550 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 30.2740ms
+2021-12-29 15:45:29.550 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 32.0445ms
+2021-12-29 15:45:29.550 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 30.8776ms
+2021-12-29 15:45:29.717 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - -
+2021-12-29 15:45:29.718 +01:00 [INF] Sending file. Request path: '"/favicon-32x32.png"'. Physical path: '"N/A"'
+2021-12-29 15:45:29.718 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 0.5204ms
+2021-12-29 15:45:29.750 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - -
+2021-12-29 15:45:29.866 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 116.2194ms
+2021-12-29 15:45:29.617 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - -
+2021-12-29 15:45:29.622 +01:00 [WRN] Failed to determine the https port for redirect.
+2021-12-29 15:45:29.769 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - - - 200 620 text/html;+charset=utf-8 2151.8884ms
+2021-12-29 15:45:29.819 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/runtime.js - -
+2021-12-29 15:45:29.819 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/styles.css - -
+2021-12-29 15:45:29.820 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/polyfills.js - -
+2021-12-29 15:45:29.821 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts.js - -
+2021-12-29 15:45:29.823 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/runtime.js - - - 200 6299 application/javascript;+charset=UTF-8 3.9643ms
+2021-12-29 15:45:29.823 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/main.js - -
+2021-12-29 15:45:29.824 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/vendor.js - -
+2021-12-29 15:45:29.831 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/scripts.js - - - 200 221134 application/javascript;+charset=UTF-8 10.1278ms
+2021-12-29 15:45:29.903 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/styles.css - - - 200 367268 text/css;+charset=UTF-8 2083.8507ms
+2021-12-29 15:45:29.907 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/main.js - - - 200 66196 application/javascript;+charset=UTF-8 2083.6055ms
+2021-12-29 15:45:29.908 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/polyfills.js - - - 304 - - 2088.4354ms
+2021-12-29 15:45:29.922 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/vendor.js - - - 200 4708195 application/javascript;+charset=UTF-8 2098.3245ms
+2021-12-29 15:45:29.247 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/sockjs-node/info?t=1640789147244 - -
+2021-12-29 15:45:29.251 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/sockjs-node/info?t=1640789147244 - - - 200 - application/json;+charset=utf-8 4.0819ms
+2021-12-29 15:45:29.253 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico - -
+2021-12-29 15:45:29.256 +01:00 [INF] Sending file. Request path: '"/favicon.ico"'. Physical path: '"C:\Users\Dawid\Desktop\studia\inz\ExamPortal\wwwroot\favicon.ico"'
+2021-12-29 15:45:29.256 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/favicon.ico - - - 0 5430 image/x-icon 3.1119ms
+2021-12-29 15:45:29.263 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/sockjs-node/286/5pswksw5/websocket - -
+2021-12-29 15:45:29.266 +01:00 [INF] CORS policy execution successful.
+2021-12-29 15:45:29.889 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/sockjs-node/286/rzhiyfwu/xhr_streaming?t=1640789147884 - 0
+2021-12-29 15:45:29.889 +01:00 [INF] CORS policy execution successful.
+2021-12-29 15:45:29.344 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/sockjs-node/286/5pswksw5/websocket - - - 101 - - 2081.2945ms
+2021-12-29 15:45:29.510 +01:00 [INF] Terminate batch job (Y/N)? 
+2021-12-29 15:45:29.517 +01:00 [INF] Application is shutting down...
+2021-12-29 15:45:29.536 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/sockjs-node/286/rzhiyfwu/xhr_streaming?t=1640789147884 - 0 - 200 - application/javascript;+charset=UTF-8 3647.0500ms
+2021-12-29 15:49:29.178 +01:00 [INF] Application is starting
+2021-12-29 15:49:29.354 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:49:29.442 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2021-12-29 15:49:29.471 +01:00 [FTL] Application Failed to start
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ExamPortal.Program.Main(String[] args) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Program.cs:line 35
+2021-12-29 15:49:29.196 +01:00 [INF] Application is starting
+2021-12-29 15:49:29.375 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:49:29.455 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2021-12-29 15:49:29.472 +01:00 [FTL] Application Failed to start
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ExamPortal.Program.Main(String[] args) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Program.cs:line 35
+2021-12-29 15:49:29.709 +01:00 [INF] Application is starting
+2021-12-29 15:49:29.877 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:49:29.961 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2021-12-29 15:49:29.977 +01:00 [FTL] Application Failed to start
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ExamPortal.Program.Main(String[] args) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Program.cs:line 35
+2021-12-29 15:49:29.480 +01:00 [INF] Application is starting
+2021-12-29 15:49:29.648 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:49:29.728 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2021-12-29 15:49:29.748 +01:00 [FTL] Application Failed to start
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ExamPortal.Program.Main(String[] args) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Program.cs:line 35
+2021-12-29 15:50:29.054 +01:00 [INF] Application is starting
+2021-12-29 15:50:29.220 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:50:29.299 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2021-12-29 15:50:29.316 +01:00 [FTL] Application Failed to start
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ExamPortal.Program.Main(String[] args) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Program.cs:line 35
+2021-12-29 15:51:29.032 +01:00 [INF] Application is starting
+2021-12-29 15:51:29.221 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:51:29.315 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2021-12-29 15:51:29.336 +01:00 [FTL] Application Failed to start
+System.InvalidOperationException: The following errors occurred with attribute routing information:
+
+Error 1:
+For action: 'ExamPortal.Controllers.AuthController.Login (ExamPortal)'
+Error: The route template 'api/[controller[/login' has invalid syntax. An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModelFactory.Flatten[TResult](ApplicationModel application, Func`5 flattener)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorBuilder.Build(ApplicationModel application)
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.GetDescriptors()
+   at Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerActionDescriptorProvider.OnProvidersExecuting(ActionDescriptorProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.UpdateCollection()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.Initialize()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider.GetChangeToken()
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.<>c__DisplayClass11_0.<Subscribe>b__0()
+   at Microsoft.Extensions.Primitives.ChangeToken.OnChange(Func`1 changeTokenProducer, Action changeTokenConsumer)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointDataSourceBase.Subscribe()
+   at Microsoft.AspNetCore.Mvc.Routing.ControllerActionEndpointDataSource..ctor(ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider, IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory, OrderedEndpointsSequenceProvider orderSequence)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute(IEndpointRouteBuilder endpoints, String name, String pattern, Object defaults, Object constraints, Object dataTokens)
+   at ExamPortal.Startup.<>c.<Configure>b__5_1(IEndpointRouteBuilder endpoints) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 114
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at ExamPortal.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Startup.cs:line 112
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.<>c__DisplayClass4_0.<Build>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass15_0.<UseStartup>b__1(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Mvc.Filters.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ExamPortal.Program.Main(String[] args) in C:\Users\Dawid\Desktop\studia\inz\ExamPortal\Program.cs:line 35
+2021-12-29 15:52:29.474 +01:00 [INF] Application is starting
+2021-12-29 15:52:29.497 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:53:29.407 +01:00 [INF] Application is starting
+2021-12-29 15:53:29.285 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:53:29.582 +01:00 [INF] Starting @angular/cli on port 61736...
+2021-12-29 15:53:29.806 +01:00 [INF] Now listening on: "http://localhost:5000"
+2021-12-29 15:53:29.807 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-29 15:53:29.807 +01:00 [INF] Hosting environment: "Development"
+2021-12-29 15:53:29.807 +01:00 [INF] Content root path: "C:\Users\Dawid\Desktop\studia\inz\ExamPortal"
+2021-12-29 15:53:29.533 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - -
+2021-12-29 15:53:29.584 +01:00 [WRN] Failed to determine the https port for redirect.
+2021-12-29 15:53:29.742 +01:00 [INF] > examportal@0.0.0 start C:\Users\Dawid\Desktop\studia\inz\ExamPortal\ClientApp
+
+2021-12-29 15:53:29.742 +01:00 [INF] > ng serve "--port" "61736"
+
+2021-12-29 15:53:29.676 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:61736/webpack-dev-server/
+
+2021-12-29 15:53:29.676 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-29 15:53:29.676 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-29 15:53:29.443 +01:00 [INF] chunk {main} main.js, main.js.map (main) 113 kB [initial] [rendered]
+
+2021-12-29 15:53:29.444 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 283 kB [initial] [rendered]
+
+2021-12-29 15:53:29.444 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-29 15:53:29.444 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 368 kB [entry] [rendered]
+
+2021-12-29 15:53:29.444 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 276 kB [initial] [rendered]
+
+2021-12-29 15:53:29.444 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-29 15:53:29.444 +01:00 [INF] Date: 2021-12-29T14:53:58.441Z - Hash: 8b8b8574cd3e611551cb - Time: 8895ms
+
+2021-12-29 15:53:29.445 +01:00 [INF] ** Angular Live Development Server is listening on localhost:61736, open your browser on http://localhost:61736/ **
+
+2021-12-29 15:53:29.516 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-29 15:54:29.172 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - - - 200 2848 text/html;+charset=utf-8 19644.7972ms
+2021-12-29 15:54:29.229 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/runtime.js - -
+2021-12-29 15:54:29.229 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/polyfills.js - -
+2021-12-29 15:54:29.232 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/vendor.js - -
+2021-12-29 15:54:29.232 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scripts.js - -
+2021-12-29 15:54:29.240 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/main.js - -
+2021-12-29 15:54:29.251 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/vendor.js - - - 304 - - 19.0115ms
+2021-12-29 15:54:29.251 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/styles.css - -
+2021-12-29 15:54:29.277 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/assets/assets/images/up-arrow.png - -
+2021-12-29 15:54:29.279 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/styles.css - - - 200 282293 text/css;+charset=UTF-8 27.7244ms
+2021-12-29 15:54:29.281 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/assets/assets/images/up-arrow.png - - - 304 - - 4.7416ms
+2021-12-29 15:54:29.308 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/runtime.js - - - 304 - - 2079.1152ms
+2021-12-29 15:54:29.309 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/polyfills.js - - - 304 - - 2079.3300ms
+2021-12-29 15:54:29.310 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/main.js - - - 200 115857 application/javascript;+charset=UTF-8 2069.5029ms
+2021-12-29 15:54:29.313 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/scripts.js - - - 200 376357 application/javascript;+charset=UTF-8 2083.1609ms
+2021-12-29 15:54:29.671 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/assets/assets/images/work.jpg - -
+2021-12-29 15:54:29.679 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/assets/assets/images/work.jpg - - - 200 87880 image/jpeg;+charset=UTF-8 8.3574ms
+2021-12-29 15:54:29.688 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/fa-solid-900.woff2 - -
+2021-12-29 15:54:29.690 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/fa-brands-400.woff2 - -
+2021-12-29 15:54:29.698 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/fa-solid-900.woff2 - - - 200 78196 font/woff2;+charset=UTF-8 15.6688ms
+2021-12-29 15:54:29.698 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/fa-brands-400.woff2 - - - 200 76764 font/woff2;+charset=UTF-8 8.4831ms
+2021-12-29 15:54:29.698 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/sockjs-node/info?t=1640789646692 - -
+2021-12-29 15:54:29.698 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/home.jpg - -
+2021-12-29 15:54:29.702 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/home.jpg - - - 200 49310 image/jpeg;+charset=UTF-8 3.8511ms
+2021-12-29 15:54:29.710 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/sockjs-node/info?t=1640789646692 - - - 200 - application/json;+charset=utf-8 11.4713ms
+2021-12-29 15:54:29.722 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/favicon.ico - -
+2021-12-29 15:54:29.752 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/sockjs-node/813/yvlr0bcx/websocket - -
+2021-12-29 15:54:29.755 +01:00 [INF] CORS policy execution successful.
+2021-12-29 15:54:29.761 +01:00 [INF] Sending file. Request path: '"/favicon.ico"'. Physical path: '"C:\Users\Dawid\Desktop\studia\inz\ExamPortal\wwwroot\favicon.ico"'
+2021-12-29 15:54:29.761 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/favicon.ico - - - 0 5430 image/x-icon 39.5386ms
+2021-12-29 15:54:29.410 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/sockjs-node/813/5tznsn1s/xhr_streaming?t=1640789647402 - 0
+2021-12-29 15:54:29.410 +01:00 [INF] CORS policy execution successful.
+2021-12-29 15:54:29.874 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/sockjs-node/813/yvlr0bcx/websocket - - - 101 - - 2122.1546ms
+2021-12-29 15:54:29.392 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/sockjs-node/813/5tznsn1s/xhr_streaming?t=1640789647402 - 0 - 200 - application/javascript;+charset=UTF-8 2982.3508ms
+2021-12-29 15:54:29.266 +01:00 [INF] Application is starting
+2021-12-29 15:54:29.486 +01:00 [INF] User profile is available. Using '"C:\Users\Dawid\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-29 15:54:29.672 +01:00 [INF] Starting @angular/cli on port 60542...
+2021-12-29 15:54:29.801 +01:00 [INF] Now listening on: "http://localhost:5000"
+2021-12-29 15:54:29.801 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-29 15:54:29.801 +01:00 [INF] Hosting environment: "Development"
+2021-12-29 15:54:29.801 +01:00 [INF] Content root path: "C:\Users\Dawid\Desktop\studia\inz\ExamPortal"
+2021-12-29 15:54:29.424 +01:00 [INF] > examportal@0.0.0 start C:\Users\Dawid\Desktop\studia\inz\ExamPortal\ClientApp
+
+2021-12-29 15:54:29.424 +01:00 [INF] > ng serve "--port" "60542"
+
+2021-12-29 15:54:29.357 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - -
+2021-12-29 15:54:29.391 +01:00 [WRN] Failed to determine the https port for redirect.
+2021-12-29 15:54:29.221 +01:00 [INF] i ´Żówds´Żú: Project is running at http://localhost:60542/webpack-dev-server/
+
+2021-12-29 15:54:29.221 +01:00 [INF] i ´Żówds´Żú: webpack output is served from /
+
+2021-12-29 15:54:29.222 +01:00 [INF] i ´Żówds´Żú: 404s will fallback to //index.html
+
+2021-12-29 15:55:29.507 +01:00 [INF] chunk {main} main.js, main.js.map (main) 113 kB [initial] [rendered]
+
+2021-12-29 15:55:29.507 +01:00 [INF] chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 283 kB [initial] [rendered]
+
+2021-12-29 15:55:29.507 +01:00 [INF] chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+
+2021-12-29 15:55:29.507 +01:00 [INF] chunk {scripts} scripts.js, scripts.js.map (scripts) 368 kB [entry] [rendered]
+
+2021-12-29 15:55:29.507 +01:00 [INF] chunk {styles} styles.css, styles.css.map (styles) 276 kB [initial] [rendered]
+
+2021-12-29 15:55:29.508 +01:00 [INF] chunk {vendor} vendor.js, vendor.js.map (vendor) 4.49 MB [initial] [rendered]
+
+2021-12-29 15:55:29.508 +01:00 [INF] Date: 2021-12-29T14:55:04.506Z - Hash: 8b8b8574cd3e611551cb - Time: 17104ms
+
+2021-12-29 15:55:29.509 +01:00 [INF] ** Angular Live Development Server is listening on localhost:60542, open your browser on http://localhost:60542/ **
+
+2021-12-29 15:55:29.583 +01:00 [INF] i ´Żówdm´Żú: Compiled successfully.
+
+2021-12-29 15:55:29.951 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - - - 0 - - 22595.6365ms
+2021-12-29 15:55:29.954 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html - -
+2021-12-29 15:55:29.025 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 70.4049ms
+2021-12-29 15:55:29.079 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - -
+2021-12-29 15:55:29.090 +01:00 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"'
+2021-12-29 15:55:29.091 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - - - 0 143632 text/css 11.9224ms
+2021-12-29 15:55:29.276 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - -
+2021-12-29 15:55:29.458 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 181.4488ms
+2021-12-29 15:55:29.117 +01:00 [INF] Application is shutting down...
+2021-12-29 15:55:29.136 +01:00 [INF] Terminate batch job (Y/N)? 
