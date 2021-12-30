@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, ViewChild, OnInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
 
 @Component({
@@ -8,13 +10,26 @@ import { TableActionsModel } from 'src/app/models/table-actions.model';
 })
 export class ExamTableComponent implements OnInit {
 
+  dataSource: MatTableDataSource<any>;
   @Input() columnsToDisplay : string[];
-  @Input() data;
+  @Input() set data(value) {
+    console.log(value + "ddd");
+    this.dataSource = new MatTableDataSource<any>(value);
+    if(this.dataSource)
+      this.dataSource.paginator = this.paginator;
+  };
   @Input() actions: TableActionsModel[];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() { }
 
   ngOnInit() {
+    
+  }
+
+  ngAfterViewInit() {
+    
   }
 
 }

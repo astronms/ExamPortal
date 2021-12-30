@@ -1,7 +1,6 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
-import { CourseModel, CourseViewModel } from '../../models/course.model';
+import { CourseViewModel } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 
 @Component({
@@ -20,26 +19,13 @@ export class CoursesListComponent implements OnInit {
     {actionType: "delete", tooltip: "Kasuj", url: "\\" }
   ];
 
-  constructor(private courseService: CourseService, @Inject(LOCALE_ID)private locale: string) { }
+  constructor(private courseService: CourseService) { }
 
   ngOnInit() {
-    const datePipe: DatePipe = new DatePipe(this.locale);
     
     this.courseService.getListOfCourses().subscribe(result => {
-      this.courses = this.mapDataFromBackendToViewModel(result);
+      this.courses = this.courseService.mapArrayDataFromBackendToViewModel(result);
     });
   }
-
-  private mapDataFromBackendToViewModel(data: CourseModel[]) : CourseViewModel[]
-  {
-    const datePipe: DatePipe = new DatePipe(this.locale);
-
-    return data.map( (course, index) => <CourseViewModel>{
-      no: index + 1,
-      title: course.name,
-      creationDate: datePipe.transform(course.creationDate, 'dd-MMM-yyyy HH:mm'),
-      studentsNumber: course.users.length
-    });
-  } 
 
 }

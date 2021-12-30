@@ -1,8 +1,6 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
-import { ExamModel, ExamViewModel } from 'src/app/models/exam.model';
+import { Component, OnInit } from '@angular/core';
+import { ExamViewModel } from 'src/app/models/exam.model';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
-import { CourseService } from '../../services/course.service';
 import { ExamSessionService } from '../../services/exam-session.service';
 
 @Component({
@@ -21,29 +19,13 @@ export class ExamSessionsListComponent implements OnInit {
   ];
 
 
-  constructor(private examSessionService: ExamSessionService, @Inject(LOCALE_ID)private locale: string) { }
+  constructor(private examSessionService: ExamSessionService) { }
 
   ngOnInit() {
-
-    const datepipe: DatePipe = new DatePipe(this.locale);
     
     this.examSessionService.getListOfExamSessions().subscribe(result => {
-      this.examSessions = this.mapDataFromBackendToViewModel(result);
+      this.examSessions = this.examSessionService.mapArrayDataFromBackendToViewModel(result);
     });
   }
-
-  private mapDataFromBackendToViewModel(data: ExamModel[]) : ExamViewModel[]
-  {
-    const datePipe: DatePipe = new DatePipe(this.locale);
-
-    return data.map( (exam, index) => <ExamViewModel>{
-      no: index + 1,
-      title: exam.title,
-      duration: exam.duration,
-      questionsNumber: exam.questionsNumber,
-      startDate: datePipe.transform(exam.startDate, 'dd-MMM-yyyy HH:mm'),
-      available: exam.available
-    });
-  } 
 
 }
