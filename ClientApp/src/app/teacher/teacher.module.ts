@@ -11,10 +11,15 @@ import { ExamTableComponent } from '../components/exam-table/exam-table.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import { CourseService } from './services/course.service';
-import { CourseCreatorComponent } from './components/course-creator/course-creator.component';
+import { CourseCreatorComponent, SuccessDialogComponent } from './components/course-creator/course-creator.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { MatStepperModule } from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     ExamCreatorComponent,
     CoursesListComponent,
     ExamTableComponent,
-    CourseCreatorComponent
+    CourseCreatorComponent,
+    SuccessDialogComponent 
   ],
   imports: [
     CommonModule,
@@ -32,7 +38,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     BrowserAnimationsModule,
     MatTooltipModule,
-    RouterModule
+    RouterModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [
     ExamSessionService,

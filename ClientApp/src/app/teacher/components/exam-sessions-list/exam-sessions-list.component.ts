@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
-import { ExamModel } from 'src/app/models/exam.model';
+import { ExamModel, ExamViewModel } from 'src/app/models/exam.model';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
+import { CourseService } from '../../services/course.service';
 import { ExamSessionService } from '../../services/exam-session.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { ExamSessionService } from '../../services/exam-session.service';
 })
 export class ExamSessionsListComponent implements OnInit {
 
-  public examSessions: ExamModel[];
+  public examSessions: ExamViewModel[];
   public displayedColumns: string[] = ['id', 'title', 'duration', 'questionsNumber', 'startDate', 'available', 'actions'];
   public teacherActions: TableActionsModel[] = [
     {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-exam" },
@@ -27,12 +28,22 @@ export class ExamSessionsListComponent implements OnInit {
     const datepipe: DatePipe = new DatePipe(this.locale);
     
     this.examSessionService.getListOfExamSessions().subscribe(result => {
-      result.forEach( exam => {
-        exam.startDate =  datepipe.transform(exam.startDate, 'dd-MMM-yyyy HH:mm');
-      });
-
-      this.examSessions = result;
+      this.examSessions = this.mapDataFromBackendToViewModel(result);
     });
   }
+
+  private mapDataFromBackendToViewModel(data: ExamModel[]) : ExamViewModel[]
+  {
+    const datePipe: DatePipe = new DatePipe(this.locale);
+
+    return data.map( (exam, index) => <ExamViewModel>{
+      no: index + 1,
+      title: exam.title,
+      duration: exam.duration,
+      questionsNumber: exam.questionsNumber,
+      startDate: datePipe.transform(exam.startDate, 'dd-MMM-yyyy HH:mm'),
+      available: exam.available
+    });
+  } 
 
 }

@@ -1,28 +1,47 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ConstantPool } from '@angular/compiler';
+import { Inject, Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { CourseModel } from '../models/course.model';
+import { NewCourse } from '../models/new-course.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  constructor() { }
+  constructor(private http: HttpClient, @Inject('BASE_URL')private baseUrl: string) { }
 
   getListOfCourses() : Observable<CourseModel[]>
   {
-    let date: Date = new Date();  
-    var courses : CourseModel[] = [
-        {id: 0, title: "Kurs 1", creationDate: date.toString(), studentsNumber: 50},
-        {id: 1, title: "Kurs 2", creationDate: date.toString(), studentsNumber: 90},
-        {id: 2, title: "Kurs 5", creationDate: date.toString(), studentsNumber: 60}
-    ];
+    return this.http.get<CourseModel[]>(this.baseUrl + 'api/auth/Course')
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
 
-    const obsUsingCreate = new Observable<CourseModel[]>( observer => {
-      observer.next(courses)
-      observer.complete()
-    })
+  addCourse(courseName: string) : Observable<NewCourse>
+  {
+    var newCourse: NewCourse = {
+      name: courseName,
+      creationDate: new Date()
+    };
 
-    return obsUsingCreate;
+    return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('An error occurred:', error.error);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    return throwError(
+      'Something bad happened; please try again later.');
   }
 }
