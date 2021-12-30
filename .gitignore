@@ -232,4 +232,5 @@ _Pvt_Extensions
 
 # Custom
 **/logs
+**/cache/*
 
