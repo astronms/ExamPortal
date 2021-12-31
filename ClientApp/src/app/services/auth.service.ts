@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { UserModel } from '../models/user.model';
+import { RoleEnum } from '../enums/role.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -43,12 +44,9 @@ export class AuthService {
     return false;
   }
 
-  /*public getUserRole() : UserRole {
-    const token: string = localStorage.getItem("jwt");
-    const decodedToken: { [key: string]: string }= jwt_decode(token);
-    console.log(decodedToken);
-    return UserRole.User;
-  }*/
+  public get userRole() : RoleEnum {
+    return this.userValue.role;
+  }
   
   public logOut() : void {
     localStorage.removeItem('user');

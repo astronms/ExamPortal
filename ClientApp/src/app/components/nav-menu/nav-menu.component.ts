@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoleEnum } from 'src/app/enums/role.enum';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -10,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  userTypes : typeof RoleEnum = RoleEnum;
 
   constructor(private router: Router, public authService: AuthService ) { }
 
