@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ExamModel } from 'src/app/models/exam.model';
+import { ExamModel, ExamViewModel } from 'src/app/models/exam.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExamSessionService {
 
-  constructor() { }
+  constructor(@Inject(LOCALE_ID)private locale: string) { }
 
   getListOfExamSessions() : Observable<ExamModel[]>
   {
@@ -23,4 +24,23 @@ export class ExamSessionService {
 
     return obsUsingCreate;
   }
+
+  mapDataFromBackendToViewModel(exam: ExamModel, index: number) : ExamViewModel
+  {
+    const datePipe: DatePipe = new DatePipe(this.locale);
+
+    return  <ExamViewModel>{
+      no: index,
+      title: exam.title,
+      duration: exam.duration,
+      questionsNumber: exam.questionsNumber,
+      startDate: datePipe.transform(exam.startDate, 'dd-MMM-yyyy HH:mm'),
+      available: exam.available
+    };
+  }
+
+  mapArrayDataFromBackendToViewModel(exams: ExamModel[]) : ExamViewModel[]
+  {
+    return exams.map( (exam, index) => this.mapDataFromBackendToViewModel(exam, index + 1));
+  } 
 }

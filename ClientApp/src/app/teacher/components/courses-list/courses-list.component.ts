@@ -1,7 +1,6 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
-import { CourseModel } from '../../models/course.model';
+import { CourseViewModel } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { CourseService } from '../../services/course.service';
 
 export class CoursesListComponent implements OnInit {
 
-  public courses: CourseModel[];
+  public courses: CourseViewModel[];
   public displayedColumns: string[] = ['id', 'title', 'studentsNumber', 'creationDate', 'actions'];
   public teacherActions: TableActionsModel[] = [
     {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-exam" },
@@ -20,17 +19,12 @@ export class CoursesListComponent implements OnInit {
     {actionType: "delete", tooltip: "Kasuj", url: "\\" }
   ];
 
-  constructor(private courseService: CourseService, @Inject(LOCALE_ID)private locale: string) { }
+  constructor(private courseService: CourseService) { }
 
   ngOnInit() {
-    const datePipe: DatePipe = new DatePipe(this.locale);
     
     this.courseService.getListOfCourses().subscribe(result => {
-      result.forEach( exam => {
-        exam.creationDate =  datePipe.transform(exam.creationDate, 'dd-MMM-yyyy HH:mm');
-      });
-
-      this.courses = result;
+      this.courses = this.courseService.mapArrayDataFromBackendToViewModel(result);
     });
   }
 
