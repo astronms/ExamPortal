@@ -12,7 +12,6 @@ namespace ExamPortal.Configuration
     {
         public MapperInitializer()
         {
-            CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<StudentInfo, StudentInfoDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
             //Course
@@ -25,6 +24,7 @@ namespace ExamPortal.Configuration
             CreateMap<Task, TaskDTO>().ReverseMap();
             CreateMap<Question, QuestionDTO>().ReverseMap();
             CreateMap<Value, ValueDTO>().ReverseMap();
+
 
         }
     }

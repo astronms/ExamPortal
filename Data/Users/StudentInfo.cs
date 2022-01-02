@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using AutoMapper.Configuration;
 
 namespace ExamPortal.Data.Users
 {
@@ -9,11 +10,9 @@ namespace ExamPortal.Data.Users
         [Key]
         public Guid StudentInfoId { get; set; }
         public int Index { get; set; }
-
-
+       
         [ForeignKey(nameof(User))]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
-
     }
 }

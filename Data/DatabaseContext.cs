@@ -1,11 +1,13 @@
-﻿using ExamPortal.Data.ExamData;
+﻿using ExamPortal.Configuration.Entities;
+using ExamPortal.Data.ExamData;
 using ExamPortal.Data.ExamToSendModel;
 using ExamPortal.Data.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExamPortal.Data
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext<User>
     {
         public DatabaseContext(DbContextOptions options) : base(options)
         {
@@ -13,9 +15,9 @@ namespace ExamPortal.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<StudentInfo> StudentsInfos { get; set; }
 
