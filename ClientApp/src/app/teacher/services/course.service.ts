@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ConstantPool } from '@angular/compiler';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -26,6 +26,14 @@ export class CourseService {
     );
   }
 
+  getCourse(guid: string) : Observable<CourseModel>
+  {
+    return this.http.get<CourseModel>(this.baseUrl + 'api/auth/Course/' + guid)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   addCourse(courseName: string) : Observable<NewCourse>
   {
     var newCourse: NewCourse = {
@@ -44,6 +52,7 @@ export class CourseService {
     const datePipe: DatePipe = new DatePipe(this.locale);
 
     return <CourseViewModel>{
+      id: course.courseId,
       no: index,
       title: course.name,
       creationDate: datePipe.transform(course.creationDate, 'dd-MMM-yyyy HH:mm'),

@@ -1,6 +1,8 @@
 <h1>Lista kursów:</h1>
-<app-exam-table [columnsToDisplay]="displayedColumns" [data]="courses" [actions]="teacherActions"></app-exam-table>
+<mat-progress-bar mode="indeterminate" *ngIf="!courses"></mat-progress-bar>
+<p *ngIf="courses && courses.length == 0">Brak kursów.</p>
+<app-exam-table [columnsToDisplay]="displayedColumns" [data]="courses" [actions]="teacherActions" *ngIf="courses && courses.length > 0"></app-exam-table>
 <br />
-<button class="btn btn-lg btn-primary btn-block" [routerLink]="['/teacher/course-creator']">Dodaj nowy</button>
+<button class="btn btn-lg btn-primary btn-block" [routerLink]="['/teacher/course-creator']" *ngIf="courses">Dodaj nowy</button>
   
   

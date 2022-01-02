@@ -8,12 +8,11 @@ import { TableActionsModel } from 'src/app/models/table-actions.model';
   templateUrl: './exam-table.component.html',
   styleUrls: ['./exam-table.component.css']
 })
-export class ExamTableComponent implements OnInit {
+export class ExamTableComponent {
 
   dataSource: MatTableDataSource<any>;
   @Input() columnsToDisplay : string[];
   @Input() set data(value) {
-    console.log(value + "ddd");
     this.dataSource = new MatTableDataSource<any>(value);
     if(this.dataSource)
       this.dataSource.paginator = this.paginator;
@@ -23,13 +22,5 @@ export class ExamTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() { }
-
-  ngOnInit() {
-    
-  }
-
-  ngAfterViewInit() {
-    
-  }
 
 }
