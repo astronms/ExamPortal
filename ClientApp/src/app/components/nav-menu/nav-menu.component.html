@@ -19,19 +19,19 @@
         <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" >
           <a class="nav-link" [routerLink]="['/about']">O projekcie</a>
         </li>
-         <!-- Button Courses -->
-         <li *ngIf="authService.isUserAuthenticated() && authService.userRole == userTypes.Admin" class="nav-item">
-          <a class="nav-link" [routerLink]="['teacher/courses-list']">Kursy</a>
-        </li> 
-        <!-- Button Exams -->
-        <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
-          <a *ngIf="authService.userRole == userTypes.Admin" class="nav-link" [routerLink]="['teacher/exams-list']">
-            Egzaminy
-          </a>
-          <a *ngIf="authService.userRole == userTypes.User" class="nav-link" [routerLink]="['student/exams-list']">
-            Egzaminy
-          </a>
-        </li> 
+        
+        <ng-container *ngIf="authService.isUserAuthenticated() && authService.userRole == userTypes.Admin">
+          <li *ngFor="let item of teacher_items | keyvalue" class="nav-item">
+            <a class="nav-link" [routerLink]="[item.value]">{{ item.key }}</a>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="authService.isUserAuthenticated() && authService.userRole == userTypes.User">
+          <li *ngFor="let item of student_items | keyvalue" class="nav-item">
+            <a class="nav-link" [routerLink]="[item.value]">{{ item.key }}</a>
+          </li>
+        </ng-container>
+
         <!-- Button Profile -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
           <a class="nav-link" [routerLink]="['/profile']">Profil</a>
