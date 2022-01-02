@@ -1,4 +1,4 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark top-nav-collapse" aria-label="Main navigation">
   <div class="container">
     <a class="navbar-brand logo-text" [routerLink]="['/']">ExamPortal</a>
     <button
@@ -32,6 +32,10 @@
         <!-- Button Exam_creator -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
           <a class="nav-link" [routerLink]="['/teacher/exam-creator']">Kreator</a>
+        </li> 
+        <!-- Button Exam -->
+        <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
+          <a class="nav-link" [routerLink]="['/student/exams']">Egzaminy</a>
         </li> 
         <!-- Button Profile -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">

@@ -30,7 +30,7 @@ Table Of Contents:
 }
 
 body {
-	background-color: var(--primary-light);
+	background-color: var(--primary);
 	color: white;
 }
 
@@ -75,7 +75,7 @@ li {
 .plans,
 .work,
 .contact {
-	height: 110vh;
+	height: 100vh;
 	position: relative;
 }
 
