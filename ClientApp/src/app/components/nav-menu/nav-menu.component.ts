@@ -13,6 +13,15 @@ export class NavMenuComponent {
   isExpanded = false;
   userTypes : typeof RoleEnum = RoleEnum;
 
+  teacher_items = {
+    "Kursy": "teacher/courses-list",
+    "Egzaminy": "teacher/exams-list"
+  }
+
+  student_items = {
+    "Egzaminy": "student/exams-list"
+  }
+
   constructor(private router: Router, public authService: AuthService ) { }
 
   collapse() {
