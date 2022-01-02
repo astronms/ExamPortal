@@ -1,4 +1,4 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark top-nav-collapse" aria-label="Main navigation">
   <div class="container">
     <a class="navbar-brand logo-text" [routerLink]="['/']">ExamPortal</a>
     <button
@@ -19,7 +19,6 @@
         <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" >
           <a class="nav-link" [routerLink]="['/about']">O projekcie</a>
         </li>
-        
         <ng-container *ngIf="authService.isUserAuthenticated() && authService.userRole == userTypes.Admin">
           <li *ngFor="let item of teacher_items | keyvalue" class="nav-item">
             <a class="nav-link" [routerLink]="[item.value]">{{ item.key }}</a>
@@ -31,7 +30,6 @@
             <a class="nav-link" [routerLink]="[item.value]">{{ item.key }}</a>
           </li>
         </ng-container>
-
         <!-- Button Profile -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
           <a class="nav-link" [routerLink]="['/profile']">Profil</a>

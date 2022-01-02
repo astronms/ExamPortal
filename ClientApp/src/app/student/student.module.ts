@@ -7,6 +7,7 @@ import { ExamComponent } from './components/exam/exam.component';
 import { ExamsService } from './services/exams.service';
 import { ExamFactoryService } from './services/exam-factory.service';
 import { SyncExamService } from './services/sync-exam.service';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SyncExamService } from './services/sync-exam.service';
     ExamComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },
