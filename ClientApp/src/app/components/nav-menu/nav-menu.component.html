@@ -15,23 +15,22 @@
     </button>
     <div class="navbar-collapse collapse offcanvas-collapse" id="navbarsExampleDefault" [ngClass]="{ show: isExpanded }">
       <ul class="navbar-nav ms-auto navbar-nav-scroll">
-        <!-- <li
-          class="nav-item"
-          [routerLinkActive]="['link-active']"
-          [routerLinkActiveOptions]="{ exact: tru e }"
-        >
-        </li> -->
         <!-- Button About -->
-        <li class="nav-item" >
+        <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" >
           <a class="nav-link" [routerLink]="['/about']">O projekcie</a>
         </li>
-        <!-- Button Login -->
-        <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link" [routerLink]="['/login']">Logowanie</a>
-        </li>
-        <!-- Button Exam_creator -->
+         <!-- Button Courses -->
+         <li *ngIf="authService.isUserAuthenticated() && authService.userRole == userTypes.Admin" class="nav-item">
+          <a class="nav-link" [routerLink]="['teacher/courses-list']">Kursy</a>
+        </li> 
+        <!-- Button Exams -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
-          <a class="nav-link" [routerLink]="['/teacher/exam-creator']">Kreator</a>
+          <a *ngIf="authService.userRole == userTypes.Admin" class="nav-link" [routerLink]="['teacher/exams-list']">
+            Egzaminy
+          </a>
+          <a *ngIf="authService.userRole == userTypes.User" class="nav-link" [routerLink]="['student/exams-list']">
+            Egzaminy
+          </a>
         </li> 
         <!-- Button Exam -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
@@ -41,6 +40,10 @@
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
           <a class="nav-link" [routerLink]="['/profile']">Profil</a>
         </li> 
+        <!-- Button Login -->
+        <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
+          <a class="nav-link" [routerLink]="['/login']">Logowanie</a>
+        </li>
         <!-- Button Logout -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
           <a class="nav-link" (click)="logout()">Wyloguj</a>
