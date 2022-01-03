@@ -82,7 +82,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateCourse(Guid guid, [FromBody] UpdateCoruseDTO courseDTO)
         {
-            if (!ModelState.IsValid || guid != Guid.Empty)
+            if (!ModelState.IsValid || guid == Guid.Empty)
             {
                 _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateCourse)}");
                 return BadRequest(ModelState);
