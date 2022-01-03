@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { UserModel } from 'src/app/models/user.model';
+import { AuthUserModel } from 'src/app/models/auth-user.model';
 
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent {
 
-  public user: UserModel;
+  public user: AuthUserModel;
 
   constructor(public authService: AuthService) {
   }
