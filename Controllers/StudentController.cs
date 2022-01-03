@@ -37,9 +37,14 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetStudent(Guid guid)
         {
-            var student = await _unitOfWork.Users.Get(q => Guid.Parse(q.Id) == guid);
-            var result = _mapper.Map<UserDTO>(student);
-            return Ok(result);
+            var user = await _unitOfWork.Users.Get(q => Guid.Parse(q.Id) == guid);
+            var isStudent = await (_userManager.IsInRoleAsync(user, "User"));
+            if (isStudent)
+            {
+                var result = _mapper.Map<UserDTO>(user);
+                return Ok(result);
+            }
+            return NotFound();
         }
 
         [HttpGet]
