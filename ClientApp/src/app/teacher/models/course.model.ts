@@ -7,6 +7,7 @@ export interface CourseModel {
 }
 
 export interface CourseViewModel {
+    id: number;
     no: number;
     title: string;
     creationDate: string;

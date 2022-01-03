@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ConstantPool } from '@angular/compiler';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -26,14 +26,30 @@ export class CourseService {
     );
   }
 
-  addCourse(courseName: string) : Observable<NewCourse>
+  getCourse(guid: string) : Observable<CourseModel>
+  {
+    return this.http.get<CourseModel>(this.baseUrl + 'api/auth/Course/' + guid)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addCourse(course: CourseModel) : Observable<NewCourse>
   {
     var newCourse: NewCourse = {
-      name: courseName,
+      name: course.name,
       creationDate: new Date()
     };
 
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  modifyCourse(course: CourseModel) : Observable<CourseModel>
+  {
+    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, course)
     .pipe(
       catchError(this.handleError)
     );
@@ -44,6 +60,7 @@ export class CourseService {
     const datePipe: DatePipe = new DatePipe(this.locale);
 
     return <CourseViewModel>{
+      id: course.courseId,
       no: index,
       title: course.name,
       creationDate: datePipe.transform(course.creationDate, 'dd-MMM-yyyy HH:mm'),
