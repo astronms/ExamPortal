@@ -49,13 +49,7 @@ export class CourseService {
 
   modifyCourse(course: CourseModel) : Observable<CourseModel>
   {
-    var courseAdd = {
-      name: course.name,
-      creationDate: course.creationDate,
-      users: course.users,
-      sessions: course.sessions
-    };
-    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, courseAdd)
+    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, course)
     .pipe(
       catchError(this.handleError)
     );
