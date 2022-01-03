@@ -1,0 +1,30 @@
+<mat-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup" label="Wprowadź nazwę kursu">
+        <form [formGroup]="firstFormGroup">
+            <mat-form-field appearance="fill">
+              <mat-label>Nazwa</mat-label>
+              <input matInput placeholder="Nazwa" formControlName="courseName" [(ngModel)]='course.name' required>
+            </mat-form-field>
+            <div>
+                <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Przypisz studentów">
+        <form [formGroup]="secondFormGroup">
+            <p>Tu będzie lista użytkowników</p>
+            <div>
+                <button class="btn btn-lg btn-primary" matStepperPrevious>Wróć</button>
+                <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step label="Gotowe">
+        <p>Nazwa kursu: {{ course.name }}</p>
+        <p>Liczba przypisanych studentów: {{ course.users.length }}</p>
+        <div>
+            <button class="btn btn-lg btn-primary" matStepperPrevious>Wróć</button>
+            <button class="btn btn-lg btn-primary" (click)="saveClick()">Zapisz</button>
+        </div>
+    </mat-step>
+</mat-stepper>

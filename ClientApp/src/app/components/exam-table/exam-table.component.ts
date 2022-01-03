@@ -13,7 +13,6 @@ export class ExamTableComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @Input() columnsToDisplay : string[];
   @Input() set data(value) {
-    console.log(value + "ddd");
     this.dataSource = new MatTableDataSource<any>(value);
     if(this.dataSource)
       this.dataSource.paginator = this.paginator;

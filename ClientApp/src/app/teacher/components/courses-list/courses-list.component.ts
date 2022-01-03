@@ -14,8 +14,8 @@ export class CoursesListComponent implements OnInit {
   public courses: CourseViewModel[];
   public displayedColumns: string[] = ['id', 'title', 'studentsNumber', 'creationDate', 'actions'];
   public teacherActions: TableActionsModel[] = [
-    {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-exam" },
-    {actionType: "edit", tooltip: "Edytuj", url: "\\" },
+    {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-course" },
+    {actionType: "edit", tooltip: "Edytuj", url: "/teacher/edit-course/" },
     {actionType: "delete", tooltip: "Kasuj", url: "\\" }
   ];
 
