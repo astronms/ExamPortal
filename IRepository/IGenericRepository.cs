@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace ExamPortal.IRepository
 {
@@ -11,10 +12,10 @@ namespace ExamPortal.IRepository
         Task<IList<T>> GetAll(
             Expression<Func<T, bool>> expression = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            List<string> includes = null
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null
         );
 
-        Task<T> Get(Expression<Func<T, bool>> expression, List<string> includes = null);
+        Task<T> Get(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
         Task Insert(T entity);
         Task InsertRange(IEnumerable<T> entities);
         Task Delete(Guid guid);
