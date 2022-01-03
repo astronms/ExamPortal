@@ -14,6 +14,8 @@ namespace ExamPortal.Models
         public string Name { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
+        public virtual IList<UserDTO> Users { get; set; }
+        public virtual IList<SessionDTO> Sessions { get; set; }
     }
     public class CourseDTO : CreateCourseDTO
     {
