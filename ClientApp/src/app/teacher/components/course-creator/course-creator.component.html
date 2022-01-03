@@ -1,4 +1,9 @@
-<h2>Tworzenie kursu</h2>
+<div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Kreator Kursu</span></h2>  
+    </div> 
+</div> 
+
 <mat-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup" label="Wprowadź nazwę kursu">
         <form [formGroup]="firstFormGroup">
@@ -7,7 +12,8 @@
               <input matInput placeholder="Nazwa" formControlName="courseName" [(ngModel)]='courseNameValue' required>
             </mat-form-field>
             <div>
-                <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
+                <button class="btn btn-sm">Wróć</button> <!-- dodać link do course-list -->
+                <button class="btn btn-sm" matStepperNext>Dalej</button>
             </div>
         </form>
     </mat-step>
@@ -15,8 +21,8 @@
         <form [formGroup]="secondFormGroup">
             <p>Tu będzie lista użytkowników</p>
             <div>
-                <button class="btn btn-lg btn-primary" matStepperPrevious>Wróć</button>
-                <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
+                <button class="btn btn-sm" matStepperPrevious>Wróć</button>
+                <button class="btn btn-sm" matStepperNext>Dalej</button>
             </div>
         </form>
     </mat-step>
@@ -24,8 +30,8 @@
         <p>Nazwa kursu: {{ courseNameValue }}</p>
         <p>Liczba przypisanych studentów: 0</p>
         <div>
-            <button class="btn btn-lg btn-primary" matStepperPrevious>Wróć</button>
-            <button class="btn btn-lg btn-primary" (click)="addCourseClick()">Zapisz</button>
+            <button class="btn btn-sm" matStepperPrevious>Wróć</button>
+            <button class="btn btn-sm" (click)="addCourseClick()">Zapisz</button>
         </div>
     </mat-step>
 </mat-stepper>
