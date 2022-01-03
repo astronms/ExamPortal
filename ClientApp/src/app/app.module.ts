@@ -20,11 +20,11 @@ import { ProfileComponent } from './components/profile/profile.component'
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
-import { UserModel } from './models/user.model';
+import { AuthUserModel } from './models/auth-user.model';
 
 
 export function tokenGetter() {
-  var user: UserModel = JSON.parse(localStorage.getItem("user"));
+  var user: AuthUserModel = JSON.parse(localStorage.getItem("user"));
   return (user ? user.token : null);
 }
 

@@ -1,11 +1,7 @@
 import { RoleEnum } from "../enums/role.enum"
 
-export class UserModel {
-    id: number;
-    firstName: string;
-    lastName: string;
+export class AuthUserModel {
     email: string;
-    index: number;
     role: RoleEnum;
     token?: string;
 }
