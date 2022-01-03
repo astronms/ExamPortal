@@ -4,13 +4,14 @@ import { CourseModel } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css']
+  selector: 'app-course-edit',
+  templateUrl: './course-edit.component.html',
+  styleUrls: ['./course-edit.component.css']
 })
-export class CourseComponent implements OnInit {
+export class CourseEditComponent implements OnInit {
 
   course: CourseModel;
+  redirect = "/teacher/courses-list";
 
   constructor(
     private route: ActivatedRoute,
@@ -27,5 +28,8 @@ export class CourseComponent implements OnInit {
         this.course = result;
       });
   }
-
+  
+  saveClick(event) {
+    this.courseService.modifyCourse(event).subscribe();
+  }
 }
