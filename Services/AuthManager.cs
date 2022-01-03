@@ -56,16 +56,15 @@ namespace ExamPortal.Services
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, _user.UserName)
+                new Claim("Name", _user.UserName)
             };
 
             var roles = await _userManager.GetRolesAsync(_user);
 
             foreach (var role in roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                claims.Add(new Claim("Role", role));
             }
-
             return claims;
         }
 
