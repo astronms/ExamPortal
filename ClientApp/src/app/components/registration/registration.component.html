@@ -1,54 +1,48 @@
 <h1>Rejestracja</h1>
-<form class="example-form">
+<form class="example-form" [formGroup]="formGroup">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="formGroup.get('email')" [errorStateMatcher]="matcher"
-               placeholder="Ex. pat@example.com">
+        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Np. pat@example.com">
         <mat-error *ngIf="formGroup.get('email').hasError('email') && !formGroup.get('email').hasError('required')">
-          Please enter a valid email address
+            Proszę wprowadzić prawidłowy email.
         </mat-error>
-        <mat-error *ngIf="formGroup.get('email').hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
+        <mat-error *ngIf="formGroup.get('email').hasError('required')">Email jest wymagany.</mat-error>
     </mat-form-field>
   
     <table class="example-full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>First name</mat-label>
-        <input matInput>
-      </mat-form-field></td>
-      <td><mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Long Last Name That Will Be Truncated</mat-label>
-        <input matInput>
-      </mat-form-field></td>
+        <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Imię</mat-label>
+                <input matInput formControlName="firstName" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="formGroup.get('firstName').hasError('required')">Imię jest wymagane.</mat-error>
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nazwisko</mat-label>
+                <input matInput formControlName="lastName" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="formGroup.get('lastName').hasError('required')">Imię jest wymagane.</mat-error>
+            </mat-form-field>
+        </td>
     </tr></table>
-  
-    <!-- <mat-form-field class="example-full-width" appearance="fill">
-        <input matInput type="password" placeholder="Password" formControlName="password" (input)="onPasswordInput()">
-        <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
-        <mat-error *ngIf="password.hasError('minlength')">Password must have at least {{minPw}} characters</mat-error>
-      </mat-form-field>
-    
-      <mat-form-field class="example-full-width" appearance="fill">
-        <input matInput type="password" placeholder="Confirm password" formControlName="password2" (input)="onPasswordInput()">
-        <mat-error *ngIf="password2.hasError('required')">Please confirm your password</mat-error>
-        <mat-error *ngIf="password2.invalid && !password2.hasError('required')">Passwords don't match</mat-error>
-      </mat-form-field> -->
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <input matInput type="password" placeholder="Password" [formControl]="formGroup.get('password')" [errorStateMatcher]="matcher">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
         <mat-error *ngIf="formGroup.get('password').hasError('required')">Hasło jest wymagane.</mat-error>
         <mat-error *ngIf="formGroup.get('password').hasError('pattern')">
-            Hasło musi składać się przynajmniej z jednej wielkiej i małej litery, jednej cyfry oraz minimum 8 znaków.
+            Hasło musi składać się przynajmniej z jednej wielkiej i małej litery, jednej cyfry, jednego znaku specjalnego oraz minimum 8 znaków.
         </mat-error>
-      </mat-form-field>
-    
-      <mat-form-field class="example-full-width" appearance="fill" >
-        <input matInput type="password" placeholder="Confirm password" [formControl]="formGroup.get('password2')" [errorStateMatcher]="matcher">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Potwierdź hasło</mat-label>
+        <input matInput type="password" formControlName="password2" [errorStateMatcher]="matcher">
         <mat-error class="password-mismatch" *ngIf="formGroup.get('password2').hasError('passwordMismatch') && !formGroup.get('password').hasError('required')">Hasła nie pasują.</mat-error>
         <mat-error *ngIf="formGroup.get('password2').hasError('required')">Potwierdź hasło.</mat-error>
-      </mat-form-field>
-      <button (click)="test()">Test!</button>
+    </mat-form-field>
+    
+    <button class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Zapisz</button>
 
 </form>
   

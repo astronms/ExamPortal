@@ -6,6 +6,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AuthUserModel } from '../models/auth-user.model';
 import { RoleEnum } from '../enums/role.enum';
+import { RegisterUserModel } from '../models/register-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,14 @@ export class AuthService {
         this.userSubject.next(user);
         return true;
     }), catchError(this.handleError));
+  }
+
+  public registerUser(user: RegisterUserModel) : Observable<RegisterUserModel>
+  {
+    return this.http.post<RegisterUserModel>(this.baseUrl + 'api/Account/register', user)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   public get userValue(): AuthUserModel {
