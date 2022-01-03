@@ -34,14 +34,28 @@ export class CourseService {
     );
   }
 
-  addCourse(courseName: string) : Observable<NewCourse>
+  addCourse(course: CourseModel) : Observable<NewCourse>
   {
     var newCourse: NewCourse = {
-      name: courseName,
+      name: course.name,
       creationDate: new Date()
     };
 
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  modifyCourse(course: CourseModel) : Observable<CourseModel>
+  {
+    var courseAdd = {
+      name: course.name,
+      creationDate: course.creationDate,
+      users: course.users,
+      sessions: course.sessions
+    };
+    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, courseAdd)
     .pipe(
       catchError(this.handleError)
     );

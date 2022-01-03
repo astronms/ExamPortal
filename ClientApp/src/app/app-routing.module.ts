@@ -18,6 +18,7 @@ import { CoursesListComponent } from './teacher/components/courses-list/courses-
 import { ExamSessionComponent } from './teacher/components/exam-session/exam-session.component';
 import { CourseCreatorComponent } from './teacher/components/course-creator/course-creator.component';
 import { CourseComponent } from './teacher/components/course/course.component';
+import { CourseEditComponent } from './teacher/components/course-edit/course-edit.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,9 +31,9 @@ const appRoutes: Routes = [
   { path: 'teacher/view-exam/:id', component: ExamSessionComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/exam-creator', component: ExamCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/courses-list', component: CoursesListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
-  { path: 'teacher/course-creator', component: PageNotFoundComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
-  { path: 'teacher/view-course/', component: CourseComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/course-creator', component: CourseCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/view-course/:id', component: CourseComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/edit-course/:id', component: CourseEditComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: '**', component: PageNotFoundComponent }
 ]
 

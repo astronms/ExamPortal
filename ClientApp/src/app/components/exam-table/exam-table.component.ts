@@ -8,7 +8,7 @@ import { TableActionsModel } from 'src/app/models/table-actions.model';
   templateUrl: './exam-table.component.html',
   styleUrls: ['./exam-table.component.css']
 })
-export class ExamTableComponent {
+export class ExamTableComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
   @Input() columnsToDisplay : string[];
@@ -22,5 +22,13 @@ export class ExamTableComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() { }
+
+  ngOnInit() {
+    
+  }
+
+  ngAfterViewInit() {
+    
+  }
 
 }

@@ -1,0 +1,7 @@
+<h2>Edycja kursu</h2>
+<mat-progress-bar mode="indeterminate" *ngIf="!course"></mat-progress-bar>
+<ng-container *ngIf="course">
+    <app-course-modify-template [redirect]="redirect" [course]="course" (onSave)="saveClick($event)"></app-course-modify-template>
+</ng-container>
+
+  
