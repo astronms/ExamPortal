@@ -38,6 +38,10 @@
         <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
           <a class="nav-link" [routerLink]="['/login']">Logowanie</a>
         </li>
+        <!-- Button Registration -->
+        <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
+          <a class="nav-link" [routerLink]="['/registration']">Rejestracja</a>
+        </li>
         <!-- Button Logout -->
         <li *ngIf="authService.isUserAuthenticated()" class="nav-item">
           <a class="nav-link" (click)="logout()">Wyloguj</a>
