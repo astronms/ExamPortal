@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ExamPortal.Data;
 using ExamPortal.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Task = System.Threading.Tasks.Task;
 
 namespace ExamPortal.Repository
@@ -21,7 +22,7 @@ namespace ExamPortal.Repository
             _db = _context.Set<T>();
         }
 
-        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
+        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = _db;
 
@@ -30,12 +31,9 @@ namespace ExamPortal.Repository
                 query = query.Where(expression);
             }
 
-            if (includes != null)
+            if (include != null)
             {
-                foreach (var includePropery in includes)
-                {
-                    query = query.Include(includePropery);
-                }
+                query = include(query);
             }
 
             if (orderBy != null)
@@ -46,15 +44,12 @@ namespace ExamPortal.Repository
             return await query.AsNoTracking().ToListAsync();
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>> expression, List<string> includes = null)
+        public async Task<T> Get(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = _db;
-            if (includes != null)
+            if (include != null)
             {
-                foreach (var includePropery in includes)
-                {
-                    query = query.Include(includePropery);
-                }
+                query = include(query);
             }
 
             return await query.AsNoTracking().FirstOrDefaultAsync(expression);

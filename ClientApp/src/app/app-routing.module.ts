@@ -17,11 +17,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { CoursesListComponent } from './teacher/components/courses-list/courses-list.component';
 import { ExamSessionComponent } from './teacher/components/exam-session/exam-session.component';
 import { CourseCreatorComponent } from './teacher/components/course-creator/course-creator.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { CourseComponent } from './teacher/components/course/course.component';
 import { CourseEditComponent } from './teacher/components/course-edit/course-edit.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'about', component: AboutComponent },

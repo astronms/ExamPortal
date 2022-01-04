@@ -17,14 +17,16 @@ import { LoginComponent } from './components/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './components/profile/profile.component'
+import { RegistrationComponent } from './components/registration/registration.component'
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
-import { UserModel } from './models/user.model';
+import { AuthUserModel } from './models/auth-user.model';
+import { SharedModule } from './shared/shared.module';
 
 
 export function tokenGetter() {
-  var user: UserModel = JSON.parse(localStorage.getItem("user"));
+  var user: AuthUserModel = JSON.parse(localStorage.getItem("user"));
   return (user ? user.token : null);
 }
 
@@ -38,7 +40,8 @@ registerLocaleData(localPl);
     LoginComponent,
     PageNotFoundComponent,
     ProfileComponent, 
-    AboutComponent
+    AboutComponent, 
+    RegistrationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,7 +56,8 @@ registerLocaleData(localPl);
         blacklistedRoutes: []
       }
     }),
-    TeacherModule
+    TeacherModule,
+    SharedModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },

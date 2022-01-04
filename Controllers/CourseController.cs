@@ -8,6 +8,7 @@ using ExamPortal.Models;
 using ExamPortal.Models.Exam;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ExamPortal.Controllers
@@ -33,7 +34,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCourse(Guid guid)
         {
-            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid);
+            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid, include: q => q.Include(x => x.Users));
             var result = _mapper.Map<CourseDTO>(course);
             return Ok(result);
         }
@@ -45,7 +46,7 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var courses = await _unitOfWork.Courses.GetAll();
+                var courses = await _unitOfWork.Courses.GetAll(include: q => q.Include(x => x.Users));
                 var results = _mapper.Map<IList<CourseDTO>>(courses);
                 return Ok(results);
             }

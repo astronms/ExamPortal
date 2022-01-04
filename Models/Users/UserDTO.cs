@@ -7,29 +7,26 @@ using ExamPortal.Data.Users;
 
 namespace ExamPortal.Models.Users
 {
-    public class CreateUserDTO
+    public class UserDTO : LoginUserDTO
     {
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        [PasswordPropertyText]
-        public string Password { get; set; }
-        public bool IsAccountActive { get; set; }
-        public List<Course> Courses { get; set; }
         
-        [Required]
-        public Guid RoleId { get; set; }
-       
+        public ICollection<string> Roles { get; set; }
+
+        public List<CourseDTO> Courses { get; set; }
+        public virtual StudentInfo StudentInfo { get; set; }
     }
 
-    public class UserDTO : CreateUserDTO
+
+    public class LoginUserDTO
     {
-        public Guid Id { get; set; }
-        public Role Role { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(15, ErrorMessage = "Your Password is limited to {2} to {1} characters", MinimumLength = 6)]
+        public string Password { get; set; }
     }
 }
