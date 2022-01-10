@@ -35,7 +35,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
+        public async Task<IActionResult> Register([FromBody] RegisterUserDTO userDTO)
         {
             _logger.LogInformation($"Registration Attempt for {userDTO.Email} ");
             if (!ModelState.IsValid)
@@ -57,14 +57,8 @@ namespace ExamPortal.Controllers
                     return BadRequest(ModelState);
                 }
 
-                if (userDTO.Roles == null)
-                {
-                    await _userManager.AddToRoleAsync(user, "User");
-                }
-                else
-                {
-                    await _userManager.AddToRolesAsync(user, userDTO.Roles);
-                }
+                await _userManager.AddToRoleAsync(user, "User");
+               
                 return Accepted();
             }
             catch (Exception ex)
