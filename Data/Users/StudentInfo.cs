@@ -13,6 +13,5 @@ namespace ExamPortal.Data.Users
        
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
-        public User User { get; set; }
     }
 }
