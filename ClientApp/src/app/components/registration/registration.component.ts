@@ -48,20 +48,16 @@ export class RegistrationComponent implements OnInit {
         studentInfo: <StudentInfoModel>{index: this.formGroup.get("index_number").value}
       };
 
-      try{
-        this.authService.registerUser(registerUser).subscribe(result => {
+      this.authService.registerUser(registerUser)
+        .subscribe(result => {
           this.authService.login({
             email: this.formGroup.get("email").value,
             password: this.formGroup.get("password").value
           }).subscribe(result => {
             this.router.navigate(["/"]);
           })
-        });
-      }
-      catch(error)
-      {
-        console.log("W komponencie! :) " + error);
-      }
+        }
+      );
     }
   }
 
