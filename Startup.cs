@@ -16,6 +16,7 @@ using ExamPortal.Repository;
 using ExamPortal.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 namespace ExamPortal
 {
@@ -49,8 +50,11 @@ namespace ExamPortal
                        .AllowAnyMethod();
                 });
             });
-
-            services.AddControllers();
+            
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             services.AddAutoMapper(typeof(MapperInitializer));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAuthManager, AuthManager>();
@@ -87,7 +91,7 @@ namespace ExamPortal
             {
                 app.UseSpaStaticFiles();
             }
-
+            
             app.UseRouting();
 
             app.UseAuthentication();
