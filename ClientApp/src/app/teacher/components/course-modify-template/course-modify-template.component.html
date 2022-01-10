@@ -12,7 +12,7 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" label="Przypisz studentów">
         <form [formGroup]="secondFormGroup">
-            <p>Tu będzie lista użytkowników</p>
+            <app-students-list></app-students-list>
             <div>
                 <button class="btn btn-lg btn-primary" matStepperPrevious>Wróć</button>
                 <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
