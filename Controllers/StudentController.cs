@@ -56,7 +56,7 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var students = await _userManager.GetUsersInRoleAsync("User");
+                var students = await _unitOfWork.Users.GetAll(include:q=>q.Include(x=>x.StudentInfo));
                 foreach (var student in students)
                 {
                     if (!(await (_userManager.IsInRoleAsync(student, "User"))))
