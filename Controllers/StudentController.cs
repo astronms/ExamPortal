@@ -10,6 +10,7 @@ using ExamPortal.Models.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ExamPortal.Controllers
@@ -38,7 +39,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetStudent(Guid guid)
         {
-            var user = await _unitOfWork.Users.Get(q => Guid.Parse(q.Id) == guid);
+            var user = await _unitOfWork.Users.Get(q => Guid.Parse(q.Id) == guid,q => q.Include(x =>x.StudentInfo));
             var isStudent = await (_userManager.IsInRoleAsync(user, "User"));
             if (isStudent)
             {
@@ -56,6 +57,13 @@ namespace ExamPortal.Controllers
             try
             {
                 var students = await _userManager.GetUsersInRoleAsync("User");
+                foreach (var student in students)
+                {
+                    if (!(await (_userManager.IsInRoleAsync(student, "User"))))
+                    {
+                        students.Remove(student);
+                    }
+                }
                 var results = _mapper.Map<IList<UserDTO>>(students);
                 return Ok(results);
             }
