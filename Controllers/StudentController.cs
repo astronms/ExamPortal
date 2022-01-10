@@ -56,12 +56,14 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var students = await _unitOfWork.Users.GetAll(include:q=>q.Include(x=>x.StudentInfo));
-                foreach (var student in students)
+                var users = await _unitOfWork.Users.GetAll(include:q=>q.Include(x=>x.StudentInfo));
+                IList<User> students = null;
+                foreach (var user in users)
                 {
-                    if (!(await (_userManager.IsInRoleAsync(student, "User"))))
+                    var isStudent = await _userManager.IsInRoleAsync(user, "User");
+                    if (isStudent)
                     {
-                        students.Remove(student);
+                        students.Add(user);
                     }
                 }
                 var results = _mapper.Map<IList<UserDTO>>(students);
