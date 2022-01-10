@@ -16,7 +16,7 @@
     <div class="navbar-collapse collapse offcanvas-collapse" id="navbarsExampleDefault" [ngClass]="{ show: isExpanded }">
       <ul class="navbar-nav ms-auto navbar-nav-scroll">
         <!-- Button About -->
-        <li *ngIf="!authService.isUserAuthenticated()" class="nav-item" >
+        <li class="nav-item" >
           <a class="nav-link" [routerLink]="['/about']">O projekcie</a>
         </li>
         <ng-container *ngIf="authService.isUserAuthenticated() && authService.userRole == userTypes.Admin">

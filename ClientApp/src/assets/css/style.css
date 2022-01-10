@@ -33,7 +33,7 @@ body {
 	background-color: var(--primary);
 	color: white;
 }
-
+	
 h1,
 h2,
 h3,
@@ -79,6 +79,31 @@ li {
 	position: relative;
 }
 
+.services-30
+{
+	height: 30vh;
+	position: relative;
+}
+
+.services-40
+{
+	height: 40vh;
+	position: relative;
+}
+
+.services-60
+{
+	height: 60vh;
+	position: relative;
+}
+
+.services-80
+{
+	height: 60vh;
+	position: relative;
+}
+
+/* Section Background */
 .services,
 .work,
 .contact,
