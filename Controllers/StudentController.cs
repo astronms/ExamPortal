@@ -57,6 +57,13 @@ namespace ExamPortal.Controllers
             try
             {
                 var students = await _userManager.GetUsersInRoleAsync("User");
+                foreach (var student in students)
+                {
+                    if (!(await (_userManager.IsInRoleAsync(student, "User"))))
+                    {
+                        students.Remove(student);
+                    }
+                }
                 var results = _mapper.Map<IList<UserDTO>>(students);
                 return Ok(results);
             }
