@@ -27,6 +27,15 @@
     </tr></table>
 
     <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nr. indeksu</mat-label>
+        <input matInput type="index_number" formControlName="index_number" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="formGroup.get('index_number').hasError('required')">Indeks jest wymagany.</mat-error>
+        <mat-error *ngIf="formGroup.get('index_number').hasError('pattern')">
+            Indeks musi być liczbą składającą się z od 5 do 8 cyfr.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Hasło</mat-label>
         <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
         <mat-error *ngIf="formGroup.get('password').hasError('required')">Hasło jest wymagane.</mat-error>

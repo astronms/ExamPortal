@@ -1,6 +1,6 @@
 import { RoleEnum } from "../enums/role.enum"
 
-export class AuthUserModel {
+export interface AuthUserModel {
     email: string;
     role: RoleEnum;
     token?: string;
