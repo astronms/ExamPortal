@@ -7,6 +7,7 @@ using ExamPortal.Data.Users;
 using ExamPortal.IRepository;
 using ExamPortal.Models.Exam;
 using ExamPortal.Models.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,7 @@ namespace ExamPortal.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{guid:Guid}", Name = "GetStudent")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -49,6 +51,7 @@ namespace ExamPortal.Controllers
             return NotFound();
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
