@@ -8,11 +8,11 @@
         <p>Przypisane egzaminy: {{ course.sessions.length }}</p>
     </mat-tab>
     <mat-tab label="Przypisani studenci"> 
-        <p *ngIf="course.users.length == 0">Brak przypisanych studentów.</p>
-        <p *ngIf="course.users.length > 0">Not implemented.</p>
+        <p *ngIf="course.users == null || course.users.length == 0">Brak przypisanych studentów.</p>
+        <app-students-list-template *ngIf="course.users.length > 0" [users]="course.users"></app-students-list-template>
     </mat-tab>
     <mat-tab label="Przypisane egzaminy"> 
-        <p *ngIf="course.sessions.length == 0">Brak przypisanych egzaminów.</p>
+        <p *ngIf="course.sessions == null || course.sessions.length == 0">Brak przypisanych egzaminów.</p>
         <p *ngIf="course.sessions.length > 0">Not implemented.</p>
     </mat-tab>
 </mat-tab-group>

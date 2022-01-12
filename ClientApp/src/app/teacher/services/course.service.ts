@@ -39,8 +39,11 @@ export class CourseService {
   {
     var newCourse: NewCourse = {
       name: course.name,
-      creationDate: new Date()
+      creationDate: new Date(),
+      users: course.users
     };
+
+    console.log(newCourse);
 
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
     .pipe(

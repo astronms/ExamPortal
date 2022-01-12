@@ -25,7 +25,20 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+    <ng-container *ngIf="isSelectable">
+        <tr 
+            mat-row
+            (click)="userRowClicked(row)"
+            [class.table-row-is-clicked]="selectedUsers.includes(row)"
+            *matRowDef="let row; columns: columnsToDisplay;"
+        ></tr>
+    </ng-container>
+    <ng-container *ngIf="!isSelectable">
+        <tr 
+            mat-row
+            *matRowDef="let row; columns: columnsToDisplay;"
+        ></tr>
+    </ng-container>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                 showFirstLastButtons 
