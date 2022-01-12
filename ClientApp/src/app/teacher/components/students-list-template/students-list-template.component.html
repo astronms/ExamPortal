@@ -29,7 +29,7 @@
         <tr 
             mat-row
             (click)="userRowClicked(row)"
-            [class.table-row-is-clicked]="selectedUsers.includes(row)"
+            [class.table-row-is-clicked]="isUserSelected(row)"
             *matRowDef="let row; columns: columnsToDisplay;"
         ></tr>
     </ng-container>

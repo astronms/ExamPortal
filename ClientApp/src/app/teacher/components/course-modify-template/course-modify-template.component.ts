@@ -69,6 +69,7 @@ export class CourseModifyTemplateComponent implements OnInit {
 
   onSelectedUsersChange(users: UserModel[])
   {
+    console.log(users);
     this.course.users = users;
   }
 
