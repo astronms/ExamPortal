@@ -36,7 +36,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCourse(Guid guid)
         {
-            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid, include: q => q.Include(x => x.Users));
+            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid, include: q => q.Include(x => x.Users).ThenInclude(y=>y.StudentInfo));
             var result = _mapper.Map<CourseDTO>(course);
             return Ok(result);
         }
@@ -49,7 +49,7 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var courses = await _unitOfWork.Courses.GetAll(include: q => q.Include(x => x.Users));
+                var courses = await _unitOfWork.Courses.GetAll(include: q => q.Include(x => x.Users).ThenInclude(y => y.StudentInfo));
                 var results = _mapper.Map<IList<CourseDTO>>(courses);
                 return Ok(results);
             }
