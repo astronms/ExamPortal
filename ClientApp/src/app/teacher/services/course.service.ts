@@ -43,8 +43,6 @@ export class CourseService {
       users: course.users
     };
 
-    console.log(newCourse);
-
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
     .pipe(
       catchError(this.handleError)
