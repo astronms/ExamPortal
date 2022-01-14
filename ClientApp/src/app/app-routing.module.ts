@@ -20,6 +20,7 @@ import { CourseCreatorComponent } from './teacher/components/course-creator/cour
 import { RegistrationComponent } from './components/registration/registration.component';
 import { CourseComponent } from './teacher/components/course/course.component';
 import { CourseEditComponent } from './teacher/components/course-edit/course-edit.component';
+import { CourseDeleteComponent } from './teacher/components/course-delete/course-delete.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   { path: 'teacher/course-creator', component: CourseCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/view-course/:id', component: CourseComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/edit-course/:id', component: CourseEditComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/delete-course/:id', component: CourseDeleteComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: '**', component: PageNotFoundComponent }
 ]
 

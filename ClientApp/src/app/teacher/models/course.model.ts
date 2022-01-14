@@ -7,11 +7,3 @@ export interface CourseModel {
     sessions: string[];
     users: UserModel[];
 }
-
-export interface CourseViewModel {
-    id: number;
-    no: number;
-    title: string;
-    creationDate: string;
-    studentsNumber: number;
-}

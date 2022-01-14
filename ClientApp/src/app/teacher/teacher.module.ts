@@ -15,7 +15,8 @@ import { CourseComponent } from './components/course/course.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
 import { CourseModifyTemplateComponent, SuccessDialogComponent } from './components/course-modify-template/course-modify-template.component';
 import { StudentsListTemplateComponent } from './components/students-list-template/students-list-template.component';
-import { CoursesListTemplateComponent } from './components/courses-list-template/courses-list-template.component'
+import { CoursesListTemplateComponent } from './components/courses-list-template/courses-list-template.component';
+import { CourseDeleteComponent } from './components/course-delete/course-delete.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CoursesListTemplateComponent } from './components/courses-list-template
     CourseEditComponent,
     CourseModifyTemplateComponent,
     StudentsListTemplateComponent,
-    CoursesListTemplateComponent 
+    CoursesListTemplateComponent,
+    CourseDeleteComponent
   ],
   imports: [
     CommonModule,

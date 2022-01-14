@@ -16,7 +16,7 @@ export class CoursesListComponent implements OnInit {
   public teacherActions: TableActionsModel[] = [
     {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-course" },
     {actionType: "edit", tooltip: "Edytuj", url: "/teacher/edit-course/" },
-    {actionType: "delete", tooltip: "Kasuj", url: "\\" }
+    {actionType: "delete", tooltip: "Kasuj", url: "/teacher/delete-course/" }
   ];
 
   constructor(private courseService: CourseService) { }
