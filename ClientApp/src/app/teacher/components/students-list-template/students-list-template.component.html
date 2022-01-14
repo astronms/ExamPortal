@@ -1,0 +1,46 @@
+<table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{i + 1}} </td>
+    </ng-container>
+
+    <!-- FirstName Column -->
+    <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Imię </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <!-- LastName Column -->
+    <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Nazwisko </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <!-- Questions number Column -->
+    <ng-container matColumnDef="studentIndex">
+        <th mat-header-cell *matHeaderCellDef> Nr. indeksu </th>
+        <td mat-cell *matCellDef="let element"> {{element.studentInfo.index}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <ng-container *ngIf="isSelectable">
+        <tr 
+            mat-row
+            (click)="userRowClicked(row)"
+            [class.table-row-is-clicked]="isUserSelected(row)"
+            *matRowDef="let row; columns: columnsToDisplay;"
+        ></tr>
+    </ng-container>
+    <ng-container *ngIf="!isSelectable">
+        <tr 
+            mat-row
+            *matRowDef="let row; columns: columnsToDisplay;"
+        ></tr>
+    </ng-container>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons 
+                aria-label="Select page of periodic elements">
+</mat-paginator>

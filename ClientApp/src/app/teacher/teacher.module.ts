@@ -14,6 +14,7 @@ import { CourseCreatorComponent } from './components/course-creator/course-creat
 import { CourseComponent } from './components/course/course.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
 import { CourseModifyTemplateComponent, SuccessDialogComponent } from './components/course-modify-template/course-modify-template.component';
+import { StudentsListTemplateComponent } from './components/students-list-template/students-list-template.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CourseModifyTemplateComponent, SuccessDialogComponent } from './compone
     SuccessDialogComponent,
     CourseComponent,
     CourseEditComponent,
-    CourseModifyTemplateComponent 
+    CourseModifyTemplateComponent,
+    StudentsListTemplateComponent 
   ],
   imports: [
     CommonModule,

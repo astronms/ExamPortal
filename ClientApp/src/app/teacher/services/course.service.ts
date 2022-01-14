@@ -4,6 +4,7 @@ import { ConstantPool } from '@angular/compiler';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { UserModel } from 'src/app/models/user.model';
 import { CourseModel, CourseViewModel } from '../models/course.model';
 import { NewCourse } from '../models/new-course.model';
 
@@ -38,7 +39,8 @@ export class CourseService {
   {
     var newCourse: NewCourse = {
       name: course.name,
-      creationDate: new Date()
+      creationDate: new Date(),
+      users: course.users
     };
 
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
@@ -50,6 +52,14 @@ export class CourseService {
   modifyCourse(course: CourseModel) : Observable<CourseModel>
   {
     return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, course)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getListOfStudents() : Observable<UserModel[]>
+  {
+    return this.http.get<UserModel[]>(this.baseUrl + 'api/auth/Student')
     .pipe(
       catchError(this.handleError)
     );

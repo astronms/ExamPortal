@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { UserModel } from 'src/app/models/user.model';
 import { CourseModel } from '../../models/course.model';
 
 export interface DialogData {
@@ -64,6 +65,11 @@ export class CourseModifyTemplateComponent implements OnInit {
     }
     else
     this.router.navigate([this.redirect]);
+  }
+
+  onSelectedUsersChange(users: UserModel[])
+  {
+    this.course.users = users;
   }
 
 }
