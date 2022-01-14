@@ -1,0 +1,8 @@
+<div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Kasowanie</span></h2>  
+    </div> 
+</div> 
+<p *ngIf="course">Czy na pewno chcesz skasować kurs <b>{{ course.name }}</b>?</p>
+<button class="btn btn-sm btn-block" [routerLink]="['/teacher/courses-list']">Wróć</button>
+<button class="btn btn-sm btn-block" (click)="deleteClick()">Tak</button>

@@ -46,6 +46,14 @@ export class CourseService {
     );
   }
 
+  deleteCourse(course: CourseModel) : void
+  {
+    this.http.delete<boolean>(this.baseUrl + 'api/auth/Course/' + course.courseId)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   modifyCourse(course: CourseModel) : Observable<CourseModel>
   {
     return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, course)

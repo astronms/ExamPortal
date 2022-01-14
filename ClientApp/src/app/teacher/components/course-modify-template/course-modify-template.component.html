@@ -6,6 +6,7 @@
               <input matInput placeholder="Nazwa" formControlName="courseName" [(ngModel)]='course.name' required>
             </mat-form-field>
             <div>
+                <button class="btn btn-lg btn-primary" [routerLink]="['/teacher/courses-list']">Wróć</button>
                 <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
             </div>
         </form>
