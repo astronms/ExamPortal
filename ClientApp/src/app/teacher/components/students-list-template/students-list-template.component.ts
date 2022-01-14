@@ -19,7 +19,8 @@ export class StudentsListTemplateComponent implements OnInit {
   @Output("selectedUsersChange") selectedUsersChange : EventEmitter<UserModel[]> = new EventEmitter<UserModel[]>();
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
-    this.dataSource.paginator = this.paginator;
+    if(this.dataSource)
+      this.dataSource.paginator = this.paginator;
   }
 
 

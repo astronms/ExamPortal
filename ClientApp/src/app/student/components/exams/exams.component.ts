@@ -1,10 +1,9 @@
-import { ExamModel } from '../../../models/exam.model';
-
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ExamsService } from '../../services/exams.service';
 import { ExamFactoryService } from '../../services/exam-factory.service';
+import { ExamSessionModel } from '../../../models/exam-session.model';
 
 @Component({
   selector: 'exams',
@@ -12,7 +11,7 @@ import { ExamFactoryService } from '../../services/exam-factory.service';
   styleUrls: []
 })
 export class ExamsComponent implements OnInit {
-  public exams: ExamModel[];
+  public exams: ExamSessionModel[];
 
   constructor(private examsService: ExamsService, private examFactoryService: ExamFactoryService, private router: Router, @Inject(LOCALE_ID)private locale: string) { }
 
@@ -21,10 +20,6 @@ export class ExamsComponent implements OnInit {
     const datepipe: DatePipe = new DatePipe(this.locale);
 
     this.examsService.getListOfExams().subscribe(result => {
-      result.forEach( exam => {
-        exam.startDate =  datepipe.transform(exam.startDate, 'dd-MMM-yyyy HH:mm');
-      });
-
       this.exams = result;
     });
   }

@@ -1,14 +1,14 @@
-import { Component, Input, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
 
 @Component({
-  selector: 'app-exam-table',
-  templateUrl: './exam-table.component.html',
-  styleUrls: ['./exam-table.component.css']
+  selector: 'app-courses-list-template',
+  templateUrl: './courses-list-template.component.html',
+  styleUrls: ['./courses-list-template.component.css']
 })
-export class ExamTableComponent implements OnInit {
+export class CoursesListTemplateComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
   @Input() columnsToDisplay : string[];
@@ -23,12 +23,7 @@ export class ExamTableComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    
-  }
-
-  ngAfterViewInit() {
-    
+  ngOnInit(): void {
   }
 
 }

@@ -1,7 +1,7 @@
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
-import { ExamModel } from '../../models/exam.model';
+import { ExamSessionModel } from '../../models/exam-session.model';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -13,8 +13,8 @@ export class ExamsService {
 
   constructor(private http: HttpClient,  @Inject('BASE_URL')private baseUrl: string) { }
 
-  getListOfExams() : Observable<ExamModel[]>{
-    return this.http.get<ExamModel[]>(this.baseUrl + 'api/exam/getlist').pipe(catchError(this.handleError));
+  getListOfExams() : Observable<ExamSessionModel[]>{
+    return this.http.get<ExamSessionModel[]>(this.baseUrl + 'api/exam/getlist').pipe(catchError(this.handleError));
   }
   
   private handleError(error: HttpErrorResponse) {
