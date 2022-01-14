@@ -7,21 +7,22 @@ import { CourseService } from './services/course.service';
 
 import { ExamSessionComponent } from './components/exam-session/exam-session.component';
 import { ExamSessionsListComponent } from './components/exam-sessions-list/exam-sessions-list.component';
-import { ExamCreatorComponent } from './components/exam-creator/exam-creator.component';
+import { ExamSessionCreatorComponent } from './components/exam-session-creator/exam-session-creator.component';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
-import { ExamTableComponent } from '../components/exam-table/exam-table.component';
+import { ExamTableComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { CourseCreatorComponent } from './components/course-creator/course-creator.component';
 import { CourseComponent } from './components/course/course.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
 import { CourseModifyTemplateComponent, SuccessDialogComponent } from './components/course-modify-template/course-modify-template.component';
 import { StudentsListTemplateComponent } from './components/students-list-template/students-list-template.component';
+import { CoursesListTemplateComponent } from './components/courses-list-template/courses-list-template.component'
 
 
 @NgModule({
   declarations: [
     ExamSessionComponent, 
     ExamSessionsListComponent,
-    ExamCreatorComponent,
+    ExamSessionCreatorComponent,
     CoursesListComponent,
     ExamTableComponent,
     CourseCreatorComponent,
@@ -29,7 +30,8 @@ import { StudentsListTemplateComponent } from './components/students-list-templa
     CourseComponent,
     CourseEditComponent,
     CourseModifyTemplateComponent,
-    StudentsListTemplateComponent 
+    StudentsListTemplateComponent,
+    CoursesListTemplateComponent 
   ],
   imports: [
     CommonModule,

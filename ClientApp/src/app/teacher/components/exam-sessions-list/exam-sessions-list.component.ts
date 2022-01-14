@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamViewModel } from 'src/app/models/exam.model';
+import { ExamSessionModel } from 'src/app/models/exam-session.model';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
 import { ExamSessionService } from '../../services/exam-session.service';
 
@@ -10,8 +10,8 @@ import { ExamSessionService } from '../../services/exam-session.service';
 })
 export class ExamSessionsListComponent implements OnInit {
 
-  public examSessions: ExamViewModel[];
-  public displayedColumns: string[] = ['id', 'title', 'duration', 'questionsNumber', 'startDate', 'available', 'actions'];
+  public examSessions: ExamSessionModel[];
+  public displayedColumns: string[] = ['index', 'name', 'startDate', 'endDate', 'actions'];
   public teacherActions: TableActionsModel[] = [
     {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-exam" },
     {actionType: "edit", tooltip: "Edytuj", url: "\\" },
@@ -24,7 +24,7 @@ export class ExamSessionsListComponent implements OnInit {
   ngOnInit() {
     
     this.examSessionService.getListOfExamSessions().subscribe(result => {
-      this.examSessions = this.examSessionService.mapArrayDataFromBackendToViewModel(result);
+      this.examSessions = result;
     });
   }
 

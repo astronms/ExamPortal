@@ -1,11 +1,9 @@
-import { DatePipe } from '@angular/common';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { ConstantPool } from '@angular/compiler';
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { UserModel } from 'src/app/models/user.model';
-import { CourseModel, CourseViewModel } from '../models/course.model';
+import { CourseModel } from '../models/course.model';
 import { NewCourse } from '../models/new-course.model';
 
 @Injectable({
@@ -15,8 +13,7 @@ export class CourseService {
 
   constructor(
     private http: HttpClient, 
-    @Inject('BASE_URL')private baseUrl: string,
-    @Inject(LOCALE_ID)private locale: string
+    @Inject('BASE_URL')private baseUrl: string
   ) { }
 
   getListOfCourses() : Observable<CourseModel[]>
@@ -63,24 +60,6 @@ export class CourseService {
     .pipe(
       catchError(this.handleError)
     );
-  }
-
-  mapDataFromBackendToViewModel(course: CourseModel, index: number) : CourseViewModel
-  {
-    const datePipe: DatePipe = new DatePipe(this.locale);
-
-    return <CourseViewModel>{
-      id: course.courseId,
-      no: index,
-      title: course.name,
-      creationDate: datePipe.transform(course.creationDate, 'dd-MMM-yyyy HH:mm'),
-      studentsNumber: course.users.length
-    };
-  }
-
-  mapArrayDataFromBackendToViewModel(data: CourseModel[]) : CourseViewModel[]
-  {
-    return data.map( (course, index) => this.mapDataFromBackendToViewModel(course, index + 1));
   }
 
   private handleError(error: HttpErrorResponse) {

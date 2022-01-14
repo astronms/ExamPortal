@@ -1,0 +1,43 @@
+<table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{ i + this.paginator.pageIndex * this.paginator.pageSize + 1 }} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Tytuł </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Students number Column -->
+    <ng-container matColumnDef="users">
+        <th mat-header-cell *matHeaderCellDef> Liczba studentów </th>
+        <td mat-cell *matCellDef="let element"> {{element.users.length}} </td>
+    </ng-container>
+
+    <!-- Creation Date Column -->
+    <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef> Data utworzenia </th>
+        <td mat-cell *matCellDef="let element"> {{element.creationDate | date: 'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <a *ngFor="let action of actions" [routerLink]="[action.url, element.courseId]">
+                <mat-icon matTooltip="{{ action.tooltip }}">{{ action.actionType }}</mat-icon>
+            </a>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons 
+                aria-label="Select page of periodic elements">
+</mat-paginator>
+

@@ -3,7 +3,7 @@
 <mat-tab-group *ngIf="course">
     <mat-tab label="Ogólne"> 
         <p>Nazwa: {{ course.name }}</p>
-        <p>Data utworzenia: {{ course.creationDate }}</p>
+        <p>Data utworzenia: {{ course.creationDate | date: 'dd/MM/yyyy' }}</p>
         <p>Przypisanych studentów: {{ course.users.length }}</p>
         <p>Przypisane egzaminy: {{ course.sessions.length }}</p>
     </mat-tab>

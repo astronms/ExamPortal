@@ -6,7 +6,7 @@ table {
     flex: none;
     max-width: 100px;
 }
-.mat-column-title {
+.mat-column-name {
     flex: none;
     width: 40%;
 }
