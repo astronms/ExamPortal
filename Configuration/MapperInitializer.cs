@@ -14,6 +14,7 @@ namespace ExamPortal.Configuration
         {
             CreateMap<StudentInfo, StudentInfoDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<User, AssignUserDTO>().ReverseMap();
             //Course
             CreateMap<Course, CourseDTO>().ReverseMap();
             CreateMap<Course, CreateCourseDTO>().ReverseMap();
