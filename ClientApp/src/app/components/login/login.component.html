@@ -1,14 +1,21 @@
-<form class="form-signin" #loginForm="ngForm" (ngSubmit)="signIn(loginForm)">
-  <div class="container-fluid">
-    <h2 class="form-signin-heading">Login</h2>
-    <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password.</div>
-    <br />
-    <label for="email" class="sr-only">Email address</label>
-    <input type="email" id="email" name="email" ngModel class="form-control" placeholder="Email" required autofocus>
-    <br />
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Password" required>
-    <br />
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
-  </div>
-</form>
+<div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+  <div class="text-center pb-4 mt-3">
+      <h2 class="headline"><span class="home_text">Logowanie</span></h2>  
+  </div> 
+</div> 
+
+<section class="services-00 d-flex align-items-center py-5" id="services">
+  <div class="container text-light">
+    <form class="form-signin" #loginForm="ngForm" (ngSubmit)="signIn(loginForm)">
+      <div *ngIf="invalidLogin" class="alert alert-danger">Niepoprawna nazwa użytkownika lub hasło.</div>
+      <br />
+      <label for="email" class="sr-only">Adres email</label>
+      <input type="email" id="email" name="email" ngModel class="form-control" placeholder="Email" required autofocus>
+      <br />
+      <label for="password" class="sr-only">Hasło</label>
+      <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Password" required>
+      <br />
+      <button class="btn btn-sm btn-block" type="submit">Zaloguj</button>
+    </form>
+  </div> <!-- end of container -->
+</section>

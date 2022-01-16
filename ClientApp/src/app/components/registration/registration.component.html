@@ -1,57 +1,64 @@
-<h1>Rejestracja</h1>
-<form class="example-form" [formGroup]="formGroup">
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Np. pat@example.com">
-        <mat-error *ngIf="formGroup.get('email').hasError('email') && !formGroup.get('email').hasError('required')">
-            Proszę wprowadzić prawidłowy email.
-        </mat-error>
-        <mat-error *ngIf="formGroup.get('email').hasError('required')">Email jest wymagany.</mat-error>
-    </mat-form-field>
-  
-    <table class="example-full-width" cellspacing="0"><tr>
-        <td>
+<div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Rejestracja</span></h2>  
+    </div> 
+</div> 
+
+<section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+        <form class="example-form" [formGroup]="formGroup">
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Imię</mat-label>
-                <input matInput formControlName="firstName" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="formGroup.get('firstName').hasError('required')">Imię jest wymagane.</mat-error>
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Np. pat@example.com">
+                <mat-error *ngIf="formGroup.get('email').hasError('email') && !formGroup.get('email').hasError('required')">
+                    Proszę wprowadzić prawidłowy email.
+                </mat-error>
+                <mat-error *ngIf="formGroup.get('email').hasError('required')">Email jest wymagany.</mat-error>
             </mat-form-field>
-        </td>
-        <td>
+        
+            <table class="example-full-width" cellspacing="0"><tr>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Imię</mat-label>
+                        <input matInput formControlName="firstName" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="formGroup.get('firstName').hasError('required')">Imię jest wymagane.</mat-error>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width align-items-right" appearance="fill">
+                        <mat-label>Nazwisko</mat-label>
+                        <input matInput formControlName="lastName" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="formGroup.get('lastName').hasError('required')">Nazwisko jest wymagane.</mat-error>
+                    </mat-form-field>
+                </td>
+            </tr></table>
+
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Nazwisko</mat-label>
-                <input matInput formControlName="lastName" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="formGroup.get('lastName').hasError('required')">Imię jest wymagane.</mat-error>
+                <mat-label>Nr. indeksu</mat-label>
+                <input matInput type="index_number" formControlName="index_number" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="formGroup.get('index_number').hasError('required')">Indeks jest wymagany.</mat-error>
+                <mat-error *ngIf="formGroup.get('index_number').hasError('pattern')">
+                    Indeks musi być liczbą składającą się od 5 do 8 cyfr.
+                </mat-error>
             </mat-form-field>
-        </td>
-    </tr></table>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Nr. indeksu</mat-label>
-        <input matInput type="index_number" formControlName="index_number" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="formGroup.get('index_number').hasError('required')">Indeks jest wymagany.</mat-error>
-        <mat-error *ngIf="formGroup.get('index_number').hasError('pattern')">
-            Indeks musi być liczbą składającą się z od 5 do 8 cyfr.
-        </mat-error>
-    </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Hasło</mat-label>
+                <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="formGroup.get('password').hasError('required')">Hasło jest wymagane.</mat-error>
+                <mat-error *ngIf="formGroup.get('password').hasError('pattern')">
+                    Hasło musi składać się przynajmniej z jednej wielkiej i małej litery, jednej cyfry, jednego znaku specjalnego oraz minimum 8 znaków.
+                </mat-error>
+            </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Hasło</mat-label>
-        <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="formGroup.get('password').hasError('required')">Hasło jest wymagane.</mat-error>
-        <mat-error *ngIf="formGroup.get('password').hasError('pattern')">
-            Hasło musi składać się przynajmniej z jednej wielkiej i małej litery, jednej cyfry, jednego znaku specjalnego oraz minimum 8 znaków.
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Potwierdź hasło</mat-label>
-        <input matInput type="password" formControlName="password2" [errorStateMatcher]="matcher">
-        <mat-error class="password-mismatch" *ngIf="formGroup.get('password2').hasError('passwordMismatch') && !formGroup.get('password').hasError('required')">Hasła nie pasują.</mat-error>
-        <mat-error *ngIf="formGroup.get('password2').hasError('required')">Potwierdź hasło.</mat-error>
-    </mat-form-field>
-    
-    <button class="btn btn-lg btn-primary btn-block" (click)="onSubmit()">Zapisz</button>
-
-</form>
-  
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Potwierdź hasło</mat-label>
+                <input matInput type="password" formControlName="password2" [errorStateMatcher]="matcher">
+                <mat-error class="password-mismatch" *ngIf="formGroup.get('password2').hasError('passwordMismatch') && !formGroup.get('password').hasError('required')">Hasła nie pasują.</mat-error>
+                <mat-error *ngIf="formGroup.get('password2').hasError('required')">Potwierdź hasło.</mat-error>
+            </mat-form-field>
+            
+            <button class="btn btn-sm btn-block" (click)="onSubmit()">Zapisz</button>
+        </form>
+    </div> <!-- end of container -->
+</section>
