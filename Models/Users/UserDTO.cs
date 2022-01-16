@@ -9,10 +9,10 @@ namespace ExamPortal.Models.Users
 {
     public class UserDTO
     {
+        public Guid Id { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
