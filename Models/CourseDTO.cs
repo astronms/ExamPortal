@@ -20,12 +20,12 @@ namespace ExamPortal.Models
     public class CourseDTO : CreateCourseDTO
     {
         public Guid CourseId { get; set; }
-        public virtual IList<AssignUserDTO> Users { get; set; }
-        public virtual IList<SessionDTO> Sessions { get; set; }
     }
 
-    public class UpdateCoruseDTO : CreateCourseDTO
+    public class UpdateCourseDTO
     {
+        public Guid CourseId { get; set; }
+        public string Name { get; set; }
         public virtual IList<AssignUserDTO> Users { get; set; }
         public virtual IList<SessionDTO> Sessions { get; set; }
 

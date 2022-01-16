@@ -81,7 +81,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateCourse(Guid guid, [FromBody] UpdateCoruseDTO courseDTO)
+        public async Task<IActionResult> UpdateCourse(Guid guid, [FromBody] UpdateCourseDTO courseDTO)
         {
             if (!ModelState.IsValid || guid == Guid.Empty)
             {

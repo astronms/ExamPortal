@@ -18,7 +18,7 @@ namespace ExamPortal.Configuration
             //Course
             CreateMap<Course, CourseDTO>().ReverseMap();
             CreateMap<Course, CreateCourseDTO>().ReverseMap();
-            CreateMap<Course, UpdateCoruseDTO>().ReverseMap();
+            CreateMap<Course, UpdateCourseDTO>().ReverseMap();
             //Exam
             CreateMap<Session, SessionDTO>().ReverseMap();
             CreateMap<Exam, ExamDTO>().ReverseMap();
