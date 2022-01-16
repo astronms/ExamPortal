@@ -95,4 +95,12 @@ describe('NavMenuComponent', () => {
         var arr = Array.from(htmlElements);
         expect(arr.filter(item => item.textContent == "Kursy").length == 1).toBeTruthy();
     });
+
+    it('should call isUserAuthenticated', () => {
+        mockAuthService.isUserAuthenticated.and.returnValue(true);
+        (mockAuthService as any).userRole = RoleEnum.Admin;
+        const fixture = TestBed.createComponent(NavMenuComponent);
+        fixture.detectChanges();
+        expect(mockAuthService.isUserAuthenticated).toHaveBeenCalled();
+    });
 });
