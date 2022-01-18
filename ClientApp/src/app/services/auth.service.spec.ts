@@ -1,10 +1,7 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 
 import { TestBed } from "@angular/core/testing";
-import { JwtHelperService, JwtModule } from "@auth0/angular-jwt";
-import { stringify } from "querystring";
-import { of } from "rxjs";
+import { JwtModule } from "@auth0/angular-jwt";
 import { AuthUserModel } from "../models/auth-user.model";
 import { UserModel } from "../models/user.model";
 import { AuthService } from "./auth.service";

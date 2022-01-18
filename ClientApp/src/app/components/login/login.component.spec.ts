@@ -45,7 +45,7 @@ describe('LoginComponent', () => {
     it('should call login authService method after login press', () => {
         mockAuthService.login.and.returnValue(of(true)); 
         
-        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
+        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn");
         loginBtn.click();
         
         expect(mockAuthService.login).toHaveBeenCalled();
@@ -55,7 +55,7 @@ describe('LoginComponent', () => {
         mockAuthService.login.and.returnValue(of(true));
         var routerSpy = spyOn(router, 'navigate');
         
-        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
+        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn");
         loginBtn.click();
         
         expect(routerSpy).toHaveBeenCalledWith(["/"]);
@@ -65,7 +65,7 @@ describe('LoginComponent', () => {
         mockAuthService.login.and.returnValue(of(false));
         var routerSpy = spyOn(router, 'navigate');
         
-        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
+        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn");
         loginBtn.click();
         
         expect(routerSpy).not.toHaveBeenCalled();
@@ -74,7 +74,7 @@ describe('LoginComponent', () => {
     it('should show information about failure in login', () => {
         mockAuthService.login.and.returnValue(of(false));
         
-        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
+        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn");
         loginBtn.click();
         
         expect(fixture.componentInstance.invalidLogin).toBeTruthy();
@@ -84,7 +84,7 @@ describe('LoginComponent', () => {
         const mockResponse = throwError('Something bad happened; please try again later.');
         mockAuthService.login.and.returnValue(mockResponse);
         
-        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
+        const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn");
         loginBtn.click();
         
         expect(fixture.componentInstance.invalidLogin).toBeTruthy();
