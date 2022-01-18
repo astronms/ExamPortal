@@ -81,7 +81,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateCourse(Guid guid, [FromBody] UpdateCoruseDTO courseDTO)
+        public async Task<IActionResult> UpdateCourse(Guid guid, [FromBody] UpdateCourseDTO courseDTO)
         {
             if (!ModelState.IsValid || guid == Guid.Empty)
             {
@@ -110,7 +110,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteCourse(Guid guid)
         {
-            if (guid != Guid.Empty)
+            if (guid == Guid.Empty)
             {
                 _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteCourse)}");
                 return BadRequest();

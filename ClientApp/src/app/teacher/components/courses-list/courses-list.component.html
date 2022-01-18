@@ -4,8 +4,11 @@
     </div> 
 </div> 
 
-<app-courses-list-template [columnsToDisplay]="displayedColumns" [data]="courses" [actions]="teacherActions"></app-courses-list-template>
-<br />
-<button class="btn btn-lg btn-primary" [routerLink]="['/teacher/course-creator']">Dodaj nowy</button>
-  
+<section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+        <app-courses-list-template [columnsToDisplay]="displayedColumns" [data]="courses" [actions]="teacherActions"></app-courses-list-template>
+        <br />
+        <button class="btn btn-sm" [routerLink]="['/teacher/course-creator']">Dodaj nowy</button>
+    </div> <!-- end of container -->
+</section>
   

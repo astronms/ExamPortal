@@ -79,32 +79,22 @@ li {
 	position: relative;
 }
 
-.services-30
+.services-00
 {
-	height: 30vh;
 	position: relative;
 }
 
-.services-40
+.services-00-margins
 {
-	height: 40vh;
-	position: relative;
-}
-
-.services-60
-{
-	height: 60vh;
-	position: relative;
-}
-
-.services-80
-{
-	height: 60vh;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	position: relative;
 }
 
 /* Section Background */
 .services,
+.services-00,
+.services-00-margins,
 .work,
 .contact,
 .testimonial,
@@ -134,6 +124,8 @@ li {
 .information .fas,
 .work .fas,
 .services .fas,
+.services-00 .fas,
+.services-00-margins .fas,
 .location .far,
 .location .fas {
 	padding: 15px 0;
@@ -391,13 +383,17 @@ li {
 /********************/
 /*     Services     */
 /********************/
-.services .card {
+.services .card,
+.services-00 .card,
+.services-00-margins .card{
 	padding: 20px;
 	border-radius: 0;
 	border: 2px solid white;
 }
 
-.services .card:hover {
+.services .card:hover,
+.services-00 .card:hover,
+.services-00-margins .card:hover {
 	border: 10px solid;
 	transform: scale(1.01);
 	border-image-slice: 1;
@@ -640,6 +636,8 @@ li {
 /*************************/
 @media only screen and (max-width: 1024px) {
 	.services,
+	.services-00,
+	.services-00-margins,
 	.work,
 	.testimonial,
 	.about,

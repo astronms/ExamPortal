@@ -14,19 +14,19 @@ namespace ExamPortal.Models
         public string Name { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
-        public virtual IList<UserDTO> Users { get; set; }
+        public virtual IList<AssignUserDTO> Users { get; set; }
         public virtual IList<SessionDTO> Sessions { get; set; }
     }
     public class CourseDTO : CreateCourseDTO
     {
         public Guid CourseId { get; set; }
-        public virtual IList<UserDTO> Users { get; set; }
-        public virtual IList<SessionDTO> Sessions { get; set; }
     }
 
-    public class UpdateCoruseDTO : CreateCourseDTO
+    public class UpdateCourseDTO
     {
-        public virtual IList<UserDTO> Users { get; set; }
+        public Guid CourseId { get; set; }
+        public string Name { get; set; }
+        public virtual IList<AssignUserDTO> Users { get; set; }
         public virtual IList<SessionDTO> Sessions { get; set; }
 
     }

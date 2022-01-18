@@ -4,26 +4,30 @@
   </div> 
 </div> 
 
-<p *ngIf="!exams"><em>Brak dostępnych egzaminów.</em></p>
+<section class="services-00 d-flex align-items-center py-5" id="services">
+  <div class="container text-light">
+    <p *ngIf="!exams"><em>Brak dostępnych egzaminów.</em></p>
 
-<table class="table table-sm" aria-labelledby="tableLabel" *ngIf="exams">
-  <thead>
-    <tr>
-      <th>Tytuł</th>
-      <th>Czas trwania</th>
-      <th>Ilość pytań</th>
-      <th>Data</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let exam of exams">
-      <td>{{ exam.title }}</td>
-      <td>{{ exam.duration }}</td>
-      <td>{{ exam.questionsNumber }}</td>
-      <td>{{ exam.startDate }}</td>
-      <button type="button" class="btn btn-dark" *ngIf="exam.available" (click)="startExam(exam.id)">Start</button>
-    </tr>
-  </tbody>
-</table>
+    <table class="table table-sm" aria-labelledby="tableLabel" *ngIf="exams">
+      <thead>
+        <tr>
+          <th>Tytuł</th>
+          <th>Czas trwania</th>
+          <th>Ilość pytań</th>
+          <th>Data</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of exams">
+          <td>{{ exam.title }}</td>
+          <td>{{ exam.duration }}</td>
+          <td>{{ exam.questionsNumber }}</td>
+          <td>{{ exam.startDate }}</td>
+          <button type="button" class="btn btn-dark" *ngIf="exam.available" (click)="startExam(exam.id)">Start</button>
+        </tr>
+      </tbody>
+    </table>
+  </div> <!-- end of container -->
+</section>
   
