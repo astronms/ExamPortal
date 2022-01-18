@@ -234,3 +234,5 @@ _Pvt_Extensions
 **/logs
 **/cache/*
 
+ClientApp/src/coverage
+
