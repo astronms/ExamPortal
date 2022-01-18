@@ -59,9 +59,11 @@ export class AuthService {
     return false;
   }
 
-  public get userRole() : RoleEnum {
-    return this.userValue.role;
-    
+  public get userRole() : RoleEnum | null {
+    if(this.userValue)
+      return this.userValue.role;
+    else
+      return null;
   }
   
   public logOut() : void {
