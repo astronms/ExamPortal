@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 
 describe('LoginComponent', () => {
@@ -43,11 +43,7 @@ describe('LoginComponent', () => {
     });
 
     it('should call login authService method after login press', () => {
-        const mockResponse = new Observable<boolean>( observer => {
-            observer.next(true);
-            observer.complete();
-          })
-        mockAuthService.login.and.returnValue(mockResponse); 
+        mockAuthService.login.and.returnValue(of(true)); 
         
         const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
         loginBtn.click();
@@ -56,11 +52,7 @@ describe('LoginComponent', () => {
     });
 
     it('should redirect to home after successfully login', () => {
-        const mockResponse = new Observable<boolean>( observer => {
-            observer.next(true);
-            observer.complete();
-          })
-        mockAuthService.login.and.returnValue(mockResponse);
+        mockAuthService.login.and.returnValue(of(true));
         var routerSpy = spyOn(router, 'navigate');
         
         const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
@@ -70,11 +62,7 @@ describe('LoginComponent', () => {
     });
 
     it('should not redirect to home if failed login', () => {
-        const mockResponse = new Observable<boolean>( observer => {
-            observer.next(false);
-            observer.complete();
-          })
-        mockAuthService.login.and.returnValue(mockResponse);
+        mockAuthService.login.and.returnValue(of(false));
         var routerSpy = spyOn(router, 'navigate');
         
         const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
@@ -84,11 +72,7 @@ describe('LoginComponent', () => {
     });
 
     it('should show information about failure in login', () => {
-        const mockResponse = new Observable<boolean>( observer => {
-            observer.next(false);
-            observer.complete();
-          })
-        mockAuthService.login.and.returnValue(mockResponse);
+        mockAuthService.login.and.returnValue(of(false));
         
         const loginBtn = fixture.debugElement.nativeElement.querySelector(".btn-lg");
         loginBtn.click();
