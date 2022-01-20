@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ExamPortal.Data;
 using ExamPortal.IRepository;
 using ExamPortal.Models;
 using ExamPortal.Models.Exam;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +36,7 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCourse(Guid guid)
         {
-            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid, include: q => q.Include(x => x.Users).ThenInclude(y=>y.StudentInfo));
+            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid, include: q => q.Include(x => x.CourseUsers).ThenInclude(x => x.User).ThenInclude(y=>y.StudentInfo));
             var result = _mapper.Map<CourseDTO>(course);
             return Ok(result);
         }
@@ -46,7 +48,7 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var courses = await _unitOfWork.Courses.GetAll(include: q => q.Include(x => x.Users).ThenInclude(y => y.StudentInfo));
+                var courses = await _unitOfWork.Courses.GetAll(include: q => q.Include(x => x.CourseUsers).ThenInclude(x=>x.User).ThenInclude(y => y.StudentInfo));
                 var results = _mapper.Map<IList<CourseDTO>>(courses);
                 return Ok(results);
             }
@@ -69,9 +71,27 @@ namespace ExamPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var course = _mapper.Map<Course>(courseDTO);
+            var courseFull = _mapper.Map<Course>(courseDTO);
+            var course = new Course()
+            {
+                CourseId = Guid.NewGuid(),
+                Name = courseFull.Name,
+                CreationDate = courseFull.CreationDate
+            };
+            
             await _unitOfWork.Courses.Insert(course);
             await _unitOfWork.Save();
+
+            foreach (var item in courseDTO.UsersId)
+            {
+                var courseUser = new CourseUser()
+                {
+                    CourseId = course.CourseId,
+                    UserId = item.ToString()
+                };
+                await _unitOfWork.CourseUsers.Insert(courseUser);
+                await _unitOfWork.Save();
+            }
 
             return CreatedAtRoute("GetCourse", new { guid = course.CourseId }, course);
 
@@ -88,17 +108,33 @@ namespace ExamPortal.Controllers
                 _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateCourse)}");
                 return BadRequest(ModelState);
             }
-
             var course = await _unitOfWork.Courses.Get(q => q.CourseId== guid);
             if (course == null)
             {
                 _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateCourse)}");
                 return BadRequest("Submitted data is invalid");
             }
-
             _mapper.Map(courseDTO, course);
             _unitOfWork.Courses.Update(course);
             await _unitOfWork.Save();
+
+            var courseUsers = await _unitOfWork.CourseUsers.GetAll(x => x.CourseId == guid);
+            foreach (var item in courseUsers)
+            {
+                await _unitOfWork.CourseUsers.Delete(item.CourseUserId);
+                await _unitOfWork.Save();
+            }
+
+            foreach (var item in courseDTO.UsersId)
+            {
+                var courseUser = new CourseUser()
+                {
+                    CourseId = course.CourseId,
+                    UserId = item.ToString()
+                };
+                await _unitOfWork.CourseUsers.Insert(courseUser);
+                await _unitOfWork.Save();
+            }
 
             return NoContent();
 
@@ -125,6 +161,13 @@ namespace ExamPortal.Controllers
 
             await _unitOfWork.Courses.Delete(guid);
             await _unitOfWork.Save();
+
+            var courseUsers = await _unitOfWork.CourseUsers.GetAll(x => x.CourseId == guid);
+            foreach (var item in courseUsers)
+            {
+                await _unitOfWork.CourseUsers.Delete(item.CourseUserId);
+                await _unitOfWork.Save();
+            }
 
             return NoContent();
 

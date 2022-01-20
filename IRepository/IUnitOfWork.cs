@@ -15,6 +15,7 @@ namespace ExamPortal.IRepository
         IGenericRepository<Exam> Exams { get; }
         IGenericRepository<Course> Courses { get; }
         IGenericRepository<User> Users { get; }
+        IGenericRepository<CourseUser> CourseUsers { get; }
 
         Task Save();
     }

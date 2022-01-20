@@ -11,7 +11,7 @@ namespace ExamPortal.Data.Users
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public List<Course> Courses { get; set; }
+        public IList<CourseUser> CourseUsers { get; set; }
         public virtual StudentInfo StudentInfo { get; set; }
 
     }
