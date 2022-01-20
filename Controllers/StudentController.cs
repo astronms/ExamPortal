@@ -39,7 +39,9 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetStudent(Guid guid)
         {
-            var user = await _unitOfWork.Users.Get(q => q.Id == guid.ToString(),q => q.Include(x =>x.StudentInfo));
+            var user = await _unitOfWork.Users.Get(q => q.Id == guid.ToString(),q => q
+                .Include(x =>x.StudentInfo)
+                .Include(x=>x.CourseUsers).ThenInclude(x => x.Course));
             var isStudent = await (_userManager.IsInRoleAsync(user, "User"));
             if (isStudent)
             {
@@ -56,7 +58,9 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var users = await _unitOfWork.Users.GetAll(include:q=>q.Include(x=>x.StudentInfo));
+                var users = await _unitOfWork.Users.GetAll(include:q=>q
+                    .Include(x=>x.StudentInfo)
+                    .Include(x => x.CourseUsers).ThenInclude(x=>x.Course));
                 IList<User> students = new List<User>();
                 foreach (var user in users)
                 {

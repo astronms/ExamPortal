@@ -16,6 +16,7 @@ namespace ExamPortal.Repository
         private IGenericRepository<Exam> _exams;
         private IGenericRepository<Course> _courses;
         private IGenericRepository<User> _users;
+        private IGenericRepository<CourseUser> _courseUser;
 
         public UnitOfWork(DatabaseContext context)
         {
@@ -26,6 +27,7 @@ namespace ExamPortal.Repository
         public IGenericRepository<Exam> Exams => _exams ??= new GenricRepository<Exam>(_context);
         public IGenericRepository<Course> Courses => _courses ??= new GenricRepository<Course>(_context);
         public IGenericRepository<User> Users => _users ??= new GenricRepository<User>(_context);
+        public IGenericRepository<CourseUser> CourseUsers => _courseUser ??=new GenricRepository<CourseUser>(_context);
 
         public async Task Save()
         {
