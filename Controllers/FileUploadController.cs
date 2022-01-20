@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ExamPortal.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/auth/[controller]")]
+    [Route("api/auth/[controller]")]
     [ApiController]
     public class FileUploadController : ControllerBase
     {
@@ -21,6 +21,7 @@ namespace ExamPortal.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost("upload", Name = "upload")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
