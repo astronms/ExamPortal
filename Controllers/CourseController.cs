@@ -82,15 +82,18 @@ namespace ExamPortal.Controllers
             await _unitOfWork.Courses.Insert(course);
             await _unitOfWork.Save();
 
-            foreach (var item in courseDTO.UsersId)
+            if(courseDTO.UsersId!= null)
             {
-                var courseUser = new CourseUser()
+                foreach (var item in courseDTO.UsersId)
                 {
-                    CourseId = course.CourseId,
-                    UserId = item.ToString()
-                };
-                await _unitOfWork.CourseUsers.Insert(courseUser);
-                await _unitOfWork.Save();
+                    var courseUser = new CourseUser()
+                    {
+                        CourseId = course.CourseId,
+                        UserId = item.ToString()
+                    };
+                    await _unitOfWork.CourseUsers.Insert(courseUser);
+                    await _unitOfWork.Save();
+                }
             }
 
             return CreatedAtRoute("GetCourse", new { guid = course.CourseId }, course);
