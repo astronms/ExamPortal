@@ -54,6 +54,8 @@ export class StudentsListTemplateComponent implements OnInit {
 
   userRowClicked(user: UserModel)
   {
+    console.log(user);
+    console.log(this.selectedUsers);
     if(this.isUserSelected(user))
       this.selectedUsers = this.selectedUsers.filter(item => item.email != user.email);
     else

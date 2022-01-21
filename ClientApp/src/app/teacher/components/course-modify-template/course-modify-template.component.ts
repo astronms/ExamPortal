@@ -69,7 +69,10 @@ export class CourseModifyTemplateComponent implements OnInit {
 
   onSelectedUsersChange(users: UserModel[])
   {
-    this.course.users = users;
+    this.course.users = [];
+    users.forEach(user => {
+      this.course.users.push({user: user});
+    });
   }
 
 }

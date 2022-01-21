@@ -41,6 +41,7 @@ export class RegistrationComponent implements OnInit {
     if (this.formGroup.valid) {
 
       var registerUser: UserModel = {
+        id: null,
         email: this.formGroup.get("email").value,
         password: this.formGroup.get("password").value,
         firstName: this.formGroup.get("firstName").value,

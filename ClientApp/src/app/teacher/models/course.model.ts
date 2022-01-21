@@ -5,5 +5,5 @@ export interface CourseModel {
     name: string;
     creationDate: string;
     sessions: string[];
-    users: UserModel[];
+    users: {user: UserModel}[];
 }

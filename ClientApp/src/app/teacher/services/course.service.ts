@@ -36,9 +36,13 @@ export class CourseService {
   {
     var newCourse: NewCourse = {
       name: course.name,
-      creationDate: new Date(),
-      users: course.users
+      creationDate: new Date().toString(),
+      users: []
     };
+
+    course.users.forEach(el => {
+      newCourse.users.push(el.user.id);
+    });
 
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
     .pipe(
@@ -56,7 +60,17 @@ export class CourseService {
 
   modifyCourse(course: CourseModel) : Observable<CourseModel>
   {
-    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, course)
+    var newCourse: NewCourse = {
+      name: course.name,
+      creationDate: course.creationDate,
+      users: []
+    };
+
+    course.users.forEach(el => {
+      newCourse.users.push(el.user.id);
+    });
+
+    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, newCourse)
     .pipe(
       catchError(this.handleError)
     );
