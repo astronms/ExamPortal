@@ -32,7 +32,7 @@ namespace ExamPortal.Controllers
             _mapper = mapper;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{guid:Guid}", Name = "GetCourse")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -43,7 +43,7 @@ namespace ExamPortal.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
