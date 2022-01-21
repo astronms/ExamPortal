@@ -22,7 +22,7 @@ namespace ExamPortal.Models
         public Guid CourseId { get; set; }
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
-        public IList<CourseUsersDTO> CourseUsers { get; set; }
+        public IList<UserForCoursesDTO> Users { get; set; }
     }
 
     public class CourseForUserDTO
