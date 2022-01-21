@@ -16,7 +16,7 @@ namespace ExamPortal.Models.Users
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public List<UserCoursesDTO> CourseUsers { get; set; }
+        public List<CourseForUserDTO> Courses { get; set; }
         public virtual StudentInfoDTO StudentInfo { get; set; }
     }
 
