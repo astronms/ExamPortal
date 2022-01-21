@@ -14,7 +14,7 @@
     <!-- Students number Column -->
     <ng-container matColumnDef="users">
         <th mat-header-cell *matHeaderCellDef> Liczba studentów </th>
-        <td mat-cell *matCellDef="let element"> {{element.users.length}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.users ? element.users.length : "N/A" }} </td>
     </ng-container>
 
     <!-- Creation Date Column -->
