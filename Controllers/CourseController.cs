@@ -7,6 +7,7 @@ using ExamPortal.Data;
 using ExamPortal.IRepository;
 using ExamPortal.Models;
 using ExamPortal.Models.Exam;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,7 @@ namespace ExamPortal.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet("{guid:Guid}", Name = "GetCourse")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -41,6 +43,7 @@ namespace ExamPortal.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -59,6 +62,7 @@ namespace ExamPortal.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -100,6 +104,7 @@ namespace ExamPortal.Controllers
 
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{guid:Guid}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -143,6 +148,7 @@ namespace ExamPortal.Controllers
 
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{guid:Guid}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

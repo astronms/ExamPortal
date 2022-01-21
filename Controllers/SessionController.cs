@@ -32,6 +32,7 @@ namespace ExamPortal.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet("{guid:Guid}", Name = "GetSession")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -42,6 +43,7 @@ namespace ExamPortal.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -60,6 +62,7 @@ namespace ExamPortal.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateSession([FromBody] SessionDTO sessionDTO)
         {
@@ -76,6 +79,7 @@ namespace ExamPortal.Controllers
             return CreatedAtRoute("GetSession", new { id = session.SessionId}, session);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{guid:Guid}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -99,7 +103,7 @@ namespace ExamPortal.Controllers
             await _unitOfWork.Save();
 
             return NoContent();
-
         }
+
     }
 }
