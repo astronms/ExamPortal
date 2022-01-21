@@ -96,7 +96,7 @@ namespace ExamPortal.Controllers
                 }
             }
 
-            return CreatedAtRoute("GetCourse", new { guid = course.CourseId }, course);
+            return CreatedAtRoute("GetCourse", new { guid = course.CourseId }, courseDTO);
 
         }
 
