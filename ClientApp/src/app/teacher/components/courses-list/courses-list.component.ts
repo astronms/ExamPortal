@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
-import { CourseViewModel } from '../../models/course.model';
+import { CourseModel } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 
 @Component({
@@ -11,12 +11,12 @@ import { CourseService } from '../../services/course.service';
 
 export class CoursesListComponent implements OnInit {
 
-  public courses: CourseViewModel[];
-  public displayedColumns: string[] = ['id', 'title', 'studentsNumber', 'creationDate', 'actions'];
+  public courses: CourseModel[];
+  public displayedColumns: string[] = ['index', 'name', 'users', 'creationDate', 'actions'];
   public teacherActions: TableActionsModel[] = [
     {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-course" },
     {actionType: "edit", tooltip: "Edytuj", url: "/teacher/edit-course/" },
-    {actionType: "delete", tooltip: "Kasuj", url: "\\" }
+    {actionType: "delete", tooltip: "Kasuj", url: "/teacher/delete-course/" }
   ];
 
   constructor(private courseService: CourseService) { }
@@ -24,7 +24,7 @@ export class CoursesListComponent implements OnInit {
   ngOnInit() {
     
     this.courseService.getListOfCourses().subscribe(result => {
-      this.courses = this.courseService.mapArrayDataFromBackendToViewModel(result);
+      this.courses = result;
     });
   }
 

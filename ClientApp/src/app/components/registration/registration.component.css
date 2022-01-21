@@ -1,6 +1,6 @@
 .example-form {
     min-width: 150px;
-    max-width: 500px;
+    max-width: 100%;
     width: 100%;
   }
   
@@ -9,5 +9,5 @@
   }
   
   td {
-    padding-right: 8px;
+    padding-right: 0px;
   }

@@ -1,15 +1,9 @@
+import { UserModel } from "src/app/models/user.model";
+
 export interface CourseModel {
     courseId: number;
     name: string;
-    creationDate: string;
+    creationDate: Date;
     sessions: string[];
-    users: string[];
-}
-
-export interface CourseViewModel {
-    id: number;
-    no: number;
-    title: string;
-    creationDate: string;
-    studentsNumber: number;
+    users: UserModel[];
 }

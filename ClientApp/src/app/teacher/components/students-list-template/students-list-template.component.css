@@ -1,0 +1,20 @@
+table {
+    width: 100%;
+}
+
+.mat-column-actions {
+    flex: none;
+    max-width: 100px;
+}
+.mat-column-title {
+    flex: none;
+    width: 40%;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+  
+.table-row-is-clicked {
+    font-weight: bold;
+}

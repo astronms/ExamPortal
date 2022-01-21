@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ExamPortal.Data;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.Models.Exam;
@@ -14,20 +15,27 @@ namespace ExamPortal.Models
         public string Name { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
-        public virtual IList<UserDTO> Users { get; set; }
-        public virtual IList<SessionDTO> Sessions { get; set; }
+        public IList<Guid> UsersId { get; set; }
     }
-    public class CourseDTO : CreateCourseDTO
+    public class CourseDTO
     {
         public Guid CourseId { get; set; }
-        public virtual IList<UserDTO> Users { get; set; }
-        public virtual IList<SessionDTO> Sessions { get; set; }
+        public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
+        public IList<UserForCoursesDTO> Users { get; set; }
     }
 
-    public class UpdateCoruseDTO : CreateCourseDTO
+    public class CourseForUserDTO
     {
-        public virtual IList<UserDTO> Users { get; set; }
-        public virtual IList<SessionDTO> Sessions { get; set; }
+        public Guid CourseId { get; set; }
+        public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
+    }
+
+    public class UpdateCourseDTO
+    {
+        public string Name { get; set; }
+        public IList<Guid> UsersId { get; set; }
 
     }
 

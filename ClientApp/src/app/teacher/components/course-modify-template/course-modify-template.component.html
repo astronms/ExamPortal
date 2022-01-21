@@ -6,16 +6,17 @@
               <input matInput placeholder="Nazwa" formControlName="courseName" [(ngModel)]='course.name' required>
             </mat-form-field>
             <div>
-                <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
+                <button class="btn btn-sm" [routerLink]="['/teacher/courses-list']">Wróć</button>
+                <button class="btn btn-sm" matStepperNext>Dalej</button>
             </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" label="Przypisz studentów">
         <form [formGroup]="secondFormGroup">
-            <p>Tu będzie lista użytkowników</p>
+            <app-students-list-template (selectedUsersChange)="onSelectedUsersChange($event)" [selectedUsers]="course.users"></app-students-list-template>
             <div>
-                <button class="btn btn-lg btn-primary" matStepperPrevious>Wróć</button>
-                <button class="btn btn-lg btn-primary" matStepperNext>Dalej</button>
+                <button class="btn btn-sm" matStepperPrevious>Wróć</button>
+                <button class="btn btn-sm" matStepperNext>Dalej</button>
             </div>
         </form>
     </mat-step>
@@ -23,8 +24,8 @@
         <p>Nazwa kursu: {{ course.name }}</p>
         <p>Liczba przypisanych studentów: {{ course.users.length }}</p>
         <div>
-            <button class="btn btn-lg btn-primary" matStepperPrevious>Wróć</button>
-            <button class="btn btn-lg btn-primary" (click)="saveClick()">Zapisz</button>
+            <button class="btn btn-sm" matStepperPrevious>Wróć</button>
+            <button class="btn btn-sm" (click)="saveClick()">Zapisz</button>
         </div>
     </mat-step>
 </mat-stepper>

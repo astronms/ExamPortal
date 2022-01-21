@@ -11,8 +11,7 @@ namespace ExamPortal.Data
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public virtual IList<User> Users { get; set; }
+        public IList<CourseUser> CourseUsers { get; set; }
 
-        public virtual IList<Session> Sessions { get; set; }
     }
 }
