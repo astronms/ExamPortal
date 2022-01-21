@@ -22,7 +22,7 @@ export class CourseModifyTemplateComponent implements OnInit {
   @Input() course: CourseModel = {
     courseId: 0,
     name: "",
-    creationDate: "",
+    creationDate: new Date(),
     sessions: [],
     users: [],
   }
@@ -69,10 +69,7 @@ export class CourseModifyTemplateComponent implements OnInit {
 
   onSelectedUsersChange(users: UserModel[])
   {
-    this.course.users = [];
-    users.forEach(user => {
-      this.course.users.push({user: user});
-    });
+    this.course.users = users;
   }
 
 }
