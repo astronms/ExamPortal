@@ -5,6 +5,7 @@ using ExamPortal.Data.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace ExamPortal.Data
 {
     public class DatabaseContext : IdentityDbContext<User>
@@ -17,8 +18,15 @@ namespace ExamPortal.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.Entity<CourseUser>().HasOne(x => x.Course).WithMany(x => x.CourseUsers)
+                .HasForeignKey(x => x.CourseId);
+            builder.Entity<CourseUser>().HasOne(x => x.User).WithMany(x => x.CourseUsers)
+                .HasForeignKey(x => x.UserId);
         }
+
+
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseUser> CourseUsers { get; set; }
         public DbSet<StudentInfo> StudentsInfos { get; set; }
 
         public DbSet<Session> Sessions { get; set; }

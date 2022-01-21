@@ -37,9 +37,14 @@ export class CourseService {
     var newCourse: NewCourse = {
       name: course.name,
       creationDate: new Date(),
-      users: course.users
+      usersId: []
     };
 
+    course.users.forEach(el => {
+      newCourse.usersId.push(el.id);
+    });
+
+    console.log(newCourse);
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
     .pipe(
       catchError(this.handleError)
@@ -48,15 +53,25 @@ export class CourseService {
 
   deleteCourse(course: CourseModel) : void
   {
-    this.http.delete<boolean>(this.baseUrl + 'api/auth/Course/' + course.courseId)
-    .pipe(
-      catchError(this.handleError)
+    this.http.delete<boolean>(this.baseUrl + 'api/auth/Course/' + course.courseId).subscribe(
+      res => {},
+      err => this.handleError(err)
     );
   }
 
   modifyCourse(course: CourseModel) : Observable<CourseModel>
   {
-    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, course)
+    var newCourse: NewCourse = {
+      name: course.name,
+      creationDate: course.creationDate,
+      usersId: []
+    };
+
+    course.users.forEach(el => {
+      newCourse.usersId.push(el.id);
+    });
+
+    return this.http.put<CourseModel>(this.baseUrl + 'api/auth/Course/' + course.courseId, newCourse)
     .pipe(
       catchError(this.handleError)
     );
