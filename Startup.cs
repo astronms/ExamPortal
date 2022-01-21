@@ -63,10 +63,11 @@ namespace ExamPortal
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ExamPortal", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "Please insert JWT with Bearer into field",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
+                    Scheme = "bearer",
+                    Description = "Please insert JWT token into field"
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement {
                     {
