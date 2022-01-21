@@ -2,7 +2,7 @@ name: BuildBackend
 on:
   push:
     paths-ignore:
-      - 'ClientApp/**'
+      - 'ExamPortal/ClientApp/**'
       - '.github/**'
 
 jobs:

@@ -8,7 +8,7 @@ jobs:
   build-angular:
     runs-on: ubuntu-latest
     env:
-      working-directory: ./ClientApp
+      working-directory: ./ExamPortal/ClientApp
     strategy:
       matrix:
         node-version: [16]
