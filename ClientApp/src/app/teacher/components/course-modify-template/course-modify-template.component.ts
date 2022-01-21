@@ -22,7 +22,7 @@ export class CourseModifyTemplateComponent implements OnInit {
   @Input() course: CourseModel = {
     courseId: 0,
     name: "",
-    creationDate: "",
+    creationDate: new Date(),
     sessions: [],
     users: [],
   }
