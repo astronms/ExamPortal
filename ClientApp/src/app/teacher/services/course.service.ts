@@ -44,7 +44,6 @@ export class CourseService {
       newCourse.usersId.push(el.id);
     });
 
-    console.log(newCourse);
     return this.http.post<NewCourse>(this.baseUrl + 'api/auth/Course', newCourse)
     .pipe(
       catchError(this.handleError)
