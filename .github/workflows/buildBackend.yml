@@ -2,7 +2,7 @@ name: BuildBackend
 on:
   push:
     paths-ignore:
-      - 'ClientApp/**'
+      - 'ExamPortal/ClientApp/**'
       - '.github/**'
 
 jobs:
@@ -19,4 +19,9 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - run: dotnet build
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal

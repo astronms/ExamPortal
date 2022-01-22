@@ -233,5 +233,5 @@ _Pvt_Extensions
 # Custom
 **/logs
 **/cache/*
-ClientApp/src/coverage
-Upload/files
+ExamPortal/ClientApp/src/coverage
+ExamPortal/Upload/files
