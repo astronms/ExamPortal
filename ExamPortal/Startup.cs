@@ -14,6 +14,7 @@ using ExamPortal.Data;
 using ExamPortal.IRepository;
 using ExamPortal.Repository;
 using ExamPortal.Services;
+using ExamPortal.XML.Exam;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
@@ -57,6 +58,7 @@ namespace ExamPortal
             });
             services.AddAutoMapper(typeof(MapperInitializer));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IXmlValidator, XmlValidator>();
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddSwaggerGen(c =>
             {
@@ -97,7 +99,8 @@ namespace ExamPortal
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ExamPortal v1"));
+                app.UseSwaggerUI(c => 
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ExamPortal v1"));
             }
             else
             {

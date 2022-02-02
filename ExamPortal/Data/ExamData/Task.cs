@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 
 namespace ExamPortal.Data.ExamData
 {
-    [XmlRoot(ElementName = "task")]
     public class Task
     {
         [Key]

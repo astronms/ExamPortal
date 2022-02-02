@@ -4,14 +4,16 @@ using ExamPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220202003852_afterSessionEndpoint")]
+    partial class afterSessionEndpoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,15 +380,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ccdc46e3-7d5b-4514-8494-3f73dd8edcf6",
-                            ConcurrencyStamp = "875e9c17-6ba5-42ab-acb0-e484b9d22062",
+                            Id = "0f6ade68-df54-4117-81e8-90b001d0f2b0",
+                            ConcurrencyStamp = "c7c8486c-a721-4823-9421-09f6cc6cdad6",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "64b28e24-49d0-4074-8792-f8aa825b469e",
-                            ConcurrencyStamp = "4c8bcbd8-6ad9-4f50-b502-13fa1d3bacff",
+                            Id = "30e3211f-bdb2-41d6-86a5-44b33826e9f3",
+                            ConcurrencyStamp = "26b96bc1-978c-47b9-a680-1e27b6e161ad",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

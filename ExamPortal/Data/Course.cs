@@ -12,6 +12,7 @@ namespace ExamPortal.Data
         public DateTime CreationDate { get; set; }
 
         public IList<CourseUser> CourseUsers { get; set; }
+        public IList<Session> Sessions { get; set; }
 
     }
 }

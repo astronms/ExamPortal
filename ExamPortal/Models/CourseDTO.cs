@@ -23,6 +23,7 @@ namespace ExamPortal.Models
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
         public IList<UserForCoursesDTO> Users { get; set; }
+        public IList<SessionDTO> Sessions { get; set; }
     }
 
     public class CourseForUserDTO

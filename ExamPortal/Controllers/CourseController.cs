@@ -38,12 +38,14 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCourse(Guid guid)
         {
-            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid, include: q => q.Include(x => x.CourseUsers).ThenInclude(x => x.User).ThenInclude(y=>y.StudentInfo));
+            var course = await _unitOfWork.Courses.Get(q => q.CourseId == guid, include: q =>
+                    q.Include(x => x.CourseUsers).ThenInclude(x => x.User).ThenInclude(y => y.StudentInfo)
+                    .Include(x => x.Sessions));
             var result = _mapper.Map<CourseDTO>(course);
             return Ok(result);
         }
 
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -51,7 +53,9 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var courses = await _unitOfWork.Courses.GetAll(include: q => q.Include(x => x.CourseUsers).ThenInclude(x=>x.User).ThenInclude(y => y.StudentInfo));
+                var courses = await _unitOfWork.Courses.GetAll(include: q =>
+                    q.Include(x => x.CourseUsers).ThenInclude(x => x.User).ThenInclude(y => y.StudentInfo)
+                        .Include(x => x.Sessions));
                 var results = _mapper.Map<IList<CourseDTO>>(courses);
                 return Ok(results);
             }

@@ -4,14 +4,16 @@ using ExamPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220131221924_XmlNodesToDB")]
+    partial class XmlNodesToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,15 +380,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ccdc46e3-7d5b-4514-8494-3f73dd8edcf6",
-                            ConcurrencyStamp = "875e9c17-6ba5-42ab-acb0-e484b9d22062",
+                            Id = "3a9ab08a-9721-4af2-ad57-e6465a67f154",
+                            ConcurrencyStamp = "28fa3323-452d-4397-bcd1-0c8a0da9579c",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "64b28e24-49d0-4074-8792-f8aa825b469e",
-                            ConcurrencyStamp = "4c8bcbd8-6ad9-4f50-b502-13fa1d3bacff",
+                            Id = "5893ecc2-f090-4b30-bde1-85788c4fa5be",
+                            ConcurrencyStamp = "6f42bc30-a45e-4db9-bec8-727c7041191a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -538,7 +540,7 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.ExamData.Session", b =>
                 {
                     b.HasOne("ExamPortal.Data.Course", "Course")
-                        .WithMany("Sessions")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -673,8 +675,6 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.Course", b =>
                 {
                     b.Navigation("CourseUsers");
-
-                    b.Navigation("Sessions");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.ExamData.Exam", b =>

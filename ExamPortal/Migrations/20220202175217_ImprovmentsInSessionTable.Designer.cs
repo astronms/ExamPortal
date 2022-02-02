@@ -4,14 +4,16 @@ using ExamPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220202175217_ImprovmentsInSessionTable")]
+    partial class ImprovmentsInSessionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,7 +94,6 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.ExamData.Session", b =>
                 {
                     b.Property<Guid>("SessionId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CourseId")
@@ -108,8 +109,6 @@ namespace ExamPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("SessionId");
-
-                    b.HasIndex("CourseId");
 
                     b.ToTable("Sessions");
                 });
@@ -378,15 +377,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ccdc46e3-7d5b-4514-8494-3f73dd8edcf6",
-                            ConcurrencyStamp = "875e9c17-6ba5-42ab-acb0-e484b9d22062",
+                            Id = "8c3d8065-1e38-4920-aaf8-199d3a548f21",
+                            ConcurrencyStamp = "d20848bb-2fa0-4af0-a355-f76460e980c1",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "64b28e24-49d0-4074-8792-f8aa825b469e",
-                            ConcurrencyStamp = "4c8bcbd8-6ad9-4f50-b502-13fa1d3bacff",
+                            Id = "e494b84d-0587-4b1a-a38b-d77a7ad8f899",
+                            ConcurrencyStamp = "9e27d093-93ed-46b2-b0a7-db83693cfe96",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -539,7 +538,7 @@ namespace ExamPortal.Migrations
                 {
                     b.HasOne("ExamPortal.Data.Course", "Course")
                         .WithMany("Sessions")
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
