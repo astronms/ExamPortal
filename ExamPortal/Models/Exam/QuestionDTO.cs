@@ -14,7 +14,7 @@ namespace ExamPortal.Models.Exam
     public class QuestionDTO : CreateQuestionDTO
     {
         public Guid QuestionId { get; set; }
-        public Task Task { get; set; }
+        public ExamTask Task { get; set; }
 
         public virtual IList<ValueDTO> Value { get; set; }
     }

@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Serialization;
 
 namespace ExamPortal.Data.ExamData
 {
-    public class Task
+    public class ExamTask
     {
         [Key]
         public Guid TaskId { get; set; }

@@ -13,7 +13,7 @@ namespace ExamPortal.Data.ExamData
 
         [ForeignKey(nameof(Task))]
         public Guid TaskId { get; set; }
-        public Task Task { get; set; }
+        public ExamTask Task { get; set; }
 
         public virtual IList<Value> Value { get; set; }
     }

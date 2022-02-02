@@ -15,7 +15,7 @@ namespace ExamPortal.Data.ExamData
         public Guid SessionId { get; set; }
         public Session Session { get; set; }
 
-        public virtual IList<Task> Task { get; set; }
+        public virtual IList<ExamTask> Task { get; set; }
     }
 
 }
