@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ExamPortal.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [Route("api/auth/[controller]")]
     [ApiController]
     public class SessionController : Controller
@@ -35,9 +36,9 @@ namespace ExamPortal.Controllers
             _xmlValidator = xmlValidator;
         }
 
-        [Authorize]
         [HttpGet("{guid:Guid}", Name = "GetSession")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetSession(Guid guid)
         {
@@ -46,9 +47,9 @@ namespace ExamPortal.Controllers
             return Ok(result);
         }
 
-        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetSessions()
         {
@@ -65,10 +66,10 @@ namespace ExamPortal.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpDelete("{guid:Guid}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteSession(Guid guid)
         {
@@ -91,9 +92,9 @@ namespace ExamPortal.Controllers
             return NoContent();
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateSession([FromForm] CreateSessionDTO createSessionDTO)
         {
