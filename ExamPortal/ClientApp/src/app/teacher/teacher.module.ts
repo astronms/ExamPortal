@@ -17,15 +17,17 @@ import { CourseModifyTemplateComponent, SuccessDialogComponent } from './compone
 import { StudentsListTemplateComponent } from './components/students-list-template/students-list-template.component';
 import { CoursesListTemplateComponent } from './components/courses-list-template/courses-list-template.component';
 import { CourseDeleteComponent } from './components/course-delete/course-delete.component';
+import { ExamSessionModifyTemplateComponent } from './components/exam-session-modify-template/exam-session-modify-template.component';
 
 
 @NgModule({
   declarations: [
     ExamSessionComponent, 
     ExamSessionsListComponent,
+    ExamSessionModifyTemplateComponent,
     ExamSessionCreatorComponent,
-    CoursesListComponent,
     ExamTableComponent,
+    CoursesListComponent,
     CourseCreatorComponent,
     SuccessDialogComponent,
     CourseComponent,

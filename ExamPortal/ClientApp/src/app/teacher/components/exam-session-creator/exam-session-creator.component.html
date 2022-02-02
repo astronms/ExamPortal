@@ -1,29 +1,11 @@
 <div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
     <div class="text-center pb-4 mt-3">
-        <h2 class="headline"><span class="home_text">Kreator</span></h2>  
+        <h2 class="headline"><span class="home_text">Tworzenie egzaminu</span></h2>  
     </div> 
 </div> 
 
-<div class="container">
-    <div class="row justify-content-md-left">
-        <div class="border">
-            <div class="col-md-3">
-                <p>Exam</p>
-            </div>
-            <div class="col-md-auto">
-                <button type="button" class="btn btn-dark">Edit</button>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-md-left">
-        <div class="border">
-            <div class="col-md-3">
-                <p> </p>
-            </div>
-            <div class="col-md-auto">
-                <button type="button" class="btn btn-dark">New</button>
-            </div>
-        </div>
-      </div>
-  </div>
-  
+<section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+        <app-exam-session-modify-template [redirect]="redirect" (onSave)="saveClick($event)"></app-exam-session-modify-template>
+    </div> <!-- end of container -->
+</section>

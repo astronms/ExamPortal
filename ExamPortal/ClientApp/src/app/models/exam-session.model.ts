@@ -6,5 +6,5 @@ export interface ExamSessionModel {
     startDate: Date;
     endDate: Date;
     courseId: number;
-    course: CourseModel;
+    course?: CourseModel;
 }

@@ -6,9 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: []
 })
 export class ExamSessionCreatorComponent {
+  redirect = '/teacher/exams-list';
+
   constructor() { }
 
-  ngOnInit() {
-
+  saveClick(event) {
+    console.log(event);
   }
 }
