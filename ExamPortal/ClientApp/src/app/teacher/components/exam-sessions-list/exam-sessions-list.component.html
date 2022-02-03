@@ -6,7 +6,9 @@
 
 <section class="services-00 d-flex align-items-center py-5" id="services">
     <div class="container text-light">
-<app-exam-sessions-table-template [columnsToDisplay]="displayedColumns" [data]="examSessions" [actions]="teacherActions"></app-exam-sessions-table-template>
+        <app-exam-sessions-table-template [columnsToDisplay]="displayedColumns" [data]="examSessions" [actions]="teacherActions"></app-exam-sessions-table-template>
+        <br />
+        <button class="btn btn-sm" [routerLink]="['/teacher/exam-creator']">Dodaj nowy</button>
     </div> <!-- end of container -->
 </section>
   

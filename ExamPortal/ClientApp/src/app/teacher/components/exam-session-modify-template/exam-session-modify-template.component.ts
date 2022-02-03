@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
+import { CourseModel } from '../../models/course.model';
+import { CourseService } from '../../services/course.service';
 
 export interface DialogData {
   addNewCourse: boolean;
@@ -26,35 +26,47 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
   @Input() examSession: ExamSessionModel = {
     sessionId: 0,
     name: '',
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: null,
+    endDate: null,
     courseId: 0
   };
-  @Output("onSave") onSavee: EventEmitter<ExamSessionModel> = new EventEmitter<ExamSessionModel>();
+  @Output("onSave") onSavee: EventEmitter<{examSession: ExamSessionModel; file: File}> = new EventEmitter<{examSession: ExamSessionModel; file: File}>();
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   @ViewChild('stepper') stepper: MatStepper;
 
+  courses: CourseModel[];
+  displayedColumns: string[] = ['index', 'name', 'users', 'creationDate'];
+
+  fileName = '';
+  file:File;
   
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private courseService: CourseService
   ) {}
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
       examSessionName: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      endDate: ['', Validators.required],
+      file: ['', Validators.required]
     });
+
     this.secondFormGroup = this.formBuilder.group({});
+
+    this.courseService.getListOfCourses().subscribe(result => {
+      this.courses = result; 
+    });
   }
 
   saveClick() {
 
-    this.onSavee.emit(this.examSession);
+    this.onSavee.emit({examSession: this.examSession, file: this.file});
 
     if(this.showDialog)
     {
@@ -73,10 +85,20 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
     this.router.navigate([this.redirect]);
   }
 
-  /*onSelectedUsersChange(users: UserModel[])
+  onSelectedCourseChange(course: CourseModel)
   {
-    this.course.users = users;
-  }*/
+    this.examSession.course = course;
+    this.examSession.courseId = course.courseId;
+  }
+
+  onFileSelected(event)
+  {
+    if(event.target.files[0])
+    {
+      this.file = event.target.files[0];
+      this.fileName = this.file.name;
+    }
+  }
 
 }
 

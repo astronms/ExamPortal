@@ -31,6 +31,20 @@ export class ExamSessionService {
     );
   }
 
+  addExamSession(exam: ExamSessionModel, file: File) : Observable<any>
+  {
+    const formData = new FormData();
+    formData.append("File", file);
+    formData.append("Name", exam.name);
+    formData.append("StartDate", exam.startDate.toDateString());
+    formData.append("EndDate", exam.endDate.toDateString());
+    formData.append("CourseId", exam.courseId.toString());
+    return this.http.post(this.baseUrl + 'api/auth/Session', formData)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);

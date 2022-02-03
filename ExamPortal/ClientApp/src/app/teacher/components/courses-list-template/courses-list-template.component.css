@@ -10,3 +10,11 @@ table {
     flex: none;
     width: 40%;
 }
+
+.table-row-selectable:hover .mat-cell{
+    border-color: currentColor;
+}
+  
+.table-row-is-clicked {
+    font-weight: bold;
+}
