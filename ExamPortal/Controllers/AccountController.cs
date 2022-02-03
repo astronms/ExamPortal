@@ -4,6 +4,7 @@ using AutoMapper;
 using ExamPortal.Data.Users;
 using ExamPortal.Models.Users;
 using ExamPortal.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace ExamPortal.Controllers
             _mapper = mapper;
             _authManager = authManager;
         }
+        [AllowAnonymous]
         [HttpPost]
         [Route("register")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
@@ -68,6 +70,7 @@ namespace ExamPortal.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO userDTO)

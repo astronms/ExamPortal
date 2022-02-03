@@ -31,7 +31,7 @@ namespace ExamPortal.Data
 
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Exam> Exams { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<ExamTask> Tasks { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Value> Values { get; set; }
 
