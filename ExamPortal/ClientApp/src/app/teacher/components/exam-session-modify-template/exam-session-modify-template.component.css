@@ -1,0 +1,19 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+}
+  
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.btn {
+  margin: 10px 10px 0 0;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-upload {
+  margin: 10px 0px;
+}

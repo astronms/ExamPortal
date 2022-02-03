@@ -1,0 +1,69 @@
+<mat-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup" label="Wprowadź podstawowe informacje">
+        <form [formGroup]="firstFormGroup">
+            <mat-form-field appearance="fill">
+              <mat-label>Nazwa</mat-label>
+              <input matInput placeholder="Nazwa" formControlName="examSessionName" [(ngModel)]='examSession.name' required>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input matInput [ngxMatDatetimePicker]="picker" 
+                    placeholder="Wybierz datę startu" 
+                    formControlName="startDate"
+                    [(ngModel)]='examSession.startDate'>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input matInput [ngxMatDatetimePicker]="picker2" 
+                    placeholder="Wybierz datę zakończenia" 
+                    formControlName="endDate"
+                    [(ngModel)]='examSession.endDate'>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker2></ngx-mat-datetime-picker>
+            </mat-form-field>
+            <br />
+            <input type="file" class="file-input"
+                formControlName="file"
+                (change)="onFileSelected($event)" #fileUpload>
+            
+            <div class="file-upload">
+
+            {{fileName || "Brak wybranego pliku."}}
+
+                <button mat-mini-fab color="primary" class="upload-btn"
+                (click)="fileUpload.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <mat-error *ngIf="firstFormGroup.get('file').hasError('required')">Proszę wybrać plik XML z egzaminami.</mat-error>
+            </div>
+ 
+            <div>
+                <button class="btn btn-sm" [routerLink]="['/teacher/exams-list']">Wróć</button>
+                <button class="btn btn-sm" matStepperNext>Dalej</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Przypisz kurs">
+        <form [formGroup]="secondFormGroup">
+            <app-courses-list-template 
+                [columnsToDisplay]="displayedColumns" 
+                [data]="courses" 
+                [isSelectable]="true" 
+                (selectedCourseChange)="onSelectedCourseChange($event)"></app-courses-list-template>
+            <div>
+                <button class="btn btn-sm" matStepperPrevious>Wróć</button>
+                <button class="btn btn-sm" matStepperNext>Dalej</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step label="Gotowe">
+        <p>Nazwa egzaminu: {{ examSession.name }}</p>
+        <p *ngIf="examSession.course">Przypisany kurs: {{ examSession.course.name }}</p>
+        <div>
+            <button class="btn btn-sm" matStepperPrevious>Wróć</button>
+            <button class="btn btn-sm" (click)="saveClick()">Zapisz</button>
+        </div>
+    </mat-step>
+</mat-stepper>

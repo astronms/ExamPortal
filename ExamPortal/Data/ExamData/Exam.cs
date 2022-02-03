@@ -10,14 +10,13 @@ namespace ExamPortal.Data.ExamData
     {
         [Key]
         public Guid ExamId { get; set; }
+        public Guid ExternalId { get; set; }
 
         [ForeignKey(nameof(Session))]
         public Guid SessionId { get; set; }
         public Session Session { get; set; }
 
-        [XmlElement(ElementName = "task")]
-        public virtual IList<Task> Task { get; set; }
-
+        public virtual IList<ExamTask> Task { get; set; }
     }
 
 }

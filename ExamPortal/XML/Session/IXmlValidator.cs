@@ -10,7 +10,7 @@ namespace ExamPortal.XML.Exam
 {
     public interface IXmlValidator
     {
-        bool IsValid(XmlDocument doc);
+        bool IsValid(string doc);
         void ValidationEventHandler(object sender, ValidationEventArgs args);
     }
 }

@@ -1,40 +1,58 @@
-import { Injectable} from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Inject, Injectable} from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
+import { CourseModel } from '../models/course.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExamSessionService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient, 
+    @Inject('BASE_URL')private baseUrl: string
+  ) { }
 
   getListOfExamSessions() : Observable<ExamSessionModel[]>
   {
-    let date: Date = new Date();  
-    var exams : ExamSessionModel[] = [];
-    exams[0] = {
-      sessionId: 0,
-      name: "Exam1",
-      startDate: new Date(),
-      endDate: new Date(),
-      courseId: 0,
-      course: null
-    };
-    exams[1] = {
-      sessionId: 1,
-      name: "Exam2",
-      startDate: new Date(),
-      endDate: new Date(),
-      courseId: 0,
-      course: null
-    };
+    return this.http.get<ExamSessionModel[]>(this.baseUrl + 'api/auth/Session')
+    .pipe(
+      map(result => {
+        result.forEach(session => {
+          this.http.get<CourseModel>(this.baseUrl + 'api/auth/Course/' + session.courseId).subscribe(course => {
+            session.course = course;
+          });
+        });
+        return result;
+      }),
+      catchError(this.handleError)
+    );
+  }
 
-    const obsUsingCreate = new Observable<ExamSessionModel[]>( observer => {
-      observer.next(exams)
-      observer.complete()
-    })
+  addExamSession(exam: ExamSessionModel, file: File) : Observable<any>
+  {
+    const formData = new FormData();
+    formData.append("File", file);
+    formData.append("Name", exam.name);
+    formData.append("StartDate", exam.startDate.toDateString());
+    formData.append("EndDate", exam.endDate.toDateString());
+    formData.append("CourseId", exam.courseId.toString());
+    return this.http.post(this.baseUrl + 'api/auth/Session', formData)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
 
-    return obsUsingCreate;
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('An error occurred:', error.error);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    return throwError(
+      'Something bad happened; please try again later.');
   }
 }

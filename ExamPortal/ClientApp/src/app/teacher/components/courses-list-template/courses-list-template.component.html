@@ -34,7 +34,17 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+    <ng-container *ngIf="!isSelectable">
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+    </ng-container>
+    <ng-container *ngIf="isSelectable">
+        <tr 
+            mat-row *matRowDef="let row; columns: columnsToDisplay;"
+            (click)="courseClicked(row)"
+            [class.table-row-selectable]="isSelectable"
+            [class.table-row-is-clicked]="row == selectedCourse"
+        ></tr>
+    </ng-container>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                 showFirstLastButtons 

@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule }  from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -33,7 +35,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     MatDialogModule,
     MatTabsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    MatDatepickerModule
   ],
   exports: [
     RouterModule,
@@ -48,7 +53,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    MatDatepickerModule
   ]
 })
 export class SharedModule { }

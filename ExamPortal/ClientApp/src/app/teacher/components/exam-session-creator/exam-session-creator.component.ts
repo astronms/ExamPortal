@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ExamSessionService } from '../../services/exam-session.service';
 
 @Component({
   selector: 'app-exam-session-creator',
@@ -6,9 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: []
 })
 export class ExamSessionCreatorComponent {
-  constructor() { }
+  redirect = '/teacher/exams-list';
 
-  ngOnInit() {
+  constructor(
+    private examSessionService: ExamSessionService
+  ) { }
 
+  saveClick(event) {
+    this.examSessionService.addExamSession(event.examSession, event.file).subscribe();
   }
 }

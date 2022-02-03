@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 
 namespace ExamPortal.Data.ExamData
 {
-    [XmlRoot(ElementName = "value")]
     public class Value
     {
         [Key]
@@ -16,6 +15,6 @@ namespace ExamPortal.Data.ExamData
 
         [ForeignKey(nameof(Question))]
         public Guid QuestionId { get; set; }
-        public Question Question { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

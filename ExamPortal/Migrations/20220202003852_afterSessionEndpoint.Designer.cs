@@ -4,14 +4,16 @@ using ExamPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220202003852_afterSessionEndpoint")]
+    partial class afterSessionEndpoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,9 +65,6 @@ namespace ExamPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExternalId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("SessionId")
                         .HasColumnType("uniqueidentifier");
 
@@ -74,37 +73,6 @@ namespace ExamPortal.Migrations
                     b.HasIndex("SessionId");
 
                     b.ToTable("Exams");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamData.ExamTask", b =>
-                {
-                    b.Property<Guid>("TaskId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ExamId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SortId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Time")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TaskId");
-
-                    b.HasIndex("ExamId");
-
-                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.ExamData.Question", b =>
@@ -146,6 +114,37 @@ namespace ExamPortal.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("ExamPortal.Data.ExamData.Task", b =>
+                {
+                    b.Property<Guid>("TaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TaskId");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.ExamData.Value", b =>
@@ -381,15 +380,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b17b8121-39fb-4cc6-99d5-369d0640cd55",
-                            ConcurrencyStamp = "4ea7630e-9d66-4ae0-aa28-d79404a47da3",
+                            Id = "0f6ade68-df54-4117-81e8-90b001d0f2b0",
+                            ConcurrencyStamp = "c7c8486c-a721-4823-9421-09f6cc6cdad6",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "516e1f44-17df-402b-adbd-7140beefe9f3",
-                            ConcurrencyStamp = "d65e2d5a-a2e5-42a4-970d-bee340033d2d",
+                            Id = "30e3211f-bdb2-41d6-86a5-44b33826e9f3",
+                            ConcurrencyStamp = "26b96bc1-978c-47b9-a680-1e27b6e161ad",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -527,20 +526,9 @@ namespace ExamPortal.Migrations
                     b.Navigation("Session");
                 });
 
-            modelBuilder.Entity("ExamPortal.Data.ExamData.ExamTask", b =>
-                {
-                    b.HasOne("ExamPortal.Data.ExamData.Exam", "Exam")
-                        .WithMany("Task")
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Exam");
-                });
-
             modelBuilder.Entity("ExamPortal.Data.ExamData.Question", b =>
                 {
-                    b.HasOne("ExamPortal.Data.ExamData.ExamTask", "Task")
+                    b.HasOne("ExamPortal.Data.ExamData.Task", "Task")
                         .WithMany("Questions")
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -551,11 +539,24 @@ namespace ExamPortal.Migrations
 
             modelBuilder.Entity("ExamPortal.Data.ExamData.Session", b =>
                 {
-                    b.HasOne("ExamPortal.Data.Course", null)
+                    b.HasOne("ExamPortal.Data.Course", "Course")
                         .WithMany("Sessions")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("ExamPortal.Data.ExamData.Task", b =>
+                {
+                    b.HasOne("ExamPortal.Data.ExamData.Exam", "Exam")
+                        .WithMany("Task")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.ExamData.Value", b =>
@@ -683,11 +684,6 @@ namespace ExamPortal.Migrations
                     b.Navigation("Task");
                 });
 
-            modelBuilder.Entity("ExamPortal.Data.ExamData.ExamTask", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
             modelBuilder.Entity("ExamPortal.Data.ExamData.Question", b =>
                 {
                     b.Navigation("Value");
@@ -696,6 +692,11 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.ExamData.Session", b =>
                 {
                     b.Navigation("Exams");
+                });
+
+            modelBuilder.Entity("ExamPortal.Data.ExamData.Task", b =>
+                {
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.Answer", b =>

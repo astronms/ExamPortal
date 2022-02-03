@@ -42,7 +42,8 @@ namespace ExamPortal.Services
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
             var jwtSettings = _configuration.GetSection("Jwt");
-            var expiration = DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("Lifetime").Value));
+            var expiration = DateTime.Now
+                .AddMinutes(Convert.ToDouble(jwtSettings.GetSection("Lifetime").Value));
             var token = new JwtSecurityToken(
                 issuer: jwtSettings.GetSection("Issuer").Value,
                 claims: claims,
