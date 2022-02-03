@@ -138,7 +138,8 @@ namespace ExamPortal.Controllers
                 {
                     SessionId = session.SessionId,
                     Session = session,
-                    ExamId = Guid.Parse(exam.Id),
+                    ExternalId = Guid.Parse(exam.Id),
+                    ExamId = Guid.NewGuid(),
                     Task = new List<ExamTask>()
                 };
                 foreach (var task in exam.Task)
@@ -146,7 +147,6 @@ namespace ExamPortal.Controllers
                     var newTask = new ExamTask
                     {
                         Exam = newExam,
-                        ExamId = newExam.ExamId,
                         Image = task.Image,
                         SortId = task.Id,
                         TaskId = Guid.NewGuid(),

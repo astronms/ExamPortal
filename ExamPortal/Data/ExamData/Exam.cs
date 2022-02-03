@@ -10,6 +10,7 @@ namespace ExamPortal.Data.ExamData
     {
         [Key]
         public Guid ExamId { get; set; }
+        public Guid ExternalId { get; set; }
 
         [ForeignKey(nameof(Session))]
         public Guid SessionId { get; set; }
