@@ -73,14 +73,14 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteSession(Guid guid)
         {
-            if (guid != Guid.Empty)
+            if (guid == Guid.Empty)
             {
                 _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteSession)}");
                 return BadRequest();
             }
 
-            var country = await _unitOfWork.Sessions.Get(q => q.SessionId == guid);
-            if (country == null)
+            var session = await _unitOfWork.Sessions.Get(q => q.SessionId == guid);
+            if (session == null)
             {
                 _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteSession)}");
                 return BadRequest("Submitted data is invalid");
