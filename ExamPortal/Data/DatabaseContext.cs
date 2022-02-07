@@ -1,9 +1,11 @@
-﻿using ExamPortal.Configuration.Entities;
+﻿using System.Linq;
+using ExamPortal.Configuration.Entities;
+using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
-using ExamPortal.Data.ExamToSendModel;
 using ExamPortal.Data.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 
 namespace ExamPortal.Data
@@ -22,6 +24,10 @@ namespace ExamPortal.Data
                 .HasForeignKey(x => x.CourseId);
             builder.Entity<CourseUser>().HasOne(x => x.User).WithMany(x => x.CourseUsers)
                 .HasForeignKey(x => x.UserId);
+            builder.Entity<ActivatedExam>().HasOne(x => x.Exam).WithMany(x => x.ActivatedExams)
+                .HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ActivatedExam>().HasOne(x => x.User).WithMany(x => x.ActivatedExams)
+                .HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.NoAction);
         }
 
 
@@ -29,17 +35,14 @@ namespace ExamPortal.Data
         public DbSet<CourseUser> CourseUsers { get; set; }
         public DbSet<StudentInfo> StudentsInfos { get; set; }
 
+        public DbSet<ActivatedExam> ActivetedExams { get; set; }
+
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ExamTask> Tasks { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Value> Values { get; set; }
 
-        public DbSet<SessionToCheck> SessionsToCheck { get; set; }
-        public DbSet<ExamToCheck> ExamsToCheck { get; set; }
-        public DbSet<TaskToCheck> TasksToCheck { get; set; }
-        public DbSet<Answer> Answers { get; set; }
-        public DbSet<ValueToCheck> ValuesToCheck { get; set; }
 
     }
 }

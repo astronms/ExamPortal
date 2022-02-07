@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
+using ExamPortal.Data.ActivetedExams;
 
 namespace ExamPortal.Data.ExamData
 {
@@ -17,6 +18,7 @@ namespace ExamPortal.Data.ExamData
         public Session Session { get; set; }
 
         public virtual IList<ExamTask> Task { get; set; }
+        public virtual IList<ActivatedExam> ActivatedExams { get; set; }
     }
 
 }

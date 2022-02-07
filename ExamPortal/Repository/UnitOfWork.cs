@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExamPortal.Data;
+using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.IRepository;
@@ -17,6 +18,7 @@ namespace ExamPortal.Repository
         private IGenericRepository<Course> _courses;
         private IGenericRepository<User> _users;
         private IGenericRepository<CourseUser> _courseUser;
+        private IGenericRepository<ActivatedExam> _activatedExams;
 
         public UnitOfWork(DatabaseContext context)
         {
@@ -28,6 +30,8 @@ namespace ExamPortal.Repository
         public IGenericRepository<Course> Courses => _courses ??= new GenricRepository<Course>(_context);
         public IGenericRepository<User> Users => _users ??= new GenricRepository<User>(_context);
         public IGenericRepository<CourseUser> CourseUsers => _courseUser ??=new GenricRepository<CourseUser>(_context);
+        public IGenericRepository<ActivatedExam> ActivatedExams =>
+            _activatedExams ??= new GenricRepository<ActivatedExam>(_context);
 
         public async Task Save()
         {
