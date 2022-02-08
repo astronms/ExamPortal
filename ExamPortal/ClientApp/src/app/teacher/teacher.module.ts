@@ -13,12 +13,14 @@ import { ExamTableComponent } from '../components/exam-sessions-table-template/e
 import { CourseCreatorComponent } from './components/course-creator/course-creator.component';
 import { CourseComponent } from './components/course/course.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
-import { CourseModifyTemplateComponent, SuccessDialogComponent } from './components/course-modify-template/course-modify-template.component';
+import { CourseModifyTemplateComponent } from './components/course-modify-template/course-modify-template.component';
 import { StudentsListTemplateComponent } from './components/students-list-template/students-list-template.component';
 import { CoursesListTemplateComponent } from './components/courses-list-template/courses-list-template.component';
 import { CourseDeleteComponent } from './components/course-delete/course-delete.component';
-import { ExamSessionModifyTemplateComponent } from './components/exam-session-modify-template/exam-session-modify-template.component';
-
+import { ExamSessionModifyTemplateComponent } from './components/exam-session-modify-template/exam-session-modify-template.component'; 
+import { SuccessDialogComponent } from './components/success-dialog-template/success-dialog-template.component';
+import { ExamSessionDeleteComponent } from './components/exam-session-delete/exam-session-delete.component';
+import { ExamSessionEditComponent } from './components/exam-session-edit/exam-session-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,16 +28,18 @@ import { ExamSessionModifyTemplateComponent } from './components/exam-session-mo
     ExamSessionsListComponent,
     ExamSessionModifyTemplateComponent,
     ExamSessionCreatorComponent,
+    ExamSessionDeleteComponent,
     ExamTableComponent,
     CoursesListComponent,
     CourseCreatorComponent,
-    SuccessDialogComponent,
     CourseComponent,
     CourseEditComponent,
     CourseModifyTemplateComponent,
     StudentsListTemplateComponent,
     CoursesListTemplateComponent,
-    CourseDeleteComponent
+    CourseDeleteComponent,
+    SuccessDialogComponent,
+    ExamSessionEditComponent
   ],
   imports: [
     CommonModule,

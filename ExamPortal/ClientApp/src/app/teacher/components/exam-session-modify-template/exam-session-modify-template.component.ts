@@ -6,10 +6,7 @@ import { Router } from '@angular/router';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
 import { CourseModel } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
-
-export interface DialogData {
-  addNewCourse: boolean;
-}
+import { SuccessDialogComponent } from '../success-dialog-template/success-dialog-template.component';
 
 @Component({
   selector: 'app-exam-session-modify-template',
@@ -18,29 +15,29 @@ export interface DialogData {
 })
 export class ExamSessionModifyTemplateComponent implements OnInit {
 
-  @ViewChild('picker') picker: any;
-  @ViewChild('picker2') picker2: any;
-
-  @Input() showDialog: boolean = true;
-  @Input() redirect: string;
-  @Input() examSession: ExamSessionModel = {
-    sessionId: 0,
-    name: '',
-    startDate: null,
-    endDate: null,
-    courseId: 0
-  };
-  @Output("onSave") onSavee: EventEmitter<{examSession: ExamSessionModel; file: File}> = new EventEmitter<{examSession: ExamSessionModel; file: File}>();
-
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  @ViewChild('stepper') stepper: MatStepper;
 
   courses: CourseModel[];
   displayedColumns: string[] = ['index', 'name', 'users', 'creationDate'];
 
   fileName = '';
-  file:File;
+  file:File = null;
+
+  @ViewChild('picker') picker: any;
+  @ViewChild('picker2') picker2: any;
+  @ViewChild('stepper') stepper: MatStepper;
+
+  @Input("showDialog") showDialog: boolean = true;
+  @Input("redirect") redirect: string;
+  @Input("examSession") examSession: ExamSessionModel = {
+    sessionId: 0,
+    name: '',
+    startDate: null,
+    endDate: null,
+    courseId: null
+  };
+  @Output("onSave") onSavee: EventEmitter<{examSession: ExamSessionModel; file: File}> = new EventEmitter<{examSession: ExamSessionModel; file: File}>();
   
   constructor(
     private formBuilder: FormBuilder,
@@ -57,7 +54,9 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
       file: ['', Validators.required]
     });
 
-    this.secondFormGroup = this.formBuilder.group({});
+    this.secondFormGroup = this.formBuilder.group({
+      courseSelect: [this.examSession.courseId ? this.examSession.courseId : '', Validators.required]
+    });
 
     this.courseService.getListOfCourses().subscribe(result => {
       this.courses = result; 
@@ -72,6 +71,9 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
     {
       const dialogRef = this.dialog.open(SuccessDialogComponent, {
         width: '250px',
+        data: { 
+          componentName: "egzamin"
+        }
       });
   
       dialogRef.afterClosed().subscribe(result => {
@@ -87,8 +89,9 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
 
   onSelectedCourseChange(course: CourseModel)
   {
+    this.secondFormGroup.patchValue({courseSelect: course ? course.name : ""})
     this.examSession.course = course;
-    this.examSession.courseId = course.courseId;
+    this.examSession.courseId = course ? course.courseId : null;
   }
 
   onFileSelected(event)
@@ -100,12 +103,4 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
     }
   }
 
-}
-
-@Component({
-  selector: 'success-dialog',
-  templateUrl: 'success-dialog.component.html',
-})
-export class SuccessDialogComponent {
-  constructor() {}
 }

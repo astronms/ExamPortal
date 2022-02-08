@@ -10,15 +10,29 @@
         <mat-progress-bar mode="indeterminate" *ngIf="!course"></mat-progress-bar>
         <mat-tab-group *ngIf="course">
             <mat-tab label="Ogólne"> 
-                <p>Nazwa: {{ course.name }}</p>
+                <!-- <p>Nazwa: {{ course.name }}</p>
                 <p>Data utworzenia: {{ course.creationDate | date: 'dd/MM/yyyy' }}</p>
-                <p>Przypisanych studentów: {{ course.users ? course.users.length : "N/A" }}</p>
+                <p>Przypisanych studentów: {{ course.users ? course.users.length : "N/A" }}</p> -->
+                <div class="container top-buffer" *ngIf="course">
+                    <div class="row">
+                        <div class="col-3"><strong>Nazwa:</strong></div>
+                        <div class="col">{{ course.name }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"><strong>Data utworzenia:</strong></div>
+                        <div class="col">{{ course.creationDate | date: 'dd/MM/yyyy' }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"><strong>Przypisanych studentów:</strong></div>
+                        <div class="col">{{ course.users ? course.users.length : "N/A" }}</div>
+                    </div>
+                </div>
             </mat-tab>
             <mat-tab label="Przypisani studenci"> 
                 <p *ngIf="!course.users || course.users.length == 0">Brak przypisanych studentów.</p>
                 <app-students-list-template *ngIf="course.users.length > 0" [users]="course.users"></app-students-list-template>
             </mat-tab>
         </mat-tab-group>
-        <button class="btn btn-sm" [routerLink]="['/teacher/courses-list']">Wróć</button>
+        <button class="btn btn-sm top-buffer" [routerLink]="['/teacher/courses-list']">Wróć</button>
     </div> <!-- end of container -->
 </section>

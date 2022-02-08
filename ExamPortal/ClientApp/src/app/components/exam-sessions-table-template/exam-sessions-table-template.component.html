@@ -14,13 +14,13 @@
     <!-- Start Date Column -->
     <ng-container matColumnDef="startDate">
         <th mat-header-cell *matHeaderCellDef>Data rozpoczęcia</th>
-        <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'dd/MM/yyyy h:mm'}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'dd/MM/yyyy HH:mm'}} </td>
     </ng-container>
 
     <!-- End Date Column -->
     <ng-container matColumnDef="endDate">
         <th mat-header-cell *matHeaderCellDef>Data zakończenia</th>
-        <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'dd/MM/yyyy h:mm'}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'dd/MM/yyyy HH:mm'}} </td>
     </ng-container>
 
     <!-- Actions Column -->
