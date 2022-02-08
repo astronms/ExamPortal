@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using ExamPortal.Data;
+using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.Models;
@@ -24,6 +25,7 @@ namespace ExamPortal.Configuration
                 .ForMember(dto => dto.LastName, opt => opt.MapFrom(x => x.LastName))
                 .ForMember(dto => dto.StudentInfo,opt=>opt.MapFrom(x=>x.StudentInfo));
             CreateMap<User, RegisterUserDTO>().ReverseMap();
+            CreateMap<User, RegisterAdminDTO>().ReverseMap();
             CreateMap<User, UserForCoursesDTO>().ReverseMap();
             //Course
             CreateMap<Course, CourseDTO>()
@@ -52,8 +54,6 @@ namespace ExamPortal.Configuration
             CreateMap<ExamTask, TaskDTO>().ReverseMap();
             CreateMap<Question, QuestionDTO>().ReverseMap();
             CreateMap<Value, ValueDTO>().ReverseMap();
-
-
         }
     }
 }

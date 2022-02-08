@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using ExamPortal.Data.ActivetedExams;
 using Microsoft.AspNetCore.Identity;
 
 namespace ExamPortal.Data.Users
@@ -13,6 +14,7 @@ namespace ExamPortal.Data.Users
         public string LastName { get; set; }
         public IList<CourseUser> CourseUsers { get; set; }
         public virtual StudentInfo StudentInfo { get; set; }
+        public virtual IList<ActivatedExam> ActivatedExams { get; set; }
 
     }
 }

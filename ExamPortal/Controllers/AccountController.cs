@@ -31,6 +31,7 @@ namespace ExamPortal.Controllers
             _mapper = mapper;
             _authManager = authManager;
         }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("register")]
@@ -61,6 +62,45 @@ namespace ExamPortal.Controllers
 
                 await _userManager.AddToRoleAsync(user, "User");
                
+                return Accepted();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(Register)}");
+                return Problem($"Something Went Wrong in the {nameof(Register)}", statusCode: 500);
+            }
+        }
+
+        //[Authorize(Roles = "Administrator")]
+        [HttpPost]
+        [Route("/api/Auth/Admin/AdminRegister")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterAdminDTO userDTO)
+        {
+            _logger.LogInformation($"Admin registration Attempt for {userDTO.Email} ");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var user = _mapper.Map<User>(userDTO);
+                user.UserName = userDTO.Email;
+                var result = await _userManager.CreateAsync(user, userDTO.Password);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    return BadRequest(ModelState);
+                }
+
+                await _userManager.AddToRoleAsync(user, "Administrator");
+
                 return Accepted();
             }
             catch (Exception ex)

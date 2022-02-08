@@ -19,6 +19,31 @@ namespace ExamPortal.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ExamPortal.Data.ActivetedExams.ActivatedExam", b =>
+                {
+                    b.Property<Guid>("ActivatedExamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ActivatedExamId");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ActivetedExams");
+                });
+
             modelBuilder.Entity("ExamPortal.Data.Course", b =>
                 {
                     b.Property<Guid>("CourseId")
@@ -173,93 +198,6 @@ namespace ExamPortal.Migrations
                     b.ToTable("Values");
                 });
 
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.Answer", b =>
-                {
-                    b.Property<Guid>("AnswerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TaskToCheckId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AnswerId");
-
-                    b.HasIndex("TaskToCheckId");
-
-                    b.ToTable("Answers");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.ExamToCheck", b =>
-                {
-                    b.Property<Guid>("ExamToCheckId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SessionToCheckId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ExamToCheckId");
-
-                    b.HasIndex("SessionToCheckId");
-
-                    b.ToTable("ExamsToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.SessionToCheck", b =>
-                {
-                    b.Property<Guid>("SessionToCheckId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SessionToCheckId");
-
-                    b.ToTable("SessionsToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.TaskToCheck", b =>
-                {
-                    b.Property<Guid>("TaskToCheckId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ExamToCheckId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SortId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TaskToCheckId");
-
-                    b.HasIndex("ExamToCheckId");
-
-                    b.ToTable("TasksToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.ValueToCheck", b =>
-                {
-                    b.Property<Guid>("ValueToCheckId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AnswerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SortId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ValueToCheckId");
-
-                    b.HasIndex("AnswerId");
-
-                    b.ToTable("ValuesToCheck");
-                });
-
             modelBuilder.Entity("ExamPortal.Data.Users.StudentInfo", b =>
                 {
                     b.Property<Guid>("StudentInfoId")
@@ -381,15 +319,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b17b8121-39fb-4cc6-99d5-369d0640cd55",
-                            ConcurrencyStamp = "4ea7630e-9d66-4ae0-aa28-d79404a47da3",
+                            Id = "652a9b3f-8203-437d-9e09-6f8e21155749",
+                            ConcurrencyStamp = "9a6ac6bf-4619-4354-873b-ec2b2fe9586b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "516e1f44-17df-402b-adbd-7140beefe9f3",
-                            ConcurrencyStamp = "d65e2d5a-a2e5-42a4-970d-bee340033d2d",
+                            Id = "e58f0988-7080-40be-8000-0711ba15e50d",
+                            ConcurrencyStamp = "d5692102-e121-42ae-8a5e-6d2ba9843a1c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -499,6 +437,25 @@ namespace ExamPortal.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ExamPortal.Data.ActivetedExams.ActivatedExam", b =>
+                {
+                    b.HasOne("ExamPortal.Data.ExamData.Exam", "Exam")
+                        .WithMany("ActivatedExams")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ExamPortal.Data.Users.User", "User")
+                        .WithMany("ActivatedExams")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ExamPortal.Data.CourseUser", b =>
                 {
                     b.HasOne("ExamPortal.Data.Course", "Course")
@@ -569,50 +526,6 @@ namespace ExamPortal.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.Answer", b =>
-                {
-                    b.HasOne("ExamPortal.Data.ExamToSendModel.TaskToCheck", "TaskToCheck")
-                        .WithMany("Answers")
-                        .HasForeignKey("TaskToCheckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TaskToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.ExamToCheck", b =>
-                {
-                    b.HasOne("ExamPortal.Data.ExamToSendModel.SessionToCheck", "SessionToCheck")
-                        .WithMany("ExamsToCheck")
-                        .HasForeignKey("SessionToCheckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SessionToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.TaskToCheck", b =>
-                {
-                    b.HasOne("ExamPortal.Data.ExamToSendModel.ExamToCheck", "ExamToCheck")
-                        .WithMany("TaskToCheck")
-                        .HasForeignKey("ExamToCheckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ExamToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.ValueToCheck", b =>
-                {
-                    b.HasOne("ExamPortal.Data.ExamToSendModel.Answer", "Answer")
-                        .WithMany("ValueToCheck")
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Answer");
-                });
-
             modelBuilder.Entity("ExamPortal.Data.Users.StudentInfo", b =>
                 {
                     b.HasOne("ExamPortal.Data.Users.User", null)
@@ -680,6 +593,8 @@ namespace ExamPortal.Migrations
 
             modelBuilder.Entity("ExamPortal.Data.ExamData.Exam", b =>
                 {
+                    b.Navigation("ActivatedExams");
+
                     b.Navigation("Task");
                 });
 
@@ -698,28 +613,10 @@ namespace ExamPortal.Migrations
                     b.Navigation("Exams");
                 });
 
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.Answer", b =>
-                {
-                    b.Navigation("ValueToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.ExamToCheck", b =>
-                {
-                    b.Navigation("TaskToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.SessionToCheck", b =>
-                {
-                    b.Navigation("ExamsToCheck");
-                });
-
-            modelBuilder.Entity("ExamPortal.Data.ExamToSendModel.TaskToCheck", b =>
-                {
-                    b.Navigation("Answers");
-                });
-
             modelBuilder.Entity("ExamPortal.Data.Users.User", b =>
                 {
+                    b.Navigation("ActivatedExams");
+
                     b.Navigation("CourseUsers");
 
                     b.Navigation("StudentInfo");

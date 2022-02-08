@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ExamPortal.Data;
+using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using Task = System.Threading.Tasks.Task;
@@ -16,6 +17,7 @@ namespace ExamPortal.IRepository
         IGenericRepository<Course> Courses { get; }
         IGenericRepository<User> Users { get; }
         IGenericRepository<CourseUser> CourseUsers { get; }
+        IGenericRepository<ActivatedExam> ActivatedExams { get; }
 
         Task Save();
     }
