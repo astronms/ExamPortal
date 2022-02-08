@@ -10,9 +10,9 @@ namespace ExamPortal.Data
         [Key]
         public Guid CourseUserId { get; set; }
         public Guid CourseId { get; set; }
-        public Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
         public string UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

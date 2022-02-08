@@ -18,5 +18,6 @@ namespace ExamPortal.Data.ExamData
 
         [ForeignKey(nameof(Course))]
         public Guid CourseId { get; set; }
+        public virtual Course Course { get; set; }
     }
 }
