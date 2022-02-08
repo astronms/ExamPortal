@@ -43,6 +43,7 @@ namespace ExamPortal.Configuration
             CreateMap<Value, ValueXml>().ReverseMap();
             //Sessions
             CreateMap<Session, SessionDTO>().ReverseMap();
+            CreateMap<Session, StudentSessionDTO>().ReverseMap();
             CreateMap<Session, CreateSessionDTO>().ReverseMap();
             CreateMap<SessionDTO, CreateSessionDTO>().ReverseMap();
             //Exam
