@@ -32,6 +32,14 @@ namespace ExamPortal.Models
         public DateTime EndDate { get; set; }
         public Guid CourseId { get; set;}
     }
+    public class UpdateSessionDTO
+    {
+        public IFormFile File { get; set; }
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public Guid CourseId { get; set; }
+    }
 
     public class StudentSessionDTO
     {

@@ -64,7 +64,7 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var sessions = await _unitOfWork.Sessions.GetAll();
+                var sessions = await _unitOfWork.Sessions.GetAll(include: x=>x.Include(x=>x.Exams));
                 var results = _mapper.Map<IList<SessionDTO>>(sessions);
                 return Ok(results);
             }
@@ -112,14 +112,14 @@ namespace ExamPortal.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteSession(Guid guid)
         {
-            if (guid != Guid.Empty)
+            if (guid == Guid.Empty)
             {
                 _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteSession)}");
                 return BadRequest();
             }
 
-            var country = await _unitOfWork.Sessions.Get(q => q.SessionId == guid);
-            if (country == null)
+            var session = await _unitOfWork.Sessions.Get(q => q.SessionId == guid);
+            if (session == null)
             {
                 _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteSession)}");
                 return BadRequest("Submitted data is invalid");
@@ -149,11 +149,13 @@ namespace ExamPortal.Controllers
                 if (!CheckIfXmlFile(createSessionDTO.File)) return BadRequest(new {message = "Invalid file extension"});
                 var xmlString = await ReadAsStringAsync(createSessionDTO.File);
                 if (!_xmlValidator.IsValid(xmlString)) return BadRequest(new {message = "Invalid XML"});
-                var session = await GenerateSessionFromXml(createSessionDTO, xmlString);
+                var session = _mapper.Map<Session>(createSessionDTO);
+                session.SessionId = Guid.NewGuid();
 
-                await _unitOfWork.Sessions.Insert(session);
+                var sessionWithExam = await GenerateSessionFromXml(session, xmlString);
+                await _unitOfWork.Sessions.Insert(sessionWithExam);
                 await _unitOfWork.Save();
-                return Ok(session.SessionId);
+                return Ok(sessionWithExam.SessionId);
             }
             catch (Exception ex)
             {
@@ -162,12 +164,60 @@ namespace ExamPortal.Controllers
             }
         }
 
-        private async Task<Session> GenerateSessionFromXml(CreateSessionDTO createSessionDTO, string xmlString)
+        [Authorize(Roles = "Administrator")]
+        [HttpPut("{sessionId:Guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateSession([FromRoute] Guid sessionId, [FromForm] UpdateSessionDTO sessionDTO)
         {
-            var session = _mapper.Map<Session>(createSessionDTO);
-            var course = await _unitOfWork.Courses.Get(x => x.CourseId == createSessionDTO.CourseId);
+            try
+            {
+                if (!ModelState.IsValid || sessionId == Guid.Empty)
+                {
+                    _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateSession)}");
+                    return BadRequest(ModelState);
+                }
+
+                var session = await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId, i => i
+                    .Include(x=>x.Exams)
+                );
+                if (session == null)
+                {
+                    _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateSession)}");
+                    return BadRequest("Submitted data is invalid");
+                }
+
+                _mapper.Map(sessionDTO, session);
+                if (sessionDTO.File != null)
+                {
+                    var exams = await _unitOfWork.Exams.GetAll(x => x.SessionId == sessionId);
+                    foreach (var exam in exams)
+                    {
+                       await _unitOfWork.Exams.Delete(exam.ExamId);
+                       await _unitOfWork.Save();
+                    }
+                    if (!CheckIfXmlFile(sessionDTO.File)) return BadRequest(new { message = "Invalid file extension" });
+                    var xmlString = await ReadAsStringAsync(sessionDTO.File);
+                    if (!_xmlValidator.IsValid(xmlString)) return BadRequest(new { message = "Invalid XML" });
+                    session = await GenerateSessionFromXml(session, xmlString);
+                    await _unitOfWork.Exams.InsertRange(session.Exams);
+                }
+                _unitOfWork.Sessions.Update(session);
+                await _unitOfWork.Save();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(UpdateSession)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+        private async Task<Session> GenerateSessionFromXml(Session session, string xmlString)
+        {
+            var course = await _unitOfWork.Courses.Get(x => x.CourseId == session.CourseId);
             session.CourseId = course.CourseId;
-            session.SessionId = Guid.NewGuid();
             session.Exams = new List<Exam>();
             DeserializeSessionFromXml(xmlString, session);
             if (course.Sessions == null) course.Sessions = new List<Session>();
@@ -185,20 +235,20 @@ namespace ExamPortal.Controllers
                 {
                     var newExam = new Exam
                     {
+                        ExamId = Guid.NewGuid(),
                         SessionId = session.SessionId,
                         Session = session,
                         ExternalId = Guid.Parse(exam.Id),
-                        ExamId = Guid.NewGuid(),
                         Task = new List<ExamTask>()
                     };
                     foreach (var task in exam.Task)
                     {
                         var newTask = new ExamTask
                         {
+                            TaskId = Guid.NewGuid(),
                             Exam = newExam,
                             Image = task.Image,
                             SortId = task.Id,
-                            TaskId = Guid.NewGuid(),
                             Time = task.Time,
                             Type = task.Type,
                             Questions = new List<Question>()
@@ -217,12 +267,12 @@ namespace ExamPortal.Controllers
                         {
                             var newValue = new Value
                             {
+                                ValueId = Guid.NewGuid(),
                                 Question = newQuestion,
                                 QuestionId = newQuestion.QuestionId,
                                 SortId = i,
                                 Regex = value.Regex,
-                                Text = value.Text,
-                                ValueId = Guid.NewGuid()
+                                Text = value.Text
                             };
                             i++;
                             if (value.Regex == null) newValue.Regex = string.Empty;
