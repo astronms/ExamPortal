@@ -1,14 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 import { CourseModel } from '../../models/course.model';
-
-export interface DialogData {
-  addNewCourse: boolean;
-}
+import { SuccessDialogComponent } from '../success-dialog-template/success-dialog-template.component';
 
 @Component({
   selector: 'app-course-modify-template',
@@ -54,6 +51,9 @@ export class CourseModifyTemplateComponent implements OnInit {
     {
       const dialogRef = this.dialog.open(SuccessDialogComponent, {
         width: '250px',
+        data: { 
+          componentName: "kurs"
+        }
       });
   
       dialogRef.afterClosed().subscribe(result => {
@@ -72,12 +72,4 @@ export class CourseModifyTemplateComponent implements OnInit {
     this.course.users = users;
   }
 
-}
-
-@Component({
-  selector: 'success-dialog',
-  templateUrl: 'success-dialog.component.html',
-})
-export class SuccessDialogComponent {
-  constructor() {}
 }

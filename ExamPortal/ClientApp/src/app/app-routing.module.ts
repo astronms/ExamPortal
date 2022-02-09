@@ -21,6 +21,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { CourseComponent } from './teacher/components/course/course.component';
 import { CourseEditComponent } from './teacher/components/course-edit/course-edit.component';
 import { CourseDeleteComponent } from './teacher/components/course-delete/course-delete.component';
+import { ExamSessionDeleteComponent } from './teacher/components/exam-session-delete/exam-session-delete.component';
+import { ExamSessionEditComponent } from './teacher/components/exam-session-edit/exam-session-edit.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -31,8 +33,10 @@ const appRoutes: Routes = [
   { path: 'student/exams-list', component: ExamsComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
   { path: 'student/exam', component: ExamComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
   { path: 'teacher/exams-list', component: ExamSessionsListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
-  { path: 'teacher/view-exam/:id', component: ExamSessionComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/exam-creator', component: ExamSessionCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/view-exam/:id', component: ExamSessionComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/edit-exam/:id', component: ExamSessionEditComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/delete-exam/:id', component: ExamSessionDeleteComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/courses-list', component: CoursesListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/course-creator', component: CourseCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/view-course/:id', component: CourseComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},

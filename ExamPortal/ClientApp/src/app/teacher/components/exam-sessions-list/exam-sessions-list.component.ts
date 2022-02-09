@@ -14,15 +14,14 @@ export class ExamSessionsListComponent implements OnInit {
   public displayedColumns: string[] = ['index', 'name', 'startDate', 'endDate', 'actions'];
   public teacherActions: TableActionsModel[] = [
     {actionType: "description", tooltip: "Zobacz", url: "/teacher/view-exam" },
-    {actionType: "edit", tooltip: "Edytuj", url: "\\" },
-    {actionType: "delete", tooltip: "Kasuj", url: "\\" }
+    {actionType: "edit", tooltip: "Edytuj", url: "/teacher/edit-exam" },
+    {actionType: "delete", tooltip: "Kasuj", url: "/teacher/delete-exam" }
   ];
 
 
   constructor(private examSessionService: ExamSessionService) { }
 
   ngOnInit() {
-    
     this.examSessionService.getListOfExamSessions().subscribe(result => {
       this.examSessions = result;
     });

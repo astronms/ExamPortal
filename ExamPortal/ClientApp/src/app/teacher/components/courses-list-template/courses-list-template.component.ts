@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
@@ -15,8 +15,9 @@ export class CoursesListTemplateComponent implements OnInit {
   @Input("columnsToDisplay") columnsToDisplay : string[];
   @Input("data") set data(value) {
     this.dataSource = new MatTableDataSource<any>(value);
-    if(this.dataSource)
+    if(this.dataSource){
       this.dataSource.paginator = this.paginator;
+    } 
   };
   @Input("actions") actions: TableActionsModel[];
   @Input("isSelectable") isSelectable: boolean = false;
@@ -25,14 +26,16 @@ export class CoursesListTemplateComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(
+    private changeDetectorRefs: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
   }
 
   courseClicked(course)
   {
-    if(this.selectedCourse == course)
+    if(this.selectedCourse && this.selectedCourse.courseId == course.courseId)
       this.selectedCourse = null;
     else
       this.selectedCourse = course;

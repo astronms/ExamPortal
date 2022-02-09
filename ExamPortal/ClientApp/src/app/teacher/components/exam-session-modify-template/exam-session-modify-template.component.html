@@ -10,7 +10,8 @@
                 <input matInput [ngxMatDatetimePicker]="picker" 
                     placeholder="Wybierz datę startu" 
                     formControlName="startDate"
-                    [(ngModel)]='examSession.startDate'>
+                    [(ngModel)]='examSession.startDate'
+                    [max]="examSession.endDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
             </mat-form-field>
@@ -19,13 +20,15 @@
                 <input matInput [ngxMatDatetimePicker]="picker2" 
                     placeholder="Wybierz datę zakończenia" 
                     formControlName="endDate"
-                    [(ngModel)]='examSession.endDate'>
+                    [(ngModel)]='examSession.endDate'
+                    [min]="examSession.startDate">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <ngx-mat-datetime-picker #picker2></ngx-mat-datetime-picker>
             </mat-form-field>
             <br />
             <input type="file" class="file-input"
                 formControlName="file"
+                accept=".xml,.XML"
                 (change)="onFileSelected($event)" #fileUpload>
             
             <div class="file-upload">
@@ -36,12 +39,12 @@
                 (click)="fileUpload.click()">
                     <mat-icon>attach_file</mat-icon>
                 </button>
-                <mat-error *ngIf="firstFormGroup.get('file').hasError('required')">Proszę wybrać plik XML z egzaminami.</mat-error>
+                <mat-error *ngIf="firstFormGroup.get('file').hasError('required') && firstFormGroup.get('file').touched">Proszę wybrać plik XML z egzaminami.</mat-error>
             </div>
  
             <div>
                 <button class="btn btn-sm" [routerLink]="['/teacher/exams-list']">Wróć</button>
-                <button class="btn btn-sm" matStepperNext>Dalej</button>
+                <button class="btn btn-sm" matStepperNext (click)="firstFormGroup.get('file').markAsTouched()">Dalej</button>
             </div>
         </form>
     </mat-step>
@@ -50,11 +53,13 @@
             <app-courses-list-template 
                 [columnsToDisplay]="displayedColumns" 
                 [data]="courses" 
-                [isSelectable]="true" 
+                [isSelectable]="true"
+                [selectedCourse]="examSession.course"
                 (selectedCourseChange)="onSelectedCourseChange($event)"></app-courses-list-template>
+                <mat-error *ngIf="secondFormGroup.get('courseSelect').hasError('required') && secondFormGroup.get('courseSelect').touched">Proszę wybrać kurs.</mat-error>
             <div>
                 <button class="btn btn-sm" matStepperPrevious>Wróć</button>
-                <button class="btn btn-sm" matStepperNext>Dalej</button>
+                <button class="btn btn-sm" matStepperNext (click)="secondFormGroup.get('courseSelect').markAsTouched()">Dalej</button>
             </div>
         </form>
     </mat-step>

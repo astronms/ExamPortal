@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ExamSessionModel } from 'src/app/models/exam-session.model';
+import { ExamSessionService } from '../../services/exam-session.service';
 
 @Component({
   selector: 'app-exam-session',
@@ -8,10 +10,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ExamSessionComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private examSessionService: ExamSessionService
+  ) { }
+
+  examSession: ExamSessionModel;
 
   ngOnInit() {
-    console.log(this.route.snapshot.paramMap.get('id'));
+    var guid = this.route.snapshot.paramMap.get('id');
+    this.examSessionService.getExamSession(guid).subscribe(result => {
+      this.examSession = result
+    });
   }
 
 }

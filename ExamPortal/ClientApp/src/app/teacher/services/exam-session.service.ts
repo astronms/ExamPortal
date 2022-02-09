@@ -31,18 +31,54 @@ export class ExamSessionService {
     );
   }
 
+  getExamSession(guid: string): Observable<ExamSessionModel>
+  {
+    return this.http.get<ExamSessionModel>(this.baseUrl + 'api/auth/Session/' + guid)
+    .pipe(
+      map(session => {
+        this.http.get<CourseModel>(this.baseUrl + 'api/auth/Course/' + session.courseId).subscribe(course => {
+          session.course = course;
+        });
+        return session;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   addExamSession(exam: ExamSessionModel, file: File) : Observable<any>
   {
     const formData = new FormData();
     formData.append("File", file);
     formData.append("Name", exam.name);
-    formData.append("StartDate", exam.startDate.toDateString());
-    formData.append("EndDate", exam.endDate.toDateString());
+    formData.append("StartDate", exam.startDate.toLocaleString());
+    formData.append("EndDate", exam.endDate.toLocaleString());
     formData.append("CourseId", exam.courseId.toString());
     return this.http.post(this.baseUrl + 'api/auth/Session', formData)
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  modifyExamSession(exam: ExamSessionModel, file: File) : Observable<any>
+  {
+    const formData = new FormData();
+    formData.append("File", file);
+    formData.append("Name", exam.name);
+    formData.append("StartDate", exam.startDate.toLocaleString());
+    formData.append("EndDate", exam.endDate.toLocaleString());
+    formData.append("CourseId", exam.courseId.toString());
+    return this.http.put(this.baseUrl + 'api/auth/Session/' + exam.sessionId, formData)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteExamSession(exam: ExamSessionModel) : void 
+  {
+    this.http.delete(this.baseUrl + 'api/auth/Session/' + exam.sessionId).subscribe(
+      res => {},
+      err => this.handleError(err)
+    )
   }
 
   private handleError(error: HttpErrorResponse) {

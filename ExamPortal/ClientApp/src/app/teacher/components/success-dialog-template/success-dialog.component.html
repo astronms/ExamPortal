@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>{{ componentName | titlecase }} został dodany.</h1>
+<p>Czy chcesz dodać kolejny {{ componentName }}?</p>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Nie</button>
+  <button mat-button (click)="confirm()" cdkFocusInitial>Tak</button>
+</div>
