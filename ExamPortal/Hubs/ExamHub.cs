@@ -40,10 +40,10 @@ namespace ExamPortal.Hubs
             await Clients.Caller.SendAsync("Question", _exam.Task.First().Title);
         }
 
-        //public async Task SendAnswer(Object answer)
-        //{
+        public async Task SendAnswer(Object answer)
+        {
 
-        //}
+        }
 
         public override async Task OnConnectedAsync()
         {

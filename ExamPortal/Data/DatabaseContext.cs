@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using ExamPortal.Configuration.Entities;
 using ExamPortal.Data.ActivetedExams;
+using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -28,21 +29,19 @@ namespace ExamPortal.Data
                 .HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<ActivatedExam>().HasOne(x => x.User).WithMany(x => x.ActivatedExams)
                 .HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ActivatedExam>().HasOne(x => x.ExamAnswers).WithOne(x => x.ActivatedExams).OnDelete(DeleteBehavior.NoAction); ;
         }
 
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseUser> CourseUsers { get; set; }
-        public DbSet<StudentInfo> StudentsInfos { get; set; }
 
-        public DbSet<ActivatedExam> ActivetedExams { get; set; }
+        public DbSet<ActivatedExam> ActivatedExams { get; set; }
 
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Exam> Exams { get; set; }
-        public DbSet<ExamTask> Tasks { get; set; }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<Value> Values { get; set; }
 
-
+        public DbSet<SessionAnswers> SessionAnswers { get; set; }
+        public DbSet<ExamAnswers> ExamAnswers { get; set; }
     }
 }
