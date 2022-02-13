@@ -1,21 +1,17 @@
-using System;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using ExamPortal.Configuration;
 using ExamPortal.Data;
+using ExamPortal.Hubs;
 using ExamPortal.IRepository;
 using ExamPortal.Repository;
 using ExamPortal.Services;
 using ExamPortal.XML.Exam;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
@@ -41,7 +37,7 @@ namespace ExamPortal
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
-
+            services.AddSignalR().AddJsonProtocol();
             services.AddCors(options =>
             {
                 options.AddPolicy("EnableCORS", builder =>
@@ -115,19 +111,17 @@ namespace ExamPortal
             {
                 app.UseSpaStaticFiles();
             }
-            
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors("EnableCORS");
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHub<ExamHub>("/examhub");
             });
 
             app.UseSpa(spa =>
