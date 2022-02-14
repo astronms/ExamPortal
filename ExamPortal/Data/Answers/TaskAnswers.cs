@@ -15,7 +15,7 @@ namespace ExamPortal.Data.Answers
 
         [ForeignKey(nameof(ExamAnswers))]
         public Guid ExamAnswersId { get; set; }
-        public ExamAnswers ExamAnswers { get; set; }
+        public virtual ExamAnswers ExamAnswers { get; set; }
 
     }
 }

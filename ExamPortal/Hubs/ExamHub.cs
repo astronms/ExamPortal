@@ -42,7 +42,6 @@ namespace ExamPortal.Hubs
 
         public async Task SendAnswer(Object answer)
         {
-
         }
 
         public override async Task OnConnectedAsync()
