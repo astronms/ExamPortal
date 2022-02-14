@@ -78,7 +78,17 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
   
       dialogRef.afterClosed().subscribe(result => {
         if(result)
-          this.stepper.reset()
+        {
+          this.fileName = '';
+          this.examSession = {
+            sessionId: 0,
+            name: '',
+            startDate: null,
+            endDate: null,
+            courseId: null
+          };
+          this.stepper.reset();
+        }
         else
           this.router.navigate([this.redirect]);
       });

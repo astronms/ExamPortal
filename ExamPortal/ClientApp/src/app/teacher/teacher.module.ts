@@ -9,7 +9,7 @@ import { ExamSessionComponent } from './components/exam-session/exam-session.com
 import { ExamSessionsListComponent } from './components/exam-sessions-list/exam-sessions-list.component';
 import { ExamSessionCreatorComponent } from './components/exam-session-creator/exam-session-creator.component';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
-import { ExamTableComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
+import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { CourseCreatorComponent } from './components/course-creator/course-creator.component';
 import { CourseComponent } from './components/course/course.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
@@ -29,7 +29,6 @@ import { ExamSessionEditComponent } from './components/exam-session-edit/exam-se
     ExamSessionModifyTemplateComponent,
     ExamSessionCreatorComponent,
     ExamSessionDeleteComponent,
-    ExamTableComponent,
     CoursesListComponent,
     CourseCreatorComponent,
     CourseComponent,

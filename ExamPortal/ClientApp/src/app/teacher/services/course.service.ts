@@ -14,7 +14,7 @@ export class CourseService {
   constructor(
     private http: HttpClient, 
     @Inject('BASE_URL')private baseUrl: string
-  ) { }
+  ) {}
 
   getListOfCourses() : Observable<CourseModel[]>
   {

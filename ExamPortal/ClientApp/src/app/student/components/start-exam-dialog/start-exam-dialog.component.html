@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Egzamin</h1>
+<div mat-dialog-content>
+  <p><b>{{examSession.name}}</b></p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Wróć</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Rozpocznij</button>
+</div>
+

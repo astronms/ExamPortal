@@ -1,12 +1,10 @@
 import { QuestionModel } from '../../models/question.model';
 import { GetQuestionReplyModel } from '../../models/get-question-reply.model';
-import { AuthService } from '../../../services/auth.service';
-import { ExamFactoryService } from '../../services/exam-factory.service';
-import { ExamStatusEnum } from '../../enums/exam-status.enum';
 
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { ExamInterface } from '../../interfaces/exam.interface';
+import { Component, Inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { SyncExamService } from '../../services/sync-exam.service';
 
 
 @Component({
@@ -16,21 +14,25 @@ import { ExamInterface } from '../../interfaces/exam.interface';
 })
 export class ExamComponent {
 
-  private examService : ExamInterface;
-
-  public question: QuestionModel;
-  public questionReply: GetQuestionReplyModel;
   public timeLeft: number;
 
   public examFinished: boolean = false;
 
   private interval: any = null;
 
-  constructor(private router: Router, private authService: AuthService, private examFactoryService: ExamFactoryService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private examService: SyncExamService,
+    private http: HttpClient,  
+    @Inject('BASE_URL')private baseUrl: string
+  ) { }
 
   ngOnInit() {
+    var examId = this.route.snapshot.paramMap.get('id');
+    
 
-    try {
+    /*try {
       this.examService = this.examFactoryService.getInstance();
 
       this.examService.examStatusObservable.subscribe(result => {
@@ -48,30 +50,15 @@ export class ExamComponent {
     catch(e)
     {
       console.log("Error in exam component!"); //Redirect to error page.
-    }
+    }*/
+
+
   }
 
   ngOnDestroy() {
     clearInterval(this.interval);
   }
-
-  nextQuestion() : void {
-
-    if(this.interval != null)
-      clearInterval(this.interval);
-      
-    this.examService.getQuestion().subscribe(result => {
-      this.question = result; //TODO: handle error
-      this.timeLeft = this.examService.getLeftTime();
-      this.setViewTimer();
-    }); 
-      
-  }
-
-  sendAnswers() : void
-  {
-    this.examService.sendAnswers() //TODO: send real answers and handle errors 
-  }
+  
 
   private setViewTimer() : void
   {

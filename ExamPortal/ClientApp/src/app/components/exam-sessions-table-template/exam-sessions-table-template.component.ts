@@ -8,7 +8,7 @@ import { TableActionsModel } from 'src/app/models/table-actions.model';
   templateUrl: './exam-sessions-table-template.component.html',
   styleUrls: ['./exam-sessions-table-template.component.css']
 })
-export class ExamTableComponent implements OnInit {
+export class ExamSessionTableTemplateComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
   @Input() columnsToDisplay : string[];
