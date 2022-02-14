@@ -107,6 +107,11 @@ namespace ExamPortal.Controllers
                 var random = new Random();
                 int index = random.Next(session.Exams.Count);
                 Exam userExam = session.Exams.ElementAt(index);
+                //TODO sessionAnswers logic
+                SessionAnswers sessionAnswers = new SessionAnswers()
+                {
+                    SessionAnswersId = Guid.NewGuid()
+                };
                 ActivatedExam activatedExam = new ActivatedExam()
                 {
                     ActivatedExamId = Guid.NewGuid(),
@@ -115,6 +120,10 @@ namespace ExamPortal.Controllers
                     StartTime = DateTime.Now,
                     ExamAnswersId = Guid.NewGuid(),
                     ExamAnswers = new ExamAnswers()
+                    {
+                        SessionAnswers = sessionAnswers,
+                        SessionAnswersId = sessionAnswers.SessionAnswersId
+                    }
                 };
                 await _unitOfWork.ActivatedExams.Insert(activatedExam);
                 await _unitOfWork.Save();
