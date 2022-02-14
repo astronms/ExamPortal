@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using ExamPortal.Data.ActivetedExams;
+using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.Hubs;
@@ -111,7 +112,9 @@ namespace ExamPortal.Controllers
                     ActivatedExamId = Guid.NewGuid(),
                     ExamId = userExam.ExamId,
                     UserId = user.Id,
-                    StartTime = DateTime.Now
+                    StartTime = DateTime.Now,
+                    ExamAnswersId = Guid.NewGuid(),
+                    ExamAnswers = new ExamAnswers()
                 };
                 await _unitOfWork.ActivatedExams.Insert(activatedExam);
                 await _unitOfWork.Save();
