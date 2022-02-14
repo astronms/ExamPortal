@@ -24,8 +24,10 @@ namespace ExamPortal.Data.Answers
 
         [ForeignKey(nameof(SessionAnswers))]
         public Guid SessionAnswersId { get; set; }
-        public SessionAnswers SessionAnswers { get; set; }
+        public virtual SessionAnswers SessionAnswers { get; set; }
 
+        [ForeignKey(nameof(ActivatedExams))]
+        public Guid ActivatedExamsId { get; set;}
         public virtual ActivatedExam ActivatedExams { get; set; }
 	}
 }

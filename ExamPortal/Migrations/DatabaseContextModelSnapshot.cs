@@ -70,10 +70,6 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.Answers.AnswersValue", b =>
                 {
                     b.Property<Guid>("AnswersValueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AnswersAnswerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AnswersId")
@@ -84,10 +80,6 @@ namespace ExamPortal.Migrations
 
                     b.HasKey("AnswersValueId");
 
-                    b.HasIndex("AnswersAnswerId");
-
-                    b.HasIndex("AnswersId");
-
                     b.ToTable("AnswersValue");
                 });
 
@@ -95,6 +87,9 @@ namespace ExamPortal.Migrations
                 {
                     b.Property<Guid>("ExamAnswersId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ActivatedExamsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExternalId")
@@ -115,11 +110,11 @@ namespace ExamPortal.Migrations
 
             modelBuilder.Entity("ExamPortal.Data.Answers.SessionAnswers", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("SessionAnswersId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("SessionAnswersId");
 
                     b.ToTable("SessionAnswers");
                 });
@@ -425,15 +420,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e676b43-8bf4-4558-9208-d9d1684f41e1",
-                            ConcurrencyStamp = "c40ac5fb-d3e2-464d-8fea-882c58bc5862",
+                            Id = "ca981047-3ebb-4e14-93a2-2e3dd9352ba9",
+                            ConcurrencyStamp = "c62d5de3-6439-4ae1-9dee-b14b729a9955",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "ef4a138c-7eac-464c-9cb2-ece6e2bd619f",
-                            ConcurrencyStamp = "6694b97a-eaa2-424a-a949-be3985802211",
+                            Id = "5c2ab088-63d1-4d81-af26-9f2adeb1a063",
+                            ConcurrencyStamp = "e38a2d1f-44bd-452d-b4b6-8c238c724cb7",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -583,16 +578,10 @@ namespace ExamPortal.Migrations
 
             modelBuilder.Entity("ExamPortal.Data.Answers.AnswersValue", b =>
                 {
-                    b.HasOne("ExamPortal.Data.Answers.Answers", null)
-                        .WithMany("AnsversValue")
-                        .HasForeignKey("AnswersAnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExamPortal.Data.Answers.SessionAnswers", "Answers")
-                        .WithMany()
-                        .HasForeignKey("AnswersId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("ExamPortal.Data.Answers.Answers", "Answers")
+                        .WithMany("AnswersValue")
+                        .HasForeignKey("AnswersValueId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Answers");
@@ -760,7 +749,7 @@ namespace ExamPortal.Migrations
 
             modelBuilder.Entity("ExamPortal.Data.Answers.Answers", b =>
                 {
-                    b.Navigation("AnsversValue");
+                    b.Navigation("AnswersValue");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.Answers.ExamAnswers", b =>

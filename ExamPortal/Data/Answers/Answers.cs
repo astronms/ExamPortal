@@ -13,7 +13,7 @@ namespace ExamPortal.Data.Answers
         public Guid AnswerId { get; set; }
 
         [XmlElement(ElementName = "value")]
-        public List<AnswersValue> AnsversValue { get; set; }
+        public List<AnswersValue> AnswersValue { get; set; }
 
         [ForeignKey(nameof(TaskAnswers))]
         public Guid TaskAnswersId { get; set; }

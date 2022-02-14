@@ -13,7 +13,7 @@ namespace ExamPortal.Data.Answers
         public List<Exam> Exam { get; set; }
         [Key]
         [XmlAttribute(AttributeName = "id")]
-        public Guid Id { get; set; }
+        public Guid SessionAnswersId { get; set; }
 
         // Jeszcze nie wiem czy to potrzeba
         //public virtual Session Session { get; set; }
