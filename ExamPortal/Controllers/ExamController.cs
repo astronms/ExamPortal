@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -15,6 +14,7 @@ using ExamPortal.Models.Exam;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -82,44 +82,39 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                ClaimsPrincipal currentUser = User;
+                var currentUser = User;
                 var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
-                User user = await _userManager.FindByNameAsync(currentUserName);
-                Session session =
-                    await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId, x => x.Include(x => x.Exams));
+                var user = await _userManager.FindByNameAsync(currentUserName);
+                var session =
+                    await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId,
+                        x => x.Include(x => x.Exams).ThenInclude(x => x.Task).ThenInclude(x => x.Questions)
+                            .ThenInclude(x => x.Value));
                 var curseForCurrentUser =
                     await _unitOfWork.Courses.Get(x => x.CourseUsers.Any(x => x.UserId == user.Id));
                 if (session == null || curseForCurrentUser == null)
-                {
                     return StatusCode(StatusCodes.Status404NotFound, "Session not found");
-                }
 
                 if (session.StartDate > DateTime.Now)
-                {
                     return StatusCode(StatusCodes.Status403Forbidden, "Session did not start");
-                }
 
-                if (DateTime.Now > session.EndDate)
-                {
-                    return StatusCode(StatusCodes.Status410Gone, "Session expired");
-                }
+                if (DateTime.Now > session.EndDate) return StatusCode(StatusCodes.Status410Gone, "Session expired");
 
                 var random = new Random();
-                int index = random.Next(session.Exams.Count);
-                Exam userExam = session.Exams.ElementAt(index);
+                var index = random.Next(session.Exams.Count);
+                var userExam = session.Exams.ElementAt(index);
                 //TODO sessionAnswers logic
-                SessionAnswers sessionAnswers = new SessionAnswers()
+                var sessionAnswers = new SessionAnswers
                 {
                     SessionAnswersId = Guid.NewGuid()
                 };
-                ActivatedExam activatedExam = new ActivatedExam()
+                var activatedExam = new ActivatedExam
                 {
                     ActivatedExamId = Guid.NewGuid(),
                     ExamId = userExam.ExamId,
                     UserId = user.Id,
                     StartTime = DateTime.Now,
                     ExamAnswersId = Guid.NewGuid(),
-                    ExamAnswers = new ExamAnswers()
+                    ExamAnswers = new ExamAnswers
                     {
                         SessionAnswers = sessionAnswers,
                         SessionAnswersId = sessionAnswers.SessionAnswersId
@@ -141,12 +136,9 @@ namespace ExamPortal.Controllers
         private static ExamInfo GetExamInfo(Exam userExam)
         {
             var totalTime = 0;
-            foreach (var task in userExam.Task)
-            {
-                totalTime += task.Time;
-            }
+            foreach (var task in userExam.Task) totalTime += task.Time;
 
-            ExamInfo exmaInfo = new ExamInfo()
+            var exmaInfo = new ExamInfo
             {
                 NumberOfTasks = userExam.Task.Count,
                 TotalTime = totalTime

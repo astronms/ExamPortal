@@ -46,7 +46,7 @@ namespace ExamPortal.Hubs
         {
         }
 
-        /*public override async Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()
         {
             var currentUser = Context.User;
             var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
@@ -55,7 +55,7 @@ namespace ExamPortal.Hubs
             _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId);
 
             await base.OnConnectedAsync();
-        }*/
+        }
     }
 
 }
