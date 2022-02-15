@@ -6,12 +6,12 @@
         <div class="col">{{ examData.sessionName }}</div>
     </div>
     <div class="row">
+      <div class="col-4"><strong>Czas:</strong></div>
+      <div class="col">{{ examData.totalTime | minuteSeconds}}</div>
+  </div>
+    <div class="row">
         <div class="col-4"><strong>Liczba pytań:</strong></div>
         <div class="col">{{ examData.numberOfTasks }}</div>
-    </div>
-    <div class="row">
-        <div class="col-4"><strong>Czas:</strong></div>
-        <div class="col">{{ examData.totalTime }}</div>
     </div>
 </div>
 <mat-error *ngIf="!examData" class="mat-dialog-title">Egzamin nie jest dostępny.</mat-error>

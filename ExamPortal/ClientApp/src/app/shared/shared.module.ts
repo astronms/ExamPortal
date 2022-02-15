@@ -17,11 +17,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
+import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
 
 
 @NgModule({
   declarations: [
-    ExamSessionTableTemplateComponent
+    ExamSessionTableTemplateComponent,
+    MinuteSecondsPipe
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-t
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     MatDatepickerModule,
-    ExamSessionTableTemplateComponent
+    ExamSessionTableTemplateComponent,
+    MinuteSecondsPipe
   ]
 })
 export class SharedModule { }
