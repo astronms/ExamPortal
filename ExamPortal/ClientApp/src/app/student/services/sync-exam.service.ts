@@ -22,7 +22,6 @@ export class SyncExamService {
     this.http.get<any>(this.baseUrl + 'api/auth/Exam/' + examId +'/start').subscribe(res => console.log(res)); //StartExam 
 
     this.startConnection();
-    this.getQuestion(); 
     this.setListeners();
   }
 
@@ -41,17 +40,17 @@ export class SyncExamService {
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
+      .then(() => this.getQuestion())
       .catch(this.handleError)
   }
 
   private getQuestion(): void {
-    this.hubConnection.invoke('getQuestion').then((data) => {
-      console.log(data);
-    }); 
+    this.hubConnection.invoke('getQuestion');
   }
 
   private setListeners(): void {
     this.hubConnection.on('question', reply => {
+      console.log("Question reply: " + reply);
       this.questions.next(reply);
     });
   }

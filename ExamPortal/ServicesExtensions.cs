@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
 using ExamPortal.Data;
 using ExamPortal.Data.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +37,20 @@ namespace ExamPortal
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtSettings.GetSection("Issuer").Value,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("Key").Value)),
+                };
+
+                o.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/examhub"))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
                 };
             });
         }

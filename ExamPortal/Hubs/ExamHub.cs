@@ -9,7 +9,6 @@ using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.IRepository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
@@ -17,7 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ExamPortal.Hubs
 {
-    //[Authorize(Roles = "User", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(Roles = "User")]
     public class ExamHub : Hub
     {
         private readonly UserManager<User> _userManager;
@@ -47,16 +46,16 @@ namespace ExamPortal.Hubs
         {
         }
 
-        //public override async Task OnConnectedAsync()
-        //{
-        //    var currentUser = Context.User;
-        //    var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
-        //    User user = await _userManager.FindByNameAsync(currentUserName);
-        //    _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user);
-        //    _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId);
+        /*public override async Task OnConnectedAsync()
+        {
+            var currentUser = Context.User;
+            var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
+            User user = await _userManager.FindByNameAsync(currentUserName);
+            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user);
+            _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId);
 
-        //    await base.OnConnectedAsync();
-        //}
+            await base.OnConnectedAsync();
+        }*/
     }
 
 }
