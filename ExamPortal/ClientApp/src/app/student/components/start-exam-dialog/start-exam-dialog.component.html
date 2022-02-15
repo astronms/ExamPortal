@@ -1,9 +1,23 @@
-<h1 mat-dialog-title>Egzamin</h1>
+<h1 mat-dialog-title class="mat-dialog-title">Egzamin</h1>
 <div mat-dialog-content>
-  <p><b>{{examSession.name}}</b></p>
+  <div class="container top-buffer" *ngIf="examData">
+    <div class="row">
+        <div class="col-4"><strong>Nazwa:</strong></div>
+        <div class="col">{{ examData.sessionName }}</div>
+    </div>
+    <div class="row">
+        <div class="col-4"><strong>Liczba pytań:</strong></div>
+        <div class="col">{{ examData.numberOfTasks }}</div>
+    </div>
+    <div class="row">
+        <div class="col-4"><strong>Czas:</strong></div>
+        <div class="col">{{ examData.totalTime }}</div>
+    </div>
+</div>
+<mat-error *ngIf="!examData" class="mat-dialog-title">Egzamin nie jest dostępny.</mat-error>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Wróć</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Rozpocznij</button>
+  <button mat-button [mat-dialog-close]="true" *ngIf="examData" cdkFocusInitial>Rozpocznij</button>
 </div>
 

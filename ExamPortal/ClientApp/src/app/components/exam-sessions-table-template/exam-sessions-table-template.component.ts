@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
@@ -8,22 +8,27 @@ import { TableActionsModel } from 'src/app/models/table-actions.model';
   templateUrl: './exam-sessions-table-template.component.html',
   styleUrls: ['./exam-sessions-table-template.component.css']
 })
-export class ExamSessionTableTemplateComponent implements OnInit {
+export class ExamSessionTableTemplateComponent {
 
   dataSource: MatTableDataSource<any>;
-  @Input() columnsToDisplay : string[];
-  @Input() set data(value) {
+  @Input("data") set data(value) {
     this.dataSource = new MatTableDataSource<any>(value);
     if(this.dataSource)
       setTimeout(()=>{ this.dataSource.paginator = this.paginator }, 50); //remove this delay once examSessions will be taken from backend
   };
-  @Input() actions: TableActionsModel[];
+  @Input("columnsToDisplay") columnsToDisplay : string[];
+  @Input("actions") actions: TableActionsModel[];
+  @Output("onActionClick") onActionClick = new EventEmitter<{action: string; id: string}>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() { }
 
-  ngOnInit() {
-    
+  actionClick(actionClicked: string, rowId: string) : void
+  {
+    this.onActionClick.emit({
+      action: actionClicked,
+      id: rowId
+    });
   }
 }

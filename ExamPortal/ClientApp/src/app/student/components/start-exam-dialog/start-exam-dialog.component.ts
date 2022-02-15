@@ -1,16 +1,17 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Pipe, PipeTransform } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ExamSessionModel } from 'src/app/models/exam-session.model';
+import { PersonalExamInfoModel } from '../../models/personal-exam-info.model';
 
 @Component({
   selector: 'app-start-exam-dialog',
-  templateUrl: './start-exam-dialog.component.html'
+  templateUrl: './start-exam-dialog.component.html',
+  styleUrls: ['./start-exam-dialog.component.css']
 })
 export class StartExamDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<StartExamDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public examSession: ExamSessionModel,
+    @Inject(MAT_DIALOG_DATA) public examData: PersonalExamInfoModel,
   ) { }
 
   onNoClick(): void {

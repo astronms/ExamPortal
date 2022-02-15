@@ -6,7 +6,12 @@
 
 <section class="services-00 d-flex align-items-center py-5" id="services">
   <div class="container text-light">
-      <app-exam-sessions-table-template [columnsToDisplay]="displayedColumns" [data]="examSessions" [actions]="studentActions"></app-exam-sessions-table-template>
+      <app-exam-sessions-table-template 
+        [columnsToDisplay]="displayedColumns" 
+        [data]="examSessions" 
+        [actions]="studentActions"
+        (onActionClick)="onActionClicked($event)">
+      </app-exam-sessions-table-template>
   </div> <!-- end of container -->
 </section>
   
