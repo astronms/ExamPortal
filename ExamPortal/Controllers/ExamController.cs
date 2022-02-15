@@ -72,7 +72,7 @@ namespace ExamPortal.Controllers
         }
 
         [Authorize(Roles = "User")]
-        [HttpGet("{sessionId:guid}/start")]
+        [HttpGet("{sessionId:guid}/prepare")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
