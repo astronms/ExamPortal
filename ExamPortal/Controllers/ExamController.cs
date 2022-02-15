@@ -72,7 +72,7 @@ namespace ExamPortal.Controllers
         }
 
         [Authorize(Roles = "User")]
-        [HttpGet("{sessionId:guid}/start")]
+        [HttpGet("{sessionId:guid}/prepare")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -127,13 +127,31 @@ namespace ExamPortal.Controllers
                 };
                 await _unitOfWork.ActivatedExams.Insert(activatedExam);
                 await _unitOfWork.Save();
-                return Ok();
+
+                var examInfo = GetExamInfo(userExam);
+                return Ok(examInfo);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Something Went Wrong in the {nameof(StartExam)} with Session id: {sessionId}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
+        }
+
+        private static ExamInfo GetExamInfo(Exam userExam)
+        {
+            var totalTime = 0;
+            foreach (var task in userExam.Task)
+            {
+                totalTime += task.Time;
+            }
+
+            ExamInfo exmaInfo = new ExamInfo()
+            {
+                NumberOfTasks = userExam.Task.Count,
+                TotalTime = totalTime
+            };
+            return exmaInfo;
         }
 
         //[Authorize(Roles = "User")]

@@ -12,7 +12,7 @@ namespace ExamPortal.Data.ExamData
         public int SortId { get; set; }
         public string Title { get; set; }
         public string Type { get; set; }
-        public string Time { get; set; }
+        public int Time { get; set; }
         public string Image { get; set; }
 
         [ForeignKey(nameof(Exam))]

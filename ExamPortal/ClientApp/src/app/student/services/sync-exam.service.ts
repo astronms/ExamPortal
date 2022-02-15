@@ -19,7 +19,7 @@ export class SyncExamService {
   ) { }
 
   startExam(examId: string): void {
-    this.http.get<any>(this.baseUrl + 'api/auth/Exam/' + examId +'/start').subscribe(res => console.log(res)); //StartExam 
+    this.http.get<any>(this.baseUrl + 'api/auth/Exam/' + examId +'/prepare').subscribe(res => console.log(res)); //StartExam
 
     this.startConnection();
     this.setListeners();
