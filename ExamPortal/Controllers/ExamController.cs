@@ -72,13 +72,13 @@ namespace ExamPortal.Controllers
         }
 
         [Authorize(Roles = "User")]
-        [HttpGet("{sessionId:guid}/prepare")]
+        [HttpGet("{sessionId:guid}/start")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status410Gone)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> StartExam([FromRoute] Guid sessionId)
+        public async Task<IActionResult> PrepareExam([FromRoute] Guid sessionId)
         {
             try
             {
@@ -88,7 +88,8 @@ namespace ExamPortal.Controllers
                 var session =
                     await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId,
                         x => x.Include(x => x.Exams).ThenInclude(x => x.Task).ThenInclude(x => x.Questions)
-                            .ThenInclude(x => x.Value));
+                            .ThenInclude(x => x.Value)
+                            .Include(x=>x.Course));
                 var curseForCurrentUser =
                     await _unitOfWork.Courses.Get(x => x.CourseUsers.Any(x => x.UserId == user.Id));
                 if (session == null || curseForCurrentUser == null)
@@ -128,7 +129,7 @@ namespace ExamPortal.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Something Went Wrong in the {nameof(StartExam)} with Session id: {sessionId}");
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(PrepareExam)} with Session id: {sessionId}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
@@ -140,6 +141,8 @@ namespace ExamPortal.Controllers
 
             var exmaInfo = new ExamInfo
             {
+                CourseName = userExam.Session.Course.Name,
+                SessionName = userExam.Session.Name,
                 NumberOfTasks = userExam.Task.Count,
                 TotalTime = totalTime
             };
