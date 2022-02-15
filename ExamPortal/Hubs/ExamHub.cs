@@ -37,9 +37,7 @@ namespace ExamPortal.Hubs
 
         public async Task GetQuestion()
         {
-            //await Clients.Caller.SendAsync("Question", _exam.Task.First().Title);
-            await Clients.Caller.SendAsync("Question", "asdasasdads");
-
+            await Clients.Caller.SendAsync("Question", _exam.Task.First().Title);
         }
 
         public async Task SendAnswer(Object answer)
