@@ -42,8 +42,9 @@ namespace ExamPortal
             {
                 options.AddPolicy("EnableCORS", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:5000/")
                        .AllowAnyHeader()
+                       .AllowCredentials()
                        .AllowAnyMethod();
                 });
             });
@@ -112,10 +113,10 @@ namespace ExamPortal
                 app.UseSpaStaticFiles();
             }
             app.UseRouting();
+            app.UseCors("EnableCORS");
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors("EnableCORS");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

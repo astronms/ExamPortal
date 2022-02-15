@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Subject, throwError } from 'rxjs';
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { HttpTransportType, HubConnection, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +14,46 @@ export class SyncExamService {
 
   constructor(
     private http: HttpClient,  
-    @Inject('BASE_URL')private baseUrl: string
+    @Inject('BASE_URL')private baseUrl: string,
+    private authService: AuthService
   ) { }
 
-  startExam(examId: number) {
-    this.http.get<any>(this.baseUrl + 'api/auth/Exam/' + examId +'/student').subscribe(res => console.log(res));
+  startExam(examId: string): void {
+    this.http.get<any>(this.baseUrl + 'api/auth/Exam/' + examId +'/start').subscribe(res => console.log(res)); //StartExam 
+
+    this.startConnection();
+    this.getQuestion(); 
+    this.setListeners();
   }
 
-  private startConnection() {
-    this.hubConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:5001/examhub')
+  private startConnection(): void  {
+    const options: IHttpConnectionOptions = { //Add JWT Token
+      accessTokenFactory: () => {
+        return this.authService.userValue.token;
+      }
+    };
+
+    this.hubConnection = new HubConnectionBuilder() 
+      .configureLogging(LogLevel.Debug)
+      .withUrl( this.baseUrl + 'examhub', options)
       .build();
 
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
       .catch(this.handleError)
+  }
+
+  private getQuestion(): void {
+    this.hubConnection.invoke('getQuestion').then((data) => {
+      console.log(data);
+    }); 
+  }
+
+  private setListeners(): void {
+    this.hubConnection.on('question', reply => {
+      this.questions.next(reply);
+    });
   }
 
   

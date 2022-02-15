@@ -5,6 +5,7 @@ import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SyncExamService } from '../../services/sync-exam.service';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class ExamComponent {
   ngOnInit() {
     var examId = this.route.snapshot.paramMap.get('id');
     
-
+    this.examService.startExam(examId);
     /*try {
       this.examService = this.examFactoryService.getInstance();
 

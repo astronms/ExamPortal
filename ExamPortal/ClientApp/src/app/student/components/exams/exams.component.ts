@@ -14,7 +14,7 @@ export class ExamsComponent implements OnInit {
   public examSessions: ExamSessionModel[];
   public displayedColumns: string[] = ['index', 'name', 'startDate', 'endDate', 'actions'];
   public studentActions: TableActionsModel[] = [
-    {actionType: "edit", tooltip: "Rozwiąż", click: this.startExam },
+    {actionType: "edit", tooltip: "Rozwiąż", url: "/student/exam/" },
     {actionType: "description", tooltip: "Zobacz", url: "//" }
   ];
 
