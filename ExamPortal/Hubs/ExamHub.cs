@@ -46,8 +46,25 @@ namespace ExamPortal.Hubs
                 x.Include(x => x.Exam)
                     .Include(x => x.ExamAnswers));
             _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId, x => x.Include(x => x.Task).ThenInclude(x => x.Questions).ThenInclude(x => x.Value));
-            var task = _mapper.Map<ExamTask, TaskDTO>(_exam.Task.First());
-            await Clients.Caller.SendAsync("Question", task);
+            bool isFinish = false;
+            var startTime = DateTime.Now;
+            int index = 0;
+            TimeSpan sumTime = TimeSpan.FromSeconds(0);
+            TaskDTO task;
+            do
+            {
+                sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
+                if (DateTime.Now - startTime > sumTime)
+                {
+                    index++;
+                }
+                task = _mapper.Map<ExamTask, TaskDTO>(_exam.Task[index]);
+                await Clients.Caller.SendAsync("Question", task);
+                if (_exam.Task.Count == index - 1)
+                {
+                    isFinish = true;
+                }
+            } while (isFinish);
         }
 
         public async Task SendAnswer(Object answer)
