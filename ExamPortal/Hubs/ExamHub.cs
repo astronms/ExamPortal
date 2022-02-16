@@ -9,9 +9,11 @@ using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.IRepository;
+using ExamPortal.Models.Exam;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ExamPortal.Hubs
@@ -37,23 +39,20 @@ namespace ExamPortal.Hubs
 
         public async Task GetQuestion()
         {
-            await Clients.Caller.SendAsync("Question", _exam.Task.First().Title);
-        }
-
-        public async Task SendAnswer(Object answer)
-        {
-        }
-
-        public override async Task OnConnectedAsync()
-        {
             var currentUser = Context.User;
             var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
             User user = await _userManager.FindByNameAsync(currentUserName);
-            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user);
-            _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId);
-
-            await base.OnConnectedAsync();
+            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user, x =>
+                x.Include(x => x.Exam)
+                    .Include(x => x.ExamAnswers));
+            _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId, x => x.Include(x => x.Task).ThenInclude(x => x.Questions).ThenInclude(x => x.Value));
+            var task = _mapper.Map<ExamTask, TaskDTO>(_exam.Task.First());
+            await Clients.Caller.SendAsync("Question", task);
         }
-    }
+
+        public async Task SendAnswer(Object answer)
+        { 
+        }
+        }
 
 }

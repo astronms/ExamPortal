@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using ExamPortal.Data;
 using ExamPortal.Data.ActivetedExams;
@@ -51,9 +52,13 @@ namespace ExamPortal.Configuration
             CreateMap<SessionDTO, CreateSessionDTO>().ReverseMap();
             //Exam
             CreateMap<Exam, ExamDTO>().ReverseMap();
-            CreateMap<ExamTask, TaskDTO>().ReverseMap();
-            CreateMap<Question, QuestionDTO>().ReverseMap();
             CreateMap<Value, ValueDTO>().ReverseMap();
+            CreateMap<ExamTask, TaskDTO>()
+                .ForMember(dto => dto.Type, opt => opt.MapFrom(x => x.Type))
+                .ForMember(dto => dto.Image, opt => opt.MapFrom(x => x.Image))
+                .ForMember(dto => dto.Time, opt => opt.MapFrom(x => x.Time))
+                .ForMember(dto => dto.Title, opt => opt.MapFrom(x => x.Title))
+                .ForMember(dto => dto.Values, opt => opt.MapFrom(x => x.Questions.Value));
         }
     }
 }
