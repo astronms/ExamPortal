@@ -8,13 +8,21 @@ import { ExamsService } from './services/exams.service';
 import { SyncExamService } from './services/sync-exam.service';
 import { SharedModule } from '../shared/shared.module';
 import { StartExamDialogComponent } from './components/start-exam-dialog/start-exam-dialog.component';
+import { TimerTemplateComponent } from './components/timer-template/timer-template.component';
+import { ClosedQuestionTemplateComponent } from './components/closed-question-template/closed-question-template.component';
+import { OpenQuestionTemplateComponent } from './components/open-question-template/open-question-template.component';
+import { YesNoQuestionTemplateComponent } from './components/yes-no-question-template/yes-no-question-template.component';
 
 
 @NgModule({
   declarations: [
     ExamsComponent,
     ExamComponent,
-    StartExamDialogComponent
+    StartExamDialogComponent,
+    TimerTemplateComponent,
+    ClosedQuestionTemplateComponent,
+    OpenQuestionTemplateComponent,
+    YesNoQuestionTemplateComponent
   ],
   imports: [
     CommonModule,
