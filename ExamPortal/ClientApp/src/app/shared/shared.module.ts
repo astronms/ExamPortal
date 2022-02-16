@@ -19,7 +19,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
 
-
 @NgModule({
   declarations: [
     ExamSessionTableTemplateComponent,

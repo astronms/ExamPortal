@@ -1,11 +1,8 @@
-import { QuestionModel } from '../../models/question.model';
-import { GetQuestionReplyModel } from '../../models/get-question-reply.model';
-
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+
 import { SyncExamService } from '../../services/sync-exam.service';
-import { ThrowStmt } from '@angular/compiler';
+import { QuestionModel } from '../../models/question.model';
 
 
 @Component({
@@ -13,50 +10,34 @@ import { ThrowStmt } from '@angular/compiler';
   templateUrl: './exam.component.html',
   styleUrls: [],
 })
-export class ExamComponent {
+export class ExamComponent implements OnDestroy {
 
-  public timeLeft: number;
-
-  public examFinished: boolean = false;
-
-  private interval: any = null;
+  //private interval: any = null;
+  public actualQuestion: QuestionModel;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private examService: SyncExamService,
-    private http: HttpClient,  
-    @Inject('BASE_URL')private baseUrl: string
+    private examService: SyncExamService
   ) { }
 
   ngOnInit() {
     var examId = this.route.snapshot.paramMap.get('id');
-    
     this.examService.startExam(examId);
-    /*try {
-      this.examService = this.examFactoryService.getInstance();
-
-      this.examService.examStatusObservable.subscribe(result => {
-        if(result == ExamStatusEnum.EndQuestionTime)
-          this.nextQuestion();
-        else if(result == ExamStatusEnum.Finished)
-          this.examFinished = true;
-      });
-
-      if(!this.examService.isPendingExam())
-        this.router.navigate(["/exams"]);
-      else
-        this.nextQuestion();
-    }
-    catch(e)
-    {
-      console.log("Error in exam component!"); //Redirect to error page.
-    }*/
-
-
+    this.setQuestionListener();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+    this.examService.closeConnection();
+  }
+
+  setQuestionListener()
+  {
+    this.examService.questions.subscribe(question => {
+      this.actualQuestion = question;
+    });
+  }
+
+  /*ngOnDestroy() {
     clearInterval(this.interval);
   }
   
@@ -66,6 +47,6 @@ export class ExamComponent {
     this.interval = setInterval(() => {
       this.timeLeft--;
     }, 1000)
-  }
+  }*/
   
 }

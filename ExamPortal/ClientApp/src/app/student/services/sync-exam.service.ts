@@ -5,6 +5,7 @@ import { HttpTransportType, HubConnection, HubConnectionBuilder, IHttpConnection
 import { AuthService } from 'src/app/services/auth.service';
 import { catchError } from 'rxjs/operators';
 import { PersonalExamInfoModel } from '../models/personal-exam-info.model';
+import { QuestionModel } from '../models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { PersonalExamInfoModel } from '../models/personal-exam-info.model';
 export class SyncExamService {
 
   private hubConnection: HubConnection;
-  questions: Subject<any> = new Subject();
+  public questions: Subject<QuestionModel> = new Subject<QuestionModel>();
 
   constructor(
     private http: HttpClient,  
@@ -31,6 +32,11 @@ export class SyncExamService {
   {
     this.startConnection();
     this.setListeners();
+  }
+
+  closeConnection() : void
+  {
+    this.hubConnection.stop();
   }
 
   private startConnection(): void
@@ -61,7 +67,6 @@ export class SyncExamService {
   private setListeners(): void 
   {
     this.hubConnection.on('question', reply => {
-      console.log("Question reply: " + reply);
       this.questions.next(reply);
     });
   }

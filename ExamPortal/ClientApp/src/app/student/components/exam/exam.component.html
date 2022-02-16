@@ -1,17 +1,16 @@
-<!-- <div *ngIf="!examFinished">
-  <h1 *ngIf="question">#{{ question.id }}: {{ question.content }}</h1>
-  <p>
-    Pozostały czas: <label *ngIf="question">{{ timeLeft }}</label>
-  </p>
-  <div *ngIf="question">
-    <div *ngFor="let answer of question.answers">
-      <label>{{ answer.content }}</label>
-      <input type="checkbox" checked data-toggle="toggle">
-    </div>
-    <button type="button" class="btn btn-dark" (click)="sendAnswers()">Zapisz</button>
+<ng-container *ngIf="actualQuestion">
+  <div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Rozwiąż</span></h2>  
+    </div> 
   </div>
-</div>
-<div *ngIf="examFinished">
-  <h1>Egzamin zakończył się!</h1>
-</div> -->
-Here will be exam :D. 
+  
+  <section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+      <timer-template [startTime]="actualQuestion.time"></timer-template>
+      <open-question-template *ngIf="actualQuestion.type == 'Opened'" [question]="actualQuestion"></open-question-template>
+      <closed-question-template *ngIf="actualQuestion.type == 'Closed'" [question]="actualQuestion"></closed-question-template>
+      <yes-no-question-template *ngIf="actualQuestion.type == 'Yes-No'" [question]="actualQuestion"></yes-no-question-template>
+    </div> <!-- end of container -->
+  </section>
+</ng-container>
