@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -46,23 +47,22 @@ namespace ExamPortal.Hubs
                 x.Include(x => x.Exam)
                     .Include(x => x.ExamAnswers));
             _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId, x => x.Include(x => x.Task).ThenInclude(x => x.Questions).ThenInclude(x => x.Value));
-            bool isFinish = false;
+            bool isFinish = true;
             var startTime = DateTime.Now;
             int index = 0;
-            TimeSpan sumTime = TimeSpan.FromSeconds(0);
-            TaskDTO task;
+            TimeSpan sumTime = TimeSpan.FromSeconds(_exam.Task[0].Time);
+            IList<TaskDTO> tasks = _mapper.Map<IList<ExamTask>, IList<TaskDTO>>(_exam.Task);
+            await Clients.Caller.SendAsync("Question", tasks[index]);
             do
             {
-                sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
                 if (DateTime.Now - startTime > sumTime)
                 {
                     index++;
+                    await Clients.Caller.SendAsync("Question", tasks[index]);
                 }
-                task = _mapper.Map<ExamTask, TaskDTO>(_exam.Task[index]);
-                await Clients.Caller.SendAsync("Question", task);
                 if (_exam.Task.Count == index - 1)
                 {
-                    isFinish = true;
+                    isFinish = false;
                 }
             } while (isFinish);
         }
