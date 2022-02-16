@@ -59,7 +59,7 @@ namespace ExamPortal.Hubs
                 {
                     index++;
                     await Clients.Caller.SendAsync("Question", tasks[index]);
-                    sumTime = TimeSpan.FromSeconds(_exam.Task[index].Time);
+                    sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
                 }
                 if (_exam.Task.Count == index - 1)
                 {
