@@ -19,7 +19,7 @@ namespace ExamPortal.Data.ExamData
         public Guid ExamId { get; set; }
         public Exam Exam { get; set; }
 
-        public virtual IList<Question> Questions { get; set; }
+        public virtual Question Questions { get; set; }
 
     }
 }

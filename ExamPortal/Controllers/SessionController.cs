@@ -247,11 +247,11 @@ namespace ExamPortal.Controllers
                         {
                             TaskId = Guid.NewGuid(),
                             Exam = newExam,
+                            Title = task.Title,
                             Image = task.Image,
                             SortId = task.Id,
                             Time = task.Time,
-                            Type = task.Type,
-                            Questions = new List<Question>()
+                            Type = task.Type
                         };
 
                         var newQuestion = new Question
@@ -280,7 +280,7 @@ namespace ExamPortal.Controllers
                             newQuestion.Value.Add(newValue);
                         }
 
-                        newTask.Questions.Add(newQuestion);
+                        newTask.Questions = newQuestion;
                         newExam.Task.Add(newTask);
                     }
 
