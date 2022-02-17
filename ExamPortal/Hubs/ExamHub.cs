@@ -38,16 +38,16 @@ namespace ExamPortal.Hubs
             _mapper = mapper;
         }
 
-        public async Task GetQuestion()
+        public async Task GetQuestion(Guid sessionId)
         {
             var currentUser = Context.User;
             var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
             User user = await _userManager.FindByNameAsync(currentUserName);
-            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user, x =>
+            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
                 x.Include(x => x.Exam)
                     .Include(x => x.ExamAnswers));
             _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId, x => x.Include(x => x.Task).ThenInclude(x => x.Questions).ThenInclude(x => x.Value));
-            bool isFinish = true;
+            bool isFinish = false;
             var startTime = DateTime.Now;
             int index = 0;
             TimeSpan sumTime = TimeSpan.FromSeconds(_exam.Task[0].Time);
@@ -63,9 +63,9 @@ namespace ExamPortal.Hubs
                 }
                 if (_exam.Task.Count == index - 1)
                 {
-                    isFinish = false;
+                    isFinish = true;
                 }
-            } while (isFinish);
+            } while (!isFinish);
         }
 
         public async Task SendAnswer(Object answer)
