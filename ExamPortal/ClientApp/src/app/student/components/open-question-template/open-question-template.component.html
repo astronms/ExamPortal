@@ -1,2 +1,16 @@
 <p>Pytanie otwarte</p>
 <h3>{{ question.title }}</h3>
+<img *ngIf="image" [attr.src]="image">
+<form class="answer-form" [formGroup]="formGroup">
+    <ng-container *ngFor="let value of question.values">
+        <p>{{ value.text }}</p>  
+        <mat-form-field class="answer-full-width" appearance="fill">
+            <input matInput formControlName="formId_{{ value.sortId }}" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="getErrorMessage('formId_' + value.sortId)">
+                {{ getErrorMessage('formId_' + value.sortId) }}
+            </mat-error>
+        </mat-form-field>
+    </ng-container>
+    <br />
+    <button class="btn btn-sm btn-block" (click)="onSubmit()">Zapisz</button>
+</form>

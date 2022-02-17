@@ -8,7 +8,11 @@
   <section class="services-00 d-flex align-items-center py-5" id="services">
     <div class="container text-light">
       <timer-template [startTime]="actualQuestion.time"></timer-template>
-      <open-question-template *ngIf="actualQuestion.type == 'Opened'" [question]="actualQuestion"></open-question-template>
+      <open-question-template 
+        *ngIf="actualQuestion.type == 'Opened'" 
+        [question]="actualQuestion" 
+        (onAnswer)="onAnswer($event)">
+      </open-question-template>
       <closed-question-template *ngIf="actualQuestion.type == 'Closed'" [question]="actualQuestion"></closed-question-template>
       <yes-no-question-template *ngIf="actualQuestion.type == 'Yes-No'" [question]="actualQuestion"></yes-no-question-template>
     </div> <!-- end of container -->

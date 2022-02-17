@@ -37,6 +37,11 @@ export class ExamComponent implements OnDestroy {
     });
   }
 
+  onAnswer(event) : void
+  {
+    this.examService.sendAnswers(event);
+  }
+
   /*ngOnDestroy() {
     clearInterval(this.interval);
   }

@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { catchError } from 'rxjs/operators';
 import { PersonalExamInfoModel } from '../models/personal-exam-info.model';
 import { QuestionModel } from '../models/question.model';
+import { AnswerModel } from '../models/answer.model';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ import { QuestionModel } from '../models/question.model';
 export class SyncExamService {
 
   private hubConnection: HubConnection;
+  private examId: string;
   public questions: Subject<QuestionModel> = new Subject<QuestionModel>();
 
   constructor(
@@ -30,6 +33,7 @@ export class SyncExamService {
 
   startExam(examId: string): void 
   {
+    this.examId = examId;
     this.startConnection();
     this.setListeners();
   }
@@ -37,6 +41,11 @@ export class SyncExamService {
   closeConnection() : void
   {
     this.hubConnection.stop();
+  }
+
+  sendAnswers(answer: AnswerModel)
+  {
+    this.hubConnection.invoke('sendAnswer', answer);
   }
 
   private startConnection(): void
@@ -61,7 +70,7 @@ export class SyncExamService {
 
   private getQuestion(): void 
   {
-    this.hubConnection.invoke('getQuestion');
+    this.hubConnection.invoke('getQuestion', this.examId);
   }
 
   private setListeners(): void 
