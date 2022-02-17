@@ -167,8 +167,8 @@ namespace ExamPortal.Controllers
                     using (var stream = createSessionDTO.File.OpenReadStream())
                     using (var archive = new ZipArchive(stream))
                     {
-                        var xmlFile = archive.Entries.First(x => GetExtension(x.Name) == ".xml");
-                        var attachments = archive.Entries.Where(x => GetExtension(x.Name) != ".xml").ToList();
+                        var xmlFile = archive.Entries.First(x => GetExtension(x.Name) == "xml");
+                        var attachments = archive.Entries.Where(x => GetExtension(x.Name) != "xml").ToList();
                         var xmlString = await ReadAsStringAsync(xmlFile.Open());
                         if (!_xmlValidator.IsValid(xmlString))
                         {
@@ -353,7 +353,7 @@ namespace ExamPortal.Controllers
 
         private static string GetExtension(string fileName)
         {
-            return "." + fileName.Split('.')[fileName.Split('.').Length - 1];
+            return fileName.Split('.')[fileName.Split('.').Length - 1];
         }
 
         private bool CheckIfXmlFile(IFormFile file)
