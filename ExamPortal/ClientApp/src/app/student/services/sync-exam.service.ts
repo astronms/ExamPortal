@@ -64,11 +64,17 @@ export class SyncExamService {
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
-      .then(() => this.getQuestion())
+      .then(() => this.callStartExam())
+      .then(() => this.callGetQuestion())
       .catch(this.handleError)
   }
 
-  private getQuestion(): void 
+  private callStartExam(): void 
+  {
+    this.hubConnection.invoke('startExam', this.examId);
+  }
+
+  private callGetQuestion(): void 
   {
     this.hubConnection.invoke('getQuestion', this.examId);
   }
