@@ -175,10 +175,11 @@ namespace ExamPortal.Controllers
                             return BadRequest(new { message = "Invalid XML" });
                         }
                         var sessionWithExam = await GenerateSessionFromXml(session, xmlString, attachments);
-
+                        await _unitOfWork.Sessions.Insert(sessionWithExam);
+                        await _unitOfWork.Save();
+                        return Ok(sessionWithExam.SessionId);
                     }
 
-                    return Ok();
                 }
                 else
                 {
