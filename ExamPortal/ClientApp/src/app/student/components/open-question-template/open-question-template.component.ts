@@ -23,9 +23,9 @@ export class OpenQuestionTemplateComponent implements AfterContentInit, OnInit {
   ngOnInit(): void {
     this.question.values.forEach(value => {
       if(!value.regex)
-        this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.required));
+        this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
       else
-        this.formGroup.addControl('formId_' + value.sortId, new FormControl('', [Validators.required, Validators.pattern(value.regex)]));
+        this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.pattern(value.regex)));
     });
   }
 
@@ -64,10 +64,7 @@ export class OpenQuestionTemplateComponent implements AfterContentInit, OnInit {
     if(!form)
       return null;
     
-    if(form.hasError('required'))
-      return 'Proszę wprowadzić wartość.'
-    else
-      return 'Wartość w nieprawidłowym formacie.'
+    return 'Wartość w nieprawidłowym formacie.'
   }
 
 }
