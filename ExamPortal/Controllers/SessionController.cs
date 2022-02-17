@@ -359,13 +359,13 @@ namespace ExamPortal.Controllers
         private bool CheckIfXmlFile(IFormFile file)
         {
             var extension = GetIFormFileExtension(file);
-            return extension == ".xml";
+            return extension == "xml";
         }
 
         private bool CheckIfZipFile(IFormFile file)
         {
             var extension = GetIFormFileExtension(file);
-            return extension == ".zip";
+            return extension == "zip";
         }
 
         private async Task<string> ReadAsStringAsync(Stream stream)
