@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ExamPortal.Data;
@@ -54,6 +55,7 @@ namespace ExamPortal.Configuration
             CreateMap<Exam, ExamDTO>().ReverseMap();
             CreateMap<Value, ValueDTO>().ReverseMap();
             CreateMap<ExamTask, TaskDTO>()
+                .ForMember(dto => dto.TaskId,opt => opt.MapFrom(x=>x.TaskId))
                 .ForMember(dto => dto.Type, opt => opt.MapFrom(x => x.Type))
                 .ForMember(dto => dto.Image,opt=>opt.MapFrom(x=>x.Image))
                 .ForMember(dto => dto.ImageType,opt => opt.MapFrom(x=>x.ImageType))

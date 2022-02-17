@@ -18,6 +18,7 @@ namespace ExamPortal.Models.Exam
     }
     public class TaskDTO 
     {
+        public Guid TaskId { get; set; }
         public string Title { get; set; }
         public string Type { get; set; }
         public string Time { get; set; }
