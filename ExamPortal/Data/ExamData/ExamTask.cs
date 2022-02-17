@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ExamPortal.Data.ExamData
 {
@@ -13,7 +14,7 @@ namespace ExamPortal.Data.ExamData
         public string Title { get; set; }
         public string Type { get; set; }
         public int Time { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
 
         [ForeignKey(nameof(Exam))]
         public Guid ExamId { get; set; }

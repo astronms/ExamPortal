@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -145,17 +146,45 @@ namespace ExamPortal.Controllers
                     _logger.LogError($"Invalid POST attempt in {nameof(CreateSession)}");
                     return BadRequest(ModelState);
                 }
-
-                if (!CheckIfXmlFile(createSessionDTO.File)) return BadRequest(new {message = "Invalid file extension"});
-                var xmlString = await ReadAsStringAsync(createSessionDTO.File);
-                if (!_xmlValidator.IsValid(xmlString)) return BadRequest(new {message = "Invalid XML"});
                 var session = _mapper.Map<Session>(createSessionDTO);
                 session.SessionId = Guid.NewGuid();
 
-                var sessionWithExam = await GenerateSessionFromXml(session, xmlString);
-                await _unitOfWork.Sessions.Insert(sessionWithExam);
-                await _unitOfWork.Save();
-                return Ok(sessionWithExam.SessionId);
+                if (CheckIfXmlFile(createSessionDTO.File))
+                {
+                    var stream = createSessionDTO.File.OpenReadStream();
+                    var xmlString = await ReadAsStringAsync(stream);
+                    if (!_xmlValidator.IsValid(xmlString))
+                    {
+                        return BadRequest(new { message = "Invalid XML" });
+                    }
+                    var sessionWithExam = await GenerateSessionFromXml(session, xmlString);
+                    await _unitOfWork.Sessions.Insert(sessionWithExam);
+                    await _unitOfWork.Save();
+                    return Ok(sessionWithExam.SessionId);
+                }
+                else if(CheckIfZipFile(createSessionDTO.File))
+                {
+                    using (var stream = createSessionDTO.File.OpenReadStream())
+                    using (var archive = new ZipArchive(stream))
+                    {
+                        var xmlFile = archive.Entries.First(x => GetExtension(x.Name) == ".xml");
+                        var attachments = archive.Entries.Where(x => GetExtension(x.Name) != ".xml").ToList();
+                        var xmlString = await ReadAsStringAsync(xmlFile.Open());
+                        if (!_xmlValidator.IsValid(xmlString))
+                        {
+                            return BadRequest(new { message = "Invalid XML" });
+                        }
+                        var sessionWithExam = await GenerateSessionFromXml(session, xmlString, attachments);
+
+                    }
+
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest(new {message = "Invalid file extension"});
+                }
+
             }
             catch (Exception ex)
             {
@@ -197,9 +226,18 @@ namespace ExamPortal.Controllers
                        await _unitOfWork.Exams.Delete(exam.ExamId);
                        await _unitOfWork.Save();
                     }
-                    if (!CheckIfXmlFile(sessionDTO.File)) return BadRequest(new { message = "Invalid file extension" });
-                    var xmlString = await ReadAsStringAsync(sessionDTO.File);
-                    if (!_xmlValidator.IsValid(xmlString)) return BadRequest(new { message = "Invalid XML" });
+
+                    if (!CheckIfXmlFile(sessionDTO.File))
+                    {
+                        return BadRequest(new { message = "Invalid file extension" });
+                    }
+
+                    var stream = sessionDTO.File.OpenReadStream();
+                    var xmlString = await ReadAsStringAsync(stream);
+                    if (!_xmlValidator.IsValid(xmlString))
+                    {
+                        return BadRequest(new { message = "Invalid XML" });
+                    }
                     session = await GenerateSessionFromXml(session, xmlString);
                     await _unitOfWork.Exams.InsertRange(session.Exams);
                 }
@@ -214,18 +252,18 @@ namespace ExamPortal.Controllers
             }
         }
 
-        private async Task<Session> GenerateSessionFromXml(Session session, string xmlString)
+        private async Task<Session> GenerateSessionFromXml(Session session, string xmlString, List<ZipArchiveEntry> attachments = null)
         {
             var course = await _unitOfWork.Courses.Get(x => x.CourseId == session.CourseId);
             session.CourseId = course.CourseId;
             session.Exams = new List<Exam>();
-            DeserializeSessionFromXml(xmlString, session);
+            DeserializeSessionFromXml(xmlString, session, attachments);
             if (course.Sessions == null) course.Sessions = new List<Session>();
             course.Sessions.Add(session);
             return session;
         }
 
-        private static void DeserializeSessionFromXml(string xmlString, Session session)
+        private static void DeserializeSessionFromXml(string xmlString, Session session, List<ZipArchiveEntry> attachments)
         {
             var serializer = new XmlSerializer(typeof(SessionXml));
             var stringReader = new StringReader(xmlString);
@@ -243,12 +281,17 @@ namespace ExamPortal.Controllers
                     };
                     foreach (var task in exam.Task)
                     {
+                        byte[] image = null;
+                        if (task.Image != null && attachments != null)
+                        {
+                            image = GetImageBytes(attachments.First(x => x.Name == task.Image));
+                        }
                         var newTask = new ExamTask
                         {
                             TaskId = Guid.NewGuid(),
                             Exam = newExam,
                             Title = task.Title,
-                            Image = task.Image,
+                            Image = image,
                             SortId = task.Id,
                             Time = task.Time,
                             Type = task.Type
@@ -288,16 +331,42 @@ namespace ExamPortal.Controllers
                 }
         }
 
+        private static byte[] GetImageBytes(ZipArchiveEntry attachment)
+        {
+            StreamReader sr = new StreamReader(attachment.Open());
+            var memstream = new MemoryStream();
+            sr.BaseStream.CopyTo(memstream);
+            return memstream.ToArray();
+        }
+
+        private static string GetIFormFileExtension(IFormFile file)
+        {
+            var fileName = file.FileName;
+            var extension = GetExtension(fileName);
+            return extension;
+        }
+
+        private static string GetExtension(string fileName)
+        {
+            return "." + fileName.Split('.')[fileName.Split('.').Length - 1];
+        }
+
         private bool CheckIfXmlFile(IFormFile file)
         {
-            var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+            var extension = GetIFormFileExtension(file);
             return extension == ".xml";
         }
 
-        private async Task<string> ReadAsStringAsync(IFormFile file)
+        private bool CheckIfZipFile(IFormFile file)
+        {
+            var extension = GetIFormFileExtension(file);
+            return extension == ".zip";
+        }
+
+        private async Task<string> ReadAsStringAsync(Stream stream)
         {
             var result = new StringBuilder();
-            using (var reader = new StreamReader(file.OpenReadStream()))
+            using (var reader = new StreamReader(stream))
             {
                 while (reader.Peek() >= 0)
                     result.AppendLine(await reader.ReadLineAsync());

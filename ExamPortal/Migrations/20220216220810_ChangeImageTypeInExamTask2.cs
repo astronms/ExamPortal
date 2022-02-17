@@ -2,39 +2,34 @@
 
 namespace ExamPortal.Migrations
 {
-    public partial class ChangesInExamTables : Migration
+    public partial class ChangeImageTypeInExamTask2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "5c2ab088-63d1-4d81-af26-9f2adeb1a063");
+                keyValue: "05e043bb-cc4b-47d7-a73d-3e479296668f");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "ca981047-3ebb-4e14-93a2-2e3dd9352ba9");
+                keyValue: "6564b1e7-c4f9-450f-9a85-410c0a554f7f");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Time",
+            migrationBuilder.RenameColumn(
+                name: "ImageBytes",
                 table: "ExamTask",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
+                newName: "Image");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "dde4b825-855f-4e95-8528-4ae2cfb92f3c", "f469fafe-29db-465f-9cec-4e8af74dd0da", "User", "USER" });
+                values: new object[] { "27203353-5b06-4c8e-ad82-62a228ebe6bb", "2655a37d-6ee7-428d-afc8-f776dafacc9d", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ad4cdb52-882e-443d-b9b6-145651c86e17", "77b614c0-0207-4ae2-9d6b-d655de572c37", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "3c332250-ebe0-4951-977c-17fa2a41ad46", "19f561bb-9c74-4760-bb6d-4574ce9393cc", "Administrator", "ADMINISTRATOR" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -42,30 +37,27 @@ namespace ExamPortal.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "ad4cdb52-882e-443d-b9b6-145651c86e17");
+                keyValue: "27203353-5b06-4c8e-ad82-62a228ebe6bb");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "dde4b825-855f-4e95-8528-4ae2cfb92f3c");
+                keyValue: "3c332250-ebe0-4951-977c-17fa2a41ad46");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Time",
+            migrationBuilder.RenameColumn(
+                name: "Image",
                 table: "ExamTask",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
+                newName: "ImageBytes");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ca981047-3ebb-4e14-93a2-2e3dd9352ba9", "c62d5de3-6439-4ae1-9dee-b14b729a9955", "User", "USER" });
+                values: new object[] { "05e043bb-cc4b-47d7-a73d-3e479296668f", "bd386c0d-a965-4cf1-9635-d85d12ffb1bf", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5c2ab088-63d1-4d81-af26-9f2adeb1a063", "e38a2d1f-44bd-452d-b4b6-8c238c724cb7", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "6564b1e7-c4f9-450f-9a85-410c0a554f7f", "b61c6156-4b79-4872-867d-508285eb4514", "Administrator", "ADMINISTRATOR" });
         }
     }
 }

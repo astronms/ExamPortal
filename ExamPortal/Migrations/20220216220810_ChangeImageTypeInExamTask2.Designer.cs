@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220215234626_EditExamTask")]
-    partial class EditExamTask
+    [Migration("20220216220810_ChangeImageTypeInExamTask2")]
+    partial class ChangeImageTypeInExamTask2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -213,8 +213,8 @@ namespace ExamPortal.Migrations
                     b.Property<Guid>("ExamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("SortId")
                         .HasColumnType("int");
@@ -423,15 +423,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8759a09c-b945-44b6-9fbc-9c325b50ee47",
-                            ConcurrencyStamp = "0fa12e78-9a6e-44b2-bda9-53783eecf79d",
+                            Id = "27203353-5b06-4c8e-ad82-62a228ebe6bb",
+                            ConcurrencyStamp = "2655a37d-6ee7-428d-afc8-f776dafacc9d",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "dcdc7f84-91db-41b0-98d9-df36aff61359",
-                            ConcurrencyStamp = "bcd1be33-ee02-41d3-8759-d4d8ed87ff52",
+                            Id = "3c332250-ebe0-4951-977c-17fa2a41ad46",
+                            ConcurrencyStamp = "19f561bb-9c74-4760-bb6d-4574ce9393cc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

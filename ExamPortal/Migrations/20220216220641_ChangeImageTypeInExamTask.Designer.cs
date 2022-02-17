@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220214220806_AddedDbTablesForAnswers")]
-    partial class AddedDbTablesForAnswers
+    [Migration("20220216220641_ChangeImageTypeInExamTask")]
+    partial class ChangeImageTypeInExamTask
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -213,14 +213,14 @@ namespace ExamPortal.Migrations
                     b.Property<Guid>("ExamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ImageBytes")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("SortId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Time")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Time")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -246,7 +246,8 @@ namespace ExamPortal.Migrations
 
                     b.HasKey("QuestionId");
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("TaskId")
+                        .IsUnique();
 
                     b.ToTable("Question");
                 });
@@ -422,15 +423,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ca981047-3ebb-4e14-93a2-2e3dd9352ba9",
-                            ConcurrencyStamp = "c62d5de3-6439-4ae1-9dee-b14b729a9955",
+                            Id = "05e043bb-cc4b-47d7-a73d-3e479296668f",
+                            ConcurrencyStamp = "bd386c0d-a965-4cf1-9635-d85d12ffb1bf",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "5c2ab088-63d1-4d81-af26-9f2adeb1a063",
-                            ConcurrencyStamp = "e38a2d1f-44bd-452d-b4b6-8c238c724cb7",
+                            Id = "6564b1e7-c4f9-450f-9a85-410c0a554f7f",
+                            ConcurrencyStamp = "b61c6156-4b79-4872-867d-508285eb4514",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -661,8 +662,8 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.ExamData.Question", b =>
                 {
                     b.HasOne("ExamPortal.Data.ExamData.ExamTask", "Task")
-                        .WithMany("Questions")
-                        .HasForeignKey("TaskId")
+                        .WithOne("Questions")
+                        .HasForeignKey("ExamPortal.Data.ExamData.Question", "TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

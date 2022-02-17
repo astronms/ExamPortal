@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamPortal.Migrations
 {
-    public partial class AddedDbTablesForAnswers : Migration
+    public partial class ChangeImageTypeInExamTask : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -353,8 +353,8 @@ namespace ExamPortal.Migrations
                     SortId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Time = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Time = table.Column<int>(type: "int", nullable: false),
+                    ImageBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     ExamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -446,12 +446,12 @@ namespace ExamPortal.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ca981047-3ebb-4e14-93a2-2e3dd9352ba9", "c62d5de3-6439-4ae1-9dee-b14b729a9955", "User", "USER" });
+                values: new object[] { "05e043bb-cc4b-47d7-a73d-3e479296668f", "bd386c0d-a965-4cf1-9635-d85d12ffb1bf", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5c2ab088-63d1-4d81-af26-9f2adeb1a063", "e38a2d1f-44bd-452d-b4b6-8c238c724cb7", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "6564b1e7-c4f9-450f-9a85-410c0a554f7f", "b61c6156-4b79-4872-867d-508285eb4514", "Administrator", "ADMINISTRATOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivatedExams_ExamAnswersId",
@@ -547,7 +547,8 @@ namespace ExamPortal.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Question_TaskId",
                 table: "Question",
-                column: "TaskId");
+                column: "TaskId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_CourseId",
