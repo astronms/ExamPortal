@@ -14,7 +14,6 @@ namespace ExamPortal.Data.Answers
     {
         [Key]
         public Guid ExamAnswersId { get; set; }
-        [ForeignKey(nameof(TaskAnswers))]
         [XmlElement(ElementName = "task")]
         public List<TaskAnswers> TaskAnswers { get; set; }
         [XmlAttribute(AttributeName = "id")]
@@ -26,8 +25,7 @@ namespace ExamPortal.Data.Answers
         public Guid SessionAnswersId { get; set; }
         public virtual SessionAnswers SessionAnswers { get; set; }
 
-        [ForeignKey(nameof(ActivatedExams))]
-        public Guid ActivatedExamsId { get; set;}
+
         public virtual ActivatedExam ActivatedExams { get; set; }
 	}
 }

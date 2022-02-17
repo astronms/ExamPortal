@@ -12,18 +12,14 @@ namespace ExamPortal.Data.ActivetedExams
         [Key]
         public Guid ActivatedExamId { get; set;}
 
-        [Required]
-        [ForeignKey(nameof(Exam))]
-        public Guid ExamId { get; set; }
+        public Guid? ExamId { get; set; }
         public virtual Exam Exam { get; set; }
 
-        [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public virtual User User { get; set; }
 
-        [ForeignKey(nameof(ExamAnswers))]
-        public Guid ExamAnswersId { get; set; }
+        public Guid? ExamAnswersId { get; set; }
         public virtual ExamAnswers ExamAnswers { get; set; }
 
         public DateTime StartTime { get; set; }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220216220810_ChangeImageTypeInExamTask2")]
-    partial class ChangeImageTypeInExamTask2
+    [Migration("20220217181044_changeOnDeleteBehavior")]
+    partial class changeOnDeleteBehavior
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,23 +27,23 @@ namespace ExamPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExamAnswersId")
+                    b.Property<Guid?>("ExamAnswersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExamId")
+                    b.Property<Guid?>("ExamId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ActivatedExamId");
 
                     b.HasIndex("ExamAnswersId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ExamAnswersId] IS NOT NULL");
 
                     b.HasIndex("ExamId");
 
@@ -72,6 +72,7 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.Answers.AnswersValue", b =>
                 {
                     b.Property<Guid>("AnswersValueId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AnswersId")
@@ -82,6 +83,8 @@ namespace ExamPortal.Migrations
 
                     b.HasKey("AnswersValueId");
 
+                    b.HasIndex("AnswersId");
+
                     b.ToTable("AnswersValue");
                 });
 
@@ -89,9 +92,6 @@ namespace ExamPortal.Migrations
                 {
                     b.Property<Guid>("ExamAnswersId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ActivatedExamsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExternalId")
@@ -130,14 +130,9 @@ namespace ExamPortal.Migrations
                     b.Property<Guid>("ExamAnswersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TaskAnswers")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExamAnswersId");
-
-                    b.HasIndex("TaskAnswers");
 
                     b.ToTable("TaskAnswers");
                 });
@@ -215,6 +210,9 @@ namespace ExamPortal.Migrations
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SortId")
                         .HasColumnType("int");
@@ -423,15 +421,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "27203353-5b06-4c8e-ad82-62a228ebe6bb",
-                            ConcurrencyStamp = "2655a37d-6ee7-428d-afc8-f776dafacc9d",
+                            Id = "7e2ed26a-661c-4a01-b8b2-ec2e5f3354d4",
+                            ConcurrencyStamp = "4481d370-282c-432a-a583-fd4283571dc8",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "3c332250-ebe0-4951-977c-17fa2a41ad46",
-                            ConcurrencyStamp = "19f561bb-9c74-4760-bb6d-4574ce9393cc",
+                            Id = "a92b8343-0595-4f04-b658-c79bba0eb92e",
+                            ConcurrencyStamp = "542345e6-f5bc-4dc8-8b2d-e56b37455ece",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -546,20 +544,17 @@ namespace ExamPortal.Migrations
                     b.HasOne("ExamPortal.Data.Answers.ExamAnswers", "ExamAnswers")
                         .WithOne("ActivatedExams")
                         .HasForeignKey("ExamPortal.Data.ActivetedExams.ActivatedExam", "ExamAnswersId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("ExamPortal.Data.ExamData.Exam", "Exam")
                         .WithMany("ActivatedExams")
                         .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("ExamPortal.Data.Users.User", "User")
                         .WithMany("ActivatedExams")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Exam");
 
@@ -583,8 +578,8 @@ namespace ExamPortal.Migrations
                 {
                     b.HasOne("ExamPortal.Data.Answers.Answers", "Answers")
                         .WithMany("AnswersValue")
-                        .HasForeignKey("AnswersValueId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("AnswersId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Answers");
@@ -604,14 +599,10 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.Answers.TaskAnswers", b =>
                 {
                     b.HasOne("ExamPortal.Data.Answers.ExamAnswers", "ExamAnswers")
-                        .WithMany()
+                        .WithMany("TaskAnswers")
                         .HasForeignKey("ExamAnswersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ExamPortal.Data.Answers.ExamAnswers", null)
-                        .WithMany("TaskAnswers")
-                        .HasForeignKey("TaskAnswers");
 
                     b.Navigation("ExamAnswers");
                 });

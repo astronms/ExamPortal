@@ -26,12 +26,10 @@ namespace ExamPortal.Data
             builder.Entity<CourseUser>().HasOne(x => x.User).WithMany(x => x.CourseUsers)
                 .HasForeignKey(x => x.UserId);
             builder.Entity<ActivatedExam>().HasOne(x => x.Exam).WithMany(x => x.ActivatedExams)
-                .HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<ActivatedExam>().HasOne(x => x.User).WithMany(x => x.ActivatedExams)
-                .HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<ActivatedExam>().HasOne(x => x.ExamAnswers).WithOne(x => x.ActivatedExams).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<AnswersValue>().HasOne(x => x.Answers).WithMany(x => x.AnswersValue)
-                .HasForeignKey(x => x.AnswersValueId).OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.SetNull);
+            builder.Entity<ActivatedExam>().HasOne(x => x.ExamAnswers).WithOne(x => x.ActivatedExams).OnDelete(DeleteBehavior.SetNull);
         }
 
 

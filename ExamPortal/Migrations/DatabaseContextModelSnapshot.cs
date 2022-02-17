@@ -25,23 +25,23 @@ namespace ExamPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExamAnswersId")
+                    b.Property<Guid?>("ExamAnswersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExamId")
+                    b.Property<Guid?>("ExamId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ActivatedExamId");
 
                     b.HasIndex("ExamAnswersId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ExamAnswersId] IS NOT NULL");
 
                     b.HasIndex("ExamId");
 
@@ -70,6 +70,7 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.Answers.AnswersValue", b =>
                 {
                     b.Property<Guid>("AnswersValueId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AnswersId")
@@ -80,6 +81,8 @@ namespace ExamPortal.Migrations
 
                     b.HasKey("AnswersValueId");
 
+                    b.HasIndex("AnswersId");
+
                     b.ToTable("AnswersValue");
                 });
 
@@ -87,9 +90,6 @@ namespace ExamPortal.Migrations
                 {
                     b.Property<Guid>("ExamAnswersId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ActivatedExamsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExternalId")
@@ -128,14 +128,9 @@ namespace ExamPortal.Migrations
                     b.Property<Guid>("ExamAnswersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TaskAnswers")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExamAnswersId");
-
-                    b.HasIndex("TaskAnswers");
 
                     b.ToTable("TaskAnswers");
                 });
@@ -424,15 +419,15 @@ namespace ExamPortal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ffc169df-6a8c-4b61-9657-ac22dcc56e21",
-                            ConcurrencyStamp = "a300e95c-b115-4612-8c36-76d88e24d4e4",
+                            Id = "7e2ed26a-661c-4a01-b8b2-ec2e5f3354d4",
+                            ConcurrencyStamp = "4481d370-282c-432a-a583-fd4283571dc8",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "2995c053-638f-4355-afc2-0224116f6375",
-                            ConcurrencyStamp = "c8ba0f72-b9f3-4321-8ebb-18c511db7902",
+                            Id = "a92b8343-0595-4f04-b658-c79bba0eb92e",
+                            ConcurrencyStamp = "542345e6-f5bc-4dc8-8b2d-e56b37455ece",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -547,20 +542,17 @@ namespace ExamPortal.Migrations
                     b.HasOne("ExamPortal.Data.Answers.ExamAnswers", "ExamAnswers")
                         .WithOne("ActivatedExams")
                         .HasForeignKey("ExamPortal.Data.ActivetedExams.ActivatedExam", "ExamAnswersId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("ExamPortal.Data.ExamData.Exam", "Exam")
                         .WithMany("ActivatedExams")
                         .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("ExamPortal.Data.Users.User", "User")
                         .WithMany("ActivatedExams")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Exam");
 
@@ -584,8 +576,8 @@ namespace ExamPortal.Migrations
                 {
                     b.HasOne("ExamPortal.Data.Answers.Answers", "Answers")
                         .WithMany("AnswersValue")
-                        .HasForeignKey("AnswersValueId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("AnswersId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Answers");
@@ -605,14 +597,10 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.Answers.TaskAnswers", b =>
                 {
                     b.HasOne("ExamPortal.Data.Answers.ExamAnswers", "ExamAnswers")
-                        .WithMany()
+                        .WithMany("TaskAnswers")
                         .HasForeignKey("ExamAnswersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ExamPortal.Data.Answers.ExamAnswers", null)
-                        .WithMany("TaskAnswers")
-                        .HasForeignKey("TaskAnswers");
 
                     b.Navigation("ExamAnswers");
                 });
