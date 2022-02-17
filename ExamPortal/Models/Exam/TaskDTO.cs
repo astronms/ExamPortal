@@ -21,6 +21,7 @@ namespace ExamPortal.Models.Exam
         public string Title { get; set; }
         public string Type { get; set; }
         public string Time { get; set; }
+        public string ImageType { get; set; }
         public byte[] Image { get; set; }
         public IList<ValueDTO> Values { get; set; }
     }

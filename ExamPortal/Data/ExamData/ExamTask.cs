@@ -14,6 +14,7 @@ namespace ExamPortal.Data.ExamData
         public string Title { get; set; }
         public string Type { get; set; }
         public int Time { get; set; }
+        public string ImageType { get; set; }
         public byte[] Image { get; set; }
 
         [ForeignKey(nameof(Exam))]

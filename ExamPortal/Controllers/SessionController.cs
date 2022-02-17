@@ -282,15 +282,19 @@ namespace ExamPortal.Controllers
                     foreach (var task in exam.Task)
                     {
                         byte[] image = null;
+                        string imageType = null;
                         if (task.Image != null && attachments != null)
                         {
-                            image = GetImageBytes(attachments.First(x => x.Name == task.Image));
+                            var attachment = attachments.First(x => x.Name == task.Image);
+                            image = GetImageBytes(attachment);
+                            imageType = GetExtension(attachment.Name);
                         }
                         var newTask = new ExamTask
                         {
                             TaskId = Guid.NewGuid(),
                             Exam = newExam,
                             Title = task.Title,
+                            ImageType = imageType,
                             Image = image,
                             SortId = task.Id,
                             Time = task.Time,
