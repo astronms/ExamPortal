@@ -13,8 +13,16 @@
         [question]="actualQuestion" 
         (onAnswer)="onAnswer($event)">
       </open-question-template>
-      <closed-question-template *ngIf="actualQuestion.type == 'Closed'" [question]="actualQuestion"></closed-question-template>
-      <yes-no-question-template *ngIf="actualQuestion.type == 'Yes-No'" [question]="actualQuestion"></yes-no-question-template>
+      <closed-question-template 
+        *ngIf="actualQuestion.type == 'Closed'" 
+        [question]="actualQuestion"
+        (onAnswer)="onAnswer($event)">
+      </closed-question-template>
+      <yes-no-question-template 
+        *ngIf="actualQuestion.type == 'Yes-No'" 
+        [question]="actualQuestion"
+        (onAnswer)="onAnswer($event)">
+      </yes-no-question-template>
     </div> <!-- end of container -->
   </section>
 </ng-container>

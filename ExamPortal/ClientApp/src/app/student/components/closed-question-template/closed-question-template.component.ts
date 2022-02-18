@@ -1,18 +1,65 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AnswerModel, AnswerValueModel } from '../../models/answer.model';
 import { QuestionModel } from '../../models/question.model';
 
 @Component({
   selector: 'closed-question-template',
-  templateUrl: './closed-question-template.component.html',
-  styleUrls: ['./closed-question-template.component.css']
+  templateUrl: './closed-question-template.component.html'
 })
-export class ClosedQuestionTemplateComponent implements OnInit {
+export class ClosedQuestionTemplateComponent implements AfterContentInit, OnInit{
 
-  @Input('question') question: QuestionModel;
+  public image: string = null;
+  public _question: QuestionModel;
+  public formGroup: FormGroup;
 
-  constructor() { }
+  @Input('question') set question(q: QuestionModel) {
+    this._question = q;
+    this.loadImage();
+    if(this.form)
+      this.form.reset();
+  }
+  @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
+  @ViewChild('questionForm') form : NgForm; 
 
-  ngOnInit(): void {
+
+  constructor() {}
+
+  ngAfterContentInit(): void 
+  {
+    this.loadImage();
   }
 
+  ngOnInit(): void {
+    this.formGroup = new FormGroup({
+      'option': new FormControl('')
+    });
+  }
+
+  onSubmit()
+  {
+    var answer: AnswerModel = {
+      taskId: this._question.taskId,
+      values: []
+    };
+    this._question.values.forEach(value => {
+      var answerValue: AnswerValueModel = {
+        sortId: value.sortId,
+        answer: (this.formGroup.get('option').value == value.sortId) ? 'true' : 'false'
+      };
+      answer.values.push(answerValue);
+    });
+
+    this.onAnswer.emit(answer);
+  }
+
+  private loadImage() : void 
+  {
+    if(this._question.image) {
+      if(this._question.imageType.toLowerCase() == 'png')
+        this.image = "data:image/PNG;base64," + this._question.image;
+      else
+        this.image = "data:image/JPEG;base64," + this._question.image;
+    }
+  }
 }
