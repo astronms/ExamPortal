@@ -15,6 +15,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class SyncExamService {
 
   private hubConnection: HubConnection;
+  private hubConnection2: HubConnection;
   private examId: string;
   public questions: Subject<QuestionModel> = new Subject<QuestionModel>();
 
@@ -41,12 +42,13 @@ export class SyncExamService {
   closeConnection() : void
   {
     this.hubConnection.stop();
+    this.hubConnection2.stop();
   }
 
   sendAnswers(answer: AnswerModel)
   {
     console.log(answer);
-    this.hubConnection.invoke('sendAnswer', answer);
+    this.hubConnection2.invoke('sendAnswer', answer);
   }
 
   private startConnection(): void
@@ -62,12 +64,23 @@ export class SyncExamService {
       .withUrl( this.baseUrl + 'examhub', options)
       .build();
 
+    this.hubConnection2 = new HubConnectionBuilder() 
+      .configureLogging(LogLevel.Debug)
+      .withUrl( this.baseUrl + 'examhub', options)
+      .build();
+
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
       .then(() => this.callStartExam())
       .then(() => this.callGetQuestion())
-      .catch(this.handleError)
+      .catch(this.handleError);
+
+    this.hubConnection2
+      .start()
+      .then(() => console.log('Connection 2 started'))
+      .catch(this.handleError);
+
   }
 
   private callStartExam(): void 
@@ -84,6 +97,10 @@ export class SyncExamService {
   {
     this.hubConnection.on('Question', reply => {
       this.questions.next(reply);
+    });
+
+    this.hubConnection.onclose(rep => {
+      console.log("testt");
     });
   }
 
