@@ -1,17 +1,19 @@
-<h3>{{ _question.title }}</h3>
-<img *ngIf="image" [attr.src]="image">
-<form class="answer-form" [formGroup]="formGroup" #questionForm="ngForm">
-    <mat-radio-group formControlName="option">
-        <ng-container *ngFor="let value of _question.values">
-            <div class="row">
-                <div class="col-3"><p>{{ value.text }}</p></div>
-                <div class="col">
-                    <mat-radio-button [value]="value.sortId"></mat-radio-button>
+<ng-container *ngIf="_question">
+    <h3>{{ _question.title }}</h3>
+    <img *ngIf="image" [attr.src]="image">
+    <form class="answer-form" [formGroup]="formGroup" #questionForm="ngForm">
+        <mat-radio-group formControlName="option">
+            <ng-container *ngFor="let value of _question.values">
+                <div class="row">
+                    <div class="col-3"><p>{{ value.text }}</p></div>
+                    <div class="col">
+                        <mat-radio-button [value]="value.sortId"></mat-radio-button>
+                    </div>
                 </div>
-            </div>
-        </ng-container>
-    </mat-radio-group>
-    <!-- <mat-error *ngIf="formGroup.get('option').hasError('required') && questionForm.submitted">Proszę wybrać odpowiedź.</mat-error> -->
-    <br />
-    <button class="btn btn-sm btn-block" (click)="onSubmit()">Zapisz</button>
-</form>
+            </ng-container>
+        </mat-radio-group>
+        <!-- <mat-error *ngIf="formGroup.get('option').hasError('required') && questionForm.submitted">Proszę wybrać odpowiedź.</mat-error> -->
+        <br />
+        <button class="btn btn-sm btn-block" (click)="onSubmit()">Zapisz</button>
+    </form>
+</ng-container>

@@ -16,13 +16,13 @@ export class TimerTemplateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      
+    this.setQuestionListener();
   }
 
   setQuestionListener()
   {
-    this.examService.questionTime.subscribe(time => {
-      this.tickCounter = time;
+    this.examService.questions.subscribe(q => {
+      this.tickCounter = q.time;
       this.renderText();
     });
   }

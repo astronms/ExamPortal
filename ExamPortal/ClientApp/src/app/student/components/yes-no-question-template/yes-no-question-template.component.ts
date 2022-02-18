@@ -16,14 +16,31 @@ export class YesNoQuestionTemplateComponent implements AfterContentInit {
 
   @Input('question') set question(q: QuestionModel)
   {
-    this._question = q;
-    this.formGroup = new FormGroup({});
-    this._question.values.forEach(value => {
-      this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
-    });
-    this.loadImage()
-    if(this.form)
-      this.form.reset();
+    if(this._question)
+    {
+      if(q.taskId != this._question.taskId)
+      {
+        this._question = q;
+        this.formGroup = new FormGroup({});
+        this._question.values.forEach(value => {
+          this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
+        });
+        this.loadImage()
+        if(this.form)
+          this.form.reset();
+      }
+    }
+    else
+    {
+      this._question = q;
+      this.formGroup = new FormGroup({});
+      this._question.values.forEach(value => {
+        this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
+      });
+      this.loadImage()
+      if(this.form)
+        this.form.reset();
+    }
   }
   @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 

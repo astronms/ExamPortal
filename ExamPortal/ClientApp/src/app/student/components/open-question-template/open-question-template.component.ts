@@ -16,16 +16,35 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
   public formGroup = new FormGroup({});
 
   @Input('question') set question(q: QuestionModel) {
-    this._question = q;
-    q.values.forEach(value => {
-      if(!value.regex)
-        this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
-      else
-        this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.pattern(value.regex)));
-    });
-    this.loadImage();
-    if(this.form)
-      this.form.reset();
+    if(this._question)
+    {
+      if(q.taskId != this._question.taskId)
+      {
+        this._question = q;
+        q.values.forEach(value => {
+          if(!value.regex)
+            this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
+          else
+            this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.pattern(value.regex)));
+        });
+        this.loadImage();
+        if(this.form)
+          this.form.reset();
+      }
+    }
+    else
+      {
+        this._question = q;
+        q.values.forEach(value => {
+          if(!value.regex)
+            this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
+          else
+            this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.pattern(value.regex)));
+        });
+        this.loadImage();
+        if(this.form)
+          this.form.reset();
+      }
   };
   @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 

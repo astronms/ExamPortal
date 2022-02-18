@@ -17,7 +17,6 @@ export class SyncExamService {
   private hubConnection: HubConnection;
   private examId: string;
   public questions: Subject<QuestionModel> = new Subject<QuestionModel>();
-  public questionTime: Subject<number> = new Subject<number>();
 
   constructor(
     private http: HttpClient,  
@@ -46,12 +45,13 @@ export class SyncExamService {
 
   sendAnswers(answer: AnswerModel)
   {
+    console.log(answer);
     this.hubConnection.invoke('sendAnswer', answer);
   }
 
   private startConnection(): void
   {
-    const options: IHttpConnectionOptions = { //Add JWT Token
+    const options: IHttpConnectionOptions = { 
       accessTokenFactory: () => {
         return this.authService.userValue.token;
       }
@@ -84,10 +84,6 @@ export class SyncExamService {
   {
     this.hubConnection.on('Question', reply => {
       this.questions.next(reply);
-    });
-
-    this.hubConnection.on('Time', reply => {
-      this.questionTime.next(reply);
     });
   }
 
