@@ -54,8 +54,8 @@ namespace ExamPortal.Hubs
                 _unitOfWork.ActivatedExams.Update(_activatedExam);
                 await _unitOfWork.Save();
             }
-
         }
+
         public async Task GetQuestion(Guid sessionId)
         {
             var currentUser = Context.User;
@@ -71,7 +71,6 @@ namespace ExamPortal.Hubs
             TimeSpan sumTime = TimeSpan.FromSeconds(_exam.Task[0].Time);
             IList<TaskDTO> tasks = _mapper.Map<IList<ExamTask>, IList<TaskDTO>>(_exam.Task);
             await Clients.Caller.SendAsync("Question", tasks[index]);
-            await Clients.Caller.SendAsync("Time", tasks[index].Time);
             do
             {
                 var currentTime = DateTime.Now - startTime;
@@ -87,20 +86,20 @@ namespace ExamPortal.Hubs
                         index++;
                         sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
                         await Clients.Caller.SendAsync("Question", tasks[index]);
-                        await Clients.Caller.SendAsync("Time", tasks[index].Time);
                     }
                 }
                 else
                 {
                     await Task.Delay(500);
-                    var time = (sumTime.Seconds - currentTime.Seconds);
-                    await Clients.Caller.SendAsync("Time", time);
+                    tasks[index].Time = (sumTime.Seconds - currentTime.Seconds);
+                    await Clients.Caller.SendAsync("Time", tasks[index]);
                 }
             } while (!isFinish);
         }
 
         public async Task SendAnswer(Object answer)
-        { 
+        {
+            Debug.WriteLine(answer);
         }
         }
 
