@@ -91,8 +91,8 @@ namespace ExamPortal.Hubs
                 else
                 {
                     await Task.Delay(500);
-                    tasks[index].Time = (sumTime.Seconds - currentTime.Seconds);
-                    await Clients.Caller.SendAsync("Time", tasks[index]);
+                    tasks[index].Time = (sumTime - currentTime).Seconds;
+                    await Clients.Caller.SendAsync("Question", tasks[index]);
                 }
             } while (!isFinish);
         }
