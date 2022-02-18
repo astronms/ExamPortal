@@ -1,7 +1,7 @@
-<h3>{{ question.title }}</h3>
+<h3>{{ _question.title }}</h3>
 <img *ngIf="image" [attr.src]="image">
-<form class="answer-form" [formGroup]="formGroup">
-    <ng-container *ngFor="let value of question.values">
+<form class="answer-form" [formGroup]="formGroup" #questionForm="ngForm">
+    <ng-container *ngFor="let value of _question.values">
         <p>{{ value.text }}</p>  
         <mat-form-field class="answer-full-width" appearance="fill">
             <input matInput formControlName="formId_{{ value.sortId }}" [errorStateMatcher]="matcher">

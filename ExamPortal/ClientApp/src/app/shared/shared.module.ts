@@ -18,6 +18,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-mat
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
     MatProgressBarModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatRadioModule
   ],
   exports: [
     RouterModule,
@@ -62,7 +64,8 @@ import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
     NgxMatNativeDateModule,
     MatDatepickerModule,
     ExamSessionTableTemplateComponent,
-    MinuteSecondsPipe
+    MinuteSecondsPipe,
+    MatRadioModule
   ]
 })
 export class SharedModule { }
