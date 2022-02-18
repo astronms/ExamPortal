@@ -1,49 +1,30 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { SyncExamService } from '../../services/sync-exam.service';
 
 @Component({
   selector: 'timer-template',
   templateUrl: './timer-template.component.html',
   styleUrls: ['./timer-template.component.css']
 })
-export class TimerTemplateComponent implements OnDestroy {
+export class TimerTemplateComponent implements OnInit {
 
-  private timeoutId: any;
   private tickCounter: number;
-  private afterViewInit: boolean = false;
   public textToDisplay: string;
-  
-  @Input('startTime') set startTime(secs: number) {
-    console.log("SETTTTTTTTTTTTTTTTTTTTTTTT");
-    this.tickCounter = secs;
-    this.reset();
+
+  constructor(
+    private examService: SyncExamService
+  ) { }
+
+  ngOnInit(): void {
+      
   }
 
-
-  constructor() { }
-
-  /*ngAfterViewInit()
+  setQuestionListener()
   {
-    this.startTickCount();
-    this.afterViewInit = true;
-  }*/
-
-  ngOnDestroy()
-  {
-    this.stop();
-  }
-
-  private startTickCount() : void
-  {
-    const that = this;
-    this.timeoutId = setInterval(function() {
-      that.tickCounter--;
-
-      that.renderText();
-
-      if(that.tickCounter <= 0)
-        that.stop();
-
-    }, 1000);
+    this.examService.questionTime.subscribe(time => {
+      this.tickCounter = time;
+      this.renderText();
+    });
   }
 
   private renderText() : void
@@ -68,20 +49,4 @@ export class TimerTemplateComponent implements OnDestroy {
 
     this.textToDisplay = out;
   }
-
-  private reset() : void
-  {
-    this.stop();
-    //if(this.afterViewInit)
-    this.startTickCount();
-  }
-
-  private stop() : void
-  {
-    if (this.timeoutId)
-      clearInterval(this.timeoutId);
-    
-    this.timeoutId = null;
-  }
-
 }
