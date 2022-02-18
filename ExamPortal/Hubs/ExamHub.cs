@@ -78,21 +78,23 @@ namespace ExamPortal.Hubs
 
                 if (currentTime > sumTime)
                 {
-                    index++;
-                    sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
-                    await Clients.Caller.SendAsync("Question", tasks[index]);
-                    await Clients.Caller.SendAsync("Time", tasks[index].Time);
+                    if (_exam.Task.Count == index + 1)
+                    {
+                        isFinish = true;
+                    }
+                    else
+                    {
+                        index++;
+                        sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
+                        await Clients.Caller.SendAsync("Question", tasks[index]);
+                        await Clients.Caller.SendAsync("Time", tasks[index].Time);
+                    }
                 }
                 else
                 {
                     await Task.Delay(500);
                     var time = (sumTime.Seconds - currentTime.Seconds);
                     await Clients.Caller.SendAsync("Time", time);
-                }
-
-                if (_exam.Task.Count == index - 1)
-                {
-                    isFinish = true;
                 }
             } while (!isFinish);
         }
