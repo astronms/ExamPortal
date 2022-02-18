@@ -17,6 +17,7 @@ export class SyncExamService {
   private hubConnection: HubConnection;
   private examId: string;
   public questions: Subject<QuestionModel> = new Subject<QuestionModel>();
+  public questionTime: Subject<number> = new Subject<number>();
 
   constructor(
     private http: HttpClient,  
@@ -81,12 +82,15 @@ export class SyncExamService {
 
   private setListeners(): void 
   {
-    this.hubConnection.on('question', reply => {
+    this.hubConnection.on('Question', reply => {
       this.questions.next(reply);
+    });
+
+    this.hubConnection.on('Time', reply => {
+      this.questionTime.next(reply);
     });
   }
 
-  
   private handleError(error: HttpErrorResponse) 
   {
     if (error.status === 0)
