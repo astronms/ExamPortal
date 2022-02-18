@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -83,7 +84,8 @@ namespace ExamPortal.Hubs
                 else
                 {
                     await Task.Delay(500);
-                    tasks[index].Time = (_exam.Task[index].Time - currentTime.Seconds);
+                    tasks[index].Time = (sumTime.Seconds - currentTime.Seconds);
+                    //Debug.WriteLine(tasks[index].Time+"  "+ sumTime.Seconds+ "  "+ currentTime.Seconds);
                     await Clients.Caller.SendAsync("Question", tasks[index]);
                 }
 
