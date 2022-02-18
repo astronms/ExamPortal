@@ -38,6 +38,23 @@ namespace ExamPortal.Hubs
             _mapper = mapper;
         }
 
+        public async Task StartExam(Guid sessionId)
+        {
+            var currentUser = Context.User;
+            var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
+            User user = await _userManager.FindByNameAsync(currentUserName);
+            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                x.Include(x => x.Exam)
+                    .Include(x => x.ExamAnswers));
+            if (_activatedExam.StartTime == new DateTime())
+            {
+                var startTime = DateTime.Now;
+                _activatedExam.StartTime = startTime;
+                _unitOfWork.ActivatedExams.Update(_activatedExam);
+                await _unitOfWork.Save();
+            }
+
+        }
         public async Task GetQuestion(Guid sessionId)
         {
             var currentUser = Context.User;
@@ -48,19 +65,28 @@ namespace ExamPortal.Hubs
                     .Include(x => x.ExamAnswers));
             _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId, x => x.Include(x => x.Task).ThenInclude(x => x.Questions).ThenInclude(x => x.Value));
             bool isFinish = false;
-            var startTime = DateTime.Now;
+            var startTime = _activatedExam.StartTime;
             int index = 0;
             TimeSpan sumTime = TimeSpan.FromSeconds(_exam.Task[0].Time);
             IList<TaskDTO> tasks = _mapper.Map<IList<ExamTask>, IList<TaskDTO>>(_exam.Task);
             await Clients.Caller.SendAsync("Question", tasks[index]);
             do
             {
-                if (DateTime.Now - startTime > sumTime)
+                var currentTime = DateTime.Now - startTime;
+
+                if (currentTime > sumTime)
                 {
                     index++;
-                    await Clients.Caller.SendAsync("Question", tasks[index]);
                     sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
+                    await Clients.Caller.SendAsync("Question", tasks[index]);
                 }
+                else
+                {
+                    await Task.Delay(500);
+                    tasks[index].Time = (_exam.Task[index].Time - currentTime.Seconds);
+                    await Clients.Caller.SendAsync("Question", tasks[index]);
+                }
+
                 if (_exam.Task.Count == index - 1)
                 {
                     isFinish = true;

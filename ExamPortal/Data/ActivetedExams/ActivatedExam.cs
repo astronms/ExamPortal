@@ -23,5 +23,7 @@ namespace ExamPortal.Data.ActivetedExams
         public virtual ExamAnswers ExamAnswers { get; set; }
 
         public DateTime StartTime { get; set; }
+
+        public string IpAddress { get; set; }
     }
 }

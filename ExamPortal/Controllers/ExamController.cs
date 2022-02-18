@@ -103,6 +103,7 @@ namespace ExamPortal.Controllers
                 var random = new Random();
                 var index = random.Next(session.Exams.Count);
                 var userExam = session.Exams.ElementAt(index);
+
                 //TODO sessionAnswers logic
                 var sessionAnswers = new SessionAnswers
                 {
@@ -113,9 +114,10 @@ namespace ExamPortal.Controllers
                     ActivatedExamId = Guid.NewGuid(),
                     ExamId = userExam.ExamId,
                     UserId = user.Id,
-                    StartTime = DateTime.Now,
+                    StartTime = new DateTime(),
                     ExamAnswersId = Guid.NewGuid(),
-                    ExamAnswers = new ExamAnswers
+                    IpAddress = ControllerContext.HttpContext.Connection.RemoteIpAddress?.ToString(),
+                ExamAnswers = new ExamAnswers
                     {
                         SessionAnswers = sessionAnswers,
                         SessionAnswersId = sessionAnswers.SessionAnswersId

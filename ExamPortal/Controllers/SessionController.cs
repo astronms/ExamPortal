@@ -228,19 +228,33 @@ namespace ExamPortal.Controllers
                        await _unitOfWork.Save();
                     }
 
-                    if (!CheckIfXmlFile(sessionDTO.File))
+                    if (CheckIfXmlFile(sessionDTO.File))
                     {
-                        return BadRequest(new { message = "Invalid file extension" });
+                        var stream = sessionDTO.File.OpenReadStream();
+                        var xmlString = await ReadAsStringAsync(stream);
+                        if (!_xmlValidator.IsValid(xmlString))
+                        {
+                            return BadRequest(new { message = "Invalid XML" });
+                        }
+                        session = await GenerateSessionFromXml(session, xmlString);
+                        await _unitOfWork.Exams.InsertRange(session.Exams);
                     }
-
-                    var stream = sessionDTO.File.OpenReadStream();
-                    var xmlString = await ReadAsStringAsync(stream);
-                    if (!_xmlValidator.IsValid(xmlString))
+                    else if (CheckIfZipFile(sessionDTO.File))
                     {
-                        return BadRequest(new { message = "Invalid XML" });
+                        using (var stream = sessionDTO.File.OpenReadStream())
+                        using (var archive = new ZipArchive(stream))
+                        {
+                            var xmlFile = archive.Entries.First(x => GetExtension(x.Name) == "xml");
+                            var attachments = archive.Entries.Where(x => GetExtension(x.Name) != "xml").ToList();
+                            var xmlString = await ReadAsStringAsync(xmlFile.Open());
+                            if (!_xmlValidator.IsValid(xmlString))
+                            {
+                                return BadRequest(new { message = "Invalid XML" });
+                            }
+                            session = await GenerateSessionFromXml(session, xmlString, attachments);
+                            await _unitOfWork.Exams.InsertRange(session.Exams);
+                        }
                     }
-                    session = await GenerateSessionFromXml(session, xmlString);
-                    await _unitOfWork.Exams.InsertRange(session.Exams);
                 }
                 _unitOfWork.Sessions.Update(session);
                 await _unitOfWork.Save();
