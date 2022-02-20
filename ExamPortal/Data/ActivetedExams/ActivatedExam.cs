@@ -25,5 +25,6 @@ namespace ExamPortal.Data.ActivetedExams
         public DateTime StartTime { get; set; }
 
         public string IpAddress { get; set; }
+        public bool IsFinish { get; set; }
     }
 }

@@ -34,24 +34,7 @@ namespace ExamPortal.Hubs
             _logger = logger;
             _mapper = mapper;
         }
-
-        public async Task StartExam(Guid sessionId)
-        {
-            var currentUser = Context.User;
-            var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
-            User user = await _userManager.FindByNameAsync(currentUserName);
-            ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
-                x.Include(i => i.Exam)
-                    .Include(i => i.ExamAnswers));
-            if (activatedExam.StartTime == new DateTime())
-            {
-                var startTime = DateTime.Now;
-                activatedExam.StartTime = startTime;
-                _unitOfWork.ActivatedExams.Update(activatedExam);
-                await _unitOfWork.Save();
-            }
-        }
-
+        
         public async Task GetQuestion(Guid sessionId)
         {
             var user = await GetUser();
@@ -59,8 +42,13 @@ namespace ExamPortal.Hubs
                 x.Include(i => i.Exam)
                     .Include(i => i.ExamAnswers)
                     .ThenInclude(i => i.TaskAnswers));
+            if (activatedExam.StartTime == new DateTime())
+            {
+                activatedExam.StartTime = DateTime.Now;
+                _unitOfWork.ActivatedExams.Update(activatedExam);
+                await _unitOfWork.Save();
+            }
             Exam exam = await _unitOfWork.Exams.Get(x => x.ExamId == activatedExam.ExamId, x => x.Include(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value));
-            bool isFinish = false;
             var startTime = activatedExam.StartTime;
             int index = 0;
             TimeSpan sumTime = TimeSpan.FromSeconds(exam.Task[0].Time);
@@ -78,7 +66,7 @@ namespace ExamPortal.Hubs
                 {
                     if (exam.Task.Count == index + 1)
                     {
-                        isFinish = true;
+                        activatedExam.IsFinish = true;
                     }
                     else
                     {
@@ -92,8 +80,7 @@ namespace ExamPortal.Hubs
                                 TaskAnswerId = new Guid()
                             };
                             activatedExam.ExamAnswers.TaskAnswers.Add(taskAnswers);
-                            _unitOfWork.ActivatedExams.Update(activatedExam);
-                            await _unitOfWork.Save();
+                            await SaveActivatedExam(activatedExam);
                         }
                         sumTime -= TimeSpan.FromSeconds(tasks[index].Time);
                         index++;
@@ -107,9 +94,16 @@ namespace ExamPortal.Hubs
                     tasks[index].Time = (int)(sumTime - currentTime).TotalSeconds;
                     await Clients.Caller.SendAsync("Question", tasks[index]);
                 }
-            } while (!isFinish);
+            } while (!activatedExam.IsFinish);
+            await SaveActivatedExam(activatedExam);
             await Clients.Caller.SendAsync("FinishExam");
             Context.Abort();
+        }
+
+        private async Task SaveActivatedExam(ActivatedExam activatedExam)
+        {
+            _unitOfWork.ActivatedExams.Update(activatedExam);
+            await _unitOfWork.Save();
         }
 
         public async Task SendAnswer(TaskAnswerDTO answer)
