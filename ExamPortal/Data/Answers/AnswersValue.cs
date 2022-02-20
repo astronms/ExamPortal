@@ -13,9 +13,10 @@ namespace ExamPortal.Data.Answers
 
         [XmlText]
         public string Value { get; set; }
+        public int SortId { get; set; }
 
-        [ForeignKey(nameof(Answers))]
-        public Guid AnswersId { get; set; }
-        public virtual Answers Answers { get; set; }
+        [ForeignKey(nameof(TaskAnswers))]
+        public Guid TaskAnswersId { get; set; }
+        public virtual TaskAnswers TaskAnswers { get; set; }
     }
 }

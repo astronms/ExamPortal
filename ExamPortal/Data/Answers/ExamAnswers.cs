@@ -14,17 +14,7 @@ namespace ExamPortal.Data.Answers
     {
         [Key]
         public Guid ExamAnswersId { get; set; }
-        [XmlElement(ElementName = "task")]
         public List<TaskAnswers> TaskAnswers { get; set; }
-        [XmlAttribute(AttributeName = "id")]
-        public string ExternalId { get; set; }
-        [XmlAttribute(AttributeName = "userId")]
-        public string UserId { get; set; }
-
-        [ForeignKey(nameof(SessionAnswers))]
-        public Guid SessionAnswersId { get; set; }
-        public virtual SessionAnswers SessionAnswers { get; set; }
-
 
         public virtual ActivatedExam ActivatedExams { get; set; }
 	}

@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ExamPortal.Data;
 using ExamPortal.Data.ActivetedExams;
+using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.Models;
 using ExamPortal.Models.Exam;
 using ExamPortal.Models.Users;
 using ExamPortal.XML.Session;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace ExamPortal.Configuration
 {
@@ -62,6 +64,19 @@ namespace ExamPortal.Configuration
                 .ForMember(dto => dto.Time, opt => opt.MapFrom(x => x.Time))
                 .ForMember(dto => dto.Title, opt => opt.MapFrom(x => x.Title))
                 .ForMember(dto => dto.Values, opt => opt.MapFrom(x => x.Questions.Value));
+            CreateMap<TaskAnswers, TaskAnswerDTO>()
+                .ForMember(dto => dto.TaskId, opt => opt.MapFrom(x => x.ExamTaskId))
+                .ForMember(dto => dto.Values, opt => opt.MapFrom(x => x.AnswersValue));
+            CreateMap<TaskAnswerDTO, TaskAnswers>()
+                .ForMember(src => src.ExamTaskId, opt => opt.MapFrom(x => x.TaskId))
+                .ForMember(src => src.AnswersValue, opt => opt.MapFrom(x => x.Values));
+            CreateMap<AnswersValue, AnswerValueDTO>()
+                .ForMember(dto=>dto.SortId,opt=>opt.MapFrom(x=>x.SortId))
+                .ForMember(x=>x.Answer, opt=>opt.MapFrom(x=>x.Value));
+            CreateMap<AnswerValueDTO, AnswersValue>()
+                .ForMember(src => src.SortId, opt => opt.MapFrom(x => x.SortId))
+                .ForMember(src => src.Value, opt => opt.MapFrom(x => x.Answer));
+
         }
     }
 }

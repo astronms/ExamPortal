@@ -40,8 +40,6 @@ namespace ExamPortal.Data
 
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Exam> Exams { get; set; }
-
-        public DbSet<SessionAnswers> SessionAnswers { get; set; }
         public DbSet<ExamAnswers> ExamAnswers { get; set; }
     }
 }

@@ -8,15 +8,18 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using ExamPortal.Data.ActivetedExams;
+using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.IRepository;
+using ExamPortal.Models;
 using ExamPortal.Models.Exam;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace ExamPortal.Hubs
 {
@@ -58,12 +61,11 @@ namespace ExamPortal.Hubs
 
         public async Task GetQuestion(Guid sessionId)
         {
-            var currentUser = Context.User;
-            var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
-            User user = await _userManager.FindByNameAsync(currentUserName);
+            var user = await GetUser();
             _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
                 x.Include(x => x.Exam)
-                    .Include(x => x.ExamAnswers));
+                    .Include(x => x.ExamAnswers)
+                    .ThenInclude(x => x.TaskAnswers));
             _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId, x => x.Include(x => x.Task).ThenInclude(x => x.Questions).ThenInclude(x => x.Value));
             bool isFinish = false;
             var startTime = _activatedExam.StartTime;
@@ -73,9 +75,13 @@ namespace ExamPortal.Hubs
             await Clients.Caller.SendAsync("Question", tasks[index]);
             do
             {
+                _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                    x.Include(x => x.Exam)
+                        .Include(x => x.ExamAnswers)
+                        .ThenInclude(x => x.TaskAnswers));
                 var currentTime = DateTime.Now - startTime;
 
-                if (currentTime > sumTime)
+                if (currentTime > sumTime || _activatedExam.ExamAnswers.TaskAnswers.Count == index + 1)
                 {
                     if (_exam.Task.Count == index + 1)
                     {
@@ -83,8 +89,10 @@ namespace ExamPortal.Hubs
                     }
                     else
                     {
+                        sumTime -= TimeSpan.FromSeconds(tasks[index].Time);
                         index++;
                         sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
+
                         await Clients.Caller.SendAsync("Question", tasks[index]);
                     }
                 }
@@ -95,12 +103,30 @@ namespace ExamPortal.Hubs
                     await Clients.Caller.SendAsync("Question", tasks[index]);
                 }
             } while (!isFinish);
+
+            await Clients.Caller.SendAsync("FinishExam");
+            Context.Abort();
         }
 
-        public async Task SendAnswer(Object answer)
+        public async Task SendAnswer(TaskAnswerDTO answer)
         {
-            Debug.WriteLine(answer);
-        }
+            var taskAnswer = _mapper.Map<TaskAnswers>(answer);
+            var user = await GetUser();
+            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user, x =>
+                x.Include(x => x.Exam)
+                    .Include(x => x.ExamAnswers)
+                    .ThenInclude(x=>x.TaskAnswers));
+            _activatedExam.ExamAnswers.TaskAnswers.Add(taskAnswer);
+            _unitOfWork.ExamAnswers.Update(_activatedExam.ExamAnswers);
+            await _unitOfWork.Save();
         }
 
+        private async Task<User> GetUser()
+        {
+            var currentUser = Context.User;
+            var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
+            User user = await _userManager.FindByNameAsync(currentUserName);
+            return user;
+        }
+    }
 }

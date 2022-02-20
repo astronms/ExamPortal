@@ -37,7 +37,7 @@ namespace ExamPortal
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
-            services.AddSignalR().AddJsonProtocol();
+            services.AddSignalR().AddNewtonsoftJsonProtocol();
             services.AddCors(options =>
             {
                 options.AddPolicy("EnableCORS", builder =>

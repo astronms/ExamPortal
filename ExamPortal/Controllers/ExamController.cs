@@ -89,7 +89,7 @@ namespace ExamPortal.Controllers
                     await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId,
                         x => x.Include(x => x.Exams).ThenInclude(x => x.Task).ThenInclude(x => x.Questions)
                             .ThenInclude(x => x.Value)
-                            .Include(x=>x.Course));
+                            .Include(x => x.Course));
                 var curseForCurrentUser =
                     await _unitOfWork.Courses.Get(x => x.CourseUsers.Any(x => x.UserId == user.Id));
                 if (session == null || curseForCurrentUser == null)
@@ -100,34 +100,38 @@ namespace ExamPortal.Controllers
 
                 if (DateTime.Now > session.EndDate) return StatusCode(StatusCodes.Status410Gone, "Session expired");
 
-                var random = new Random();
-                var index = random.Next(session.Exams.Count);
-                var userExam = session.Exams.ElementAt(index);
+                var activatedExams = await _unitOfWork.ActivatedExams.GetAll();
+                if (!activatedExams.Select(x => x.UserId == user.Id && x.Exam.SessionId == sessionId).Any())
+                {
+                    var random = new Random();
+                    var index = random.Next(session.Exams.Count);
+                    var userExam = session.Exams.ElementAt(index);
 
-                //TODO sessionAnswers logic
-                var sessionAnswers = new SessionAnswers
-                {
-                    SessionAnswersId = Guid.NewGuid()
-                };
-                var activatedExam = new ActivatedExam
-                {
-                    ActivatedExamId = Guid.NewGuid(),
-                    ExamId = userExam.ExamId,
-                    UserId = user.Id,
-                    StartTime = new DateTime(),
-                    ExamAnswersId = Guid.NewGuid(),
-                    IpAddress = ControllerContext.HttpContext.Connection.RemoteIpAddress?.ToString(),
-                ExamAnswers = new ExamAnswers
+
+                    var activatedExam = new ActivatedExam
                     {
-                        SessionAnswers = sessionAnswers,
-                        SessionAnswersId = sessionAnswers.SessionAnswersId
-                    }
-                };
-                await _unitOfWork.ActivatedExams.Insert(activatedExam);
-                await _unitOfWork.Save();
+                        ActivatedExamId = Guid.NewGuid(),
+                        ExamId = userExam.ExamId,
+                        UserId = user.Id,
+                        StartTime = new DateTime(),
+                        ExamAnswersId = Guid.NewGuid(),
+                        IpAddress = ControllerContext.HttpContext.Connection.RemoteIpAddress?.ToString(),
+                        ExamAnswers = new ExamAnswers
+                        {
+                            ExamAnswersId = Guid.NewGuid(),
+                            TaskAnswers = new List<TaskAnswers>()
+                        }
+                    };
+                    await _unitOfWork.ActivatedExams.Insert(activatedExam);
+                    await _unitOfWork.Save();
 
-                var examInfo = GetExamInfo(userExam);
-                return Ok(examInfo);
+                    var examInfo = GetExamInfo(userExam);
+                    return Ok(examInfo);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status423Locked, "Session already started");
+                }
             }
             catch (Exception ex)
             {
