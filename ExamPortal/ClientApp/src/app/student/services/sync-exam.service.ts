@@ -62,11 +62,13 @@ export class SyncExamService {
     this.hubConnection = new HubConnectionBuilder() 
       .configureLogging(LogLevel.Debug)
       .withUrl( this.baseUrl + 'examhub', options)
+      .withAutomaticReconnect()
       .build();
 
     this.hubConnection2 = new HubConnectionBuilder() 
       .configureLogging(LogLevel.Debug)
       .withUrl( this.baseUrl + 'examhub', options)
+      .withAutomaticReconnect()
       .build();
 
     this.hubConnection
