@@ -1,13 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, Subject, throwError } from 'rxjs';
-import { HttpTransportType, HubConnection, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
 import { AuthService } from 'src/app/services/auth.service';
 import { catchError } from 'rxjs/operators';
 import { PersonalExamInfoModel } from '../models/personal-exam-info.model';
 import { QuestionModel } from '../models/question.model';
 import { AnswerModel } from '../models/answer.model';
-import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -73,13 +72,11 @@ export class SyncExamService {
 
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
       .then(() => this.callGetQuestion())
       .catch(this.handleError);
 
     this.hubConnection2
       .start()
-      .then(() => console.log('Connection 2 started'))
       .catch(this.handleError);
 
   }
