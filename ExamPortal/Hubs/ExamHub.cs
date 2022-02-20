@@ -1,9 +1,5 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -19,7 +15,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace ExamPortal.Hubs
 {
@@ -30,8 +25,6 @@ namespace ExamPortal.Hubs
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<ExamHub> _logger;
         private readonly IMapper _mapper;
-        private Exam _exam;
-        private ActivatedExam _activatedExam;
 
         public ExamHub(UserManager<User> userManager, IUnitOfWork unitOfWork, ILogger<ExamHub> logger,
             IMapper mapper)
@@ -47,14 +40,14 @@ namespace ExamPortal.Hubs
             var currentUser = Context.User;
             var currentUserName = currentUser?.FindFirst(ClaimTypes.Name)?.Value;
             User user = await _userManager.FindByNameAsync(currentUserName);
-            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
-                x.Include(x => x.Exam)
-                    .Include(x => x.ExamAnswers));
-            if (_activatedExam.StartTime == new DateTime())
+            ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                x.Include(i => i.Exam)
+                    .Include(i => i.ExamAnswers));
+            if (activatedExam.StartTime == new DateTime())
             {
                 var startTime = DateTime.Now;
-                _activatedExam.StartTime = startTime;
-                _unitOfWork.ActivatedExams.Update(_activatedExam);
+                activatedExam.StartTime = startTime;
+                _unitOfWork.ActivatedExams.Update(activatedExam);
                 await _unitOfWork.Save();
             }
         }
@@ -62,37 +55,49 @@ namespace ExamPortal.Hubs
         public async Task GetQuestion(Guid sessionId)
         {
             var user = await GetUser();
-            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
-                x.Include(x => x.Exam)
-                    .Include(x => x.ExamAnswers)
-                    .ThenInclude(x => x.TaskAnswers));
-            _exam = await _unitOfWork.Exams.Get(x => x.ExamId == _activatedExam.ExamId, x => x.Include(x => x.Task).ThenInclude(x => x.Questions).ThenInclude(x => x.Value));
+            ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                x.Include(i => i.Exam)
+                    .Include(i => i.ExamAnswers)
+                    .ThenInclude(i => i.TaskAnswers));
+            Exam exam = await _unitOfWork.Exams.Get(x => x.ExamId == activatedExam.ExamId, x => x.Include(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value));
             bool isFinish = false;
-            var startTime = _activatedExam.StartTime;
+            var startTime = activatedExam.StartTime;
             int index = 0;
-            TimeSpan sumTime = TimeSpan.FromSeconds(_exam.Task[0].Time);
-            IList<TaskDTO> tasks = _mapper.Map<IList<ExamTask>, IList<TaskDTO>>(_exam.Task);
+            TimeSpan sumTime = TimeSpan.FromSeconds(exam.Task[0].Time);
+            IList<TaskDTO> tasks = _mapper.Map<IList<ExamTask>, IList<TaskDTO>>(exam.Task);
             await Clients.Caller.SendAsync("Question", tasks[index]);
             do
             {
-                _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
-                    x.Include(x => x.Exam)
-                        .Include(x => x.ExamAnswers)
-                        .ThenInclude(x => x.TaskAnswers));
+                activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                    x.Include(i => i.Exam)
+                        .Include(i => i.ExamAnswers)
+                        .ThenInclude(i => i.TaskAnswers));
                 var currentTime = DateTime.Now - startTime;
 
-                if (currentTime > sumTime || _activatedExam.ExamAnswers.TaskAnswers.Count == index + 1)
+                if (currentTime > sumTime || activatedExam.ExamAnswers.TaskAnswers.Count == index + 1)
                 {
-                    if (_exam.Task.Count == index + 1)
+                    if (exam.Task.Count == index + 1)
                     {
                         isFinish = true;
                     }
                     else
                     {
+                        if (activatedExam.ExamAnswers.TaskAnswers.Count < index + 1)
+                        {
+                            var taskAnswers = new TaskAnswers()
+                            {
+                                AnswersValue = new List<AnswersValue>(),
+                                ExamAnswersId = activatedExam.ExamAnswersId,
+                                ExamTaskId = exam.Task[index].TaskId,
+                                TaskAnswerId = new Guid()
+                            };
+                            activatedExam.ExamAnswers.TaskAnswers.Add(taskAnswers);
+                            _unitOfWork.ActivatedExams.Update(activatedExam);
+                            await _unitOfWork.Save();
+                        }
                         sumTime -= TimeSpan.FromSeconds(tasks[index].Time);
                         index++;
-                        sumTime += TimeSpan.FromSeconds(_exam.Task[index].Time);
-
+                        sumTime += TimeSpan.FromSeconds(exam.Task[index].Time);
                         await Clients.Caller.SendAsync("Question", tasks[index]);
                     }
                 }
@@ -103,7 +108,6 @@ namespace ExamPortal.Hubs
                     await Clients.Caller.SendAsync("Question", tasks[index]);
                 }
             } while (!isFinish);
-
             await Clients.Caller.SendAsync("FinishExam");
             Context.Abort();
         }
@@ -112,12 +116,12 @@ namespace ExamPortal.Hubs
         {
             var taskAnswer = _mapper.Map<TaskAnswers>(answer);
             var user = await GetUser();
-            _activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user, x =>
-                x.Include(x => x.Exam)
-                    .Include(x => x.ExamAnswers)
-                    .ThenInclude(x=>x.TaskAnswers));
-            _activatedExam.ExamAnswers.TaskAnswers.Add(taskAnswer);
-            _unitOfWork.ExamAnswers.Update(_activatedExam.ExamAnswers);
+            ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user, x =>
+                x.Include(i => i.Exam)
+                    .Include(i => i.ExamAnswers)
+                    .ThenInclude(i => i.TaskAnswers)); 
+            activatedExam.ExamAnswers.TaskAnswers.Add(taskAnswer);
+            _unitOfWork.ExamAnswers.Update(activatedExam.ExamAnswers);
             await _unitOfWork.Save();
         }
 
