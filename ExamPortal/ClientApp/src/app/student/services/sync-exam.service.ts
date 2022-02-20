@@ -18,6 +18,7 @@ export class SyncExamService {
   private hubConnection2: HubConnection;
   private examId: string;
   public questions: Subject<QuestionModel> = new Subject<QuestionModel>();
+  public examFinished: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private http: HttpClient,  
@@ -47,7 +48,6 @@ export class SyncExamService {
 
   sendAnswers(answer: AnswerModel)
   {
-    console.log(answer);
     this.hubConnection2.invoke('sendAnswer', answer);
   }
 
@@ -72,7 +72,6 @@ export class SyncExamService {
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
-      .then(() => this.callStartExam())
       .then(() => this.callGetQuestion())
       .catch(this.handleError);
 
@@ -83,14 +82,10 @@ export class SyncExamService {
 
   }
 
-  private callStartExam(): void 
+  private callGetQuestion(): void
   {
-    this.hubConnection.invoke('startExam', this.examId);
-  }
-
-  private callGetQuestion(): void 
-  {
-    this.hubConnection.invoke('getQuestion', this.examId);
+    this.hubConnection.invoke('getQuestion', this.examId)
+      .catch(this.handleError);
   }
 
   private setListeners(): void 
@@ -99,8 +94,9 @@ export class SyncExamService {
       this.questions.next(reply);
     });
 
-    this.hubConnection.onclose(rep => {
-      console.log("testt");
+    this.hubConnection.on('FinishExam', () => {
+      this.examFinished.next(true);
+      this.closeConnection();
     });
   }
 
