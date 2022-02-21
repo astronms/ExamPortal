@@ -67,6 +67,10 @@ namespace ExamPortal.Hubs
             await Clients.Caller.SendAsync("Question", tasks[index]);
             do
             {
+                activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                    x.Include(i => i.Exam)
+                        .Include(i => i.ExamAnswers)
+                        .ThenInclude(i => i.TaskAnswers));
                 var currentTime = DateTime.Now - startTime;
 
                 if (currentTime > sumTime || activatedExam.ExamAnswers.TaskAnswers.Count == index + 1)
