@@ -1,6 +1,6 @@
 <mat-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup" label="Wprowadź podstawowe informacje">
-        <form [formGroup]="firstFormGroup">
+        <form [formGroup]="firstFormGroup" autocomplete="off">
             <mat-form-field appearance="fill">
               <mat-label>Nazwa</mat-label>
               <input matInput placeholder="Nazwa" formControlName="examSessionName" [(ngModel)]='examSession.name' required>

@@ -12,7 +12,7 @@ import { QuestionModel } from '../../models/question.model';
 })
 export class ExamComponent implements OnDestroy {
 
-  //private interval: any = null;
+  public examFinished: boolean = false; 
   public actualQuestion: QuestionModel;
 
   constructor(
@@ -23,17 +23,21 @@ export class ExamComponent implements OnDestroy {
   ngOnInit() {
     var examId = this.route.snapshot.paramMap.get('id');
     this.examService.startExam(examId);
-    this.setQuestionListener();
+    this.setListeners();
   }
 
   ngOnDestroy(): void {
     this.examService.closeConnection();
   }
 
-  setQuestionListener()
+  setListeners()
   {
     this.examService.questions.subscribe(question => {
       this.actualQuestion = question;
+    });
+
+    this.examService.examFinished.subscribe(value => {
+      this.examFinished = value;
     });
   }
 
@@ -41,17 +45,5 @@ export class ExamComponent implements OnDestroy {
   {
     this.examService.sendAnswers(event);
   }
-
-  /*ngOnDestroy() {
-    clearInterval(this.interval);
-  }
-  
-
-  private setViewTimer() : void
-  {
-    this.interval = setInterval(() => {
-      this.timeLeft--;
-    }, 1000)
-  }*/
   
 }
