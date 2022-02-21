@@ -72,6 +72,37 @@ namespace ExamPortal.Controllers
         }
 
         [Authorize(Roles = "User")]
+        [HttpGet("{sessionId:guid}/IsPrepared")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status410Gone)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> IsPrepareExam([FromRoute] Guid sessionId)
+        {
+            try
+            {
+                var currentUser = User;
+                var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
+                var user = await _userManager.FindByNameAsync(currentUserName);
+                var activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId);
+                if (activatedExam != null)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(PrepareExam)} with Session id: {sessionId}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+        [Authorize(Roles = "User")]
         [HttpGet("{sessionId:guid}/prepare")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
