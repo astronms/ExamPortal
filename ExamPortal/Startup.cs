@@ -31,13 +31,13 @@ namespace ExamPortal
         {
             services.AddDbContext<DatabaseContext>(options =>
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"));
+                    options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")).EnableDetailedErrors().EnableSensitiveDataLogging();
                 }
                );
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
-            services.AddSignalR().AddNewtonsoftJsonProtocol();
+            services.AddSignalR().AddNewtonsoftJsonProtocol(o=>o.PayloadSerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddCors(options =>
             {
                 options.AddPolicy("EnableCORS", builder =>
@@ -54,7 +54,7 @@ namespace ExamPortal
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             services.AddAutoMapper(typeof(MapperInitializer));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IXmlValidator, XmlValidator>();
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddSwaggerGen(c =>
@@ -105,7 +105,6 @@ namespace ExamPortal
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -116,7 +115,6 @@ namespace ExamPortal
             app.UseCors("EnableCORS");
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

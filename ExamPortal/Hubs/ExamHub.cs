@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -14,7 +15,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace ExamPortal.Hubs
 {
@@ -54,62 +57,82 @@ namespace ExamPortal.Hubs
 
         public async Task GetQuestion(Guid sessionId)
         {
-            var user = await GetUser();
-            ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
-                x.Include(i => i.Exam)
-                    .Include(i => i.ExamAnswers)
-                    .ThenInclude(i => i.TaskAnswers));
-            Exam exam = await _unitOfWork.Exams.Get(x => x.ExamId == activatedExam.ExamId, x => x.Include(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value));
-            var startTime = activatedExam.StartTime;
-            int index = 0;
-            TimeSpan sumTime = TimeSpan.FromSeconds(exam.Task[0].Time);
-            IList<TaskDTO> tasks = _mapper.Map<IList<ExamTask>, IList<TaskDTO>>(exam.Task);
-            await Clients.Caller.SendAsync("Question", tasks[index]);
-            do
+            try
             {
-                activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
-                    x.Include(i => i.Exam)
+                var user = await GetUser();
+                ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                    x.Include(i => i.Exam).ThenInclude(i=>i.Task).ThenInclude(i=>i.Questions).ThenInclude(i=>i.Value)
                         .Include(i => i.ExamAnswers)
                         .ThenInclude(i => i.TaskAnswers));
-                var currentTime = DateTime.Now - startTime;
-
-                if (currentTime > sumTime || activatedExam.ExamAnswers.TaskAnswers.Count == index + 1)
+                //Exam exam = await _unitOfWork.Exams.Get(x => x.ExamId == activatedExam.ExamId, x => x.Include(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value));
+                var startTime = activatedExam.StartTime;
+                int index = 0;
+                TimeSpan sumTime = TimeSpan.FromSeconds(activatedExam.Exam.Task[0].Time);
+                IList<TaskDTO> tasks = _mapper.Map<IList<ExamTask>, IList<TaskDTO>>(activatedExam.Exam.Task);
+                await Clients.Caller.SendAsync("Question", tasks[index]);
+                
+                do
                 {
-                    if (exam.Task.Count == index + 1)
+                    activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
+                        x.Include(i => i.Exam).ThenInclude(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value)
+                            .Include(i => i.ExamAnswers)
+                            .ThenInclude(i => i.TaskAnswers));
+                    var currentTime = DateTime.Now - startTime;
+
+                    if (currentTime > sumTime || activatedExam.ExamAnswers.TaskAnswers.Count == index + 1)
                     {
-                        activatedExam.IsFinish = true;
+                        if (activatedExam.Exam.Task.Count == index + 1)
+                        {
+                            activatedExam.IsFinish = true;
+                        }
+                        else
+                        {
+                            if (activatedExam.ExamAnswers.TaskAnswers.Count < index + 1)
+                            {
+                                var answerValueList = new List<AnswersValue>();
+                                foreach (var task in activatedExam.Exam.Task)
+                                {
+                                    answerValueList.Add(new AnswersValue()
+                                    {
+                                        AnswersValueId = new Guid(),
+                                        SortId = task.SortId,
+                                        TaskAnswersId = task.TaskId,
+                                        Value = String.Empty
+                                    });
+                                }
+                                var taskAnswers = new TaskAnswers()
+                                {
+                                    AnswersValue = answerValueList,
+                                    ExamAnswersId = activatedExam.ExamAnswersId,
+                                    ExamTaskId = activatedExam.Exam.Task[index].TaskId,
+                                    TaskAnswerId = new Guid()
+                                };
+                                activatedExam.ExamAnswers.TaskAnswers.Add(taskAnswers);
+                                _unitOfWork.ActivatedExams.Update(activatedExam);
+                                await _unitOfWork.Save();
+                            }
+                            sumTime -= TimeSpan.FromSeconds(tasks[index].Time);
+                            index++;
+                            sumTime += TimeSpan.FromSeconds(activatedExam.Exam.Task[index].Time);
+                            await Clients.Caller.SendAsync("Question", tasks[index]);
+                        }
                     }
                     else
                     {
-                        if (activatedExam.ExamAnswers.TaskAnswers.Count < index + 1)
-                        {
-                            var taskAnswers = new TaskAnswers()
-                            {
-                                AnswersValue = new List<AnswersValue>(),
-                                ExamAnswersId = activatedExam.ExamAnswersId,
-                                ExamTaskId = exam.Task[index].TaskId,
-                                TaskAnswerId = new Guid()
-                            };
-                            activatedExam.ExamAnswers.TaskAnswers.Add(taskAnswers);
-                        }
-                        sumTime -= TimeSpan.FromSeconds(tasks[index].Time);
-                        index++;
-                        sumTime += TimeSpan.FromSeconds(exam.Task[index].Time);
+                        await Task.Delay(500);
+                        tasks[index].Time = (int)(sumTime - currentTime).TotalSeconds;
                         await Clients.Caller.SendAsync("Question", tasks[index]);
                     }
-                }
-                else
-                {
-                    await Task.Delay(500);
-                    tasks[index].Time = (int)(sumTime - currentTime).TotalSeconds;
-                    await Clients.Caller.SendAsync("Question", tasks[index]);
-                }
+                } while (!activatedExam.IsFinish);
+                await Clients.Caller.SendAsync("FinishExam");
+                Context.Abort();
                 _unitOfWork.ActivatedExams.Update(activatedExam);
                 await _unitOfWork.Save();
-            } while (!activatedExam.IsFinish);
-            await Clients.Caller.SendAsync("FinishExam");
-            Context.Abort();
-
+            }
+            catch (Exception ex)
+            {
+                var test = ex.Message;
+            }
         }
 
         public async Task SendAnswer(TaskAnswerDTO answer)

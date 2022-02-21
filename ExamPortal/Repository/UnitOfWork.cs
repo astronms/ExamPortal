@@ -38,6 +38,7 @@ namespace ExamPortal.Repository
         public async Task Save()
         {
             await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
         }
 
         public void Dispose()
