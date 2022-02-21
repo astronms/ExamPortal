@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of, Subject, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { HubConnection, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
 import { AuthService } from 'src/app/services/auth.service';
 import { catchError } from 'rxjs/operators';
@@ -72,6 +72,7 @@ export class SyncExamService {
 
     this.hubConnection
       .start()
+      .then(() => this.callStartExam())
       .then(() => this.callGetQuestion())
       .catch(this.handleError);
 
@@ -79,6 +80,12 @@ export class SyncExamService {
       .start()
       .catch(this.handleError);
 
+  }
+
+  private callStartExam(): void
+  {
+    this.hubConnection.invoke('startExam', this.examId)
+      .catch(this.handleError);
   }
 
   private callGetQuestion(): void
