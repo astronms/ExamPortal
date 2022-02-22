@@ -85,10 +85,11 @@ namespace ExamPortal.Controllers
                 var currentUser = User;
                 var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
                 var user = await _userManager.FindByNameAsync(currentUserName);
-                var activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId);
+                var activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, i => i.Include(x => x.Exam));
                 if (activatedExam != null)
                 {
-                    return Ok();
+                    var examInfo = GetExamInfo(activatedExam.Exam);
+                    return Ok(examInfo);
                 }
                 else
                 {
@@ -186,25 +187,5 @@ namespace ExamPortal.Controllers
             };
             return exmaInfo;
         }
-
-        //[Authorize(Roles = "User")]
-        //[HttpGet("{sessionId:guid}/exam")]
-        //public async Task<IActionResult> ExecuteExam([FromRoute] Guid sessionId)
-        //{
-        //    try
-        //    {
-        //        ClaimsPrincipal currentUser = User;
-        //        var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
-        //        User user = await _userManager.FindByNameAsync(currentUserName);
-
-
-        //        return Accepted();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, $"Something Went Wrong in the {nameof(ExecuteExam)} with Session id: {sessionId}");
-        //        return StatusCode(500, "Internal Server Error. Please Try Again Later.");
-        //    }
-        //}
     }
 }
