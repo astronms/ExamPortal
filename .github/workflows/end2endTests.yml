@@ -27,6 +27,12 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+          
+      - name: Install SQL Server
+        uses: Particular/install-sql-server-action@main
+        with:
+          connection-string-env-var: SQL_SERVER_CONNECTION_STRING
+          catalog: nservicebus
 
       - name: npm install and npm run e2e
         run: |
