@@ -1,31 +1,21 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { SyncExamService } from '../../services/sync-exam.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'timer-template',
   templateUrl: './timer-template.component.html',
   styleUrls: ['./timer-template.component.css']
 })
-export class TimerTemplateComponent implements OnInit {
+export class TimerTemplateComponent{
 
   private tickCounter: number;
   public textToDisplay: string;
 
-  constructor(
-    private examService: SyncExamService
-  ) { }
+  @Input('time') set timer(time: number) {
+    this.tickCounter = time;
+    this.renderText();
+  };
 
-  ngOnInit(): void {
-    this.setQuestionListener();
-  }
-
-  setQuestionListener()
-  {
-    this.examService.questions.subscribe(q => {
-      this.tickCounter = q.time;
-      this.renderText();
-    });
-  }
+  constructor() { }
 
   private renderText() : void
   {

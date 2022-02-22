@@ -7,7 +7,8 @@
   
   <section class="services-00 d-flex align-items-center py-5" id="services">
     <div class="container text-light">
-      <timer-template></timer-template>
+      <timer-template [time]="actualTime"></timer-template>
+
       <open-question-template 
         *ngIf="actualQuestion.type == 'Opened'" 
         [question]="actualQuestion" 
@@ -23,6 +24,7 @@
         [question]="actualQuestion"
         (onAnswer)="onAnswer($event)">
       </yes-no-question-template>
+
     </div> <!-- end of container -->
   </section>
 </ng-container>

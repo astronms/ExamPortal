@@ -28,7 +28,15 @@ export class SyncExamService {
   getExamData(examId: string) : Observable<PersonalExamInfoModel>
   {
     return this.http.get<PersonalExamInfoModel>(this.baseUrl + 'api/auth/Exam/' + examId +'/prepare').pipe(
-      catchError(this.handleError)
+      catchError(err => {
+        if(err.status == 423)
+        {
+          return this.http.get<PersonalExamInfoModel>(this.baseUrl + 'api/auth/Exam/' + examId +'/IsPrepared').pipe(
+            catchError(this.handleError)
+          );
+        }
+        return this.handleError(err);
+      })
     );
   }
 
@@ -59,13 +67,15 @@ export class SyncExamService {
     };
 
     this.hubConnection = new HubConnectionBuilder() 
-      .configureLogging(LogLevel.Debug)
+      //.configureLogging(LogLevel.Debug)
+      .configureLogging(LogLevel.None)
       .withUrl( this.baseUrl + 'examhub', options)
       .withAutomaticReconnect()
       .build();
 
     this.hubConnection2 = new HubConnectionBuilder() 
-      .configureLogging(LogLevel.Debug)
+      //.configureLogging(LogLevel.Debug)
+      .configureLogging(LogLevel.None)
       .withUrl( this.baseUrl + 'examhub', options)
       .withAutomaticReconnect()
       .build();
@@ -118,5 +128,4 @@ export class SyncExamService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-
 }
