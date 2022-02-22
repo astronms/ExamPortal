@@ -85,7 +85,7 @@ namespace ExamPortal.Controllers
                 var currentUser = User;
                 var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
                 var user = await _userManager.FindByNameAsync(currentUserName);
-                var activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, i => i.Include(x => x.Exam));
+                var activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, i => i.Include(x => x.Exam).ThenInclude(x => x.Task));
                 if (activatedExam != null)
                 {
                     var examInfo = GetExamInfo(activatedExam.Exam);
