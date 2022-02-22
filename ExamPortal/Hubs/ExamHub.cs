@@ -64,7 +64,6 @@ namespace ExamPortal.Hubs
                     x.Include(i => i.Exam).ThenInclude(i=>i.Task).ThenInclude(i=>i.Questions).ThenInclude(i=>i.Value)
                         .Include(i => i.ExamAnswers)
                         .ThenInclude(i => i.TaskAnswers));
-                //Exam exam = await _unitOfWork.Exams.Get(x => x.ExamId == activatedExam.ExamId, x => x.Include(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value));
                 var startTime = activatedExam.StartTime;
                 int index = 0;
                 TimeSpan sumTime = TimeSpan.FromSeconds(activatedExam.Exam.Task[0].Time);
