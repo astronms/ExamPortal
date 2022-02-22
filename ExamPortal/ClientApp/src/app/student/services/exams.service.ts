@@ -13,8 +13,10 @@ export class ExamsService {
 
   constructor(private http: HttpClient,  @Inject('BASE_URL')private baseUrl: string) { }
 
-  getListOfExams() : Observable<ExamSessionModel[]>{
-    return this.http.get<ExamSessionModel[]>(this.baseUrl + 'api/exam/getlist').pipe(catchError(this.handleError));
+  getListOfExamSessions() : Observable<ExamSessionModel[]>{
+    return this.http.get<ExamSessionModel[]>(this.baseUrl + 'api/auth/Session/student').pipe(
+      catchError(this.handleError)
+    );
   }
   
   private handleError(error: HttpErrorResponse) {

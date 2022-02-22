@@ -58,7 +58,16 @@ export class CourseModifyTemplateComponent implements OnInit {
   
       dialogRef.afterClosed().subscribe(result => {
         if(result)
-          this.stepper.reset()
+        {
+          this.course = {
+            courseId: 0,
+            name: "",
+            creationDate: new Date(),
+            sessions: [],
+            users: [],
+          };
+          this.stepper.reset();
+        }
         else
           this.router.navigate([this.redirect]);
       });

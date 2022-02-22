@@ -1,0 +1,19 @@
+<ng-container *ngIf="_question">
+    <h3>{{ _question.title }}</h3>
+    <img *ngIf="image" [attr.src]="image">
+    <form class="answer-form" [formGroup]="formGroup" *ngIf="_question" #questionForm="ngForm">
+        <ng-container *ngFor="let value of _question.values">
+            <div class="row" *ngIf="value">
+                <div class="col-10"><p>{{ value.text }}</p></div> 
+                <div class="col">
+                    <mat-radio-group formControlName="formId_{{ value.sortId }}">
+                        <mat-radio-button [value]="true">Tak</mat-radio-button>
+                        <mat-radio-button [value]="false">Nie</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </ng-container>
+        <br />
+        <button class="btn btn-sm btn-block" (click)="onSubmit()">Zapisz</button>
+    </form>
+</ng-container>

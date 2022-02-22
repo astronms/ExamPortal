@@ -13,13 +13,17 @@ namespace ExamPortal.Models.Exam
         public string Title { get; set; }
         public string Type { get; set; }
         public string Time { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public Guid ExamId { get; set; }
     }
-    public class TaskDTO : CreateTaskDTO
+    public class TaskDTO 
     {
         public Guid TaskId { get; set; }
-        public ExamDTO Exam { get; set; }
-        public virtual IList<QuestionDTO> Questions { get; set; }
+        public string Title { get; set; }
+        public string Type { get; set; }
+        public int Time { get; set; }
+        public string ImageType { get; set; }
+        public byte[] Image { get; set; }
+        public IList<ValueDTO> Values { get; set; }
     }
 }

@@ -10,9 +10,6 @@
         <mat-progress-bar mode="indeterminate" *ngIf="!course"></mat-progress-bar>
         <mat-tab-group *ngIf="course">
             <mat-tab label="Ogólne"> 
-                <!-- <p>Nazwa: {{ course.name }}</p>
-                <p>Data utworzenia: {{ course.creationDate | date: 'dd/MM/yyyy' }}</p>
-                <p>Przypisanych studentów: {{ course.users ? course.users.length : "N/A" }}</p> -->
                 <div class="container top-buffer" *ngIf="course">
                     <div class="row">
                         <div class="col-3"><strong>Nazwa:</strong></div>

@@ -1,8 +1,15 @@
-import { AnswerModel } from "./answer.model";
-
 export interface QuestionModel {
-    id: number;
-    content: string;
-    time: number;
-    answers: AnswerModel[];
-  }
+  taskId: number;
+  title: string;
+  type: string;
+  time: number;
+  imageType: string;
+  image: string;
+  values: QuestionValue[];
+}
+
+export interface QuestionValue {
+  sortId: number;
+  regex: string;
+  text: string;
+}

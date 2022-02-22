@@ -31,7 +31,7 @@ namespace ExamPortal.XML.Session
         [XmlAttribute(AttributeName = "type")]
         public string Type { get; set; }
         [XmlAttribute(AttributeName = "time")]
-        public string Time { get; set; }
+        public int Time { get; set; }
         [XmlElement(ElementName = "image")]
         public string Image { get; set; }
     }

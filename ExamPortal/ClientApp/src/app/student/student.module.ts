@@ -5,15 +5,24 @@ import { ExamsComponent } from './components/exams/exams.component';
 import { ExamComponent } from './components/exam/exam.component';
 
 import { ExamsService } from './services/exams.service';
-import { ExamFactoryService } from './services/exam-factory.service';
 import { SyncExamService } from './services/sync-exam.service';
 import { SharedModule } from '../shared/shared.module';
+import { StartExamDialogComponent } from './components/start-exam-dialog/start-exam-dialog.component';
+import { TimerTemplateComponent } from './components/timer-template/timer-template.component';
+import { ClosedQuestionTemplateComponent } from './components/closed-question-template/closed-question-template.component';
+import { OpenQuestionTemplateComponent } from './components/open-question-template/open-question-template.component';
+import { YesNoQuestionTemplateComponent } from './components/yes-no-question-template/yes-no-question-template.component';
 
 
 @NgModule({
   declarations: [
     ExamsComponent,
-    ExamComponent
+    ExamComponent,
+    StartExamDialogComponent,
+    TimerTemplateComponent,
+    ClosedQuestionTemplateComponent,
+    OpenQuestionTemplateComponent,
+    YesNoQuestionTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +31,6 @@ import { SharedModule } from '../shared/shared.module';
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },
     ExamsService,
-    ExamFactoryService,
     SyncExamService,
   ],
 })

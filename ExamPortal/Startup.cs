@@ -1,21 +1,17 @@
-using System;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using ExamPortal.Configuration;
 using ExamPortal.Data;
+using ExamPortal.Hubs;
 using ExamPortal.IRepository;
 using ExamPortal.Repository;
 using ExamPortal.Services;
 using ExamPortal.XML.Exam;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
@@ -35,19 +31,20 @@ namespace ExamPortal
         {
             services.AddDbContext<DatabaseContext>(options =>
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"));
+                    options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")).EnableDetailedErrors().EnableSensitiveDataLogging();
                 }
                );
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
-
+            services.AddSignalR().AddNewtonsoftJsonProtocol(o=>o.PayloadSerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddCors(options =>
             {
                 options.AddPolicy("EnableCORS", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:5000/")
                        .AllowAnyHeader()
+                       .AllowCredentials()
                        .AllowAnyMethod();
                 });
             });
@@ -57,7 +54,7 @@ namespace ExamPortal
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             services.AddAutoMapper(typeof(MapperInitializer));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IXmlValidator, XmlValidator>();
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddSwaggerGen(c =>
@@ -108,26 +105,22 @@ namespace ExamPortal
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
-            
             app.UseRouting();
-
+            app.UseCors("EnableCORS");
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseCors("EnableCORS");
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHub<ExamHub>("/examhub");
             });
 
             app.UseSpa(spa =>

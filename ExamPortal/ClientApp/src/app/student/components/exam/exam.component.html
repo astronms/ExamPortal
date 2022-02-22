@@ -1,16 +1,46 @@
-<div *ngIf="!examFinished">
-  <h1 *ngIf="question">#{{ question.id }}: {{ question.content }}</h1>
-  <p>
-    Pozostały czas: <label *ngIf="question">{{ timeLeft }}</label>
-  </p>
-  <div *ngIf="question">
-    <div *ngFor="let answer of question.answers">
-      <label>{{ answer.content }}</label>
-      <input type="checkbox" checked data-toggle="toggle">
-    </div>
-    <button type="button" class="btn btn-dark" (click)="sendAnswers()">Zapisz</button>
+<ng-container *ngIf="actualQuestion && !examFinished">
+  <div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Rozwiąż</span></h2>  
+    </div> 
   </div>
-</div>
-<div *ngIf="examFinished">
-  <h1>Egzamin zakończył się!</h1>
-</div>
+  
+  <section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+      <timer-template [time]="actualTime"></timer-template>
+
+      <open-question-template 
+        *ngIf="actualQuestion.type == 'Opened'" 
+        [question]="actualQuestion" 
+        (onAnswer)="onAnswer($event)">
+      </open-question-template>
+      <closed-question-template 
+        *ngIf="actualQuestion.type == 'Closed'" 
+        [question]="actualQuestion"
+        (onAnswer)="onAnswer($event)">
+      </closed-question-template>
+      <yes-no-question-template 
+        *ngIf="actualQuestion.type == 'Yes-No'" 
+        [question]="actualQuestion"
+        (onAnswer)="onAnswer($event)">
+      </yes-no-question-template>
+
+    </div> <!-- end of container -->
+  </section>
+</ng-container>
+
+<ng-container *ngIf="examFinished">
+  <div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Egzamin zakończył się</span></h2>  
+    </div> 
+  </div>
+  
+  <section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+      <h2>Wyniki egzaminu zostaną udostępnione po ocenie przez egzaminatora.</h2>
+      <br />
+      <button class="btn btn-sm top-buffer" [routerLink]="['/student/exams-list']">Lista egzaminów</button>
+    </div> <!-- end of container -->
+  </section>
+</ng-container>

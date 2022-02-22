@@ -1,12 +1,8 @@
-import { QuestionModel } from '../../models/question.model';
-import { GetQuestionReplyModel } from '../../models/get-question-reply.model';
-import { AuthService } from '../../../services/auth.service';
-import { ExamFactoryService } from '../../services/exam-factory.service';
-import { ExamStatusEnum } from '../../enums/exam-status.enum';
+import { ChangeDetectorRef, Component, Inject, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { ExamInterface } from '../../interfaces/exam.interface';
+import { SyncExamService } from '../../services/sync-exam.service';
+import { QuestionModel } from '../../models/question.model';
 
 
 @Component({
@@ -14,70 +10,44 @@ import { ExamInterface } from '../../interfaces/exam.interface';
   templateUrl: './exam.component.html',
   styleUrls: [],
 })
-export class ExamComponent {
+export class ExamComponent implements OnDestroy {
 
-  private examService : ExamInterface;
+  public examFinished: boolean = false; 
+  public actualQuestion: QuestionModel;
+  public actualTime: number;
 
-  public question: QuestionModel;
-  public questionReply: GetQuestionReplyModel;
-  public timeLeft: number;
-
-  public examFinished: boolean = false;
-
-  private interval: any = null;
-
-  constructor(private router: Router, private authService: AuthService, private examFactoryService: ExamFactoryService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private examService: SyncExamService,
+    private cdRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
-
-    try {
-      this.examService = this.examFactoryService.getInstance();
-
-      this.examService.examStatusObservable.subscribe(result => {
-        if(result == ExamStatusEnum.EndQuestionTime)
-          this.nextQuestion();
-        else if(result == ExamStatusEnum.Finished)
-          this.examFinished = true;
-      });
-
-      if(!this.examService.isPendingExam())
-        this.router.navigate(["/exams"]);
-      else
-        this.nextQuestion();
-    }
-    catch(e)
-    {
-      console.log("Error in exam component!"); //Redirect to error page.
-    }
+    var examId = this.route.snapshot.paramMap.get('id');
+    this.examService.startExam(examId);
+    this.setListeners();
   }
 
-  ngOnDestroy() {
-    clearInterval(this.interval);
+  ngOnDestroy(): void {
+    this.examService.closeConnection();
   }
 
-  nextQuestion() : void {
-
-    if(this.interval != null)
-      clearInterval(this.interval);
-      
-    this.examService.getQuestion().subscribe(result => {
-      this.question = result; //TODO: handle error
-      this.timeLeft = this.examService.getLeftTime();
-      this.setViewTimer();
-    }); 
-      
-  }
-
-  sendAnswers() : void
+  setListeners()
   {
-    this.examService.sendAnswers() //TODO: send real answers and handle errors 
+    this.examService.questions.subscribe(question => {
+      this.actualQuestion = question;
+      this.actualTime = question.time;
+      this.cdRef.detectChanges();
+    });
+
+    this.examService.examFinished.subscribe(value => {
+      this.examFinished = value;
+    });
   }
 
-  private setViewTimer() : void
+  onAnswer(event) : void
   {
-    this.interval = setInterval(() => {
-      this.timeLeft--;
-    }, 1000)
+    this.examService.sendAnswers(event);
   }
   
 }

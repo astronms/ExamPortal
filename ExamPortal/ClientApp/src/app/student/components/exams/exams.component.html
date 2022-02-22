@@ -1,33 +1,17 @@
 <div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
   <div class="text-center pb-4 mt-3">
-      <h2 class="headline"><span class="home_text">Egzaminy</span></h2>  
+      <h2 class="headline"><span class="home_text">Lista Egzaminów</span></h2>  
   </div> 
-</div> 
+</div>
 
 <section class="services-00 d-flex align-items-center py-5" id="services">
   <div class="container text-light">
-    <p *ngIf="!exams"><em>Brak dostępnych egzaminów.</em></p>
-
-    <table class="table table-sm" aria-labelledby="tableLabel" *ngIf="exams">
-      <thead>
-        <tr>
-          <th>Tytuł</th>
-          <th>Czas trwania</th>
-          <th>Ilość pytań</th>
-          <th>Data</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let exam of exams">
-          <td>{{ exam.title }}</td>
-          <td>{{ exam.duration }}</td>
-          <td>{{ exam.questionsNumber }}</td>
-          <td>{{ exam.startDate }}</td>
-          <button type="button" class="btn btn-dark" *ngIf="exam.available" (click)="startExam(exam.id)">Start</button>
-        </tr>
-      </tbody>
-    </table>
+      <app-exam-sessions-table-template 
+        [columnsToDisplay]="displayedColumns" 
+        [data]="examSessions" 
+        [actions]="studentActions"
+        (onActionClick)="onActionClicked($event)">
+      </app-exam-sessions-table-template>
   </div> <!-- end of container -->
 </section>
   
