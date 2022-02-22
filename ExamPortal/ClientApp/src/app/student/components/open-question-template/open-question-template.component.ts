@@ -15,36 +15,14 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
   public _question: QuestionModel
   public formGroup = new FormGroup({});
 
-  @Input('question') set question(q: QuestionModel) {
+  @Input('question') set question(questionData: QuestionModel) {
     if(this._question)
     {
-      if(q.taskId != this._question.taskId)
-      {
-        this._question = q;
-        q.values.forEach(value => {
-          if(!value.regex)
-            this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
-          else
-            this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.pattern(value.regex)));
-        });
-        this.loadImage();
-        if(this.form)
-          this.form.reset();
-      }
+      if(questionData.taskId != this._question.taskId)
+        this.refreshContent(questionData);
     }
     else
-      {
-        this._question = q;
-        q.values.forEach(value => {
-          if(!value.regex)
-            this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
-          else
-            this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.pattern(value.regex)));
-        });
-        this.loadImage();
-        if(this.form)
-          this.form.reset();
-      }
+      this.refreshContent(questionData);
   };
   @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 
@@ -75,13 +53,18 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
     }
   }
 
-  getErrorMessage(field: string)
+  private refreshContent(question: QuestionModel) : void
   {
-    var form = this.formGroup.get(field);
-    if(!form)
-      return null;
-    
-    return 'Wartość w nieprawidłowym formacie.'
+    this._question = question;
+    question.values.forEach(value => {
+      if(!value.regex)
+        this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
+      else
+        this.formGroup.addControl('formId_' + value.sortId, new FormControl('', Validators.pattern(value.regex)));
+    });
+    this.loadImage();
+    if(this.form)
+      this.form.reset();
   }
 
   private loadImage() : void 

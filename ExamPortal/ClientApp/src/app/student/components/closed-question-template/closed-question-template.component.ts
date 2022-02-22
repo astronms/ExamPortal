@@ -13,25 +13,15 @@ export class ClosedQuestionTemplateComponent implements AfterContentInit, OnInit
   public _question: QuestionModel;
   public formGroup: FormGroup;
 
-  @Input('question') set question(q: QuestionModel) {
+  @Input('question') set question(questionData: QuestionModel) {
     if(this._question)
     {
-      if(q.taskId != this._question.taskId)
-      {
-        this._question = q;
-        this.loadImage();
-        if(this.form)
-          this.form.reset();
-      }
+      if(questionData.taskId != this._question.taskId)
+        this.refreshContent(questionData)
     }
     else 
-    {
-      this._question = q;
-      this.loadImage();
-      if(this.form)
-        this.form.reset();
-    }
-  }
+      this.refreshContent(questionData);
+  };
   @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 
 
@@ -64,6 +54,14 @@ export class ClosedQuestionTemplateComponent implements AfterContentInit, OnInit
     });
 
     this.onAnswer.emit(answer);
+  }
+
+  private refreshContent(question: QuestionModel) : void 
+  {
+    this._question = question;
+    this.loadImage();
+    if(this.form)
+      this.form.reset();
   }
 
   private loadImage() : void 

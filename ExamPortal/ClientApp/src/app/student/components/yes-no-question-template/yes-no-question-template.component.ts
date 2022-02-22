@@ -14,33 +14,15 @@ export class YesNoQuestionTemplateComponent implements AfterContentInit {
   public _question: QuestionModel;
   public formGroup = new FormGroup({});
 
-  @Input('question') set question(q: QuestionModel)
+  @Input('question') set question(questionData: QuestionModel)
   {
     if(this._question)
     {
-      if(q.taskId != this._question.taskId)
-      {
-        this._question = q;
-        this.formGroup = new FormGroup({});
-        this._question.values.forEach(value => {
-          this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
-        });
-        this.loadImage()
-        if(this.form)
-          this.form.reset();
-      }
+      if(questionData.taskId != this._question.taskId)
+        this.refreshContent(questionData);
     }
     else
-    {
-      this._question = q;
-      this.formGroup = new FormGroup({});
-      this._question.values.forEach(value => {
-        this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
-      });
-      this.loadImage()
-      if(this.form)
-        this.form.reset();
-    }
+      this.refreshContent(questionData);
   }
   @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 
@@ -68,6 +50,18 @@ export class YesNoQuestionTemplateComponent implements AfterContentInit {
 
     this.onAnswer.emit(answer);
 
+  }
+
+  private refreshContent(question: QuestionModel) : void
+  {
+    this._question = question;
+    this.formGroup = new FormGroup({});
+    this._question.values.forEach(value => {
+      this.formGroup.addControl('formId_' + value.sortId, new FormControl(''));
+    });
+    this.loadImage()
+    if(this.form)
+      this.form.reset();
   }
 
   private loadImage() : void 

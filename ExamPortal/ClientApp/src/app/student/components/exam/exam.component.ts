@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { SyncExamService } from '../../services/sync-exam.service';
@@ -14,10 +14,12 @@ export class ExamComponent implements OnDestroy {
 
   public examFinished: boolean = false; 
   public actualQuestion: QuestionModel;
+  public actualTime: number;
 
   constructor(
     private route: ActivatedRoute,
-    private examService: SyncExamService
+    private examService: SyncExamService,
+    private cdRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,8 @@ export class ExamComponent implements OnDestroy {
   {
     this.examService.questions.subscribe(question => {
       this.actualQuestion = question;
+      this.actualTime = question.time;
+      this.cdRef.detectChanges();
     });
 
     this.examService.examFinished.subscribe(value => {
