@@ -131,7 +131,7 @@ namespace ExamPortal.Hubs
             }
             catch (Exception ex)
             {
-                var test = ex.Message;
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetQuestion)}");
             }
         }
 

@@ -132,7 +132,7 @@ namespace ExamPortal.Controllers
                 if (DateTime.Now > session.EndDate) return StatusCode(StatusCodes.Status410Gone, "Session expired");
 
                 var activatedExams = await _unitOfWork.ActivatedExams.GetAll(include: i=>i.Include(x=>x.Exam));
-                if (!activatedExams.Any(x => x.UserId == user.Id && x.Exam.SessionId == sessionId))
+                if (!activatedExams.Any(x => x.UserId == user.Id && x.Exam?.SessionId == sessionId))
                 {
                     var random = new Random();
                     var index = random.Next(session.Exams.Count);
