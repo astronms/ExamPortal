@@ -30,8 +30,9 @@ export class CourseDeleteComponent implements OnInit {
 
   deleteClick()
   {
-    this.courseService.deleteCourse(this.course);
-    this.router.navigate(["/teacher/courses-list"]);
+    this.courseService.deleteCourse(this.course).subscribe(() => {
+      this.router.navigate(["/teacher/courses-list"]);
+    });
   }
 
 }

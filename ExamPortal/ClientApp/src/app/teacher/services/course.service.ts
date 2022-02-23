@@ -50,11 +50,11 @@ export class CourseService {
     );
   }
 
-  deleteCourse(course: CourseModel) : void
+  deleteCourse(course: CourseModel) : Observable<any>
   {
-    this.http.delete<boolean>(this.baseUrl + 'api/auth/Course/' + course.courseId).subscribe(
-      res => {},
-      err => this.handleError(err)
+    return this.http.delete<boolean>(this.baseUrl + 'api/auth/Course/' + course.courseId)
+    .pipe(
+      catchError(this.handleError)
     );
   }
 

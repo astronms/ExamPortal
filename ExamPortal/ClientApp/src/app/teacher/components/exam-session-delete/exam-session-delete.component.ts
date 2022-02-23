@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
-import { CourseModel } from '../../models/course.model';
-import { CourseService } from '../../services/course.service';
 import { ExamSessionService } from '../../services/exam-session.service';
 
 @Component({
@@ -32,8 +30,9 @@ export class ExamSessionDeleteComponent implements OnInit {
 
   deleteClick()
   {
-    this.examSessionService.deleteExamSession(this.examSession);
-    this.router.navigate(["/teacher/exams-list"]);
+    this.examSessionService.deleteExamSession(this.examSession).subscribe(() => 
+      this.router.navigate(["/teacher/exams-list"])
+    );
   }
 
 }

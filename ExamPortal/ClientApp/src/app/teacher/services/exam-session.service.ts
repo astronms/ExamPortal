@@ -73,12 +73,12 @@ export class ExamSessionService {
     );
   }
 
-  deleteExamSession(exam: ExamSessionModel) : void 
+  deleteExamSession(exam: ExamSessionModel) : Observable<any>
   {
-    this.http.delete(this.baseUrl + 'api/auth/Session/' + exam.sessionId).subscribe(
-      res => {},
-      err => this.handleError(err)
-    )
+    return this.http.delete(this.baseUrl + 'api/auth/Session/' + exam.sessionId)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
