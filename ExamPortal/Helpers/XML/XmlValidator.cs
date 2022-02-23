@@ -20,7 +20,7 @@ namespace ExamPortal.Helpers.XML
             {
                 XmlDocument xml = new XmlDocument();
                 xml.LoadXml(doc);
-                var schemaString = File.ReadAllText(".\\XML\\Session\\SessionSchema.xsd");
+                var schemaString = File.ReadAllText(".\\Helpers\\XML\\SessionSchema.xsd");
                 xml.Schemas.Add("", XmlReader.Create(new StringReader(schemaString)));
                 xml.Validate(ValidationEventHandler);
             }
