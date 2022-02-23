@@ -23,7 +23,7 @@ export class CourseModifyTemplateComponent implements OnInit {
     sessions: [],
     users: [],
   }
-  @Output("onSave") onSavee: EventEmitter<CourseModel> = new EventEmitter<CourseModel>();
+  @Output() saveClicked: EventEmitter<CourseModel> = new EventEmitter<CourseModel>();
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -45,7 +45,7 @@ export class CourseModifyTemplateComponent implements OnInit {
 
   saveClick() {
 
-    this.onSavee.emit(this.course);
+    this.saveClicked.emit(this.course);
 
     if(this.showDialog)
     {

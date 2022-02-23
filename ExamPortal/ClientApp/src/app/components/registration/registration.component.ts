@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./registration.component.css']
 })
 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
 
   passPattern = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}';
   indexPattern = '([0-9]){5,8}';
@@ -32,9 +32,6 @@ export class RegistrationComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) { }
-
-  ngOnInit(): void {
-  }
 
   onSubmit()
   {

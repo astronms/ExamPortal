@@ -8,7 +8,7 @@
     <div class="container text-light">
         <mat-progress-bar mode="indeterminate" *ngIf="!course"></mat-progress-bar>
         <ng-container *ngIf="course">
-            <app-course-modify-template [redirect]="redirect" [course]="course" [showDialog]="false" (onSave)="saveClick($event)"></app-course-modify-template>
+            <app-course-modify-template [redirect]="redirect" [course]="course" [showDialog]="false" (saveClicked)="saveClick($event)"></app-course-modify-template>
         </ng-container>
     </div> <!-- end of container -->
 </section>

@@ -31,7 +31,7 @@
                 <a *ngIf="action.url" [routerLink]="[action.url, element.sessionId]">
                     <mat-icon matTooltip="{{ action.tooltip }}">{{ action.actionType }}</mat-icon>
                 </a>
-                <a *ngIf="!action.url" (click)="actionClick(action.actionType, element.sessionId)">
+                <a *ngIf="!action.url" (click)="onActionClick(action.actionType, element.sessionId)">
                     <mat-icon matTooltip="{{ action.tooltip }}">{{ action.actionType }}</mat-icon>
                 </a>
             </ng-container>

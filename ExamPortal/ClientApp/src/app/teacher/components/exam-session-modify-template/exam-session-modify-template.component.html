@@ -55,7 +55,7 @@
                 [data]="courses" 
                 [isSelectable]="true"
                 [selectedCourse]="examSession.course"
-                (selectedCourseChange)="onSelectedCourseChange($event)"></app-courses-list-template>
+                (selectedUsersChange)="onSelectedCourseChange($event)"></app-courses-list-template>
                 <mat-error *ngIf="secondFormGroup.get('courseSelect').hasError('required') && secondFormGroup.get('courseSelect').touched">Proszę wybrać kurs.</mat-error>
             <div>
                 <button class="btn btn-sm" matStepperPrevious>Wróć</button>

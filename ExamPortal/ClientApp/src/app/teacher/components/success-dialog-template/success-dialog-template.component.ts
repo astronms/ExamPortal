@@ -1,8 +1,8 @@
 import { Component, Inject } from "@angular/core";
-import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
-    selector: 'success-dialog',
+    selector: 'app-success-dialog',
     templateUrl: 'success-dialog.component.html',
 })
 
