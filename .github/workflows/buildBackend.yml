@@ -25,8 +25,8 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
-      - name: update packages
-        uses: bchir/nuget-update@V1.0.0
+      - name: nuget update
+        uses: Bchir/update-nuget@V1.0.1-RC3
         with:
           searchFor: 'outdated'
           versionToSelect: 'latest'
