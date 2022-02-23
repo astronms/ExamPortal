@@ -36,7 +36,5 @@ jobs:
         working-directory: ${{env.working-directory}}
 
       - name: Eslint 
-        uses: stefanoeb/eslint-action@1.0.2
+        run: npm run lint
         working-directory: ${{env.working-directory}}
-        with:
-          node-version: ${{ matrix.node-version }}
