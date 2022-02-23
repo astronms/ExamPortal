@@ -166,7 +166,7 @@ namespace ExamPortal.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status423Locked, "Session already started");
+                    return StatusCode(StatusCodes.Status410Gone, "Session already started");
                 }
             }
             catch (Exception ex)
