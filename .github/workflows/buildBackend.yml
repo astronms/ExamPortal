@@ -25,6 +25,11 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+      - name: update packages
+      uses: bchir/nuget-update@V1.0.0
+        with:
+          searchFor: 'outdated'
+          versionToSelect: 'latest'
       - name: resharper
         uses: glassechidna/resharper-action@master
         with:
