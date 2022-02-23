@@ -11,7 +11,7 @@ import { TableActionsModel } from 'src/app/models/table-actions.model';
 export class ExamSessionTableTemplateComponent {
 
   dataSource: MatTableDataSource<any>;
-  @Input() set data(value) {
+  @Input("data") set data(value) {
     this.dataSource = new MatTableDataSource<any>(value);
     if(this.dataSource)
       setTimeout(()=>{ this.dataSource.paginator = this.paginator }, 50); //remove this delay once examSessions will be taken from backend
