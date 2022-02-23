@@ -14,9 +14,9 @@ export class StudentsListTemplateComponent implements OnInit {
   dataSource: MatTableDataSource<UserModel>;
   columnsToDisplay: string[] = ['index', 'firstName', 'lastName', 'studentIndex'];
   private paginator: MatPaginator;
-  @Input("selectedUsers") selectedUsers: UserModel[];
-  @Input("users") users: UserModel[];
-  @Output("selectedUsersChange") selectedUsersChange : EventEmitter<UserModel[]> = new EventEmitter<UserModel[]>();
+  @Input() selectedUsers: UserModel[];
+  @Input() users: UserModel[];
+  @Output() selectedUsersChange : EventEmitter<UserModel[]> = new EventEmitter<UserModel[]>();
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     if(this.dataSource)

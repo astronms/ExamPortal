@@ -4,7 +4,7 @@ import { AnswerModel, AnswerValueModel } from '../../models/answer.model';
 import { QuestionModel } from '../../models/question.model';
 
 @Component({
-  selector: 'closed-question-template',
+  selector: 'app-closed-question-template',
   templateUrl: './closed-question-template.component.html'
 })
 export class ClosedQuestionTemplateComponent implements AfterContentInit, OnInit{
@@ -13,7 +13,7 @@ export class ClosedQuestionTemplateComponent implements AfterContentInit, OnInit
   public _question: QuestionModel;
   public formGroup: FormGroup;
 
-  @Input('question') set question(questionData: QuestionModel) {
+  @Input() set question(questionData: QuestionModel) {
     if(this._question)
     {
       if(questionData.taskId != this._question.taskId)
@@ -22,7 +22,7 @@ export class ClosedQuestionTemplateComponent implements AfterContentInit, OnInit
     else 
       this.refreshContent(questionData);
   };
-  @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
+  @Output() answerSet: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 
 
 
@@ -53,7 +53,7 @@ export class ClosedQuestionTemplateComponent implements AfterContentInit, OnInit
       answer.values.push(answerValue);
     });
 
-    this.onAnswer.emit(answer);
+    this.answerSet.emit(answer);
   }
 
   private refreshContent(question: QuestionModel) : void 

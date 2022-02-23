@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'timer-template',
+  selector: 'app-timer-template',
   templateUrl: './timer-template.component.html',
   styleUrls: ['./timer-template.component.css']
 })
@@ -10,7 +10,7 @@ export class TimerTemplateComponent{
   private tickCounter: number;
   public textToDisplay: string;
 
-  @Input('time') set timer(time: number) {
+  @Input() set time(time: number) {
     this.tickCounter = time;
     this.renderText();
   };

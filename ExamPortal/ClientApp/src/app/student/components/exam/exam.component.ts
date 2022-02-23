@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { SyncExamService } from '../../services/sync-exam.service';
 import { QuestionModel } from '../../models/question.model';
@@ -10,7 +10,7 @@ import { QuestionModel } from '../../models/question.model';
   templateUrl: './exam.component.html',
   styleUrls: [],
 })
-export class ExamComponent implements OnDestroy {
+export class ExamComponent implements OnInit, OnDestroy {
 
   public examFinished: boolean = false; 
   public actualQuestion: QuestionModel;

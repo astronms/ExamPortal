@@ -42,7 +42,7 @@
             mat-row *matRowDef="let row; columns: columnsToDisplay;"
             (click)="courseClicked(row)"
             [class.table-row-selectable]="isSelectable"
-            [class.table-row-is-clicked]="selectedCourse && row.courseId == selectedCourse.courseId"
+            [class.table-row-is-clicked]="selectedCourse && row.courseId === selectedCourse.courseId"
         ></tr>
     </ng-container>
 </table>

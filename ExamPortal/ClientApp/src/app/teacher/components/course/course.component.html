@@ -26,7 +26,7 @@
                 </div>
             </mat-tab>
             <mat-tab label="Przypisani studenci"> 
-                <p *ngIf="!course.users || course.users.length == 0">Brak przypisanych studentów.</p>
+                <p *ngIf="!course.users || course.users.length === 0">Brak przypisanych studentów.</p>
                 <app-students-list-template *ngIf="course.users.length > 0" [users]="course.users"></app-students-list-template>
             </mat-tab>
         </mat-tab-group>

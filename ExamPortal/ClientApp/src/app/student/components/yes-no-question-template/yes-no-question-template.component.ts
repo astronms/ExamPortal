@@ -4,7 +4,7 @@ import { AnswerModel, AnswerValueModel } from '../../models/answer.model';
 import { QuestionModel } from '../../models/question.model';
 
 @Component({
-  selector: 'yes-no-question-template',
+  selector: 'app-yes-no-question-template',
   templateUrl: './yes-no-question-template.component.html',
   styleUrls: ['./yes-no-question-template.component.css']
 })
@@ -14,7 +14,7 @@ export class YesNoQuestionTemplateComponent implements AfterContentInit {
   public _question: QuestionModel;
   public formGroup = new FormGroup({});
 
-  @Input('question') set question(questionData: QuestionModel)
+  @Input() set question(questionData: QuestionModel)
   {
     if(this._question)
     {
@@ -24,7 +24,7 @@ export class YesNoQuestionTemplateComponent implements AfterContentInit {
     else
       this.refreshContent(questionData);
   }
-  @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
+  @Output() answerSet: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 
 
   constructor() {}
@@ -48,7 +48,7 @@ export class YesNoQuestionTemplateComponent implements AfterContentInit {
       answer.values.push(answerValue);
     });
 
-    this.onAnswer.emit(answer);
+    this.answerSet.emit(answer);
 
   }
 

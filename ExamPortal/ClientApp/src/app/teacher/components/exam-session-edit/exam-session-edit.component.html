@@ -9,7 +9,7 @@
         <app-exam-session-modify-template 
             *ngIf="examSession"
             [redirect]="redirect" 
-            (onSave)="saveClick($event)"
+            (saveClicked)="saveClick($event)"
             [showDialog]="false"
             [examSession]="examSession">
         </app-exam-session-modify-template>

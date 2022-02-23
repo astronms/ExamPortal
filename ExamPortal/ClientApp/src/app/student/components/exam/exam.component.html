@@ -7,23 +7,23 @@
   
   <section class="services-00 d-flex align-items-center py-5" id="services">
     <div class="container text-light">
-      <timer-template [time]="actualTime"></timer-template>
+      <app-timer-template [time]="actualTime"></app-timer-template>
 
-      <open-question-template 
-        *ngIf="actualQuestion.type == 'Opened'" 
+      <app-open-question-template 
+        *ngIf="actualQuestion.type === 'Opened'" 
         [question]="actualQuestion" 
-        (onAnswer)="onAnswer($event)">
-      </open-question-template>
-      <closed-question-template 
-        *ngIf="actualQuestion.type == 'Closed'" 
+        (answerSet)="onAnswer($event)">
+      </app-open-question-template>
+      <app-closed-question-template 
+        *ngIf="actualQuestion.type === 'Closed'" 
         [question]="actualQuestion"
-        (onAnswer)="onAnswer($event)">
-      </closed-question-template>
-      <yes-no-question-template 
-        *ngIf="actualQuestion.type == 'Yes-No'" 
+        (answerSet)="onAnswer($event)">
+      </app-closed-question-template>
+      <app-yes-no-question-template 
+        *ngIf="actualQuestion.type === 'Yes-No'" 
         [question]="actualQuestion"
-        (onAnswer)="onAnswer($event)">
-      </yes-no-question-template>
+        (answerSet)="onAnswer($event)">
+      </app-yes-no-question-template>
 
     </div> <!-- end of container -->
   </section>

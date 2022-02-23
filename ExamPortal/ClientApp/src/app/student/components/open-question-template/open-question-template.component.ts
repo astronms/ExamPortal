@@ -5,7 +5,7 @@ import { AnswerModel, AnswerValueModel } from '../../models/answer.model';
 import { QuestionModel } from '../../models/question.model';
 
 @Component({
-  selector: 'open-question-template',
+  selector: 'app-open-question-template',
   templateUrl: './open-question-template.component.html',
   styleUrls: ['./open-question-template.component.css']
 })
@@ -15,7 +15,7 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
   public _question: QuestionModel
   public formGroup = new FormGroup({});
 
-  @Input('question') set question(questionData: QuestionModel) {
+  @Input() set question(questionData: QuestionModel) {
     if(this._question)
     {
       if(questionData.taskId != this._question.taskId)
@@ -24,7 +24,7 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
     else
       this.refreshContent(questionData);
   };
-  @Output('onAnswer') onAnswer: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
+  @Output() answerSet: EventEmitter<AnswerModel> = new EventEmitter<AnswerModel>();
   @ViewChild('questionForm') form : NgForm; 
 
   constructor() {}
@@ -49,7 +49,7 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
         answer.values.push(answerValue);
       });
 
-      this.onAnswer.emit(answer);
+      this.answerSet.emit(answer);
     }
   }
 

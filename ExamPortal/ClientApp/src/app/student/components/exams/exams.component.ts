@@ -9,7 +9,7 @@ import { StartExamDialogComponent } from '../start-exam-dialog/start-exam-dialog
 import { start } from 'repl';
 
 @Component({
-  selector: 'exams',
+  selector: 'app-exams',
   templateUrl: './exams.component.html',
   styleUrls: []
 })

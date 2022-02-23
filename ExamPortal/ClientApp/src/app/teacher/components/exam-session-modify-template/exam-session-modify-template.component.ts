@@ -28,16 +28,16 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
   @ViewChild('picker2') picker2: any;
   @ViewChild('stepper') stepper: MatStepper;
 
-  @Input("showDialog") showDialog: boolean = true;
-  @Input("redirect") redirect: string;
-  @Input("examSession") examSession: ExamSessionModel = {
+  @Input() showDialog: boolean = true;
+  @Input() redirect: string;
+  @Input() examSession: ExamSessionModel = {
     sessionId: 0,
     name: '',
     startDate: null,
     endDate: null,
     courseId: null
   };
-  @Output("onSave") onSavee: EventEmitter<{examSession: ExamSessionModel; file: File}> = new EventEmitter<{examSession: ExamSessionModel; file: File}>();
+  @Output() saveClicked: EventEmitter<{examSession: ExamSessionModel; file: File}> = new EventEmitter<{examSession: ExamSessionModel; file: File}>();
   
   constructor(
     private formBuilder: FormBuilder,
@@ -65,7 +65,7 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
 
   saveClick() {
 
-    this.onSavee.emit({examSession: this.examSession, file: this.file});
+    this.saveClicked.emit({examSession: this.examSession, file: this.file});
 
     if(this.showDialog)
     {
