@@ -164,10 +164,13 @@ namespace ExamPortal.Controllers
                     var examInfo = GetExamInfo(userExam);
                     return Ok(examInfo);
                 }
-                else
+                if (activatedExams.Any(x =>
+                        x.UserId == user.Id && x.Exam?.SessionId == sessionId && x.IsFinish))
                 {
-                    return StatusCode(StatusCodes.Status410Gone, "Session already started");
+                    return StatusCode(StatusCodes.Status410Gone, "Session finished");
                 }
+
+                return StatusCode(StatusCodes.Status423Locked, "Session already started");
             }
             catch (Exception ex)
             {

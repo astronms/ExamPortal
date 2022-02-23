@@ -3,9 +3,8 @@ using System.IO;
 using System.Xml;
 using System.Xml.Schema;
 using Microsoft.Extensions.Logging;
-using Serilog;
 
-namespace ExamPortal.XML.Exam
+namespace ExamPortal.Helpers.XML
 {
     public class XmlValidator : IXmlValidator
     {

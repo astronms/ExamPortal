@@ -1,17 +1,14 @@
-﻿using System.Diagnostics;
+﻿
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using ExamPortal.Data;
-using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
+using ExamPortal.Data.Xml;
 using ExamPortal.Models;
 using ExamPortal.Models.Exam;
 using ExamPortal.Models.Users;
-using ExamPortal.XML.Session;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace ExamPortal.Configuration
 {

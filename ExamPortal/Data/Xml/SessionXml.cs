@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace ExamPortal.XML.Session
+namespace ExamPortal.Data.Xml
 {
     [XmlRoot(ElementName = "session")]
     public class SessionXml
