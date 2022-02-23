@@ -34,3 +34,9 @@ jobs:
           npm ci
           npm run build:ci
         working-directory: ${{env.working-directory}}
+
+      - name: Eslint 
+        uses: stefanoeb/eslint-action@1.0.2
+        with:
+          node-version: ${{ matrix.node-version }}
+        working-directory: ${{env.working-directory}}
