@@ -37,6 +37,6 @@ jobs:
 
       - name: Eslint 
         uses: stefanoeb/eslint-action@1.0.2
+        working-directory: ${{env.working-directory}}
         with:
           node-version: ${{ matrix.node-version }}
-        working-directory: ${{env.working-directory}}
