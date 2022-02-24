@@ -30,8 +30,8 @@ jobs:
       - name: Test
         run: dotnet test --no-restore --verbosity normal
 
-      - name: Inspect
-        uses: nbadal/inspectcode-action
+      - name: Inspect code
+        uses: muno92/resharper_inspectcode@1.4.0
         with:
-          solution: './ExamPortal.sln'
+          solutionPath: ./ExamPortal.sln
           
