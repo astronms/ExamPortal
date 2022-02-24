@@ -15,20 +15,29 @@ jobs:
     name: Dotnet ${{ matrix.dotnet }} sample
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.2
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+          nuget-version: latest
+
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
+          
       - name: Install dependencies
         run: dotnet restore
+
       - name: Build
         run: dotnet build --no-restore
+
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+
       - name: resharper
         uses: glassechidna/resharper-action@master
         with:
-          nuget-api-key: ${{ secrets.NuGetAPIKey }}
-          nuget-version: 'latest'
           solution: ExamPortal.sln
           
