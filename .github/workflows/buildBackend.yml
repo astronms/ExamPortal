@@ -29,4 +29,9 @@ jobs:
 
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+
+      - name: Inspect
+        uses: nbadal/inspectcode-action
+        with:
+          solution: './ExamPortal.sln'
           
