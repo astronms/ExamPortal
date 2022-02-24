@@ -25,12 +25,10 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
-      - name: nuget update
-        uses: Bchir/update-nuget@V1.0.1-RC3
-        with:
-          searchFor: 'outdated'
-          versionToSelect: 'latest'
       - name: resharper
         uses: glassechidna/resharper-action@master
         with:
+          nuget-api-key: ${{ secrets.NuGetAPIKey }}
+          nuget-version: 'latest'
           solution: ExamPortal.sln
+          
