@@ -34,4 +34,6 @@ jobs:
         uses: muno92/resharper_inspectcode@1.4.0
         with:
           solutionPath: ./ExamPortal.sln
+          minimumSeverity: error
+          exclude: ./ExamPortal/ClientApp/*
           
