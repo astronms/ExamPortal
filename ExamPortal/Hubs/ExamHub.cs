@@ -135,11 +135,11 @@ namespace ExamPortal.Hubs
             }
         }
 
-        public async Task SendAnswer(TaskAnswerDTO answer)
+        public async Task SendAnswer(Guid sessionId, TaskAnswerDTO answer)
         {
             var taskAnswer = _mapper.Map<TaskAnswers>(answer);
             var user = await GetUser();
-            ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user, x =>
+            ActivatedExam activatedExam = await _unitOfWork.ActivatedExams.Get(x => x.User == user && x.Exam.SessionId == sessionId, x =>
                 x.Include(i => i.Exam)
                     .Include(i => i.ExamAnswers)
                     .ThenInclude(i => i.TaskAnswers)); 
