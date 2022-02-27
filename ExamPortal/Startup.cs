@@ -59,7 +59,12 @@ namespace ExamPortal
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ExamPortal", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "ExamPortal",
+                    Description = "An ASP.NET Core Web Api for executing exams",
+                    Version = "v1"
+                });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,

@@ -308,13 +308,22 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var sessions = await _unitOfWork.Sessions.GetAll(x=>x.EndDate< DateTime.Now);
-                if (!sessions.Any())
+                var finishedActivatedExams = await _unitOfWork.ActivatedExams.GetAll(x => x.IsFinish == true);
+                var sessions = await _unitOfWork.Sessions.GetAll();
+                var dtoList = _mapper.Map<IList<ExecutedSessionDTO>>(sessions);
+                var result = new List<ExecutedSessionDTO>();
+                foreach (var dto in dtoList)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, "Sessions not found");
+                    var finishedExam = await _unitOfWork.ActivatedExams.GetAll(x => x.IsFinish == true && x.Exam.SessionId == dto.SessionId);
+                    var session = await _unitOfWork.Sessions.Get(x => x.SessionId == dto.SessionId, i=>i.Include(x=>x.Course.CourseUsers));
+                    dto.ParticipatedMembers = finishedExam.Count();
+                    dto.TotalMembers = session.Course.CourseUsers.Count();
+                    if (session.EndDate < DateTime.Now || dto.ParticipatedMembers == dto.TotalMembers)
+                    {
+                        result.Add(dto);
+                    }
                 }
-                var results = _mapper.Map<IList<SessionDTO>>(sessions);
-                return Ok(results);
+                return Ok(result);
             }
             catch (Exception ex)
             {

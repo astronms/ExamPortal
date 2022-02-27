@@ -50,6 +50,7 @@ namespace ExamPortal.Configuration
             CreateMap<Session, CreateSessionDTO>().ReverseMap();
             CreateMap<Session, UpdateSessionDTO>().ReverseMap();
             CreateMap<SessionDTO, CreateSessionDTO>().ReverseMap();
+            CreateMap<Session, ExecutedSessionDTO>().ReverseMap();
             //Exam
             CreateMap<Exam, ExamDTO>().ReverseMap();
             CreateMap<Value, ValueDTO>().ReverseMap();

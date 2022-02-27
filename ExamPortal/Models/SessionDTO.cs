@@ -17,6 +17,12 @@ namespace ExamPortal.Models
         public Guid CourseId { get; set; }
         
     }
+    public class ExecutedSessionDTO : SessionDTO
+    {
+        public int TotalMembers { get; set; }
+        public int ParticipatedMembers { get; set; }
+
+    }
 
     public class FullSessionDTO: SessionDTO
     {
