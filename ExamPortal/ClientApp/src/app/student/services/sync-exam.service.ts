@@ -55,7 +55,7 @@ export class SyncExamService {
 
   sendAnswers(answer: AnswerModel)
   {
-    this.hubConnection2.invoke('sendAnswer', answer);
+    this.hubConnection2.invoke('sendAnswer', this.examId, answer);
   }
 
   private startConnection(): void
