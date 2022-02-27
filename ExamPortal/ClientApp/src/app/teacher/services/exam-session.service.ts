@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Inject, Injectable} from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -79,6 +79,29 @@ export class ExamSessionService {
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  getFinishedExamSessions() : Observable<ExamSessionModel[]>
+  {
+    return this.http.get<ExamSessionModel[]>(this.baseUrl + 'api/auth/Session/answers-list')
+    .pipe(
+      map(result => {
+        result.forEach(session => {
+          this.http.get<CourseModel>(this.baseUrl + 'api/auth/Course/' + session.courseId).subscribe(course => {
+            session.course = course;
+          });
+        });
+        return result;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  downloadSessionAnswers(guid: string) : Observable<Blob>
+  { 
+    return this.http.get(this.baseUrl + 'api/auth/Session/' + guid + '/answers', {responseType: 'blob'}).pipe(
+      catchError(this.handleError)
+    )
   }
 
   private handleError(error: HttpErrorResponse) {

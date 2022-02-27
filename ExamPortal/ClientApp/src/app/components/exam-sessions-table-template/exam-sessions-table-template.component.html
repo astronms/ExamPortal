@@ -23,6 +23,12 @@
         <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'dd/MM/yyyy HH:mm'}} </td>
     </ng-container>
 
+    <!-- Participation Column -->
+    <ng-container matColumnDef="participation">
+        <th mat-header-cell *matHeaderCellDef>Udział</th>
+        <td mat-cell *matCellDef="let element"> {{ element.participatedMembers }} / {{ element.totalMembers }} </td>
+    </ng-container>
+
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>

@@ -7,4 +7,6 @@ export interface ExamSessionModel {
     endDate: Date;
     courseId: number;
     course?: CourseModel;
+    totalMembers?: number;
+    participatedMembers?: number;
 }

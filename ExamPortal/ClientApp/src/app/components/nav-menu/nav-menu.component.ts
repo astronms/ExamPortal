@@ -14,6 +14,7 @@ export class NavMenuComponent {
   userTypes : typeof RoleEnum = RoleEnum;
 
   teacher_items = {
+    "Wyniki": "teacher/results-list",
     "Kursy": "teacher/courses-list",
     "Egzaminy": "teacher/exams-list"
   }

@@ -9,7 +9,6 @@ import { ExamSessionComponent } from './components/exam-session/exam-session.com
 import { ExamSessionsListComponent } from './components/exam-sessions-list/exam-sessions-list.component';
 import { ExamSessionCreatorComponent } from './components/exam-session-creator/exam-session-creator.component';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
-import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { CourseCreatorComponent } from './components/course-creator/course-creator.component';
 import { CourseComponent } from './components/course/course.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
@@ -21,6 +20,7 @@ import { ExamSessionModifyTemplateComponent } from './components/exam-session-mo
 import { SuccessDialogComponent } from './components/success-dialog-template/success-dialog-template.component';
 import { ExamSessionDeleteComponent } from './components/exam-session-delete/exam-session-delete.component';
 import { ExamSessionEditComponent } from './components/exam-session-edit/exam-session-edit.component';
+import { ExamResultsListComponent } from './components/exam-results-list/exam-results-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { ExamSessionEditComponent } from './components/exam-session-edit/exam-se
     CoursesListTemplateComponent,
     CourseDeleteComponent,
     SuccessDialogComponent,
-    ExamSessionEditComponent
+    ExamSessionEditComponent,
+    ExamResultsListComponent
   ],
   imports: [
     CommonModule,
