@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -15,9 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace ExamPortal.Hubs
 {
@@ -96,7 +93,7 @@ namespace ExamPortal.Hubs
                                         AnswersValueId = new Guid(),
                                         SortId = task.SortId,
                                         TaskAnswersId = task.TaskId,
-                                        Value = String.Empty
+                                        Value = string.Empty
                                     });
                                 }
                                 var taskAnswers = new TaskAnswers()
