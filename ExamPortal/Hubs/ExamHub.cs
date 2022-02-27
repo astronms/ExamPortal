@@ -88,13 +88,17 @@ namespace ExamPortal.Hubs
                                 var answerValueList = new List<AnswersValue>();
                                 foreach (var task in activatedExam.Exam.Task)
                                 {
-                                    answerValueList.Add(new AnswersValue()
+                                    foreach (var value in task.Questions.Value)
                                     {
-                                        AnswersValueId = new Guid(),
-                                        SortId = task.SortId,
-                                        TaskAnswersId = task.TaskId,
-                                        Value = string.Empty
-                                    });
+                                        answerValueList.Add(new AnswersValue()
+                                        {
+                                            AnswersValueId = Guid.NewGuid(),
+                                            SortId = value.SortId,
+                                            TaskAnswersId = task.TaskId,
+                                            Value = string.Empty
+                                        });
+                                    }
+
                                 }
                                 var taskAnswers = new TaskAnswers()
                                 {
