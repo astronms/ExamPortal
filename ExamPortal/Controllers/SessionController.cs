@@ -6,8 +6,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 using AutoMapper;
+using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
 using ExamPortal.Data.Users;
 using ExamPortal.Data.Xml;
@@ -65,7 +67,7 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var sessions = await _unitOfWork.Sessions.GetAll(include: x=>x.Include(x=>x.Exams));
+                var sessions = await _unitOfWork.Sessions.GetAll(include: x => x.Include(x => x.Exams));
                 var results = _mapper.Map<IList<SessionDTO>>(sessions);
                 return Ok(results);
             }
@@ -162,7 +164,7 @@ namespace ExamPortal.Controllers
                     await _unitOfWork.Save();
                     return Ok(sessionWithExam.SessionId);
                 }
-                else if(CheckIfZipFile(createSessionDTO.File))
+                else if (CheckIfZipFile(createSessionDTO.File))
                 {
                     using (var stream = createSessionDTO.File.OpenReadStream())
                     using (var archive = new ZipArchive(stream))
@@ -183,7 +185,7 @@ namespace ExamPortal.Controllers
                 }
                 else
                 {
-                    return BadRequest(new {message = "Invalid file extension"});
+                    return BadRequest(new { message = "Invalid file extension" });
                 }
 
             }
@@ -210,7 +212,7 @@ namespace ExamPortal.Controllers
                 }
 
                 var session = await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId, i => i
-                    .Include(x=>x.Exams)
+                    .Include(x => x.Exams)
                 );
                 if (session == null)
                 {
@@ -224,8 +226,8 @@ namespace ExamPortal.Controllers
                     var exams = await _unitOfWork.Exams.GetAll(x => x.SessionId == sessionId);
                     foreach (var exam in exams)
                     {
-                       await _unitOfWork.Exams.Delete(exam.ExamId);
-                       await _unitOfWork.Save();
+                        await _unitOfWork.Exams.Delete(exam.ExamId);
+                        await _unitOfWork.Save();
                     }
 
                     if (CheckIfXmlFile(sessionDTO.File))
@@ -267,6 +269,103 @@ namespace ExamPortal.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
+        [HttpGet("{sessionId:Guid}/answers")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetResult([FromRoute] Guid sessionId)
+        {
+            try
+            {
+                var session = await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId && x.EndDate < DateTime.Now);
+                if (session == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, $"Result for session id:{sessionId} not found");
+                }
+                var activatedExams = await _unitOfWork.ActivatedExams.GetAll(x => x.Exam.SessionId == sessionId, include: x =>
+                    x.Include(i => i.Exam).ThenInclude(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value)
+                        .Include(i => i.ExamAnswers)
+                        .ThenInclude(i => i.TaskAnswers).ThenInclude(i=>i.AnswersValue));
+                var sessionAnswersXml = await GenereteAnswersXML(activatedExams, sessionId);
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(SessionAnswersXml));
+                StringWriter textWriter = new StringWriter();
+                xmlSerializer.Serialize(textWriter, sessionAnswersXml);
+                UTF8Encoding encoding = new UTF8Encoding();
+                byte[] byteArray = encoding.GetBytes(textWriter.ToString());
+                return File(byteArray, "application/octet-stream");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetResult)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet("answers-list")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetResultList()
+        {
+            try
+            {
+                var sessions = await _unitOfWork.Sessions.GetAll(x=>x.EndDate< DateTime.Now);
+                if (!sessions.Any())
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, "Sessions not found");
+                }
+                var results = _mapper.Map<IList<SessionDTO>>(sessions);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessions)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+        private async Task<SessionAnswersXml> GenereteAnswersXML(IList<ActivatedExam> activatedExams, Guid sessionId)
+        {
+            SessionAnswersXml sessionAnswers = new SessionAnswersXml()
+            {
+                SessionAnswersId = sessionId,
+                ExamAnswers = new List<ExamAnswersXml>()
+            };
+            foreach (var activatedExam in activatedExams)
+            {
+                List<TaskAnswersXml> listTaskAnswersXml = new List<TaskAnswersXml>();
+                foreach (var taskAnswer in activatedExam.ExamAnswers.TaskAnswers)
+                {
+                    AnswersXml answersXml = new AnswersXml()
+                    {
+                        Value = new List<string>()
+                    };
+                    foreach (var answersValue in taskAnswer.AnswersValue)
+                    {
+                        answersXml.Value.Add(answersValue.Value);
+                    }
+                    var exam = await _unitOfWork.Exams.Get(x => x.ExamId == activatedExam.ExamId, i => i.Include(x => x.Task));
+                    var taskAnswerId = exam.Task
+                        .Where(x => x.TaskId == taskAnswer.ExamTaskId)
+                        .Select(x => x.SortId)
+                        .FirstOrDefault();
+                    TaskAnswersXml taskAnswersXml = new TaskAnswersXml()
+                    {
+                        Answers = answersXml,
+                        TaskAnswersId = taskAnswerId
+                    };
+                    listTaskAnswersXml.Add(taskAnswersXml);
+                }
+                sessionAnswers.ExamAnswers.Add(new ExamAnswersXml()
+                {
+                    ExamAnswersId = (Guid)activatedExam.ExamId,
+                    UserId = activatedExam.UserId,
+                    TaskAnswers = listTaskAnswersXml
+                });
+            }
+            return sessionAnswers;
+        }
+
         private async Task<Session> GenerateSessionFromXml(Session session, string xmlString, List<ZipArchiveEntry> attachments = null)
         {
             var course = await _unitOfWork.Courses.Get(x => x.CourseId == session.CourseId);
@@ -282,7 +381,7 @@ namespace ExamPortal.Controllers
         {
             var serializer = new XmlSerializer(typeof(SessionXml));
             var stringReader = new StringReader(xmlString);
-            var sessionXml = (SessionXml) serializer.Deserialize(stringReader);
+            var sessionXml = (SessionXml)serializer.Deserialize(stringReader);
             if (sessionXml != null)
                 foreach (var exam in sessionXml.Exams)
                 {

@@ -96,7 +96,7 @@ namespace ExamPortal.Hubs
                                         AnswersValueId = new Guid(),
                                         SortId = task.SortId,
                                         TaskAnswersId = task.TaskId,
-                                        Value = String.Empty
+                                        Value = string.Empty
                                     });
                                 }
                                 var taskAnswers = new TaskAnswers()
