@@ -272,7 +272,7 @@ namespace ExamPortal.Controllers
         [HttpGet("{sessionId:Guid}/answers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetResult([FromRoute] Guid sessionId)
+        public async Task<IActionResult> GetAnswers([FromRoute] Guid sessionId)
         {
             try
             {
@@ -295,7 +295,7 @@ namespace ExamPortal.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetResult)}");
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetAnswers)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
@@ -304,7 +304,7 @@ namespace ExamPortal.Controllers
         [HttpGet("answers-list")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetResultList()
+        public async Task<IActionResult> GetAnswersList()
         {
             try
             {
