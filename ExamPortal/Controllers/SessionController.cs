@@ -336,7 +336,7 @@ namespace ExamPortal.Controllers
         [HttpPost("{sessionId:Guid}/result")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SendSessionResult([FromRoute] Guid sessionId, [FromBody] IFormFile resultFile)
+        public async Task<IActionResult> SendSessionResult([FromRoute] Guid sessionId, [FromForm] IFormFile resultFile)
         {
             try
             {
