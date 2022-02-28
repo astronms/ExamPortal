@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
 import { TableActionsModel } from 'src/app/models/table-actions.model';
 import { ExamSessionService } from '../../services/exam-session.service';
+import { UploadResultDialogComponent } from '../upload-result-dialog-template/upload-result-dialog-template.component';
 
 @Component({
   selector: 'app-exam-results-list',
@@ -19,7 +21,8 @@ export class ExamResultsListComponent implements OnInit {
   ];
 
   constructor(
-    private examSessionService: ExamSessionService
+    private examSessionService: ExamSessionService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +39,7 @@ export class ExamResultsListComponent implements OnInit {
     }
     else if(event.action == "arrow_upward")
     {
-      this.openUploadFileDialog();
+      this.openUploadFileDialog(event.id);
     }
   }
 
@@ -56,9 +59,14 @@ export class ExamResultsListComponent implements OnInit {
     );
   }
 
-  private openUploadFileDialog()
+  private openUploadFileDialog(guid: string)
   {
-    console.log("Here will be uload :)");
+    this.dialog.open(UploadResultDialogComponent, {
+      width: '350px',
+      data: { 
+        sessionId: guid
+      }
+    });
   }
 
 }

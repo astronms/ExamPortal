@@ -21,6 +21,7 @@ import { SuccessDialogComponent } from './components/success-dialog-template/suc
 import { ExamSessionDeleteComponent } from './components/exam-session-delete/exam-session-delete.component';
 import { ExamSessionEditComponent } from './components/exam-session-edit/exam-session-edit.component';
 import { ExamResultsListComponent } from './components/exam-results-list/exam-results-list.component';
+import { UploadResultDialogComponent } from './components/upload-result-dialog-template/upload-result-dialog-template.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ExamResultsListComponent } from './components/exam-results-list/exam-re
     CourseDeleteComponent,
     SuccessDialogComponent,
     ExamSessionEditComponent,
-    ExamResultsListComponent
+    ExamResultsListComponent,
+    UploadResultDialogComponent
   ],
   imports: [
     CommonModule,
