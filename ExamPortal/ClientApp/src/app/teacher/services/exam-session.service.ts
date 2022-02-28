@@ -104,9 +104,14 @@ export class ExamSessionService {
     )
   }
 
-  saveSessionResult(guid: string, file: File)
+  saveSessionResult(guid: string, file: File) : Observable<any>
   {
-    console.log(file.name);
+    const formData = new FormData();
+    formData.append("resultFile", file, file.name);
+    return this.http.post(this.baseUrl + 'api/auth/Session/' + guid + '/result', formData)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -43,8 +43,9 @@ export class UploadResultDialogComponent {
 
     confirm()
     {
-        this.examSessionService.saveSessionResult(this.sessionId, this.file);
-        this.dialogRef.close();
+        this.examSessionService.saveSessionResult(this.sessionId, this.file).subscribe(() => {
+            this.dialogRef.close();
+        });
     }
 
     close()
