@@ -332,6 +332,24 @@ namespace ExamPortal.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
+        [HttpPost("{sessionId:Guid}/result")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> SendSessionResult([FromRoute] Guid sessionId, [FromBody] IFormFile resultFile)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(SendSessionResult)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+
         private async Task<SessionAnswersXml> GenereteAnswersXML(IList<ActivatedExam> activatedExams, Guid sessionId)
         {
             SessionAnswersXml sessionAnswers = new SessionAnswersXml()
