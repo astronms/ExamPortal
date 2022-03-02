@@ -34,3 +34,7 @@ jobs:
           npm ci
           npm run build:ci
         working-directory: ${{env.working-directory}}
+
+      - name: Eslint 
+        run: npm run lint
+        working-directory: ${{env.working-directory}}
