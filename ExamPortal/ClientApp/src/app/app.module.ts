@@ -21,12 +21,12 @@ import { RegistrationComponent } from './components/registration/registration.co
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
-import { AuthUserModel } from './models/auth-user.model';
 import { SharedModule } from './shared/shared.module';
+import { UserModel } from './models/user.model';
 
 
 export function tokenGetter() {
-  var user: AuthUserModel = JSON.parse(localStorage.getItem("user"));
+  var user: UserModel = JSON.parse(localStorage.getItem("user"));
   return (user ? user.token : null);
 }
 

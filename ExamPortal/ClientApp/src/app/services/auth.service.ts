@@ -4,7 +4,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { AuthUserModel } from '../models/auth-user.model';
 import { RoleEnum } from '../enums/role.enum';
 import { UserModel } from '../models/user.model';
 
@@ -13,11 +12,11 @@ import { UserModel } from '../models/user.model';
 })
 export class AuthService {
 
-  private userSubject: BehaviorSubject<AuthUserModel>;
-  public user: Observable<AuthUserModel>;
+  private userSubject: BehaviorSubject<UserModel>;
+  public user: Observable<UserModel>;
 
   constructor(private http: HttpClient, @Inject('BASE_URL')private baseUrl: string, private jwtHelper: JwtHelperService) { 
-    this.userSubject = new BehaviorSubject<AuthUserModel>(JSON.parse(localStorage.getItem('user')));
+    this.userSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
   }
 
@@ -28,8 +27,10 @@ export class AuthService {
       })})
       .pipe(map(result => {
         var data = this.jwtHelper.decodeToken(result.token);
-        var user: AuthUserModel = {
+        var user: UserModel = {
           email: data.Name,
+          firstName: data.FirstName,
+          lastName: data.LastName,
           role: data.Role,
           token: result.token
         }
@@ -47,7 +48,7 @@ export class AuthService {
     );
   }
 
-  public get userValue(): AuthUserModel {
+  public get userValue(): UserModel {
     return this.userSubject.value;
   }
 
@@ -64,6 +65,11 @@ export class AuthService {
       return this.userValue.role;
     else
       return null;
+  }
+
+  public changePassword(pass: string) : any
+  {
+    console.log("change!");
   }
   
   public logOut() : void {
