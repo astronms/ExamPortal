@@ -1,0 +1,38 @@
+﻿<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="session">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="exam" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="task" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="answer" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="actual"/>
+                          <xs:element type="xs:string" name="correct"/>
+                          <xs:element type="xs:float" name="score"/>
+                          <xs:element type="xs:float" name="maxScore"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:float" name="taskScore"/>
+                    <xs:element type="xs:float" name="taskMaxScore"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="finalScore"/>
+              <xs:element type="xs:float" name="maxScore"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="userId" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="id"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

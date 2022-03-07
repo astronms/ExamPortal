@@ -4,7 +4,8 @@ namespace ExamPortal.Helpers.XML
 {
     public interface IXmlValidator
     {
-        bool IsValid(string doc);
+        bool IsSessionValid(string doc);
+        bool IsResultValid(string doc);
         void ValidationEventHandler(object sender, ValidationEventArgs args);
     }
 }

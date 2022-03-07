@@ -32,11 +32,8 @@ namespace ExamPortal.Models.Users
 
     }
 
-    public class RegisterUserDTO
+    public class RegisterUserDTO : PasswordDTO
     {
-        [Required]
-        [StringLength(15, ErrorMessage = "Your Password is limited to {2} to {1} characters", MinimumLength = 6)]
-        public string Password { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
@@ -46,11 +43,31 @@ namespace ExamPortal.Models.Users
 
     }
 
-    public class RegisterAdminDTO
+    public class UpdateUserDTO
+    {
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public virtual StudentInfoDTO StudentInfo { get; set; }
+    }
+
+    public class UpdateUserPasswordDTO : PasswordDTO
+    {
+        [Required]
+        public string CurrentPassword { get; set; }
+    }
+
+    public class PasswordDTO
     {
         [Required]
         [StringLength(15, ErrorMessage = "Your Password is limited to {2} to {1} characters", MinimumLength = 6)]
         public string Password { get; set; }
+    }
+
+    public class RegisterAdminDTO : PasswordDTO
+    {
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
@@ -59,15 +76,12 @@ namespace ExamPortal.Models.Users
     }
 
 
-    public class LoginUserDTO
+    public class LoginUserDTO : PasswordDTO
     {
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(15, ErrorMessage = "Your Password is limited to {2} to {1} characters", MinimumLength = 6)]
-        public string Password { get; set; }
     }
 
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ExamPortal.Models
+namespace ExamPortal.Models.Answers
 {
     public class TaskAnswerDTO
     {
