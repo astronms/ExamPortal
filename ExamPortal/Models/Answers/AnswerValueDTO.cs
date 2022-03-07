@@ -1,4 +1,4 @@
-﻿namespace ExamPortal.Models
+﻿namespace ExamPortal.Models.Answers
 {
     public class AnswerValueDTO
     {

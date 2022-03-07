@@ -5,6 +5,7 @@ using ExamPortal.Data;
 using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
+using ExamPortal.Data.Result;
 using ExamPortal.Data.Users;
 using ExamPortal.IRepository;
 using Task = System.Threading.Tasks.Task;
@@ -21,6 +22,8 @@ namespace ExamPortal.Repository
         private IGenericRepository<CourseUser> _courseUser;
         private IGenericRepository<ActivatedExam> _activatedExams;
         private IGenericRepository<ExamAnswers> _examAnswers;
+        private IGenericRepository<SessionResult> _sessionsResults;
+        private IGenericRepository<ExamResult> _examResults;
 
         public UnitOfWork(DatabaseContext context)
         {
@@ -34,6 +37,9 @@ namespace ExamPortal.Repository
         public IGenericRepository<CourseUser> CourseUsers => _courseUser ??=new GenricRepository<CourseUser>(_context);
         public IGenericRepository<ActivatedExam> ActivatedExams => _activatedExams ??= new GenricRepository<ActivatedExam>(_context);
         public IGenericRepository<ExamAnswers> ExamAnswers => _examAnswers ??= new GenricRepository<ExamAnswers>(_context);
+        public IGenericRepository<SessionResult> SessionResults => _sessionsResults ??= new GenricRepository<SessionResult>(_context);
+        public IGenericRepository<ExamResult> ExamResults => _examResults ??= new GenricRepository<ExamResult>(_context);
+
 
         public async Task Save()
         {

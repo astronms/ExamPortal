@@ -14,10 +14,7 @@ namespace ExamPortal.Data.Answers
         [Key]
         [XmlAttribute(AttributeName = "id")]
         public Guid SessionAnswersId { get; set; }
-
-        // Jeszcze nie wiem czy to potrzeba
-        //public virtual Session Session { get; set; }
-
+        
         public virtual IList<ExamAnswers> ExamAnswers { get; set; }
     }
 }

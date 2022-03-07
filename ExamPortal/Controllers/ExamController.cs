@@ -7,10 +7,12 @@ using AutoMapper;
 using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
+using ExamPortal.Data.Result;
 using ExamPortal.Data.Users;
 using ExamPortal.Hubs;
 using ExamPortal.IRepository;
 using ExamPortal.Models.Exam;
+using ExamPortal.Models.Result;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -41,6 +43,8 @@ namespace ExamPortal.Controllers
             _examHub = examHub;
         }
 
+        #region GetExam
+
         [Authorize(Roles = "Administrator")]
         [HttpGet("{guid:Guid}", Name = "GetExam")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -70,6 +74,10 @@ namespace ExamPortal.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+
+        #endregion
+
+        #region PrepareExam
 
         [Authorize(Roles = "User")]
         [HttpGet("{sessionId:guid}/IsPrepared")]
@@ -135,7 +143,7 @@ namespace ExamPortal.Controllers
 
                 if (DateTime.Now > session.EndDate) return StatusCode(StatusCodes.Status410Gone, "Session expired");
 
-                var activatedExams = await _unitOfWork.ActivatedExams.GetAll(include: i=>i.Include(x=>x.Exam));
+                var activatedExams = await _unitOfWork.ActivatedExams.GetAll(include: i => i.Include(x => x.Exam));
                 if (!activatedExams.Any(x => x.UserId == user.Id && x.Exam?.SessionId == sessionId))
                 {
                     var random = new Random();
@@ -179,6 +187,38 @@ namespace ExamPortal.Controllers
             }
         }
 
+        #endregion
+
+        #region Results
+
+        [Authorize(Roles = "User")]
+        [HttpGet("{sessionId:Guid}/result")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetExamResult([FromRoute] Guid sessionId)
+        {
+            try
+            {
+                var currentUser = User;
+                var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
+                var user = await _userManager.FindByNameAsync(currentUserName);
+                var examResult = await _unitOfWork.ExamResults.Get(x => x.SessionResultId == sessionId && x.User == user, i=>i.Include(x=>x.Task).ThenInclude(x=>x.ResultValues));
+                if (examResult == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, $"Exam for Sessionid:{sessionId}not found");
+                }
+                var examResultDTO = _mapper.Map<ExamResultDTO>(examResult);
+                return Ok(examResultDTO);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetExamResult)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+        #endregion
         private static ExamInfo GetExamInfo(Exam userExam)
         {
             var totalTime = 0;

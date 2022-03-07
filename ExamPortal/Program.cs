@@ -12,7 +12,7 @@ namespace ExamPortal
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration().WriteTo.File(
-                path: "logs\\log-.txt",
+                path: "..\\logs\\log-.txt",
                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:dd.fff zzz} [{Level:u3}] {Message:u3}{NewLine}{Exception}",
                 rollingInterval: RollingInterval.Day,
                 restrictedToMinimumLevel: LogEventLevel.Information,
@@ -31,8 +31,6 @@ namespace ExamPortal
             {
                 Log.CloseAndFlush();
             }
-
-            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

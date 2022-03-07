@@ -5,6 +5,7 @@ using ExamPortal.Data;
 using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
+using ExamPortal.Data.Result;
 using ExamPortal.Data.Users;
 using Task = System.Threading.Tasks.Task;
 
@@ -19,7 +20,9 @@ namespace ExamPortal.IRepository
         IGenericRepository<User> Users { get; }
         IGenericRepository<CourseUser> CourseUsers { get; }
         IGenericRepository<ActivatedExam> ActivatedExams { get; }
-        IGenericRepository<ExamAnswers> ExamAnswers { get; } 
+        IGenericRepository<ExamAnswers> ExamAnswers { get; }
+        IGenericRepository<SessionResult> SessionResults { get; }
+        IGenericRepository<ExamResult> ExamResults { get; }
 
         Task Save();
     }
