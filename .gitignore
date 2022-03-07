@@ -232,6 +232,7 @@ _Pvt_Extensions
 
 # Custom
 **/logs
+logs/
 **/cache/*
 ExamPortal/ClientApp/src/coverage
 ExamPortal/Upload/files

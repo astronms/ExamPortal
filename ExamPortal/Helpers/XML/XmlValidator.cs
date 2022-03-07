@@ -14,7 +14,8 @@ namespace ExamPortal.Helpers.XML
         {
             _logger = logger;
         }
-        public bool IsValid(string doc)
+
+        public bool IsSessionValid(string doc)
         {
             try
             {
@@ -41,6 +42,36 @@ namespace ExamPortal.Helpers.XML
             }
 
             _logger.LogInformation("XML is Valid" );
+            return true;
+        }
+
+        public bool IsResultValid(string doc)
+        {
+            try
+            {
+                XmlDocument xml = new XmlDocument();
+                xml.LoadXml(doc);
+                var schemaString = File.ReadAllText(".\\Helpers\\XML\\ResultSchema.xsd");
+                xml.Schemas.Add("", XmlReader.Create(new StringReader(schemaString)));
+                xml.Validate(ValidationEventHandler);
+            }
+            catch (XmlException ex)
+            {
+                _logger.LogError("XmlDocumentValidationExample.XmlException: " + ex.Message);
+                return false;
+            }
+            catch (XmlSchemaValidationException ex)
+            {
+                _logger.LogError("XmlDocumentValidationExample.XmlSchemaValidationException: " + ex.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("XmlDocumentValidationExample.Exception: " + ex.Message);
+                return false;
+            }
+
+            _logger.LogInformation("XML is Valid");
             return true;
         }
 

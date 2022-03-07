@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamPortal.Migrations
 {
-    public partial class changeOnDeleteBehavior : Migration
+    public partial class addedResultDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,14 +62,25 @@ namespace ExamPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SessionAnswers",
+                name: "ExamAnswers",
                 columns: table => new
                 {
-                    SessionAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ExamAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SessionAnswers", x => x.SessionAnswersId);
+                    table.PrimaryKey("PK_ExamAnswers", x => x.ExamAnswersId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SessionsResult",
+                columns: table => new
+                {
+                    SessionResultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SessionsResult", x => x.SessionResultId);
                 });
 
             migrationBuilder.CreateTable(
@@ -244,66 +255,21 @@ namespace ExamPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExamAnswers",
-                columns: table => new
-                {
-                    ExamAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExternalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SessionAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExamAnswers", x => x.ExamAnswersId);
-                    table.ForeignKey(
-                        name: "FK_ExamAnswers_SessionAnswers_SessionAnswersId",
-                        column: x => x.SessionAnswersId,
-                        principalTable: "SessionAnswers",
-                        principalColumn: "SessionAnswersId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Exams",
                 columns: table => new
                 {
                     ExamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExternalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SessionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SessionAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    SessionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exams", x => x.ExamId);
                     table.ForeignKey(
-                        name: "FK_Exams_SessionAnswers_SessionAnswersId",
-                        column: x => x.SessionAnswersId,
-                        principalTable: "SessionAnswers",
-                        principalColumn: "SessionAnswersId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Exams_Sessions_SessionId",
                         column: x => x.SessionId,
                         principalTable: "Sessions",
                         principalColumn: "SessionId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TaskAnswers",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExamAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TaskAnswers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TaskAnswers_ExamAnswers_ExamAnswersId",
-                        column: x => x.ExamAnswersId,
-                        principalTable: "ExamAnswers",
-                        principalColumn: "ExamAnswersId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -315,7 +281,9 @@ namespace ExamPortal.Migrations
                     ExamId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ExamAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsFinish = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -338,6 +306,39 @@ namespace ExamPortal.Migrations
                         principalTable: "Exams",
                         principalColumn: "ExamId",
                         onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExamResults",
+                columns: table => new
+                {
+                    ExamResultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FinalScore = table.Column<double>(type: "float", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ExamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SessionResultId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExamResults", x => x.ExamResultId);
+                    table.ForeignKey(
+                        name: "FK_ExamResults_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ExamResults_Exams_ExamId",
+                        column: x => x.ExamId,
+                        principalTable: "Exams",
+                        principalColumn: "ExamId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExamResults_SessionsResult_SessionResultId",
+                        column: x => x.SessionResultId,
+                        principalTable: "SessionsResult",
+                        principalColumn: "SessionResultId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -365,20 +366,24 @@ namespace ExamPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Answers",
+                name: "TaskResult",
                 columns: table => new
                 {
-                    AnswerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TaskAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    TaskResultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    SortId = table.Column<int>(type: "int", nullable: false),
+                    TotalScore = table.Column<double>(type: "float", nullable: false),
+                    ExamResultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Answers", x => x.AnswerId);
+                    table.PrimaryKey("PK_TaskResult", x => x.TaskResultId);
                     table.ForeignKey(
-                        name: "FK_Answers_TaskAnswers_TaskAnswersId",
-                        column: x => x.TaskAnswersId,
-                        principalTable: "TaskAnswers",
-                        principalColumn: "Id",
+                        name: "FK_TaskResult_ExamResults_ExamResultId",
+                        column: x => x.ExamResultId,
+                        principalTable: "ExamResults",
+                        principalColumn: "ExamResultId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -401,21 +406,49 @@ namespace ExamPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AnswersValue",
+                name: "TaskAnswers",
                 columns: table => new
                 {
-                    AnswersValueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    TaskAnswerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExamTaskId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExamAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnswersValue", x => x.AnswersValueId);
+                    table.PrimaryKey("PK_TaskAnswers", x => x.TaskAnswerId);
                     table.ForeignKey(
-                        name: "FK_AnswersValue_Answers_AnswersId",
-                        column: x => x.AnswersId,
-                        principalTable: "Answers",
-                        principalColumn: "AnswerId",
+                        name: "FK_TaskAnswers_ExamAnswers_ExamAnswersId",
+                        column: x => x.ExamAnswersId,
+                        principalTable: "ExamAnswers",
+                        principalColumn: "ExamAnswersId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TaskAnswers_ExamTask_ExamTaskId",
+                        column: x => x.ExamTaskId,
+                        principalTable: "ExamTask",
+                        principalColumn: "TaskId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AnswerResult",
+                columns: table => new
+                {
+                    AnswerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SortId = table.Column<int>(type: "int", nullable: false),
+                    Actual = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Correct = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Score = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaskResultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnswerResult", x => x.AnswerId);
+                    table.ForeignKey(
+                        name: "FK_AnswerResult_TaskResult_TaskResultId",
+                        column: x => x.TaskResultId,
+                        principalTable: "TaskResult",
+                        principalColumn: "TaskResultId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -440,15 +473,45 @@ namespace ExamPortal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "7e2ed26a-661c-4a01-b8b2-ec2e5f3354d4", "4481d370-282c-432a-a583-fd4283571dc8", "User", "USER" });
+            migrationBuilder.CreateTable(
+                name: "AnswersValue",
+                columns: table => new
+                {
+                    AnswersValueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SortId = table.Column<int>(type: "int", nullable: false),
+                    TaskAnswersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnswersValue", x => x.AnswersValueId);
+                    table.ForeignKey(
+                        name: "FK_AnswersValue_TaskAnswers_TaskAnswersId",
+                        column: x => x.TaskAnswersId,
+                        principalTable: "TaskAnswers",
+                        principalColumn: "TaskAnswerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a92b8343-0595-4f04-b658-c79bba0eb92e", "542345e6-f5bc-4dc8-8b2d-e56b37455ece", "Administrator", "ADMINISTRATOR" });
+                values: new object[,]
+                {
+                    { "9a48d905-08ad-4548-8da3-b168be98b43a", "0d0eff4f-0ac3-49a2-bbcd-2b8d2f5bef7f", "User", "USER" },
+                    { "d98f3528-5b3b-429c-b82d-a30df84f17da", "7d21474a-c1df-4946-894c-d5a34ebaa137", "Administrator", "ADMINISTRATOR" },
+                    { "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd", "d19a938a-c6c7-4dcb-8f1e-bb02c53eb16f", "SuperAdministrator", "SUPERADMINISTRATOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "2c9681fa-0c85-46cb-a996-6dd72291a440", "superadmin@gmail.com", false, "Super", "Admin", false, null, "SUPERADMIN@GMAIL.COM", "SUPERADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEOvFvX/4sSq8tt4Zi9JK3RDWYktYjCG+ERS2mQD5w9W9akb+UsGDBoy118BB3x04Vg==", null, false, "3611bab1-229a-4524-a8d9-8e7ca5e375a0", false, "superadmin@gmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd", "b74ddd14-6340-4840-95c2-db12554843e5" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivatedExams_ExamAnswersId",
@@ -468,15 +531,14 @@ namespace ExamPortal.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Answers_TaskAnswersId",
-                table: "Answers",
-                column: "TaskAnswersId",
-                unique: true);
+                name: "IX_AnswerResult_TaskResultId",
+                table: "AnswerResult",
+                column: "TaskResultId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AnswersValue_AnswersId",
+                name: "IX_AnswersValue_TaskAnswersId",
                 table: "AnswersValue",
-                column: "AnswersId");
+                column: "TaskAnswersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -528,14 +590,19 @@ namespace ExamPortal.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExamAnswers_SessionAnswersId",
-                table: "ExamAnswers",
-                column: "SessionAnswersId");
+                name: "IX_ExamResults_ExamId",
+                table: "ExamResults",
+                column: "ExamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exams_SessionAnswersId",
-                table: "Exams",
-                column: "SessionAnswersId");
+                name: "IX_ExamResults_SessionResultId",
+                table: "ExamResults",
+                column: "SessionResultId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExamResults_UserId",
+                table: "ExamResults",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Exams_SessionId",
@@ -571,6 +638,16 @@ namespace ExamPortal.Migrations
                 column: "ExamAnswersId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TaskAnswers_ExamTaskId",
+                table: "TaskAnswers",
+                column: "ExamTaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskResult_ExamResultId",
+                table: "TaskResult",
+                column: "ExamResultId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Value_QuestionId",
                 table: "Value",
                 column: "QuestionId");
@@ -580,6 +657,9 @@ namespace ExamPortal.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ActivatedExams");
+
+            migrationBuilder.DropTable(
+                name: "AnswerResult");
 
             migrationBuilder.DropTable(
                 name: "AnswersValue");
@@ -609,31 +689,34 @@ namespace ExamPortal.Migrations
                 name: "Value");
 
             migrationBuilder.DropTable(
-                name: "Answers");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Question");
+                name: "TaskResult");
 
             migrationBuilder.DropTable(
                 name: "TaskAnswers");
 
             migrationBuilder.DropTable(
-                name: "ExamTask");
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Question");
+
+            migrationBuilder.DropTable(
+                name: "ExamResults");
 
             migrationBuilder.DropTable(
                 name: "ExamAnswers");
 
             migrationBuilder.DropTable(
-                name: "Exams");
+                name: "ExamTask");
 
             migrationBuilder.DropTable(
-                name: "SessionAnswers");
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "SessionsResult");
+
+            migrationBuilder.DropTable(
+                name: "Exams");
 
             migrationBuilder.DropTable(
                 name: "Sessions");
