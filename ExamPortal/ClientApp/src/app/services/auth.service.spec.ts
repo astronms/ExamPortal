@@ -3,12 +3,11 @@ import { HttpClientTestingModule, HttpTestingController } from "@angular/common/
 import { TestBed } from "@angular/core/testing";
 import { JwtModule } from "@auth0/angular-jwt";
 import { RoleEnum } from "../enums/role.enum";
-import { AuthUserModel } from "../models/auth-user.model";
 import { UserModel } from "../models/user.model";
 import { AuthService } from "./auth.service";
 
 export function tokenGetter() {
-    var user: AuthUserModel = JSON.parse(localStorage.getItem("user"));
+    var user: UserModel = JSON.parse(localStorage.getItem("user"));
     return (user ? user.token : null);
 }
 
@@ -132,7 +131,7 @@ describe('AuthService', () => {
         );
 
         let userString = localStorage.getItem("user");
-        let user: AuthUserModel = JSON.parse(userString);
+        let user: UserModel = JSON.parse(userString);
 
         expect(userString).toBeDefined();
         expect(user.email).toEqual("admin@admin.com");

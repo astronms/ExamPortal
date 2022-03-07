@@ -1,0 +1,13 @@
+.row {
+    margin-top: 5px;
+}
+
+.password-form {
+    min-width: 150px;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .half-width {
+    width: 30%;
+  }

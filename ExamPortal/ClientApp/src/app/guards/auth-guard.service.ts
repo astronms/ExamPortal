@@ -9,8 +9,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private authService: AuthService, private jwtHelper: JwtHelperService) {
-  }
+  constructor(
+    private router: Router, 
+    private authService: AuthService, 
+    private jwtHelper: JwtHelperService
+  ) {}
+
   canActivate(route: ActivatedRouteSnapshot) {
     const user = this.authService.userValue;
     if(user) {

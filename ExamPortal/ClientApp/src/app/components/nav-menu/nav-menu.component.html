@@ -19,6 +19,13 @@
         <li class="nav-item" >
           <a class="nav-link" [routerLink]="['/about']">O projekcie</a>
         </li>
+
+        <ng-container *ngIf="authService.isUserAuthenticated() && authService.userRole === userTypes.SuperAdmin">
+          <li *ngFor="let item of admin_items | keyvalue" class="nav-item">
+            <a class="nav-link" [routerLink]="[item.value]">{{ item.key }}</a>
+          </li>
+        </ng-container>
+
         <ng-container *ngIf="authService.isUserAuthenticated() && authService.userRole === userTypes.Admin">
           <li *ngFor="let item of teacher_items | keyvalue" class="nav-item">
             <a class="nav-link" [routerLink]="[item.value]">{{ item.key }}</a>
