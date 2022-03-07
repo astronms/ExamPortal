@@ -6,9 +6,11 @@ import { JwtModule } from "@auth0/angular-jwt";
 import localPl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 
-import { StudentModule } from './student/student.module';
-import { AppRoutingModule } from './app-routing.module';
+import { AdminModule } from './admin/admin.module';
 import { TeacherModule } from './teacher/teacher.module';
+import { StudentModule } from './student/student.module';
+import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -21,12 +23,11 @@ import { RegistrationComponent } from './components/registration/registration.co
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
-import { AuthUserModel } from './models/auth-user.model';
-import { SharedModule } from './shared/shared.module';
+import { UserModel } from './models/user.model';
 
 
 export function tokenGetter() {
-  var user: AuthUserModel = JSON.parse(localStorage.getItem("user"));
+  var user: UserModel = JSON.parse(localStorage.getItem("user"));
   return (user ? user.token : null);
 }
 
@@ -48,7 +49,6 @@ registerLocaleData(localPl);
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    StudentModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -56,7 +56,9 @@ registerLocaleData(localPl);
         blacklistedRoutes: []
       }
     }),
+    AdminModule,
     TeacherModule,
+    StudentModule,
     SharedModule
   ],
   providers: [

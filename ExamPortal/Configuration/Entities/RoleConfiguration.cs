@@ -12,12 +12,20 @@ namespace ExamPortal.Configuration.Entities
                 new IdentityRole
                 {
                     Name = "User",
-                    NormalizedName = "USER"
+                    NormalizedName = "USER",
+                    Id = "9a48d905-08ad-4548-8da3-b168be98b43a"
                 },
                 new IdentityRole
                 {
                     Name = "Administrator",
-                    NormalizedName = "ADMINISTRATOR"
+                    NormalizedName = "ADMINISTRATOR",
+                    Id = "d98f3528-5b3b-429c-b82d-a30df84f17da"
+                },
+                new IdentityRole
+                {
+                    Name = "SuperAdministrator",
+                    NormalizedName = "SUPERADMINISTRATOR",
+                    Id = "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd"
                 }
             );
         }

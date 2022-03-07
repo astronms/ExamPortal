@@ -10,11 +10,14 @@ using System.Xml.Serialization;
 using AutoMapper;
 using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.ExamData;
+using ExamPortal.Data.Result;
 using ExamPortal.Data.Users;
 using ExamPortal.Data.Xml;
+using ExamPortal.Helpers;
 using ExamPortal.Helpers.XML;
 using ExamPortal.IRepository;
 using ExamPortal.Models;
+using ExamPortal.Models.Result;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -44,6 +47,8 @@ namespace ExamPortal.Controllers
             _mapper = mapper;
             _xmlValidator = xmlValidator;
         }
+
+        #region GetSessions
 
         [Authorize(Roles = "Administrator")]
         [HttpGet("{guid:Guid}", Name = "GetSession")]
@@ -106,6 +111,34 @@ namespace ExamPortal.Controllers
             }
         }
 
+        [Authorize(Roles = "User")]
+        [HttpGet("student/resultList")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetStudentSessionsResults()
+        {
+            try
+            {
+                var currentUser = User;
+                var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
+                var user = await _userManager.FindByNameAsync(currentUserName);
+
+                var resultSessions = await _unitOfWork.SessionResults.GetAll(x => x.Exams.Any(x => x.User == user));
+
+                var results = _mapper.Map<IList<SessionResultForUserDTO>>(resultSessions);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessions)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+        #endregion
+
+        #region DeleteSession
+
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{guid:Guid}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -133,6 +166,10 @@ namespace ExamPortal.Controllers
             return NoContent();
         }
 
+        #endregion
+
+        #region CreateSession
+
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -150,11 +187,11 @@ namespace ExamPortal.Controllers
                 var session = _mapper.Map<Session>(createSessionDTO);
                 session.SessionId = Guid.NewGuid();
 
-                if (CheckIfXmlFile(createSessionDTO.File))
+                if (FileHelper.CheckIfXmlFile(createSessionDTO.File))
                 {
                     var stream = createSessionDTO.File.OpenReadStream();
-                    var xmlString = await ReadAsStringAsync(stream);
-                    if (!_xmlValidator.IsValid(xmlString))
+                    var xmlString = await FileHelper.ReadAsStringAsync(stream);
+                    if (!_xmlValidator.IsSessionValid(xmlString))
                     {
                         return BadRequest(new { message = "Invalid XML" });
                     }
@@ -163,15 +200,15 @@ namespace ExamPortal.Controllers
                     await _unitOfWork.Save();
                     return Ok(sessionWithExam.SessionId);
                 }
-                else if (CheckIfZipFile(createSessionDTO.File))
+                else if (FileHelper.CheckIfZipFile(createSessionDTO.File))
                 {
                     using (var stream = createSessionDTO.File.OpenReadStream())
                     using (var archive = new ZipArchive(stream))
                     {
-                        var xmlFile = archive.Entries.First(x => GetExtension(x.Name) == "xml");
-                        var attachments = archive.Entries.Where(x => GetExtension(x.Name) != "xml").ToList();
-                        var xmlString = await ReadAsStringAsync(xmlFile.Open());
-                        if (!_xmlValidator.IsValid(xmlString))
+                        var xmlFile = archive.Entries.First(x => FileHelper.GetExtension(x.Name) == "xml");
+                        var attachments = archive.Entries.Where(x => FileHelper.GetExtension(x.Name) != "xml").ToList();
+                        var xmlString = await FileHelper.ReadAsStringAsync(xmlFile.Open());
+                        if (!_xmlValidator.IsSessionValid(xmlString))
                         {
                             return BadRequest(new { message = "Invalid XML" });
                         }
@@ -194,6 +231,10 @@ namespace ExamPortal.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+
+        #endregion
+
+        #region UpdateSession
 
         [Authorize(Roles = "Administrator")]
         [HttpPut("{sessionId:Guid}")]
@@ -229,26 +270,26 @@ namespace ExamPortal.Controllers
                         await _unitOfWork.Save();
                     }
 
-                    if (CheckIfXmlFile(sessionDTO.File))
+                    if (FileHelper.CheckIfXmlFile(sessionDTO.File))
                     {
                         var stream = sessionDTO.File.OpenReadStream();
-                        var xmlString = await ReadAsStringAsync(stream);
-                        if (!_xmlValidator.IsValid(xmlString))
+                        var xmlString = await FileHelper.ReadAsStringAsync(stream);
+                        if (!_xmlValidator.IsSessionValid(xmlString))
                         {
                             return BadRequest(new { message = "Invalid XML" });
                         }
                         session = await GenerateSessionFromXml(session, xmlString);
                         await _unitOfWork.Exams.InsertRange(session.Exams);
                     }
-                    else if (CheckIfZipFile(sessionDTO.File))
+                    else if (FileHelper.CheckIfZipFile(sessionDTO.File))
                     {
                         using (var stream = sessionDTO.File.OpenReadStream())
                         using (var archive = new ZipArchive(stream))
                         {
-                            var xmlFile = archive.Entries.First(x => GetExtension(x.Name) == "xml");
-                            var attachments = archive.Entries.Where(x => GetExtension(x.Name) != "xml").ToList();
-                            var xmlString = await ReadAsStringAsync(xmlFile.Open());
-                            if (!_xmlValidator.IsValid(xmlString))
+                            var xmlFile = archive.Entries.First(x => FileHelper.GetExtension(x.Name) == "xml");
+                            var attachments = archive.Entries.Where(x => FileHelper.GetExtension(x.Name) != "xml").ToList();
+                            var xmlString = await FileHelper.ReadAsStringAsync(xmlFile.Open());
+                            if (!_xmlValidator.IsSessionValid(xmlString))
                             {
                                 return BadRequest(new { message = "Invalid XML" });
                             }
@@ -268,6 +309,10 @@ namespace ExamPortal.Controllers
             }
         }
 
+        #endregion
+
+        #region Answers
+
         [Authorize(Roles = "Administrator")]
         [HttpGet("{sessionId:Guid}/answers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -284,7 +329,7 @@ namespace ExamPortal.Controllers
                 var activatedExams = await _unitOfWork.ActivatedExams.GetAll(x => x.Exam.SessionId == sessionId, include: x =>
                     x.Include(i => i.Exam).ThenInclude(i => i.Task).ThenInclude(i => i.Questions).ThenInclude(i => i.Value)
                         .Include(i => i.ExamAnswers)
-                        .ThenInclude(i => i.TaskAnswers).ThenInclude(i=>i.AnswersValue));
+                        .ThenInclude(i => i.TaskAnswers).ThenInclude(i => i.AnswersValue));
                 var sessionAnswersXml = await GenereteAnswersXML(activatedExams, sessionId);
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(SessionAnswersXml));
                 StringWriter textWriter = new StringWriter();
@@ -315,7 +360,7 @@ namespace ExamPortal.Controllers
                 foreach (var dto in dtoList)
                 {
                     var finishedExam = await _unitOfWork.ActivatedExams.GetAll(x => x.IsFinish == true && x.Exam.SessionId == dto.SessionId);
-                    var session = await _unitOfWork.Sessions.Get(x => x.SessionId == dto.SessionId, i=>i.Include(x=>x.Course.CourseUsers));
+                    var session = await _unitOfWork.Sessions.Get(x => x.SessionId == dto.SessionId, i => i.Include(x => x.Course.CourseUsers));
                     dto.ParticipatedMembers = finishedExam.Count();
                     dto.TotalMembers = session.Course.CourseUsers.Count();
                     if (session.EndDate < DateTime.Now || dto.ParticipatedMembers == dto.TotalMembers)
@@ -332,15 +377,85 @@ namespace ExamPortal.Controllers
             }
         }
 
+        #endregion
+
+        #region Results
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet("{sessionId:Guid}/result")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetSessionResult([FromRoute] Guid sessionId)
+        {
+            try
+            {
+                var sessionResult = await _unitOfWork.SessionResults.Get(x => x.SessionResultId == sessionId,
+                    i => i.Include(x => x.Exams).ThenInclude(x => x.Task).ThenInclude(x => x.ResultValues));
+                if (sessionResult == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, $"Session with id:{sessionId} not found");
+                }
+                return Ok(sessionResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessionResult)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
         [Authorize(Roles = "Administrator")]
         [HttpPost("{sessionId:Guid}/result")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SendSessionResult([FromRoute] Guid sessionId, [FromForm] IFormFile resultFile)
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> SendSessionResult([FromRoute] Guid sessionId, IFormFile resultFile)
         {
             try
             {
-                return Ok();
+                var session = await _unitOfWork.Sessions.Get(x => x.SessionId == sessionId);
+                if (session == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, $"Session with id:{sessionId} not found");
+                }
+                if (FileHelper.CheckIfXmlFile(resultFile))
+                {
+                    var stream = resultFile.OpenReadStream();
+                    var xmlString = await FileHelper.ReadAsStringAsync(stream);
+                    if (!_xmlValidator.IsResultValid(xmlString) || session.SessionId != sessionId)
+                    {
+                        return BadRequest(new { message = "Invalid XML" });
+                    }
+                    var serializer = new XmlSerializer(typeof(SessionResultXml));
+                    var stringReader = new StringReader(xmlString);
+                    var ssessionResultXml = (SessionResultXml)serializer.Deserialize(stringReader);
+                    var sessionResult = _mapper.Map<SessionResult>(ssessionResultXml);
+                    foreach (var examResult in sessionResult.Exams)
+                    {
+                        examResult.SessionResultId = sessionResult.SessionResultId;
+                        foreach (var taskResult in examResult.Task)
+                        {
+                            var exam = await _unitOfWork.Exams.Get(x => x.ExamId == examResult.ExamId, i => i.Include(x => x.Task));
+                            var task = exam.Task.FirstOrDefault(x => x.SortId == taskResult.SortId);
+                            taskResult.Title = task.Title;
+                            taskResult.Image = task.Image;
+                            taskResult.ExamResultId = examResult.ExamResultId;
+                            foreach (var values in taskResult.ResultValues)
+                            {
+                                values.TaskResultId = taskResult.TaskResultId;
+                            }
+                        }
+                    }
+                    await _unitOfWork.SessionResults.Insert(sessionResult);
+                    await _unitOfWork.Save();
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest(new { message = "Invalid file extension" });
+                }
             }
             catch (Exception ex)
             {
@@ -348,6 +463,9 @@ namespace ExamPortal.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+
+        #endregion
+
 
 
         private async Task<SessionAnswersXml> GenereteAnswersXML(IList<ActivatedExam> activatedExams, Guid sessionId)
@@ -366,9 +484,9 @@ namespace ExamPortal.Controllers
                     {
                         Value = new List<string>()
                     };
-                    foreach (var answersValue in taskAnswer.AnswersValue)
+                    for (int i = 1; i <= taskAnswer.AnswersValue.Count; i++)
                     {
-                        answersXml.Value.Add(answersValue.Value);
+                        answersXml.Value.Add(taskAnswer.AnswersValue.Where(x=>x.SortId == i).Select(x=>x.Value).First());
                     }
                     var exam = await _unitOfWork.Exams.Get(x => x.ExamId == activatedExam.ExamId, i => i.Include(x => x.Task));
                     var taskAnswerId = exam.Task
@@ -382,6 +500,7 @@ namespace ExamPortal.Controllers
                     };
                     listTaskAnswersXml.Add(taskAnswersXml);
                 }
+                listTaskAnswersXml.OrderBy(x => x.TaskAnswersId);
                 sessionAnswers.ExamAnswers.Add(new ExamAnswersXml()
                 {
                     ExamAnswersId = (Guid)activatedExam.ExamId,
@@ -426,8 +545,8 @@ namespace ExamPortal.Controllers
                         if (task.Image != null && attachments != null)
                         {
                             var attachment = attachments.First(x => x.Name == task.Image);
-                            image = GetImageBytes(attachment);
-                            imageType = GetExtension(attachment.Name);
+                            image = FileHelper.GetImageBytes(attachment);
+                            imageType = FileHelper.GetExtension(attachment.Name);
                         }
                         var newTask = new ExamTask
                         {
@@ -449,7 +568,7 @@ namespace ExamPortal.Controllers
                             Value = new List<Value>()
                         };
 
-                        var i = 0;
+                        var i = 1;
                         foreach (var value in task.Questions.Value)
                         {
                             var newValue = new Value
@@ -473,50 +592,6 @@ namespace ExamPortal.Controllers
 
                     session.Exams.Add(newExam);
                 }
-        }
-
-        private static byte[] GetImageBytes(ZipArchiveEntry attachment)
-        {
-            StreamReader sr = new StreamReader(attachment.Open());
-            var memstream = new MemoryStream();
-            sr.BaseStream.CopyTo(memstream);
-            return memstream.ToArray();
-        }
-
-        private static string GetIFormFileExtension(IFormFile file)
-        {
-            var fileName = file.FileName;
-            var extension = GetExtension(fileName);
-            return extension;
-        }
-
-        private static string GetExtension(string fileName)
-        {
-            return fileName.Split('.')[fileName.Split('.').Length - 1];
-        }
-
-        private bool CheckIfXmlFile(IFormFile file)
-        {
-            var extension = GetIFormFileExtension(file);
-            return extension == "xml";
-        }
-
-        private bool CheckIfZipFile(IFormFile file)
-        {
-            var extension = GetIFormFileExtension(file);
-            return extension == "zip";
-        }
-
-        private async Task<string> ReadAsStringAsync(Stream stream)
-        {
-            var result = new StringBuilder();
-            using (var reader = new StreamReader(stream))
-            {
-                while (reader.Peek() >= 0)
-                    result.AppendLine(await reader.ReadLineAsync());
-            }
-
-            return result.ToString();
         }
     }
 }

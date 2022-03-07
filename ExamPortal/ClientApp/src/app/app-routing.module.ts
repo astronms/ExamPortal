@@ -24,13 +24,14 @@ import { CourseDeleteComponent } from './teacher/components/course-delete/course
 import { ExamSessionDeleteComponent } from './teacher/components/exam-session-delete/exam-session-delete.component';
 import { ExamSessionEditComponent } from './teacher/components/exam-session-edit/exam-session-edit.component';
 import { ExamResultsListComponent } from './teacher/components/exam-results-list/exam-results-list.component';
+import { TeacherCreatorComponent } from './admin/components/teacher-creator/teacher-creator.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'student/exams-list', component: ExamsComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
   { path: 'student/exam/:id', component: ExamComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
   { path: 'teacher/exams-list', component: ExamSessionsListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   { path: 'teacher/edit-course/:id', component: CourseEditComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/delete-course/:id', component: CourseDeleteComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/results-list', component: ExamResultsListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'admin/teacher-create', component: TeacherCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.SuperAdmin}},
   { path: '**', component: PageNotFoundComponent }
 ]
 
