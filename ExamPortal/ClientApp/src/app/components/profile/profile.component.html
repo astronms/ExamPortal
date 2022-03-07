@@ -6,6 +6,12 @@
 
 <section class="services-00 d-flex align-items-center py-5" id="services">
     <div class="container text-light">
+        <div *ngIf="operationSuccess" class="alert alert-success" role="alert">
+            Operacja zakończona sukcesem. 
+        </div>
+        <div *ngIf="operationFailed" class="alert alert-danger" role="alert">
+            Operacja zakończona niepowodzeniem. Zweryfikuj poprawność haseł.  
+        </div>
         <form class="password-form" [formGroup]="formGroup">
             <div class="container">
                 <div class="row">
@@ -13,7 +19,7 @@
                         <strong>Imię:</strong> 
                     </div>
                     <div class="col">
-                        {{ this.user.firstName }}
+                        {{ user.firstName }}
                     </div>
                 </div>
                 <div class="row">
@@ -21,17 +27,25 @@
                         <strong>Nazwisko:</strong> 
                     </div>
                     <div class="col">
-                        {{ this.user.lastName }}
+                        {{ user.lastName }}
                     </div>
                 </div>
-               <!--  <div class="row">
+                <div class="row">
                     <div class="col-2">
-                        <strong>Zmień hasło:</strong> 
+                        <strong>E-mail:</strong> 
                     </div>
+                    <div class="col">
+                        {{ user.email }}
+                    </div>
+                </div>
+                <div class="row" *ngIf="user.studentInfo">
                     <div class="col-2">
-                        <input type="password" id="passwordChange" name="passwordChange" ngModel class="form-control" placeholder="hasło" required>
+                        <strong>Indeks:</strong> 
                     </div>
-                </div> -->
+                    <div class="col">
+                        {{ this.user.studentInfo.index }}
+                    </div>
+                </div>
                 <div class="row">
                     <mat-form-field class="half-width">
                         <mat-label>Zmień hasło</mat-label>
@@ -48,6 +62,13 @@
                         <input matInput type="password" formControlName="password2" [errorStateMatcher]="matcher">
                         <mat-error class="password-mismatch" *ngIf="formGroup.get('password2').hasError('passwordMismatch') && !formGroup.get('password').hasError('required')">Hasła nie pasują.</mat-error>
                         <mat-error *ngIf="formGroup.get('password2').hasError('required')">Potwierdź hasło.</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="half-width">
+                        <mat-label>Obecne hasło</mat-label>
+                        <input matInput type="password" formControlName="currentPassword" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="formGroup.get('currentPassword').hasError('required')">Wprowadź obecne hasło.</mat-error>
                     </mat-form-field>
                 </div>
                 <button class="btn btn-sm btn-block" (click)="changePassword()">Zapisz</button>

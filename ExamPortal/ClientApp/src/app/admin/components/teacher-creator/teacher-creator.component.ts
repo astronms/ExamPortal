@@ -3,48 +3,56 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, V
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
-
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-teacher-creator',
+  templateUrl: './teacher-creator.component.html',
+  styleUrls: ['./teacher-creator.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class TeacherCreatorComponent {
 
-  public user: UserModel;
+  registrationSuccess = false;
+  registrationFailed = false;
+
   passPattern = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}';
   matcher = new MyErrorStateMatcher();
+
   formGroup = new FormGroup({
+    'email': new FormControl('', [Validators.required, Validators.email]),
+    'firstName': new FormControl('', [Validators.required]),
+    'lastName': new FormControl('', [Validators.required]),
     'password': new FormControl('', [Validators.required, Validators.pattern(this.passPattern)]),
     'password2': new FormControl('', [Validators.required]),
-    'currentPassword': new FormControl('', [Validators.required]),
   }, { validators: passwordMatchValidator });
 
-  operationSuccess = false;
-  operationFailed = false;
-
   constructor(
-    public authService: AuthService,
-  ) {}
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
-  ngOnInit()
-  {
-    this.user = this.authService.userValue;
-  }
-
-  changePassword()
+  onSubmit()
   {
     if (this.formGroup.valid) {
-      this.authService.changePassword(this.formGroup.get("currentPassword").value, this.formGroup.get("password").value).subscribe(() => {
-        this.operationSuccess = true;
-        this.operationFailed = false;
-        this.resetForm();
-      }, () => {
-        this.operationFailed = true;
-        this.operationSuccess = false;
-      })
+
+      var registerUser: UserModel = {
+        id: null,
+        email: this.formGroup.get("email").value,
+        password: this.formGroup.get("password").value,
+        firstName: this.formGroup.get("firstName").value,
+        lastName: this.formGroup.get("lastName").value,
+      };
+
+      this.authService.registerTeacher(registerUser)
+        .subscribe(() => {
+          this.resetForm();
+          this.registrationSuccess = true;
+          this.registrationFailed = false;
+        }, () => {
+          this.registrationFailed = true;
+          this.registrationSuccess = false;
+        }
+      );
     }
   }
 
@@ -55,7 +63,7 @@ export class ProfileComponent implements OnInit {
       this.formGroup.get(key).setErrors(null) ;
     });
   }
-
+  
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

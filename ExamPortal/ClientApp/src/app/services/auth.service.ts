@@ -35,7 +35,12 @@ export class AuthService {
           token: result.token
         }
         localStorage.setItem('user', JSON.stringify(user));
-        this.userSubject.next(user);
+        this.userSubject.next(user); 
+
+        this.http.get<UserModel>(this.baseUrl + '/api/Account/info').subscribe(result => { //get full user data. In case when we receive failure we will still have partially data.
+          this.userSubject.next(result);
+        })
+
         return true;
     }), catchError(this.handleError));
   }
@@ -43,6 +48,14 @@ export class AuthService {
   public registerUser(user: UserModel) : Observable<UserModel>
   {
     return this.http.post<UserModel>(this.baseUrl + 'api/Account/register', user)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public registerTeacher(user: UserModel) : Observable<UserModel>
+  {
+    return this.http.post<UserModel>(this.baseUrl + 'api/Admin/AdminRegister', user)
     .pipe(
       catchError(this.handleError)
     );
@@ -67,9 +80,15 @@ export class AuthService {
       return null;
   }
 
-  public changePassword(pass: string) : any
+  public changePassword(currentPass: string, pass: string) : any
   {
-    console.log("change!");
+    return this.http.put<any>(this.baseUrl + 'api/Account/updatePassword', {
+      password: pass,
+      currentPassword: currentPass
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
   }
   
   public logOut() : void {
