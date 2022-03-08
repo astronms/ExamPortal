@@ -466,7 +466,7 @@ namespace ExamPortal.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "56ba63a6-36f1-406f-99f4-bdce996b0766",
+                            ConcurrencyStamp = "a2a8a45f-ddf6-46f8-a4a5-36da889ebe7e",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -474,9 +474,9 @@ namespace ExamPortal.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIM7SmXEXhBIlkPusxl3J5EMtIN1zUggM2+jq3knRwJGI1YTPefdkM+TNCvQ/ZDoHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENVyHVNaHzbx81inSRGQtZ2Qq2pghsSHg25XXHRieSw0YQS81Y00DAPkxExrjSZtcw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a6974efd-ae29-4aa4-b230-2b37d1787be9",
+                            SecurityStamp = "b58fada3-d3f2-4842-b5e5-f6266724da7e",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         });
@@ -512,21 +512,21 @@ namespace ExamPortal.Migrations
                         new
                         {
                             Id = "9a48d905-08ad-4548-8da3-b168be98b43a",
-                            ConcurrencyStamp = "f2742a80-fdea-4c02-925e-8ef557a95793",
+                            ConcurrencyStamp = "9adc820d-ffd8-4c28-aa02-139c97ae5a18",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "d98f3528-5b3b-429c-b82d-a30df84f17da",
-                            ConcurrencyStamp = "2d132ea7-7320-42f1-9aea-97a369314857",
+                            ConcurrencyStamp = "3cdcc084-b11c-4163-b0e4-818ede0d2646",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd",
-                            ConcurrencyStamp = "70199c6e-6cec-41bf-acc5-c6cba8f63031",
+                            ConcurrencyStamp = "bbbe49aa-ff56-4daf-82bc-00ba09b3851e",
                             Name = "SuperAdministrator",
                             NormalizedName = "SUPERADMINISTRATOR"
                         });

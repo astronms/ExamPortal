@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220306221506_mofidyResultTables")]
-    partial class mofidyResultTables
+    [Migration("20220308194047_Results")]
+    partial class Results
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -299,7 +299,7 @@ namespace ExamPortal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ExamResults");
+                    b.ToTable("ExamResult");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.Result.ResultValue", b =>
@@ -319,9 +319,6 @@ namespace ExamPortal.Migrations
 
                     b.Property<double>("Score")
                         .HasColumnType("float");
-
-                    b.Property<int>("SortId")
-                        .HasColumnType("int");
 
                     b.Property<Guid>("TaskResultId")
                         .HasColumnType("uniqueidentifier");
@@ -362,11 +359,11 @@ namespace ExamPortal.Migrations
                     b.Property<double>("TaskMaxScore")
                         .HasColumnType("float");
 
+                    b.Property<double>("TaskScore")
+                        .HasColumnType("float");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TotalScore")
-                        .HasColumnType("float");
 
                     b.HasKey("TaskResultId");
 
@@ -471,7 +468,7 @@ namespace ExamPortal.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4707167c-842b-43a0-81d3-20d3ec2028f2",
+                            ConcurrencyStamp = "a2a8a45f-ddf6-46f8-a4a5-36da889ebe7e",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -479,9 +476,9 @@ namespace ExamPortal.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFm+2eeTr1oB2e+D9UguJq0l7ESoSDqzP97vURY4CLqX/aM14PhJZMAbipVA0D4mKw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENVyHVNaHzbx81inSRGQtZ2Qq2pghsSHg25XXHRieSw0YQS81Y00DAPkxExrjSZtcw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "145c507c-663c-4f97-a75a-c5d7d946f7f9",
+                            SecurityStamp = "b58fada3-d3f2-4842-b5e5-f6266724da7e",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         });
@@ -517,21 +514,21 @@ namespace ExamPortal.Migrations
                         new
                         {
                             Id = "9a48d905-08ad-4548-8da3-b168be98b43a",
-                            ConcurrencyStamp = "c4d2b64d-c484-4698-bc8f-daa11850470c",
+                            ConcurrencyStamp = "9adc820d-ffd8-4c28-aa02-139c97ae5a18",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "d98f3528-5b3b-429c-b82d-a30df84f17da",
-                            ConcurrencyStamp = "e6f91534-a5c6-492e-987c-af642163f3cd",
+                            ConcurrencyStamp = "3cdcc084-b11c-4163-b0e4-818ede0d2646",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd",
-                            ConcurrencyStamp = "c927e8e7-eb66-4e25-b337-dda52008a788",
+                            ConcurrencyStamp = "bbbe49aa-ff56-4daf-82bc-00ba09b3851e",
                             Name = "SuperAdministrator",
                             NormalizedName = "SUPERADMINISTRATOR"
                         });
