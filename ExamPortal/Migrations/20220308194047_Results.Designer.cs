@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220308191649_fixProblemWitResultTask2")]
-    partial class fixProblemWitResultTask2
+    [Migration("20220308194047_Results")]
+    partial class Results
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -468,7 +468,7 @@ namespace ExamPortal.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc863745-2f42-4635-9be7-fe93ba2792c9",
+                            ConcurrencyStamp = "a2a8a45f-ddf6-46f8-a4a5-36da889ebe7e",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -476,9 +476,9 @@ namespace ExamPortal.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFCLf6o/KTnzmwCTnzWari6kt/nZkyrRAm++W5G41FA/OfN2JEHLt/H14eL97mOMpw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENVyHVNaHzbx81inSRGQtZ2Qq2pghsSHg25XXHRieSw0YQS81Y00DAPkxExrjSZtcw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "695570e1-d18d-4fbf-b3e6-6a5a511252f2",
+                            SecurityStamp = "b58fada3-d3f2-4842-b5e5-f6266724da7e",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         });
@@ -514,21 +514,21 @@ namespace ExamPortal.Migrations
                         new
                         {
                             Id = "9a48d905-08ad-4548-8da3-b168be98b43a",
-                            ConcurrencyStamp = "78cc6e09-3abe-49e9-b39b-74aca2a5fa9e",
+                            ConcurrencyStamp = "9adc820d-ffd8-4c28-aa02-139c97ae5a18",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "d98f3528-5b3b-429c-b82d-a30df84f17da",
-                            ConcurrencyStamp = "7c882d9a-876a-4717-849c-43903d47f508",
+                            ConcurrencyStamp = "3cdcc084-b11c-4163-b0e4-818ede0d2646",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd",
-                            ConcurrencyStamp = "e83ec187-0311-4873-b6f9-23427e90ea64",
+                            ConcurrencyStamp = "bbbe49aa-ff56-4daf-82bc-00ba09b3851e",
                             Name = "SuperAdministrator",
                             NormalizedName = "SUPERADMINISTRATOR"
                         });
