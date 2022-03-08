@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ExamPortal.Controllers
@@ -48,7 +49,8 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                User user = await GetCurrentUser();
+                User currentUser = await GetCurrentUser();
+                var user = await _unitOfWork.Users.Get(x => x.Id == currentUser.Id, i=>i.Include(x=>x.StudentInfo));
                 var userDTO = _mapper.Map<UserDTO>(user);
                 return Ok(userDTO);
             }
@@ -73,7 +75,7 @@ namespace ExamPortal.Controllers
             }
             try
             {
-                var user = await _unitOfWork.Users.Get(x => x.Id == userId.ToString());
+                var user = await _unitOfWork.Users.Get(x => x.Id == userId.ToString(),i=> i.Include(x => x.StudentInfo));
                 var userDTO = _mapper.Map<UserDTO>(user);
                 return Ok(userDTO);
             }
