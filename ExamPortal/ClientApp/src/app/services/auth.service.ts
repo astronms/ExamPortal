@@ -36,7 +36,7 @@ export class AuthService {
         }
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user); 
-
+        
         return this.http.get<UserModel>(this.baseUrl + 'api/Account/info').subscribe(result => { //get full user data. In case when we receive failure we will still have partially data.
           result.role = user.role;
           result.token = user.token;
