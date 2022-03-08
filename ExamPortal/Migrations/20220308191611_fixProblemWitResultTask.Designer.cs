@@ -4,14 +4,16 @@ using ExamPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220308191611_fixProblemWitResultTask")]
+    partial class fixProblemWitResultTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -357,11 +359,11 @@ namespace ExamPortal.Migrations
                     b.Property<double>("TaskMaxScore")
                         .HasColumnType("float");
 
-                    b.Property<double>("TaskScore")
-                        .HasColumnType("float");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("TotalScore")
+                        .HasColumnType("float");
 
                     b.HasKey("TaskResultId");
 
@@ -466,7 +468,7 @@ namespace ExamPortal.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc863745-2f42-4635-9be7-fe93ba2792c9",
+                            ConcurrencyStamp = "dc07f010-cfc5-4572-a60b-3189a2172a43",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -474,9 +476,9 @@ namespace ExamPortal.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFCLf6o/KTnzmwCTnzWari6kt/nZkyrRAm++W5G41FA/OfN2JEHLt/H14eL97mOMpw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHke8rDFQwIADQN0+kJ/OvjVyWLVQuK6PgQP3TOfLNwp+Wytv0tiR27uXWT1o6FoAQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "695570e1-d18d-4fbf-b3e6-6a5a511252f2",
+                            SecurityStamp = "a5ac808e-3f70-4e15-bd33-d9d86673c7e6",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         });
@@ -512,21 +514,21 @@ namespace ExamPortal.Migrations
                         new
                         {
                             Id = "9a48d905-08ad-4548-8da3-b168be98b43a",
-                            ConcurrencyStamp = "78cc6e09-3abe-49e9-b39b-74aca2a5fa9e",
+                            ConcurrencyStamp = "372409bb-ae03-4ac1-a02f-e5b249d7a0f6",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "d98f3528-5b3b-429c-b82d-a30df84f17da",
-                            ConcurrencyStamp = "7c882d9a-876a-4717-849c-43903d47f508",
+                            ConcurrencyStamp = "411d3f66-26ed-4038-b62e-8ca47df3ef19",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd",
-                            ConcurrencyStamp = "e83ec187-0311-4873-b6f9-23427e90ea64",
+                            ConcurrencyStamp = "fb797a58-8df0-4126-871c-9174f818ce20",
                             Name = "SuperAdministrator",
                             NormalizedName = "SUPERADMINISTRATOR"
                         });
