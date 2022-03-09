@@ -1,9 +1,11 @@
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable} from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, } from 'rxjs/operators';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
+import { UserModel } from 'src/app/models/user.model';
 import { CourseModel } from '../models/course.model';
+import { ExamSessionResultsModel } from '../models/exam-session-results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -112,6 +114,36 @@ export class ExamSessionService {
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  async getUsersWithCompletedExamData(examSessionGuid: string) : Promise<any>
+  {
+    console.log("dupa");
+    var students: UserModel[] = [];
+    const data = await this.http.get<ExamSessionResultsModel>(this.baseUrl + 'api/auth/Session/' + examSessionGuid + '/result').pipe(
+      map(async result => {
+        console.log('start');
+        result.exams.forEach(async exam => {
+          console.log('pentla');
+          /*this.http.get<UserModel>(this.baseUrl + 'api/Admin/' + exam.userId + '/info').subscribe(student => {
+            console.log('get');
+            student.studentInfo = {index: 111111}; //workaround for backend issue
+            student.studentInfo.examResult = exam;
+            students.push(student);
+            console.log(student);
+          });*/
+          const student = await this.http.get<UserModel>(this.baseUrl + 'api/Admin/' + exam.userId + '/info').toPromise();
+          student.studentInfo = {index: 111111}; //workaround for backend issue
+          student.studentInfo.examResult = exam;
+          students.push(student);
+          console.log('pentla end');
+        });
+        console.log(students);
+        return students;
+      }),
+      catchError(this.handleError)
+    ).toPromise();
+    return data;
   }
 
   private handleError(error: HttpErrorResponse) {

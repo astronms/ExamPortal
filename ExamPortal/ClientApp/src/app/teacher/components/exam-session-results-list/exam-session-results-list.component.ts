@@ -7,17 +7,17 @@ import { UploadResultDialogComponent } from '../upload-result-dialog-template/up
 
 @Component({
   selector: 'app-exam-results-list',
-  templateUrl: './exam-results-list.component.html',
-  styleUrls: ['./exam-results-list.component.css']
+  templateUrl: './exam-session-results-list.component.html',
+  styleUrls: ['./exam-session-results-list.component.css']
 })
-export class ExamResultsListComponent implements OnInit {
+export class ExamSessionResultsListComponent implements OnInit {
 
   public examSessions: ExamSessionModel[];
   public displayedColumns: string[] = ['index', 'name', 'startDate', 'endDate', 'participation', 'actions'];
   public teacherActions: TableActionsModel[] = [
     {actionType: "arrow_downward", tooltip: "Pobierz odpowiedzi" },
     {actionType: "arrow_upward", tooltip: "Prześlij wyniki", },
-    {actionType: "bar_chart", tooltip: "Zobacz wyniki", url: "/" }
+    {actionType: "bar_chart", tooltip: "Zobacz wyniki", url: "/teacher/exam-result/" }
   ];
 
   constructor(

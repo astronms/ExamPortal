@@ -20,8 +20,9 @@ import { ExamSessionModifyTemplateComponent } from './components/exam-session-mo
 import { SuccessDialogComponent } from './components/success-dialog-template/success-dialog-template.component';
 import { ExamSessionDeleteComponent } from './components/exam-session-delete/exam-session-delete.component';
 import { ExamSessionEditComponent } from './components/exam-session-edit/exam-session-edit.component';
-import { ExamResultsListComponent } from './components/exam-results-list/exam-results-list.component';
+import { ExamSessionResultsListComponent } from './components/exam-session-results-list/exam-session-results-list.component';
 import { UploadResultDialogComponent } from './components/upload-result-dialog-template/upload-result-dialog-template.component';
+import { ExamSessionResultComponent } from './components/exam-session-result/exam-session-result.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +41,9 @@ import { UploadResultDialogComponent } from './components/upload-result-dialog-t
     CourseDeleteComponent,
     SuccessDialogComponent,
     ExamSessionEditComponent,
-    ExamResultsListComponent,
-    UploadResultDialogComponent
+    ExamSessionResultsListComponent,
+    UploadResultDialogComponent,
+    ExamSessionResultComponent
   ],
   imports: [
     CommonModule,
