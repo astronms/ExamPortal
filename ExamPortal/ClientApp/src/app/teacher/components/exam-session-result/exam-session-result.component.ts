@@ -17,8 +17,8 @@ export class ExamSessionResultComponent implements OnInit {
 
   async ngOnInit() {
     var examSessionId = this.route.snapshot.paramMap.get('id');
-    const result = await this.examSessionService.getUsersWithCompletedExamData(examSessionId);
-    console.log(result);
+    const studentsResults = await this.examSessionService.getStudentsWithExamResults(examSessionId);
+    console.log(studentsResults);
   }
 
 }

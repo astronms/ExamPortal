@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable} from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError, } from 'rxjs/operators';
+import { map, catchError, delay, } from 'rxjs/operators';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
 import { UserModel } from 'src/app/models/user.model';
 import { CourseModel } from '../models/course.model';
@@ -116,34 +116,35 @@ export class ExamSessionService {
     );
   }
 
-  async getUsersWithCompletedExamData(examSessionGuid: string) : Promise<any>
+  getExamSessionResults(examSessionGuid: string) : Observable<ExamSessionResultsModel>
   {
-    console.log("dupa");
-    var students: UserModel[] = [];
-    const data = await this.http.get<ExamSessionResultsModel>(this.baseUrl + 'api/auth/Session/' + examSessionGuid + '/result').pipe(
-      map(async result => {
-        console.log('start');
-        result.exams.forEach(async exam => {
-          console.log('pentla');
-          /*this.http.get<UserModel>(this.baseUrl + 'api/Admin/' + exam.userId + '/info').subscribe(student => {
-            console.log('get');
-            student.studentInfo = {index: 111111}; //workaround for backend issue
-            student.studentInfo.examResult = exam;
-            students.push(student);
-            console.log(student);
-          });*/
-          const student = await this.http.get<UserModel>(this.baseUrl + 'api/Admin/' + exam.userId + '/info').toPromise();
-          student.studentInfo = {index: 111111}; //workaround for backend issue
-          student.studentInfo.examResult = exam;
-          students.push(student);
-          console.log('pentla end');
-        });
-        console.log(students);
-        return students;
+    return this.http.get<ExamSessionResultsModel>(this.baseUrl + 'api/auth/Session/' + examSessionGuid + '/result').pipe(
+      map(result => {
+        result.exams.forEach(exam => {
+          this.http.get<UserModel>(this.baseUrl + 'api/Admin/' + exam.userId + '/info').subscribe(user => {
+            exam.user = user;
+          });
+        })
+        return result; 
       }),
       catchError(this.handleError)
-    ).toPromise();
-    return data;
+    );
+  }
+
+  async getStudentsWithExamResults(examSessionGuid: string) : Promise<any>
+  {
+    var students: UserModel[] = [];
+    this.getExamSessionResults(examSessionGuid).toPromise().then(result => {
+      result.exams.forEach(exam => {
+        let student = exam.user;
+        //exam.user = null;
+        //student.studentInfo.examResult = exam;
+        console.log(exam);
+        console.log(exam.user);
+        students.push(student);
+      });
+    });
+    return students;
   }
 
   private handleError(error: HttpErrorResponse) {

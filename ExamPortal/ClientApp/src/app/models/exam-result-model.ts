@@ -1,9 +1,12 @@
+import { UserModel } from "./user.model";
+
 export interface ExamResultModel {
     examResultId: number;
     task: TaskResultModel[];
     finalScore: number;
     maxScore: number;
     userId: number;
+    user?: UserModel;
     examId: number;
     sessionResultId: number;
 }

@@ -12,6 +12,7 @@ import { TimerTemplateComponent } from './components/timer-template/timer-templa
 import { ClosedQuestionTemplateComponent } from './components/closed-question-template/closed-question-template.component';
 import { OpenQuestionTemplateComponent } from './components/open-question-template/open-question-template.component';
 import { YesNoQuestionTemplateComponent } from './components/yes-no-question-template/yes-no-question-template.component';
+import { ExamsResultsListComponent } from './components/exams-results-list/exams-results-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { YesNoQuestionTemplateComponent } from './components/yes-no-question-tem
     TimerTemplateComponent,
     ClosedQuestionTemplateComponent,
     OpenQuestionTemplateComponent,
-    YesNoQuestionTemplateComponent
+    YesNoQuestionTemplateComponent,
+    ExamsResultsListComponent
   ],
   imports: [
     CommonModule,
