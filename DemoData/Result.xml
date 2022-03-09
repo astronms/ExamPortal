@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
-<session id="a4568e48-e2a5-4c5f-ae8c-f323a5f3fee9">
-    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="e319f149-bfd8-43bd-97c9-6691c52ca2aa">
+<session id="16e39a80-590e-4ad2-bb4f-5f1ba90ca811">
+    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="d2950859-9360-4df9-a670-bc1033a09ed8">
         <task id="1">
             <answer>
                 <actual><![CDATA[ true ]]></actual>
@@ -41,26 +41,26 @@
         </task>
         <task id="3">
             <answer>
-                <actual>"true"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[ true]]></actual>
+                <correct><![CDATA[ false]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"false"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[ false]]></actual>
+                <correct><![CDATA[ false]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"true"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[ true]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"false"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[false]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
@@ -69,26 +69,26 @@
         </task>
         <task id="4">
             <answer>
-                <actual>"1"</actual>
-                <correct>"6"</correct>
+                <actual><![CDATA[1]]></actual>
+                <correct><![CDATA[6]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"3"</actual>
-                <correct>"3"</correct>
+                <actual><![CDATA[3]]></actual>
+                <correct><![CDATA[3]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"4"</actual>
-                <correct>"4"</correct>
+                <actual><![CDATA[4]]></actual>
+                <correct><![CDATA[4]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"B:1,C:2,D:4"</actual>
-                <correct>"B:1,C:2,D:4"</correct>
+                <actual><![CDATA[B:1,C:2,D:4]]></actual>
+                <correct><![CDATA[B:1,C:2,D:4]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
@@ -98,23 +98,23 @@
         <finalScore>6.75</finalScore>
         <maxScore>13.0</maxScore>
     </exam>
-    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="1ccedd24-35e5-43d4-a7e6-37f4e3921883">
+    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="01a241e0-cf0e-4e68-b48f-9eb50bc4e50e">
         <task id="1">
             <answer>
-                <actual>"true"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[true]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"false"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[false]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"false"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[false]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
@@ -123,14 +123,14 @@
         </task>
         <task id="2">
             <answer>
-                <actual>"true"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[true]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"false"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[false]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
@@ -139,26 +139,26 @@
         </task>
         <task id="3">
             <answer>
-                <actual>"true"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[true]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"false"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[false]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"true"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[true]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"false"</actual>
-                <correct>"false"</correct>
+                <actual><![CDATA[false]]></actual>
+                <correct><![CDATA[false]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
@@ -167,26 +167,26 @@
         </task>
         <task id="4">
             <answer>
-                <actual>"1"</actual>
-                <correct>"6"</correct>
+                <actual><![CDATA[1]]></actual>
+                <correct><![CDATA[6]]></correct>
                 <score>-0.25</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"3"</actual>
-                <correct>"3"</correct>
+                <actual><![CDATA[3]]></actual>
+                <correct><![CDATA[3]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"4"</actual>
-                <correct>"4"</correct>
+                <actual><![CDATA[4]]></actual>
+                <correct><![CDATA[4]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>
             <answer>
-                <actual>"B:1,C:2,D:4"</actual>
-                <correct>"B:1,C:2,D:4"</correct>
+                <actual><![CDATA[B:1,C:2,D:4]]></actual>
+                <correct><![CDATA[B:1,C:2,D:4]]></correct>
                 <score>1.0</score>
                 <maxScore>1.0</maxScore>
             </answer>

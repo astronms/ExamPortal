@@ -4,14 +4,16 @@ using ExamPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220309201458_ImprovmentsInResult")]
+    partial class ImprovmentsInResult
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -337,8 +339,7 @@ namespace ExamPortal.Migrations
 
                     b.HasKey("SessionResultId");
 
-                    b.HasIndex("SessionId")
-                        .IsUnique();
+                    b.HasIndex("SessionId");
 
                     b.ToTable("SessionsResult");
                 });
@@ -470,7 +471,7 @@ namespace ExamPortal.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "54c15d06-6ef2-4685-b26a-a39cfa0a0b35",
+                            ConcurrencyStamp = "b3ea80f0-aabe-413b-a35d-23cecbeb9d94",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -478,9 +479,9 @@ namespace ExamPortal.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO2SKGzldNVczomTdUyT6HsIg/K5qcF6pGGsWhd9CN+S3pKd83deMm1ipeKj/vQcjg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOmOKLRpq/suVsOh4i6dOXq9qgaqhh8E2ZtosUSKRFryRQxnlwf8fLszxlntDEOwwA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d08c9192-0621-4afb-9d25-5fb5036416d0",
+                            SecurityStamp = "153e5692-05b9-4c5c-af2b-cb349ee412ee",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         });
@@ -516,21 +517,21 @@ namespace ExamPortal.Migrations
                         new
                         {
                             Id = "9a48d905-08ad-4548-8da3-b168be98b43a",
-                            ConcurrencyStamp = "c5f92353-7fc5-4ef7-b1bb-9a0d633aab13",
+                            ConcurrencyStamp = "de9e976f-c463-4989-84c6-675871e840fb",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "d98f3528-5b3b-429c-b82d-a30df84f17da",
-                            ConcurrencyStamp = "9e07a0f9-1404-4146-b7b4-dee5fb74f7a9",
+                            ConcurrencyStamp = "aed0aab3-cce9-4582-85ba-8458d47c3d10",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd",
-                            ConcurrencyStamp = "3a066e77-645b-491f-bff8-704c97d2956e",
+                            ConcurrencyStamp = "dc410db0-27b8-459b-ae3d-e23ed2b05265",
                             Name = "SuperAdministrator",
                             NormalizedName = "SUPERADMINISTRATOR"
                         });
@@ -802,8 +803,8 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.Result.SessionResult", b =>
                 {
                     b.HasOne("ExamPortal.Data.ExamData.Session", "Session")
-                        .WithOne("SessionResult")
-                        .HasForeignKey("ExamPortal.Data.Result.SessionResult", "SessionId")
+                        .WithMany()
+                        .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -918,8 +919,6 @@ namespace ExamPortal.Migrations
             modelBuilder.Entity("ExamPortal.Data.ExamData.Session", b =>
                 {
                     b.Navigation("Exams");
-
-                    b.Navigation("SessionResult");
                 });
 
             modelBuilder.Entity("ExamPortal.Data.Result.ExamResult", b =>

@@ -4,6 +4,7 @@ namespace ExamPortal.Models.Result
 {
     public class TaskResultDTO
     {
+        public string Type { get; set; }
         public string Title { get; set; }
         public byte[] Image { get; set; }
         public int SortId { get; set; }

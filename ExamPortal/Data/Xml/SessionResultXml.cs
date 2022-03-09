@@ -11,7 +11,7 @@ namespace ExamPortal.Data.Xml
         [XmlElement(ElementName = "exam")]
         public List<ExamResultXml> Exam { get; set; }
         [XmlAttribute(AttributeName = "id")]
-        public Guid Id { get; set; }
+        public Guid SessionId { get; set; }
     }
 
     [XmlRoot(ElementName = "exam")]

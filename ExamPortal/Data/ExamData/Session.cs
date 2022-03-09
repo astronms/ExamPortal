@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 using ExamPortal.Data.ActivetedExams;
+using ExamPortal.Data.Result;
 
 namespace ExamPortal.Data.ExamData
 {
@@ -20,5 +21,8 @@ namespace ExamPortal.Data.ExamData
         [ForeignKey(nameof(Course))]
         public Guid CourseId { get; set; }
         public virtual Course Course { get; set; }
+
+        public virtual SessionResult SessionResult { get; set; }
     }
 }
+

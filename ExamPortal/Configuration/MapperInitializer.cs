@@ -108,10 +108,10 @@ namespace ExamPortal.Configuration
 
             CreateMap<SessionResult, SessionResultXml>()
                 .ForMember(src => src.Exam, opt => opt.MapFrom(x => x.Exams))
-                .ForMember(src => src.Id, opt => opt.MapFrom(x => x.SessionResultId));
+                .ForMember(src => src.SessionId, opt => opt.MapFrom(x => x.SessionId));
             CreateMap<SessionResultXml, SessionResult>()
-                .ForMember(src => src.SessionResultId, opt => opt.MapFrom(x => x.Id))
-                .ForMember(src => src.Exams, opt => opt.MapFrom(x => x.Exam));
+                .ForMember(src => src.Exams, opt => opt.MapFrom(x => x.Exam))
+                .ForMember(src=>src.SessionId,opt=>opt.MapFrom(x=>x.SessionId));
             CreateMap<ExamResult, ExamResultXml>()
                 .ForMember(src => src.Id, opt => opt.MapFrom(x => x.ExamId))
                 .ForMember(src => src.FinalScore, opt => opt.MapFrom(x => x.FinalScore))
@@ -151,7 +151,17 @@ namespace ExamPortal.Configuration
                 .ForMember(src => src.FinalScore, opt => opt.MapFrom(x => x.FinalScore));
             CreateMap<TaskResult, TaskResultDTO>().ReverseMap();
             CreateMap<ResultValue, ResultValueDTO>().ReverseMap();
-
+            CreateMap<SessionResult, SessionResultForAdminDTO>()
+                .ForMember(src => src.SessionResultId, opt => opt.MapFrom(x => x.SessionResultId))
+                .ForMember(src => src.SessionId, opt => opt.MapFrom(x => x.SessionId))
+                .ForMember(src=>src.UsersScore,opt=>opt.MapFrom(x=>x.Exams));
+            CreateMap<ExamResult, UserScoreDTO>()
+                .ForMember(src => src.MaxScore, opt => opt.MapFrom(x => x.MaxScore))
+                .ForMember(src => src.Score, opt => opt.MapFrom(x => x.FinalScore))
+                .ForMember(x => x.Index, opt => opt.MapFrom(x => x.User.StudentInfo.Index))
+                .ForMember(src => src.FristName, opt => opt.MapFrom(x => x.User.FirstName))
+                .ForMember(src => src.LastName, opt => opt.MapFrom(x => x.User.LastName))
+                .ForMember(src => src.UserId, opt => opt.MapFrom(x => x.User.Id));
 
             #endregion
 
