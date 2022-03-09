@@ -123,9 +123,27 @@ namespace ExamPortal.Controllers
                 var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
                 var user = await _userManager.FindByNameAsync(currentUserName);
 
-                var resultSessions = await _unitOfWork.SessionResults.GetAll(x => x.Exams.Any(x => x.User == user));
-
-                var results = _mapper.Map<IList<SessionResultForUserDTO>>(resultSessions);
+                var resultSessions = await _unitOfWork.SessionResults.GetAll(x => x.Exams.Any(x => x.User == user), include: i => i.Include(x=>x.Exams));
+                IList<SessionResultForUserDTO> results = new List<SessionResultForUserDTO>();
+                if (resultSessions != null)
+                {
+                    foreach (var sessionResult in resultSessions)
+                    {
+                        var examResult = sessionResult.Exams.FirstOrDefault(x => x.UserId == user.Id);
+                        var exam = await _unitOfWork.Exams.Get(x => x.ExternalId == examResult.ExamId, i => i.Include(x => x.Session));
+                        SessionResultForUserDTO sessionResultDTO = new SessionResultForUserDTO()
+                        {
+                            SessionResultId = sessionResult.SessionResultId,
+                            SessionId = exam.SessionId,
+                            Name = exam.Session.Name,
+                            StartDate = exam.Session.StartDate,
+                            EndDate = exam.Session.EndDate,
+                            Score = examResult.FinalScore,
+                            MaxScore = examResult.MaxScore
+                        };
+                        results.Add(sessionResultDTO);
+                    }
+                }
                 return Ok(results);
             }
             catch (Exception ex)
@@ -437,7 +455,7 @@ namespace ExamPortal.Controllers
                         examResult.SessionResultId = sessionResult.SessionResultId;
                         foreach (var taskResult in examResult.Task)
                         {
-                            var exam = await _unitOfWork.Exams.Get(x => x.ExamId == examResult.ExamId, i => i.Include(x => x.Task));
+                            var exam = await _unitOfWork.Exams.Get(x => x.ExternalId == examResult.ExamId, i => i.Include(x => x.Task));
                             var task = exam.Task.FirstOrDefault(x => x.SortId == taskResult.SortId);
                             taskResult.Title = task.Title;
                             taskResult.Image = task.Image;
@@ -503,7 +521,7 @@ namespace ExamPortal.Controllers
                 listTaskAnswersXml.OrderBy(x => x.TaskAnswersId);
                 sessionAnswers.ExamAnswers.Add(new ExamAnswersXml()
                 {
-                    ExamAnswersId = (Guid)activatedExam.ExamId,
+                    ExamAnswersId = activatedExam.Exam.ExternalId,
                     UserId = activatedExam.UserId,
                     TaskAnswers = listTaskAnswersXml
                 });

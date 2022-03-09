@@ -19,6 +19,7 @@ namespace ExamPortal.Data
         {
             
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -33,8 +34,10 @@ namespace ExamPortal.Data
                 .HasForeignKey(x => x.ExamId).OnDelete(DeleteBehavior.SetNull);
             builder.Entity<ActivatedExam>().HasOne(x => x.User).WithMany(x => x.ActivatedExams)
                 .HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.SetNull);
-            builder.Entity<ActivatedExam>().HasOne(x => x.ExamAnswers).WithOne(x => x.ActivatedExams).OnDelete(DeleteBehavior.SetNull);
+            builder.Entity<ActivatedExam>().HasOne(x => x.ExamAnswers).WithOne(x => x.ActivatedExams)
+                .OnDelete(DeleteBehavior.SetNull);
         }
+
         private void SeedSuperAdmin(ModelBuilder builder)
         {
             User user = new User()
