@@ -68,8 +68,12 @@ namespace ExamPortal.Data
 
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Exam> Exams { get; set; }
+
         public DbSet<ExamAnswers> ExamAnswers { get; set; }
 
         public DbSet<SessionResult> SessionsResult { get; set; }
+        public DbSet<ExamResult> ExamResults { get; set; }
+        public DbSet<TaskResult> TaskResults { get; set; }
+        public DbSet<ResultValue> ResultValues { get; set; }
     }
 }
