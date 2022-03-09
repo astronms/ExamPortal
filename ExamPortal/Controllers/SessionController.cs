@@ -106,7 +106,7 @@ namespace ExamPortal.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessions)}");
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetStudentSessions)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
@@ -150,7 +150,7 @@ namespace ExamPortal.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessions)}");
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetStudentSessionsResults)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
@@ -392,7 +392,7 @@ namespace ExamPortal.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessions)}");
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetAnswersList)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
@@ -442,7 +442,7 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var examResult = _unitOfWork.ExamResults.Get(
+                var examResult = await _unitOfWork.ExamResults.Get(
                     x => x.UserId == userId.ToString() && x.SessionResult.SessionId == sessionId,
                     i => i.Include(x => x.Task).ThenInclude(x => x.ResultValues));
                 if (examResult == null)
@@ -454,7 +454,7 @@ namespace ExamPortal.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessionResult)}");
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessionUserResult)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
