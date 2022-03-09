@@ -144,7 +144,11 @@ namespace ExamPortal.Configuration
                 .ForMember(src => src.Correct, opt => opt.MapFrom(x => x.Correct))
                 .ForMember(src => src.Score, opt => opt.MapFrom(x => x.Score))
                 .ForMember(src => src.MaxScore, opt => opt.MapFrom(x => x.MaxScore));
-            CreateMap<ExamResult, ExamResultDTO>().ReverseMap();
+            CreateMap<ExamResult, ExamResultDTO>()
+                .ForMember(src => src.SessionResultId, opt => opt.MapFrom(x => x.SessionResultId))
+                .ForMember(src => src.ResultTasks, opt => opt.MapFrom(x => x.Task))
+                .ForMember(src => src.MaxScore, opt => opt.MapFrom(x => x.MaxScore))
+                .ForMember(src => src.FinalScore, opt => opt.MapFrom(x => x.FinalScore));
             CreateMap<TaskResult, TaskResultDTO>().ReverseMap();
             CreateMap<ResultValue, ResultValueDTO>().ReverseMap();
 

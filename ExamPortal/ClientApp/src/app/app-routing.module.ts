@@ -26,6 +26,8 @@ import { ExamSessionEditComponent } from './teacher/components/exam-session-edit
 import { ExamSessionResultsListComponent } from './teacher/components/exam-session-results-list/exam-session-results-list.component';
 import { TeacherCreatorComponent } from './admin/components/teacher-creator/teacher-creator.component';
 import { ExamSessionResultComponent } from './teacher/components/exam-session-result/exam-session-result.component';
+import { ExamsResultsListComponent } from './student/components/exams-results-list/exams-results-list.component';
+import { ExamResultComponent } from './student/components/exam-result/exam-result.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -34,6 +36,8 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'student/exams-list', component: ExamsComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
+  { path: 'student/exams-results', component: ExamsResultsListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
+  { path: 'student/exam-result/:id', component: ExamResultComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
   { path: 'student/exam/:id', component: ExamComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.User}},
   { path: 'teacher/exams-list', component: ExamSessionsListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/exam-creator', component: ExamSessionCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},

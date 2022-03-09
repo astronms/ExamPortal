@@ -6,7 +6,6 @@ import { TableActionsModel } from 'src/app/models/table-actions.model';
 import { SyncExamService } from '../../services/sync-exam.service';
 import { MatDialog } from '@angular/material/dialog';
 import { StartExamDialogComponent } from '../start-exam-dialog/start-exam-dialog.component';
-import { start } from 'repl';
 
 @Component({
   selector: 'app-exams',

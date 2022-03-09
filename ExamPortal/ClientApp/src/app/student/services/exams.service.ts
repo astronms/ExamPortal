@@ -18,6 +18,12 @@ export class ExamsService {
       catchError(this.handleError)
     );
   }
+
+  getListOfExamSessionsResults() : Observable<ExamSessionModel[]>{
+    return this.http.get<ExamSessionModel[]>(this.baseUrl + 'api/auth/Session/student/resultList').pipe(
+      catchError(this.handleError)
+    );
+  }
   
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

@@ -116,7 +116,7 @@ export class ExamSessionService {
     );
   }
 
-  getExamSessionResults(examSessionGuid: string) : Observable<ExamSessionResultsModel>
+  /*getExamSessionResults(examSessionGuid: string) : Observable<ExamSessionResultsModel>
   {
     return this.http.get<ExamSessionResultsModel>(this.baseUrl + 'api/auth/Session/' + examSessionGuid + '/result').pipe(
       map(result => {
@@ -145,7 +145,7 @@ export class ExamSessionService {
       });
     });
     return students;
-  }
+  }*/
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

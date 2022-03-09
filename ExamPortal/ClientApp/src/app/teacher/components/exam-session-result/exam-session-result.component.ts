@@ -7,7 +7,7 @@ import { ExamSessionService } from '../../services/exam-session.service';
   templateUrl: './exam-session-result.component.html',
   styleUrls: ['./exam-session-result.component.css']
 })
-export class ExamSessionResultComponent implements OnInit {
+export class ExamSessionResultComponent{
 
   constructor(
     private route: ActivatedRoute,
@@ -15,10 +15,10 @@ export class ExamSessionResultComponent implements OnInit {
     private examSessionService: ExamSessionService
   ) { }
 
-  async ngOnInit() {
+  /*async ngOnInit() {
     var examSessionId = this.route.snapshot.paramMap.get('id');
     const studentsResults = await this.examSessionService.getStudentsWithExamResults(examSessionId);
     console.log(studentsResults);
-  }
+  }*/
 
 }

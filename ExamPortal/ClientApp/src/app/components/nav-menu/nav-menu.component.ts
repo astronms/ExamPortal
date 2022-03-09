@@ -24,7 +24,8 @@ export class NavMenuComponent {
   };
 
   student_items = {
-    "Egzaminy": "student/exams-list"
+    "Egzaminy": "student/exams-list",
+    "Wyniki": "student/exams-results"
   };
 
   constructor(private router: Router, public authService: AuthService ) { }
