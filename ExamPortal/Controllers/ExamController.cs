@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using ExamPortal.Data.ActivetedExams;
 using ExamPortal.Data.Answers;
 using ExamPortal.Data.ExamData;
-using ExamPortal.Data.Result;
 using ExamPortal.Data.Users;
 using ExamPortal.Hubs;
 using ExamPortal.IRepository;
@@ -20,6 +14,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ExamPortal.Controllers
 {
@@ -219,6 +218,7 @@ namespace ExamPortal.Controllers
         }
 
         #endregion
+
         private static ExamInfo GetExamInfo(Exam userExam)
         {
             var totalTime = 0;

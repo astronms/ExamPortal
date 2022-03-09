@@ -148,7 +148,6 @@ namespace ExamPortal.Configuration
             CreateMap<TaskResult, TaskResultDTO>().ReverseMap();
             CreateMap<ResultValue, ResultValueDTO>().ReverseMap();
 
-            CreateMap<SessionResult, SessionResultForUserDTO>().ReverseMap();
 
             #endregion
 

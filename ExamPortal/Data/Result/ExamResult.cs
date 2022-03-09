@@ -19,11 +19,10 @@ namespace ExamPortal.Data.Result
        
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
+
         public virtual User User { get; set; }
 
-        [ForeignKey(nameof(Exam))]
         public Guid ExamId { get; set; }
-        public virtual Exam Exam { get; set; }
 
         [ForeignKey(nameof(SessionResult))]
         public Guid SessionResultId { get; set; }
