@@ -9,6 +9,7 @@ namespace ExamPortal.Data.Result
     {
         [Key]
         public Guid TaskResultId { get; set; }
+        public string Type { get; set; }
         public string Title { get; set; }
         public byte[] Image { get; set; }
         public int SortId { get; set; }

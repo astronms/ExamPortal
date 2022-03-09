@@ -501,6 +501,7 @@ namespace ExamPortal.Controllers
                         {
                             var exam = await _unitOfWork.Exams.Get(x => x.ExternalId == examResult.ExamId, i => i.Include(x => x.Task));
                             var task = exam.Task.FirstOrDefault(x => x.SortId == taskResult.SortId);
+                            taskResult.Type = task.Type;
                             taskResult.Title = task.Title;
                             taskResult.Image = task.Image;
                             taskResult.ExamResultId = examResult.ExamResultId;
