@@ -123,21 +123,23 @@ namespace ExamPortal.Controllers
                 var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
                 var user = await _userManager.FindByNameAsync(currentUserName);
 
-                var resultSessions = await _unitOfWork.SessionResults.GetAll(x => x.Exams.Any(x => x.User == user), include: i => i.Include(x=>x.Exams));
+                var resultSessions = await _unitOfWork.SessionResults.GetAll(x => x.Exams.Any(x => x.User == user), 
+                    include: i => i
+                            .Include(x=>x.Exams)
+                            .Include(x=>x.Session));
                 IList<SessionResultForUserDTO> results = new List<SessionResultForUserDTO>();
                 if (resultSessions != null)
                 {
                     foreach (var sessionResult in resultSessions)
                     {
                         var examResult = sessionResult.Exams.FirstOrDefault(x => x.UserId == user.Id);
-                        var exam = await _unitOfWork.Exams.Get(x => x.ExternalId == examResult.ExamId, i => i.Include(x => x.Session));
                         SessionResultForUserDTO sessionResultDTO = new SessionResultForUserDTO()
                         {
                             SessionResultId = sessionResult.SessionResultId,
-                            SessionId = exam.SessionId,
-                            Name = exam.Session.Name,
-                            StartDate = exam.Session.StartDate,
-                            EndDate = exam.Session.EndDate,
+                            SessionId = examResult.SessionResult.SessionId,
+                            Name = examResult.SessionResult.Session.Name,
+                            StartDate = examResult.SessionResult.Session.StartDate,
+                            EndDate = examResult.SessionResult.Session.EndDate,
                             Score = examResult.FinalScore,
                             MaxScore = examResult.MaxScore
                         };
@@ -408,13 +410,47 @@ namespace ExamPortal.Controllers
         {
             try
             {
-                var sessionResult = await _unitOfWork.SessionResults.Get(x => x.SessionResultId == sessionId,
-                    i => i.Include(x => x.Exams).ThenInclude(x => x.Task).ThenInclude(x => x.ResultValues));
+                var sessionResult = await _unitOfWork.SessionResults.Get(x => x.SessionId == sessionId,
+                    i => i
+                        .Include(x => x.Exams)
+                        .ThenInclude(x => x.Task)
+                        .ThenInclude(x => x.ResultValues)
+                        .Include(x=>x.Exams)
+                        .ThenInclude(x=>x.User)
+                        .ThenInclude(x=>x.StudentInfo));
                 if (sessionResult == null)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, $"Session with id:{sessionId} not found");
                 }
-                return Ok(sessionResult);
+
+                var result = _mapper.Map<SessionResultForAdminDTO>(sessionResult);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(GetSessionResult)}");
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet("{sessionId:Guid}/result/{userId:Guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetSessionUserResult([FromRoute] Guid sessionId, [FromRoute] Guid userId)
+        {
+            try
+            {
+                var examResult = _unitOfWork.ExamResults.Get(
+                    x => x.UserId == userId.ToString() && x.SessionResult.SessionId == sessionId,
+                    i => i.Include(x => x.Task).ThenInclude(x => x.ResultValues));
+                if (examResult == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, $"Exam for Sessionid:{sessionId}not found");
+                }
+                var examResultDTO = _mapper.Map<ExamResultDTO>(examResult);
+                return Ok(examResultDTO);
             }
             catch (Exception ex)
             {
@@ -438,6 +474,13 @@ namespace ExamPortal.Controllers
                 {
                     return StatusCode(StatusCodes.Status404NotFound, $"Session with id:{sessionId} not found");
                 }
+
+                var sessionResult = await _unitOfWork.SessionResults.Get(x => x.SessionId == sessionId);
+                if (sessionResult != null)
+                {
+                    await _unitOfWork.SessionResults.Delete(sessionResult.SessionResultId);
+                    await _unitOfWork.Save();
+                }
                 if (FileHelper.CheckIfXmlFile(resultFile))
                 {
                     var stream = resultFile.OpenReadStream();
@@ -448,8 +491,9 @@ namespace ExamPortal.Controllers
                     }
                     var serializer = new XmlSerializer(typeof(SessionResultXml));
                     var stringReader = new StringReader(xmlString);
-                    var ssessionResultXml = (SessionResultXml)serializer.Deserialize(stringReader);
-                    var sessionResult = _mapper.Map<SessionResult>(ssessionResultXml);
+                    var sessionResultXml = (SessionResultXml)serializer.Deserialize(stringReader);
+                    sessionResult = _mapper.Map<SessionResult>(sessionResultXml);
+                    sessionResult.SessionId = sessionId;
                     foreach (var examResult in sessionResult.Exams)
                     {
                         examResult.SessionResultId = sessionResult.SessionResultId;
