@@ -12,6 +12,7 @@ namespace ExamPortal.Data.Result
         public string Type { get; set; }
         public string Title { get; set; }
         public byte[] Image { get; set; }
+        public string ImageType { get; set; }
         public int SortId { get; set; }
         public virtual IList<ResultValue> ResultValues { get; set; }
         public double TaskScore { get; set; }

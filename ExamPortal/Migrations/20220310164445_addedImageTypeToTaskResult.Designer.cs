@@ -4,14 +4,16 @@ using ExamPortal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamPortal.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220310164445_addedImageTypeToTaskResult")]
+    partial class addedImageTypeToTaskResult
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,9 +321,6 @@ namespace ExamPortal.Migrations
                     b.Property<Guid>("TaskResultId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ResultValueId");
 
                     b.HasIndex("TaskResultId");
@@ -479,7 +478,7 @@ namespace ExamPortal.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5cf72daa-99f4-47a8-bfad-35c3ae858bb7",
+                            ConcurrencyStamp = "f1130ca7-7d2a-40e7-83c9-6beebbae221e",
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Super",
@@ -487,9 +486,9 @@ namespace ExamPortal.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOtdcAS4b3DYuSD3zlGvTSrkxwlPs13Xi4oPBd58o3FGvXskLNCoCPbHH7j5bNZbA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO8fC5xOUJX29+K7P+b5YJr/1RuImG73kW4iZzn05LwFcEfITHrKvE3iG1lW3RW/yg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "69d69e2a-5883-49e4-a811-08e9edcba123",
+                            SecurityStamp = "95681d5b-e87e-4b09-93e3-75fe93b27d8d",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         });
@@ -525,21 +524,21 @@ namespace ExamPortal.Migrations
                         new
                         {
                             Id = "9a48d905-08ad-4548-8da3-b168be98b43a",
-                            ConcurrencyStamp = "8e9aa841-6d38-4cf6-b671-3aa12fd1e052",
+                            ConcurrencyStamp = "9135c737-3362-404a-a346-a5fd38939f91",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "d98f3528-5b3b-429c-b82d-a30df84f17da",
-                            ConcurrencyStamp = "40647d87-9316-4b85-a768-659238e31c0f",
+                            ConcurrencyStamp = "aff4c8b1-df01-4cce-b9c5-138e4ff6fe4f",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a91f4dbc-8020-4052-b7c1-8cb3d46de4fd",
-                            ConcurrencyStamp = "7bbbeb9e-6286-44dc-881b-f750190f71b6",
+                            ConcurrencyStamp = "1730bc25-684c-4235-81e6-f49352a21f24",
                             Name = "SuperAdministrator",
                             NormalizedName = "SUPERADMINISTRATOR"
                         });
