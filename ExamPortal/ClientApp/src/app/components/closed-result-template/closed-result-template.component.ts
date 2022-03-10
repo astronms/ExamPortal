@@ -1,35 +1,36 @@
-import { AfterContentInit, Component, Input} from '@angular/core';
+import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TaskResultModel } from 'src/app/models/exam-result-model';
 
 @Component({
-  selector: 'app-yes-no-result-template',
-  templateUrl: './yes-no-result-template.component.html',
-  styleUrls: ['./yes-no-result-template.component.css']
+  selector: 'app-closed-result-template',
+  templateUrl: './closed-result-template.component.html'
 })
-export class YesNoResultTemplateComponent implements AfterContentInit {
+export class ClosedResultTemplateComponent implements AfterContentInit {
 
   public image: string = null;
-  public formGroup = new FormGroup({});
   public _result: TaskResultModel;
+  public formGroup: FormGroup;
+  public selectedOptionIndex: number;
 
   @Input() set result(res: TaskResultModel) {
     this._result = res;
-    this.formGroup = new FormGroup({});
-    var iter = 0;
-    res.resultValues.forEach(value => {
-      this.formGroup.addControl('formId_' + iter, new FormControl(JSON.parse(value.actual)));
-      iter++;
+    this.selectedOptionIndex = res.resultValues.findIndex(x => JSON.parse(x.actual) == true);
+
+    console.log(res.resultValues);
+
+    this.formGroup = new FormGroup({
+      'option': new FormControl(this.selectedOptionIndex.toString())
     });
-    this.loadImage()
-  }
+  };
 
   constructor() {}
 
   ngAfterContentInit(): void 
   {
-    this.loadImage()
+    this.loadImage();
   }
+
 
   private loadImage() : void 
   {

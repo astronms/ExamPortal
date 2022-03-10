@@ -17,7 +17,7 @@ export interface TaskResultModel {
 }
 
 export interface ResultValueModel {
-    text: string;
+    value: string;
     actual: string;
     correct: string;
     score: number;

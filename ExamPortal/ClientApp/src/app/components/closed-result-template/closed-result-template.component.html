@@ -1,0 +1,17 @@
+<ng-container *ngIf="_result">
+    <h3>{{ _result.title }}</h3>
+    <img *ngIf="image" [attr.src]="image">
+    <form class="answer-form" [formGroup]="formGroup">
+        <mat-radio-group formControlName="option" [disabled]="true">
+            <ng-container *ngFor="let element of _result.resultValues | keyvalue">
+                <div class="row">
+                    <div class="col-3"><p>{{ element.value.value }}</p></div>
+                    <div class="col">
+                        <mat-radio-button [value]="element.key"></mat-radio-button>
+                    </div>
+                </div>
+            </ng-container>
+        </mat-radio-group>
+        <p><strong>Wynik: {{ _result.taskScore }}/{{ _result.taskMaxScore }}</strong></p>
+    </form>
+</ng-container>

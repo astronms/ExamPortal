@@ -10,7 +10,9 @@
         <br />
         <h4>Odpowiedzi:</h4>
         <ng-container *ngFor="let result of examResult.resultTasks">
+          <br />
           <app-yes-no-result-template *ngIf="result.type === 'Yes-No'" [result]="result"></app-yes-no-result-template>
+          <app-closed-result-template *ngIf="result.type === 'Closed'" [result]="result"></app-closed-result-template>
        </ng-container>
     </div> <!-- end of container -->
   </section>

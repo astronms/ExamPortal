@@ -20,12 +20,14 @@ import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-t
 import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
 import { MatRadioModule } from '@angular/material/radio';
 import { YesNoResultTemplateComponent } from '../components/yes-no-result-template/yes-no-result-template.component';
+import { ClosedResultTemplateComponent } from '../components/closed-result-template/closed-result-template.component';
 
 @NgModule({
   declarations: [
     ExamSessionTableTemplateComponent,
     MinuteSecondsPipe,
-    YesNoResultTemplateComponent
+    YesNoResultTemplateComponent,
+    ClosedResultTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +70,8 @@ import { YesNoResultTemplateComponent } from '../components/yes-no-result-templa
     ExamSessionTableTemplateComponent,
     MinuteSecondsPipe,
     MatRadioModule,
-    YesNoResultTemplateComponent
+    YesNoResultTemplateComponent,
+    ClosedResultTemplateComponent
   ]
 })
 export class SharedModule { }
