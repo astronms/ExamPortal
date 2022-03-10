@@ -8,12 +8,13 @@ namespace ExamPortal.Data.Result
     {
         [Key]
         public Guid ResultValueId { get; set; }
+        public string Value { get; set; }
         public string Actual { get; set; }
         public string Correct { get; set; }
         public double Score { get; set; }
         public double MaxScore { get; set; }
 
-        [ForeignKey("TaskResultId")]
+        [ForeignKey(nameof(TaskResult))]
         public Guid TaskResultId { get; set; }
         public virtual TaskResult TaskResult { get; set; }
     }

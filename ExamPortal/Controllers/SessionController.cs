@@ -499,16 +499,17 @@ namespace ExamPortal.Controllers
                         examResult.SessionResultId = sessionResult.SessionResultId;
                         foreach (var taskResult in examResult.Task)
                         {
-                            var exam = await _unitOfWork.Exams.Get(x => x.ExternalId == examResult.ExamId, i => i.Include(x => x.Task));
+                            var exam = await _unitOfWork.Exams.Get(x => x.ExternalId == examResult.ExamId, 
+                                i => i.Include(x => x.Task).ThenInclude(x=>x.Questions).ThenInclude(x=>x.Value));
                             var task = exam.Task.FirstOrDefault(x => x.SortId == taskResult.SortId);
                             taskResult.Type = task.Type;
                             taskResult.Title = task.Title;
                             taskResult.Image = task.Image;
                             taskResult.ImageType = task.ImageType;
                             taskResult.ExamResultId = examResult.ExamResultId;
-                            foreach (var values in taskResult.ResultValues)
+                            foreach (var item in taskResult.ResultValues.Select((value, i) => (value, i)))
                             {
-                                values.TaskResultId = taskResult.TaskResultId;
+                                item.value.Value = task.Questions.Value[item.i].Text;
                             }
                         }
                     }
