@@ -444,7 +444,8 @@ namespace ExamPortal.Controllers
             {
                 var examResult = await _unitOfWork.ExamResults.Get(
                     x => x.UserId == userId.ToString() && x.SessionResult.SessionId == sessionId,
-                    i => i.Include(x => x.Task).ThenInclude(x => x.ResultValues));
+                    i => i.Include(x => x.Task).ThenInclude(x => x.ResultValues)
+                        .Include(x=>x.SessionResult));
                 if (examResult == null)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, $"Exam for Sessionid:{sessionId}not found");
@@ -494,6 +495,7 @@ namespace ExamPortal.Controllers
                     var sessionResultXml = (SessionResultXml)serializer.Deserialize(stringReader);
                     sessionResult = _mapper.Map<SessionResult>(sessionResultXml);
                     sessionResult.SessionId = sessionId;
+                    sessionResult.Name = session.Name;
                     foreach (var examResult in sessionResult.Exams)
                     {
                         examResult.SessionResultId = sessionResult.SessionResultId;
