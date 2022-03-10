@@ -6,6 +6,7 @@
   
   <section class="services-00 d-flex align-items-center py-5" id="services">
     <div class="container text-light" *ngIf="examResult">
+        <h4>Egzamin: {{ examResult.name }}</h4>
         <h4>Zdobyte punkty: {{ examResult.finalScore }}/{{ examResult.maxScore }} </h4>
         <br />
         <h4>Odpowiedzi:</h4>
@@ -13,6 +14,7 @@
           <br />
           <app-yes-no-result-template *ngIf="result.type === 'Yes-No'" [result]="result"></app-yes-no-result-template>
           <app-closed-result-template *ngIf="result.type === 'Closed'" [result]="result"></app-closed-result-template>
+          <app-open-result-template *ngIf="result.type === 'Opened'" [result]="result"></app-open-result-template>
        </ng-container>
     </div> <!-- end of container -->
   </section>

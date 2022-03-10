@@ -14,6 +14,7 @@ namespace ExamPortal.Data.Result
         [ForeignKey(nameof(Session))]
         public Guid SessionId { get; set; }
         public Session Session { get; set; }
+        public string Name { get; set; }
 
         public virtual IList<ExamResult> Exams { get; set; }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
-<session id="ce09a83d-db8c-4032-961a-c1a680cf50b9">
-    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="95da1293-fe44-437d-a7f7-d4d4601448bc">
+<session id="b91e55e7-d944-439b-a884-1c208d6be2de">
+    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="72fbfac2-2cb3-48bb-a733-1b8ae421ca6a">
         <task id="1">
             <answer>
                 <actual><![CDATA[ true ]]></actual>
@@ -41,30 +41,30 @@
         </task>
         <task id="3">
             <answer>
-                <actual><![CDATA[ true]]></actual>
+                <actual><![CDATA[ false ]]></actual>
                 <correct><![CDATA[ false]]></correct>
-                <score>-0.25</score>
-                <maxScore>1.0</maxScore>
+                <score>0</score>
+                <maxScore>0</maxScore>
             </answer>
             <answer>
                 <actual><![CDATA[ false]]></actual>
                 <correct><![CDATA[ false]]></correct>
-                <score>1.0</score>
-                <maxScore>1.0</maxScore>
+                <score>0</score>
+                <maxScore>0</maxScore>
             </answer>
             <answer>
                 <actual><![CDATA[ true]]></actual>
-                <correct><![CDATA[false]]></correct>
-                <score>-0.25</score>
-                <maxScore>1.0</maxScore>
+                <correct><![CDATA[ true ]]></correct>
+                <score>4.0</score>
+                <maxScore>4.0</maxScore>
             </answer>
             <answer>
                 <actual><![CDATA[false]]></actual>
                 <correct><![CDATA[false]]></correct>
-                <score>1.0</score>
-                <maxScore>1.0</maxScore>
+                <score>0</score>
+                <maxScore>0</maxScore>
             </answer>
-            <taskScore>1.5</taskScore>
+            <taskScore>4.0</taskScore>
             <taskMaxScore>4.0</taskMaxScore>
         </task>
         <task id="4">
@@ -98,7 +98,7 @@
         <finalScore>6.75</finalScore>
         <maxScore>13.0</maxScore>
     </exam>
-    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="5a0efefc-cde1-4b82-a664-84c8304eb969">
+    <exam id="767f440d-ec1f-4286-9d44-835db9e55fe6" userId="aa4b0456-9654-4faf-a1a4-8cce15751ebc">
         <task id="1">
             <answer>
                 <actual><![CDATA[true]]></actual>
@@ -139,30 +139,30 @@
         </task>
         <task id="3">
             <answer>
-                <actual><![CDATA[true]]></actual>
-                <correct><![CDATA[false]]></correct>
-                <score>-0.25</score>
-                <maxScore>1.0</maxScore>
+                <actual><![CDATA[ false ]]></actual>
+                <correct><![CDATA[ false]]></correct>
+                <score>0</score>
+                <maxScore>0</maxScore>
+            </answer>
+            <answer>
+                <actual><![CDATA[ true ]]></actual>
+                <correct><![CDATA[ false]]></correct>
+                <score>0</score>
+                <maxScore>0</maxScore>
+            </answer>
+            <answer>
+                <actual><![CDATA[ false]]></actual>
+                <correct><![CDATA[ true ]]></correct>
+                <score>0</score>
+                <maxScore>4.0</maxScore>
             </answer>
             <answer>
                 <actual><![CDATA[false]]></actual>
                 <correct><![CDATA[false]]></correct>
-                <score>1.0</score>
-                <maxScore>1.0</maxScore>
+                <score>0</score>
+                <maxScore>0</maxScore>
             </answer>
-            <answer>
-                <actual><![CDATA[true]]></actual>
-                <correct><![CDATA[false]]></correct>
-                <score>-0.25</score>
-                <maxScore>1.0</maxScore>
-            </answer>
-            <answer>
-                <actual><![CDATA[false]]></actual>
-                <correct><![CDATA[false]]></correct>
-                <score>1.0</score>
-                <maxScore>1.0</maxScore>
-            </answer>
-            <taskScore>1.5</taskScore>
+            <taskScore>4.0</taskScore>
             <taskMaxScore>4.0</taskMaxScore>
         </task>
         <task id="4">

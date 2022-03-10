@@ -21,13 +21,15 @@ import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
 import { MatRadioModule } from '@angular/material/radio';
 import { YesNoResultTemplateComponent } from '../components/yes-no-result-template/yes-no-result-template.component';
 import { ClosedResultTemplateComponent } from '../components/closed-result-template/closed-result-template.component';
+import { OpenResultTemplateComponent } from '../components/open-result-template/open-result-template.component';
 
 @NgModule({
   declarations: [
     ExamSessionTableTemplateComponent,
     MinuteSecondsPipe,
     YesNoResultTemplateComponent,
-    ClosedResultTemplateComponent
+    ClosedResultTemplateComponent,
+    OpenResultTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,8 @@ import { ClosedResultTemplateComponent } from '../components/closed-result-templ
     MinuteSecondsPipe,
     MatRadioModule,
     YesNoResultTemplateComponent,
-    ClosedResultTemplateComponent
+    ClosedResultTemplateComponent,
+    OpenResultTemplateComponent
   ]
 })
 export class SharedModule { }

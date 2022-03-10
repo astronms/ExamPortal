@@ -8,6 +8,8 @@
                     <div class="col-3"><p>{{ element.value.value }}</p></div>
                     <div class="col">
                         <mat-radio-button [value]="element.key"></mat-radio-button>
+                        <mat-icon [ngStyle]="{'color':'red'}" *ngIf="!resultCorrectness[element.key]">clear</mat-icon>
+                        <mat-icon [ngStyle]="{'color':'green'}" *ngIf="resultCorrectness[element.key]">done</mat-icon>
                     </div>
                 </div>
             </ng-container>

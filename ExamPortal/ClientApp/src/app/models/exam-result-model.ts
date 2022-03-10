@@ -3,6 +3,7 @@ export interface ExamResultModel {
     resultTasks: TaskResultModel[];
     finalScore: number;
     maxScore: number;
+    name: string;
 }
 
 export interface TaskResultModel {

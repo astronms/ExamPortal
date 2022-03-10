@@ -1,0 +1,18 @@
+<ng-container *ngIf="_result">
+    <h3>{{ _result.title }}</h3>
+    <img *ngIf="image" [attr.src]="image">
+    <form class="answer-form" [formGroup]="formGroup" [disabled]="true">
+        <ng-container *ngFor="let item of _result.resultValues | keyvalue">
+            <p>{{ item.value.value }}</p>  
+            <mat-form-field class="answer-full-width" appearance="fill">
+                <input matInput formControlName="formId_{{ item.key }}">
+            </mat-form-field>
+            <ng-container *ngIf="!resultCorrectness[item.key]">
+                <mat-icon [ngStyle]="{'color':'red'}">clear</mat-icon>
+                Poprawna odpowiedź: {{item.value.correct}}
+            </ng-container>
+            <mat-icon [ngStyle]="{'color':'green'}" *ngIf="resultCorrectness[item.key]">done</mat-icon>
+        </ng-container>
+    </form>
+    <p><strong>Wynik: {{ _result.taskScore }}/{{ _result.taskMaxScore }}</strong></p>
+</ng-container>

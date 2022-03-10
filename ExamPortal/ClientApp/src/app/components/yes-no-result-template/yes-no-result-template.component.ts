@@ -12,14 +12,20 @@ export class YesNoResultTemplateComponent implements AfterContentInit {
   public image: string = null;
   public formGroup = new FormGroup({});
   public _result: TaskResultModel;
+  public resultCorrectness: boolean[];
 
   @Input() set result(res: TaskResultModel) {
     this._result = res;
+    this.resultCorrectness = [];
     this.formGroup = new FormGroup({});
     var iter = 0;
     res.resultValues.forEach(value => {
       this.formGroup.addControl('formId_' + iter, new FormControl(JSON.parse(value.actual)));
-      iter++;
+      iter++; 
+      if(JSON.parse(value.actual) == JSON.parse(value.correct))
+        this.resultCorrectness.push(true);
+      else
+        this.resultCorrectness.push(false);
     });
     this.loadImage()
   }

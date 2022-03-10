@@ -202,7 +202,9 @@ namespace ExamPortal.Controllers
                 var currentUser = User;
                 var currentUserName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
                 var user = await _userManager.FindByNameAsync(currentUserName);
-                var examResult = await _unitOfWork.ExamResults.Get(x => x.SessionResultId == sessionId && x.User == user, i=>i.Include(x=>x.Task).ThenInclude(x=>x.ResultValues));
+                var examResult = await _unitOfWork.ExamResults.Get(
+                    x => x.SessionResultId == sessionId && x.User == user,
+                    i => i.Include(x => x.Task).ThenInclude(x => x.ResultValues).Include(x => x.SessionResult));
                 if (examResult == null)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, $"Exam for Sessionid:{sessionId}not found");
