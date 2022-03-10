@@ -504,6 +504,7 @@ namespace ExamPortal.Controllers
                             taskResult.Type = task.Type;
                             taskResult.Title = task.Title;
                             taskResult.Image = task.Image;
+                            taskResult.ImageType = task.ImageType;
                             taskResult.ExamResultId = examResult.ExamResultId;
                             foreach (var values in taskResult.ResultValues)
                             {
