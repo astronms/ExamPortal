@@ -19,11 +19,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
 import { MatRadioModule } from '@angular/material/radio';
+import { YesNoResultTemplateComponent } from '../components/yes-no-result-template/yes-no-result-template.component';
 
 @NgModule({
   declarations: [
     ExamSessionTableTemplateComponent,
-    MinuteSecondsPipe
+    MinuteSecondsPipe,
+    YesNoResultTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDatepickerModule,
     ExamSessionTableTemplateComponent,
     MinuteSecondsPipe,
-    MatRadioModule
+    MatRadioModule,
+    YesNoResultTemplateComponent
   ]
 })
 export class SharedModule { }

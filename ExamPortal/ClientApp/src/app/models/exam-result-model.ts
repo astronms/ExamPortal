@@ -7,14 +7,17 @@ export interface ExamResultModel {
 
 export interface TaskResultModel {
     title: string;
+    type: string;
     image?: any;
+    imageType: any;
     sortId: any;
-    resultValues: ResultValue[];
+    resultValues: ResultValueModel[];
     taskScore: number;
     taskMaxScore: number;
 }
 
-export interface ResultValue {
+export interface ResultValueModel {
+    text: string;
     actual: string;
     correct: string;
     score: number;

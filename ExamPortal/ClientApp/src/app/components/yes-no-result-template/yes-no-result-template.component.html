@@ -1,0 +1,17 @@
+<ng-container *ngIf="_result">
+    <h3>{{ _result.title }}</h3>
+    <img *ngIf="image" [attr.src]="image">
+    <form class="answer-form" [formGroup]="formGroup">
+        <ng-container *ngFor="let value of _result.resultValues">
+            <div class="row" *ngIf="value">
+                <div class="col-10"><p>{{ value.text }}</p></div> 
+                <div class="col">
+                    <mat-radio-group formControlName="formId_{{ value.sortId }}" [disabled]="true">
+                        <mat-radio-button [value]="true">Tak</mat-radio-button>
+                        <mat-radio-button [value]="false">Nie</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </ng-container>
+    </form>
+</ng-container>
