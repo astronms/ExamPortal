@@ -159,10 +159,7 @@ namespace ExamPortal.Configuration
             CreateMap<ExamResult, UserScoreDTO>()
                 .ForMember(src => src.MaxScore, opt => opt.MapFrom(x => x.MaxScore))
                 .ForMember(src => src.Score, opt => opt.MapFrom(x => x.FinalScore))
-                .ForMember(x => x.Index, opt => opt.MapFrom(x => x.User.StudentInfo.Index))
-                .ForMember(src => src.FristName, opt => opt.MapFrom(x => x.User.FirstName))
-                .ForMember(src => src.LastName, opt => opt.MapFrom(x => x.User.LastName))
-                .ForMember(src => src.UserId, opt => opt.MapFrom(x => x.User.Id));
+                .ForMember(src=>src.User,opt=>opt.MapFrom(x=>x.User));
 
             #endregion
 
