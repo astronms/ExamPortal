@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { MinuteSecondsPipe } from '../pipes/minute-second.pipe';
 import { MatRadioModule } from '@angular/material/radio';
+import {  MatExpansionModule } from '@angular/material/expansion';
 import { YesNoResultTemplateComponent } from '../components/yes-no-result-template/yes-no-result-template.component';
 import { ClosedResultTemplateComponent } from '../components/closed-result-template/closed-result-template.component';
 import { OpenResultTemplateComponent } from '../components/open-result-template/open-result-template.component';
@@ -50,7 +51,8 @@ import { OpenResultTemplateComponent } from '../components/open-result-template/
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     MatDatepickerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatExpansionModule
   ],
   exports: [
     RouterModule,
@@ -66,6 +68,7 @@ import { OpenResultTemplateComponent } from '../components/open-result-template/
     MatInputModule,
     MatDialogModule,
     MatTabsModule,
+    MatExpansionModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     MatDatepickerModule,

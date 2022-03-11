@@ -9,12 +9,26 @@
         <h4>Egzamin: {{ examResult.name }}</h4>
         <h4>Zdobyte punkty: {{ examResult.finalScore }}/{{ examResult.maxScore }} </h4>
         <br />
-        <h4>Odpowiedzi:</h4>
-        <ng-container *ngFor="let result of examResult.resultTasks">
+        <!-- <ng-container *ngFor="let result of examResult.resultTasks">
           <br />
           <app-yes-no-result-template *ngIf="result.type === 'Yes-No'" [result]="result"></app-yes-no-result-template>
           <app-closed-result-template *ngIf="result.type === 'Closed'" [result]="result"></app-closed-result-template>
           <app-open-result-template *ngIf="result.type === 'Opened'" [result]="result"></app-open-result-template>
-       </ng-container>
+       </ng-container>-->
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let result of examResult.resultTasks | keyvalue">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <p class="question-text">{{ +result.key + 1 }}. {{ result.value.title }}</p>
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ result.value.taskScore }}/{{ result.value.taskMaxScore }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-yes-no-result-template *ngIf="result.value.type === 'Yes-No'" [result]="result.value"></app-yes-no-result-template>
+          <app-closed-result-template *ngIf="result.value.type === 'Closed'" [result]="result.value"></app-closed-result-template>
+          <app-open-result-template *ngIf="result.value.type === 'Opened'" [result]="result.value"></app-open-result-template>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div> <!-- end of container -->
   </section>

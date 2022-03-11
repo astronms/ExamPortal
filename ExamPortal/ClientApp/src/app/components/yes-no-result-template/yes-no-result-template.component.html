@@ -1,5 +1,4 @@
 <ng-container *ngIf="_result">
-    <h3>{{ _result.title }}</h3>
     <img *ngIf="image" [attr.src]="image">
     <form class="answer-form" [formGroup]="formGroup">
         <ng-container *ngFor="let item of _result.resultValues | keyvalue">
@@ -15,6 +14,5 @@
                 </div>
             </div>
         </ng-container>
-        <p><strong>Wynik: {{ _result.taskScore }}/{{ _result.taskMaxScore }}</strong></p>
     </form>
 </ng-container>

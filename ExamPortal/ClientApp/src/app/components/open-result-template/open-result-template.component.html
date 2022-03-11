@@ -1,5 +1,4 @@
 <ng-container *ngIf="_result">
-    <h3>{{ _result.title }}</h3>
     <img *ngIf="image" [attr.src]="image">
     <form class="answer-form" [formGroup]="formGroup" [disabled]="true">
         <ng-container *ngFor="let item of _result.resultValues | keyvalue">
@@ -14,5 +13,4 @@
             <mat-icon [ngStyle]="{'color':'green'}" *ngIf="resultCorrectness[item.key]">done</mat-icon>
         </ng-container>
     </form>
-    <p><strong>Wynik: {{ _result.taskScore }}/{{ _result.taskMaxScore }}</strong></p>
 </ng-container>

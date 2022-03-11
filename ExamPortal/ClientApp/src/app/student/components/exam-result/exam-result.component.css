@@ -1,0 +1,8 @@
+.question-text {
+    font-weight: bold;
+    font-size: large;
+}
+
+.mat-expansion-panel-header-title {
+    min-width: 80%;
+}
