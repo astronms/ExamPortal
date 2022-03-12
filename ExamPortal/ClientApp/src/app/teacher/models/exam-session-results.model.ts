@@ -1,6 +1,11 @@
-import { ExamResultModel } from "src/app/models/exam-result-model";
+import { UserModel } from "src/app/models/user.model";
 
 export interface ExamSessionResultsModel {
     sessionResultId: number;
-    exams: ExamResultModel[];
+    sessionId: number;
+    usersScore: {
+        user: UserModel;
+        score: number;
+        maxScore: number;
+    }[];
 }

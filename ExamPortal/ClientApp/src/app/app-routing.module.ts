@@ -28,6 +28,7 @@ import { TeacherCreatorComponent } from './admin/components/teacher-creator/teac
 import { ExamSessionResultComponent } from './teacher/components/exam-session-result/exam-session-result.component';
 import { ExamsResultsListComponent } from './student/components/exams-results-list/exams-results-list.component';
 import { ExamResultComponent } from './student/components/exam-result/exam-result.component';
+import { ExamSessionStudentResultComponent } from './teacher/components/exam-session-student-result/exam-session-student-result.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
   { path: 'teacher/delete-course/:id', component: CourseDeleteComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/results-list', component: ExamSessionResultsListComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'teacher/exam-result/:id', component: ExamSessionResultComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
+  { path: 'teacher/exam-student-result/:id/:userId', component: ExamSessionStudentResultComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.Admin}},
   { path: 'admin/teacher-create', component: TeacherCreatorComponent, canActivate: [AuthGuard], data: {roles: RoleEnum.SuperAdmin}},
   { path: '**', component: PageNotFoundComponent }
 ]

@@ -116,37 +116,6 @@ export class ExamSessionService {
     );
   }
 
-  /*getExamSessionResults(examSessionGuid: string) : Observable<ExamSessionResultsModel>
-  {
-    return this.http.get<ExamSessionResultsModel>(this.baseUrl + 'api/auth/Session/' + examSessionGuid + '/result').pipe(
-      map(result => {
-        result.exams.forEach(exam => {
-          this.http.get<UserModel>(this.baseUrl + 'api/Admin/' + exam.userId + '/info').subscribe(user => {
-            exam.user = user;
-          });
-        })
-        return result; 
-      }),
-      catchError(this.handleError)
-    );
-  }
-
-  async getStudentsWithExamResults(examSessionGuid: string) : Promise<any>
-  {
-    var students: UserModel[] = [];
-    this.getExamSessionResults(examSessionGuid).toPromise().then(result => {
-      result.exams.forEach(exam => {
-        let student = exam.user;
-        //exam.user = null;
-        //student.studentInfo.examResult = exam;
-        console.log(exam);
-        console.log(exam.user);
-        students.push(student);
-      });
-    });
-    return students;
-  }*/
-
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);

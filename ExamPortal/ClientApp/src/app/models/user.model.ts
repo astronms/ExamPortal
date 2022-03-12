@@ -10,6 +10,8 @@ export interface UserModel {
     studentInfo?: StudentInfoModel;
     role?: RoleEnum;
     token?: string;
+    score?: number;
+    maxScore?: number;
 }
 
 export interface StudentInfoModel {

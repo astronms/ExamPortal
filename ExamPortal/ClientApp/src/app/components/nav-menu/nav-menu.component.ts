@@ -18,8 +18,8 @@ export class NavMenuComponent {
   };
 
   teacher_items = {
-    "Wyniki": "teacher/results-list",
     "Kursy": "teacher/courses-list",
+    "Wyniki": "teacher/results-list",
     "Egzaminy": "teacher/exams-list"
   };
 

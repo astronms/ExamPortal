@@ -6,15 +6,10 @@
   
   <section class="services-00 d-flex align-items-center py-5" id="services">
     <div class="container text-light" *ngIf="examResult">
-        <h4>Egzamin: {{ examResult.name }}</h4>
-        <h4>Zdobyte punkty: {{ examResult.finalScore }}/{{ examResult.maxScore }} </h4>
-        <br />
-        <!-- <ng-container *ngFor="let result of examResult.resultTasks">
-          <br />
-          <app-yes-no-result-template *ngIf="result.type === 'Yes-No'" [result]="result"></app-yes-no-result-template>
-          <app-closed-result-template *ngIf="result.type === 'Closed'" [result]="result"></app-closed-result-template>
-          <app-open-result-template *ngIf="result.type === 'Opened'" [result]="result"></app-open-result-template>
-       </ng-container>-->
+      <div class="exam-info">
+        <p>Egzamin: {{ examResult.name }}</p>
+        <p>Zdobyte punkty: {{ examResult.finalScore }}/{{ examResult.maxScore }} </p>
+      </div>
       <mat-accordion>
         <mat-expansion-panel *ngFor="let result of examResult.resultTasks | keyvalue">
           <mat-expansion-panel-header>
@@ -30,5 +25,7 @@
           <app-open-result-template *ngIf="result.value.type === 'Opened'" [result]="result.value"></app-open-result-template>
         </mat-expansion-panel>
       </mat-accordion>
+      <br />
+      <button class="btn btn-sm" [routerLink]="['/student/exams-results']">Wróć</button>
     </div> <!-- end of container -->
   </section>

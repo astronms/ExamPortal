@@ -1,0 +1,32 @@
+<div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Wynik Egzaminu</span></h2>  
+    </div> 
+  </div>
+  
+  <section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light" *ngIf="examResult">
+        <div class="exam-info">
+            <p>Student: {{ student.firstName }} {{ student.lastName }}</p>
+            <p>Egzamin: {{ examResult.name }}</p>
+            <p>Zdobyte punkty: {{ examResult.finalScore }}/{{ examResult.maxScore }} </p>
+        </div>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let result of examResult.resultTasks | keyvalue">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                <p class="question-text">{{ +result.key + 1 }}. {{ result.value.title }}</p>
+                </mat-panel-title>
+                <mat-panel-description>
+                {{ result.value.taskScore }}/{{ result.value.taskMaxScore }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-yes-no-result-template *ngIf="result.value.type === 'Yes-No'" [result]="result.value"></app-yes-no-result-template>
+            <app-closed-result-template *ngIf="result.value.type === 'Closed'" [result]="result.value"></app-closed-result-template>
+            <app-open-result-template *ngIf="result.value.type === 'Opened'" [result]="result.value"></app-open-result-template>
+            </mat-expansion-panel>
+        </mat-accordion>
+      <br />
+      <button class="btn btn-sm" [routerLink]="['/teacher/exam-result/', examSessionId]">Wróć</button>
+    </div> <!-- end of container -->
+  </section>

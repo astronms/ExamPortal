@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserModel } from 'src/app/models/user.model';
-import { CourseService } from '../../services/course.service';
+import { StudentsService } from '../../services/students.service';
 
 @Component({
   selector: 'app-students-list-template',
@@ -12,11 +12,12 @@ import { CourseService } from '../../services/course.service';
 export class StudentsListTemplateComponent implements OnInit {
 
   dataSource: MatTableDataSource<UserModel>;
-  columnsToDisplay: string[] = ['index', 'firstName', 'lastName', 'studentIndex'];
   private paginator: MatPaginator;
-  @Input() selectedUsers: UserModel[];
+  @Input() columnsToDisplay: string[] = ['index', 'firstName', 'lastName', 'studentIndex'];
+  @Input() selectedUsers: UserModel[] = [];
   @Input() users: UserModel[];
   @Output() selectedUsersChange : EventEmitter<UserModel[]> = new EventEmitter<UserModel[]>();
+  @Output() userClicked : EventEmitter<UserModel> = new EventEmitter<UserModel>();
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     if(this.dataSource)
@@ -25,13 +26,13 @@ export class StudentsListTemplateComponent implements OnInit {
 
 
   constructor(
-    private courseService: CourseService
+    private studentsService: StudentsService
   ) { }
 
   ngOnInit(): void {
     if(this.users == null)
     {
-      this.courseService.getListOfStudents()
+      this.studentsService.getListOfStudents()
         .subscribe(result => {
           this.dataSource = new MatTableDataSource<UserModel>(result);
           this.dataSource.paginator = this.paginator;
@@ -47,6 +48,11 @@ export class StudentsListTemplateComponent implements OnInit {
     return this.selectedUsersChange.observers.length > 0;
   }
 
+  get isClickable() : boolean
+  {
+    return this.userClicked.observers.length > 0;
+  }
+
   isUserSelected(user: UserModel) : boolean
   {
     return this.selectedUsers.filter(item => item.email == user.email).length > 0;
@@ -60,6 +66,7 @@ export class StudentsListTemplateComponent implements OnInit {
       this.selectedUsers.push(user);
 
     this.selectedUsersChange.emit(this.selectedUsers);
+    this.userClicked.emit(user);
   }
 
 }

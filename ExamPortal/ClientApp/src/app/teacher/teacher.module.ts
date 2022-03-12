@@ -23,6 +23,9 @@ import { ExamSessionEditComponent } from './components/exam-session-edit/exam-se
 import { ExamSessionResultsListComponent } from './components/exam-session-results-list/exam-session-results-list.component';
 import { UploadResultDialogComponent } from './components/upload-result-dialog-template/upload-result-dialog-template.component';
 import { ExamSessionResultComponent } from './components/exam-session-result/exam-session-result.component';
+import { ExamSessionResultService } from './services/exam-session-result.service';
+import { ExamSessionStudentResultComponent } from './components/exam-session-student-result/exam-session-student-result.component';
+import { StudentsService } from './services/students.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { ExamSessionResultComponent } from './components/exam-session-result/exa
     ExamSessionEditComponent,
     ExamSessionResultsListComponent,
     UploadResultDialogComponent,
-    ExamSessionResultComponent
+    ExamSessionResultComponent,
+    ExamSessionStudentResultComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +55,9 @@ import { ExamSessionResultComponent } from './components/exam-session-result/exa
   ],
   providers: [
     ExamSessionService,
-    CourseService
+    ExamSessionResultService,
+    CourseService,
+    StudentsService
   ]
 })
 export class TeacherModule { } 
