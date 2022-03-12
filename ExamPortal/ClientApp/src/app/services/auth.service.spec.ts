@@ -1,6 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 
-import { TestBed } from "@angular/core/testing";
+import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { JwtModule } from "@auth0/angular-jwt";
 import { RoleEnum } from "../enums/role.enum";
 import { UserModel } from "../models/user.model";
@@ -115,12 +115,19 @@ describe('AuthService', () => {
         
         authService.login(expectedUser).subscribe(
             result => {
-                expect(result).toEqual(true);
+                expect(result).toBeDefined();
             },
             err => {
                 fail("Shouldn't return error.");
             }
         );
+
+        const exampleUser: UserModel = {
+            email: "admin@admin.com",
+            firstName: "Admin",
+            lastName: "Admin",
+            role: RoleEnum.Admin
+        };
 
         const req = httpTestingController.expectOne(baseUrl + 'api/Account/login');
         req.flush(
@@ -129,6 +136,8 @@ describe('AuthService', () => {
             }, 
             { status: 202, statusText: 'Authorized' }
         );
+        const reqUserInfo = httpTestingController.expectOne(baseUrl + 'api/Account/info');
+        reqUserInfo.flush(exampleUser, { status: 202, statusText: 'Success' });
 
         let userString = localStorage.getItem("user");
         let user: UserModel = JSON.parse(userString);
@@ -147,12 +156,19 @@ describe('AuthService', () => {
         
         authService.login(expectedUser).subscribe(
             result => {
-                expect(result).toEqual(true);
+                expect(result).toBeDefined();
             },
             err => {
                 fail("Shouldn't return error.");
             }
         );
+
+        const exampleUser: UserModel = {
+            email: "admin@admin.com",
+            firstName: "Admin",
+            lastName: "Admin",
+            role: RoleEnum.Admin
+        }
 
         const req = httpTestingController.expectOne(baseUrl + 'api/Account/login');
         req.flush(
@@ -161,6 +177,9 @@ describe('AuthService', () => {
             }, 
             { status: 202, statusText: 'Authorized' }
         );
+        const reqUserInfo = httpTestingController.expectOne(baseUrl + 'api/Account/info');
+        reqUserInfo.flush(exampleUser, { status: 202, statusText: 'Success' });
+
 
         expect(authService.isUserAuthenticated()).toBeFalsy();
     });
@@ -179,12 +198,19 @@ describe('AuthService', () => {
         
         authService.login(expectedUser).subscribe(
             result => {
-                expect(result).toEqual(true);
+                expect(result).toBeDefined();
             },
             err => {
                 fail("Shouldn't return error.");
             }
         );
+
+        const exampleUser: UserModel = {
+            email: "admin@admin.com",
+            firstName: "Admin",
+            lastName: "Admin",
+            role: RoleEnum.Admin
+        }
 
         const req = httpTestingController.expectOne(baseUrl + 'api/Account/login');
         req.flush(
@@ -193,6 +219,9 @@ describe('AuthService', () => {
             }, 
             { status: 202, statusText: 'Authorized' }
         );
+        const reqUserInfo = httpTestingController.expectOne(baseUrl + 'api/Account/info');
+        reqUserInfo.flush(exampleUser, { status: 202, statusText: 'Success' });
+
 
         expect(authService.userRole).toEqual(RoleEnum.Admin); 
     });
@@ -206,12 +235,19 @@ describe('AuthService', () => {
         
         authService.login(expectedUser).subscribe(
             result => {
-                expect(result).toEqual(true);
+                expect(result).toBeDefined();
             },
             err => {
                 fail("Shouldn't return error.");
             }
         );
+
+        const exampleUser: UserModel = {
+            email: "admin@admin.com",
+            firstName: "Admin",
+            lastName: "Admin",
+            role: RoleEnum.Admin
+        }
 
         const req = httpTestingController.expectOne(baseUrl + 'api/Account/login');
         req.flush(
@@ -220,6 +256,9 @@ describe('AuthService', () => {
             }, 
             { status: 202, statusText: 'Authorized' }
         );
+        const reqUserInfo = httpTestingController.expectOne(baseUrl + 'api/Account/info');
+        reqUserInfo.flush(exampleUser, { status: 202, statusText: 'Success' });
+
 
         authService.logOut();
 

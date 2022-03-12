@@ -19,11 +19,13 @@ export class NavMenuComponent {
 
   teacher_items = {
     "Kursy": "teacher/courses-list",
+    "Wyniki": "teacher/results-list",
     "Egzaminy": "teacher/exams-list"
   };
 
   student_items = {
-    "Egzaminy": "student/exams-list"
+    "Egzaminy": "student/exams-list",
+    "Wyniki": "student/exams-results"
   };
 
   constructor(private router: Router, public authService: AuthService ) { }

@@ -1,4 +1,5 @@
 import { RoleEnum } from "../enums/role.enum";
+import { ExamResultModel } from "./exam-result-model";
 
 export interface UserModel {
     id?: number;
@@ -9,8 +10,11 @@ export interface UserModel {
     studentInfo?: StudentInfoModel;
     role?: RoleEnum;
     token?: string;
+    score?: number;
+    maxScore?: number;
 }
 
 export interface StudentInfoModel {
     index: number;
+    examResult?: ExamResultModel;
 }

@@ -1,0 +1,16 @@
+<div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Ukończone Egzaminy</span></h2>  
+    </div> 
+</div>
+
+<section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+        <app-exam-sessions-table-template 
+            [columnsToDisplay]="displayedColumns" 
+            [data]="examSessions" 
+            [actions]="teacherActions"
+            (actionClick)="onActionClicked($event)">
+        </app-exam-sessions-table-template>
+    </div> <!-- end of container -->
+</section>

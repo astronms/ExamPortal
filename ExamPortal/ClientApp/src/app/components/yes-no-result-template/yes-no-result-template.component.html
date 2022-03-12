@@ -1,0 +1,18 @@
+<ng-container *ngIf="_result">
+    <img *ngIf="image" [attr.src]="image">
+    <form class="answer-form" [formGroup]="formGroup">
+        <ng-container *ngFor="let item of _result.resultValues | keyvalue">
+            <div class="row" *ngIf="item.value">
+                <div class="col-10"><p>{{ item.value.value }}</p></div> 
+                <div class="col">
+                    <mat-radio-group formControlName="formId_{{ item.key }}" [disabled]="true">
+                        <mat-radio-button [value]="true" color="red">Tak</mat-radio-button>
+                        <mat-radio-button [value]="false">Nie</mat-radio-button>
+                        <mat-icon [ngStyle]="{'color':'red'}" *ngIf="!resultCorrectness[item.key]">clear</mat-icon>
+                        <mat-icon [ngStyle]="{'color':'green'}" *ngIf="resultCorrectness[item.key]">done</mat-icon>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </ng-container>
+    </form>
+</ng-container>

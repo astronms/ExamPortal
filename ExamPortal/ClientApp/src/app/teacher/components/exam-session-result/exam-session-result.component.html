@@ -1,0 +1,15 @@
+<div class="container text-light py-5 aos-init aos-animate" data-aos="fade-right"> 
+    <div class="text-center pb-4 mt-3">
+        <h2 class="headline"><span class="home_text">Wynik egzaminu</span></h2>  
+    </div> 
+</div> 
+
+<section class="services-00 d-flex align-items-center py-5" id="services">
+    <div class="container text-light">
+        <app-students-list-template *ngIf="usersWithScore.length > 0" 
+            [users]="usersWithScore" 
+            [columnsToDisplay]="columnsToDisplay"
+            (userClicked)="userClicked($event)" >
+        </app-students-list-template>
+    </div> <!-- end of container -->
+</section>
