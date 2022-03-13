@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { PersonalExamInfoModel } from '../models/personal-exam-info.model';
 import { QuestionModel } from '../models/question.model';
 import { AnswerModel } from '../models/answer.model';
+import { ExamResultModel } from 'src/app/models/exam-result-model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,13 @@ export class SyncExamService {
         }
         return this.handleError(err);
       })
+    );
+  }
+
+  getExamResult(examResultGuid: string) : Observable<ExamResultModel>
+  {
+    return this.http.get<ExamResultModel>(this.baseUrl + 'api/auth/Exam/' + examResultGuid + '/result').pipe(
+      catchError(this.handleError)
     );
   }
 

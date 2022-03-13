@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Przesyłanie pliku wynikowego</h1>
+<ng-container *ngIf="sessionId && session">
+  <p>Wybierz plik wynikowy dla egzaminu:</p>
+  <p><strong>{{ session.name }}</strong></p>
+  <br />
+  <form [formGroup]="formGroup">
+    <input type="file" class="file-input"
+      formControlName="file"
+      accept=".xml,.XML"
+      (change)="onFileSelected($event)" #fileUpload>
+
+    <div class="file-upload">
+
+      {{fileName || "Brak wybranego pliku."}}
+
+      <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button (click)="confirm()">Zapisz</button>
+    <button mat-button (click)="close()">Wróć</button>
+  </div>
+</ng-container>
+

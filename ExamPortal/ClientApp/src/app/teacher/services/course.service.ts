@@ -76,14 +76,6 @@ export class CourseService {
     );
   }
 
-  getListOfStudents() : Observable<UserModel[]>
-  {
-    return this.http.get<UserModel[]>(this.baseUrl + 'api/auth/Student')
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
-
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);

@@ -19,7 +19,9 @@ export class ExamSessionsListComponent implements OnInit {
   ];
 
 
-  constructor(private examSessionService: ExamSessionService) { }
+  constructor(
+    private examSessionService: ExamSessionService
+  ) { }
 
   ngOnInit() {
     this.examSessionService.getListOfExamSessions().subscribe(result => {

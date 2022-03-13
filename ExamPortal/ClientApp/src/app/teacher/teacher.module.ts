@@ -9,7 +9,6 @@ import { ExamSessionComponent } from './components/exam-session/exam-session.com
 import { ExamSessionsListComponent } from './components/exam-sessions-list/exam-sessions-list.component';
 import { ExamSessionCreatorComponent } from './components/exam-session-creator/exam-session-creator.component';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
-import { ExamSessionTableTemplateComponent } from '../components/exam-sessions-table-template/exam-sessions-table-template.component';
 import { CourseCreatorComponent } from './components/course-creator/course-creator.component';
 import { CourseComponent } from './components/course/course.component';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
@@ -21,6 +20,12 @@ import { ExamSessionModifyTemplateComponent } from './components/exam-session-mo
 import { SuccessDialogComponent } from './components/success-dialog-template/success-dialog-template.component';
 import { ExamSessionDeleteComponent } from './components/exam-session-delete/exam-session-delete.component';
 import { ExamSessionEditComponent } from './components/exam-session-edit/exam-session-edit.component';
+import { ExamSessionResultsListComponent } from './components/exam-session-results-list/exam-session-results-list.component';
+import { UploadResultDialogComponent } from './components/upload-result-dialog-template/upload-result-dialog-template.component';
+import { ExamSessionResultComponent } from './components/exam-session-result/exam-session-result.component';
+import { ExamSessionResultService } from './services/exam-session-result.service';
+import { ExamSessionStudentResultComponent } from './components/exam-session-student-result/exam-session-student-result.component';
+import { StudentsService } from './services/students.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,11 @@ import { ExamSessionEditComponent } from './components/exam-session-edit/exam-se
     CoursesListTemplateComponent,
     CourseDeleteComponent,
     SuccessDialogComponent,
-    ExamSessionEditComponent
+    ExamSessionEditComponent,
+    ExamSessionResultsListComponent,
+    UploadResultDialogComponent,
+    ExamSessionResultComponent,
+    ExamSessionStudentResultComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +55,9 @@ import { ExamSessionEditComponent } from './components/exam-session-edit/exam-se
   ],
   providers: [
     ExamSessionService,
-    CourseService
+    ExamSessionResultService,
+    CourseService,
+    StudentsService
   ]
 })
 export class TeacherModule { } 

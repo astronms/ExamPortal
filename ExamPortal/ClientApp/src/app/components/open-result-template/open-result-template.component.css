@@ -1,0 +1,19 @@
+.answer-form {
+    min-width: 150px;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+.answer-full-width {
+    width: 30%;
+    padding-bottom: 5px;
+}
+
+.mat-icon { 
+  vertical-align: middle !important;
+  margin-left: 10px; 
+}
+
+img {
+  margin: 10px 0 10px;
+}

@@ -1,0 +1,5 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+.mat-icon { vertical-align: middle !important; }
