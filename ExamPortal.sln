@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamPortal", ".\ExamPortal\ExamPortal.csproj", "{D76D4DCC-4B47-413D-8F82-551D5A2CCE0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamPortal", "ExamPortal\ExamPortal.csproj", "{D76D4DCC-4B47-413D-8F82-551D5A2CCE0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamPortal.Tests", ".\ExamPortal.Tests\ExamPortal.Tests.csproj", "{664E7327-8ED8-4250-91EE-DC08084037D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamPortal.Tests", "ExamPortal.Tests\ExamPortal.Tests.csproj", "{664E7327-8ED8-4250-91EE-DC08084037D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
