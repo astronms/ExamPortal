@@ -15,6 +15,7 @@ namespace ExamPortal.Data.ExamData
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public string SessionType { get; set; }
 
         public virtual IList<Exam> Exams { get; set; }
 
