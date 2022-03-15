@@ -11,12 +11,12 @@ using Task = System.Threading.Tasks.Task;
 
 namespace ExamPortal.Repository
 {
-    public class GenricRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DatabaseContext _context;
         private readonly DbSet<T> _db;
 
-        public GenricRepository(DatabaseContext context)
+        public GenericRepository(DatabaseContext context)
         {
             _context = context;
             _db = _context.Set<T>();
