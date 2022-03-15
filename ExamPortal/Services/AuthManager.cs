@@ -18,9 +18,9 @@ namespace ExamPortal.Services
         private readonly IConfiguration _configuration;
         private User _user;
 
-        public AuthManager(UserManager<User> usreManager, IConfiguration configuration)
+        public AuthManager(UserManager<User> userManager, IConfiguration configuration)
         {
-            _userManager = usreManager;
+            _userManager = userManager;
             _configuration = configuration;
         }
         public async Task<bool> ValidateUser(LoginUserDTO userDTO)

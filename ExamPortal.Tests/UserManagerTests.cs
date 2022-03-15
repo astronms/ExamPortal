@@ -34,7 +34,7 @@ namespace ExamPortal.Tests
                 {FirstName = "Firs3", LastName = "Last3", Email = "test3@test.pl", Id = Guid.NewGuid().ToString()};
             var password = "zaq1@WSX!";
 
-            var result = await _userManager.CreateAsync(newUser, password);
+            await _userManager.CreateAsync(newUser, password);
 
             Assert.Equal(3, _users.Count);
         }

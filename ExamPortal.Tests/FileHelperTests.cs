@@ -47,7 +47,7 @@ namespace ExamPortal.Tests
         }
 
         [Fact]
-        public void CheckIfZipFile_With_Zip_Format()
+        public void CheckIfZipFile_with_zip_format_return_true()
         {
             var fileMock = new Mock<IFormFile>();
             var fileName = "test.zip";
