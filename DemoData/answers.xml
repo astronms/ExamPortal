@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-16"?>
+<session xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="a4568e48-e2a5-4c5f-ae8c-f323a5f3fee9">
+  <exam id="606c6f1c-ddf3-4d6d-ac93-4fd38d2a29aa" userId="c4d871e9-e274-4bd8-b4a3-5f34e1f83bd9">
+    <task id="2">
+      <answers>
+        <value>True</value>
+        <value>False</value>
+      </answers>
+    </task>
+    <task id="1">
+      <answers>
+        <value>False</value>
+        <value>True</value>
+        <value>True</value>
+      </answers>
+    </task>
+    <task id="4">
+      <answers>
+        <value>7</value>
+        <value>6</value>
+        <value>4</value>
+        <value>B:1,C:2,D:4</value>
+      </answers>
+    </task>
+    <task id="3">
+      <answers>
+        <value>true</value>
+        <value>false</value>
+        <value>false</value>
+        <value>false</value>
+      </answers>
+    </task>
+  </exam>
+  <exam id="606c6f1c-ddf3-4d6d-ac93-4fd38d2a29aa" userId="422657e4-5619-4979-97c2-4ad1c28c2221">
+    <task id="2">
+      <answers>
+        <value>True</value>
+        <value>False</value>
+      </answers>
+    </task>
+    <task id="1">
+      <answers>
+        <value>False</value>
+        <value>True</value>
+        <value>True</value>
+      </answers>
+    </task>
+    <task id="4">
+      <answers>
+        <value>5</value>
+        <value>234</value>
+        <value />
+        <value />
+      </answers>
+    </task>
+    <task id="3">
+      <answers>
+        <value>false</value>
+        <value>false</value>
+        <value>false</value>
+        <value>false</value>
+      </answers>
+    </task>
+  </exam>
+</session>
