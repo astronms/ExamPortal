@@ -14,7 +14,7 @@ export class ExamSessionTableTemplateComponent {
   @Input() set data(value) {
     this.dataSource = new MatTableDataSource<any>(value);
     if(this.dataSource)
-      setTimeout(()=>{ this.dataSource.paginator = this.paginator }, 50); //remove this delay once examSessions will be taken from backend
+      this.dataSource.paginator = this.paginator;
   };
   @Input() columnsToDisplay : string[];
   @Input() actions: TableActionsModel[];

@@ -23,6 +23,7 @@ import {  MatExpansionModule } from '@angular/material/expansion';
 import { YesNoResultTemplateComponent } from './components/yes-no-result-template/yes-no-result-template.component';
 import { ClosedResultTemplateComponent } from './components/closed-result-template/closed-result-template.component';
 import { OpenResultTemplateComponent } from './components/open-result-template/open-result-template.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { OpenResultTemplateComponent } from './components/open-result-template/o
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ],
   exports: [
     RouterModule,
@@ -69,6 +71,7 @@ import { OpenResultTemplateComponent } from './components/open-result-template/o
     MatDialogModule,
     MatTabsModule,
     MatExpansionModule,
+    MatSelectModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     MatDatepickerModule,

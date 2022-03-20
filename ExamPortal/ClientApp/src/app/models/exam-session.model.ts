@@ -1,3 +1,4 @@
+import { ExamTypesEnum } from "../teacher/enums/exam-types.enum";
 import { CourseModel } from "../teacher/models/course.model";
 
 export interface ExamSessionModel {
@@ -8,6 +9,7 @@ export interface ExamSessionModel {
     endDate: Date;
     courseId?: number;
     course?: CourseModel;
+    type?: ExamTypesEnum;
     totalMembers?: number;
     participatedMembers?: number;
     score?: number;

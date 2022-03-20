@@ -1,11 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable} from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError, delay, } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
-import { UserModel } from 'src/app/models/user.model';
 import { CourseModel } from '../models/course.model';
-import { ExamSessionResultsModel } from '../models/exam-session-results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,12 +47,14 @@ export class ExamSessionService {
 
   addExamSession(exam: ExamSessionModel, file: File) : Observable<any>
   {
+    console.log(exam);
     const formData = new FormData();
     formData.append("File", file);
     formData.append("Name", exam.name);
     formData.append("StartDate", exam.startDate.toLocaleString());
     formData.append("EndDate", exam.endDate.toLocaleString());
     formData.append("CourseId", exam.courseId.toString());
+    formData.append("Type", exam.type);
     return this.http.post(this.baseUrl + 'api/auth/Session', formData)
     .pipe(
       catchError(this.handleError)
@@ -69,6 +69,7 @@ export class ExamSessionService {
     formData.append("StartDate", exam.startDate.toLocaleString());
     formData.append("EndDate", exam.endDate.toLocaleString());
     formData.append("CourseId", exam.courseId.toString());
+    formData.append("Type", exam.type);
     return this.http.put(this.baseUrl + 'api/auth/Session/' + exam.sessionId, formData)
     .pipe(
       catchError(this.handleError)
