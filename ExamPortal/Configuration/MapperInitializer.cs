@@ -65,7 +65,12 @@ namespace ExamPortal.Configuration
 
             CreateMap<Session, SessionDTO>().ReverseMap();
             CreateMap<Session, StudentSessionDTO>().ReverseMap();
-            CreateMap<Session, CreateSessionDTO>().ReverseMap();
+            CreateMap<Session, CreateSessionDTO>()
+                .ForMember(src => src.Name, opt => opt.MapFrom(x => x.Name))
+                .ForMember(src => src.CourseId, opt => opt.MapFrom(x => x.CourseId))
+                .ForMember(src => src.Type, opt => opt.MapFrom(x => x.SessionType))
+                .ForMember(src => src.StartDate, opt => opt.MapFrom(x => x.StartDate))
+                .ForMember(src => src.EndDate, opt => opt.MapFrom(x => x.EndDate)).ReverseMap();
             CreateMap<Session, UpdateSessionDTO>().ReverseMap();
             CreateMap<SessionDTO, CreateSessionDTO>().ReverseMap();
             CreateMap<Session, ExecutedSessionDTO>().ReverseMap();

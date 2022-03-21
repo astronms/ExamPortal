@@ -70,6 +70,7 @@ namespace ExamPortal.Data
         public DbSet<Exam> Exams { get; set; }
 
         public DbSet<ExamAnswers> ExamAnswers { get; set; }
+        public DbSet<TaskAnswers> TaskAnswers { get; set; }
 
         public DbSet<SessionResult> SessionsResult { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
