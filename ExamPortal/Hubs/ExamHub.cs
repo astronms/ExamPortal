@@ -87,7 +87,7 @@ namespace ExamPortal.Hubs
 
                     if (currentTime > sumTime ||( activatedExam.ExamAnswers.TaskAnswers.Count == index + 1 && activatedExam.Exam.Session.SessionType == "async"))
                     {
-                        if (activatedExam.Exam.Task.Count != index + 1 )
+                        if (activatedExam.Exam.Task.Count == index + 1 )
                         {
                             activatedExam.IsFinish = true;
                         }
