@@ -6,6 +6,15 @@
               <input matInput placeholder="Nazwa" formControlName="examSessionName" [(ngModel)]='examSession.name' required>
             </mat-form-field>
             <br />
+            <mat-form-field appearance="fill">
+                <mat-label>Typ egzaminu</mat-label>
+                <mat-select formControlName="type" [(ngModel)]="examSession.type" required>
+                    <mat-option *ngFor="let examType of availableExamTypes" [value]="examType.value">
+                            {{examType.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
             <mat-form-field>
                 <input matInput [ngxMatDatetimePicker]="picker" 
                     placeholder="Wybierz datę startu" 

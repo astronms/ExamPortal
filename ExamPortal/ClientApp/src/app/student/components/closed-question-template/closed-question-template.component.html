@@ -14,6 +14,10 @@
         </mat-radio-group>
         <!-- <mat-error *ngIf="formGroup.get('option').hasError('required') && questionForm.submitted">Proszę wybrać odpowiedź.</mat-error> -->
         <br />
-        <button class="btn btn-sm btn-block" (click)="onSubmit()">Zapisz</button>
+        <button *ngIf="!answerSent" class="btn btn-sm btn-block" (click)="onSubmit()">Zapisz</button>
+        <ng-container *ngIf="answerSent">
+            <button class="btn btn-sm btn-block" disabled>Zapisz</button>
+            <label style="margin-left: 10px;">Odpowiedź zapisana. Poczekaj na następne pytanie.</label>
+        </ng-container>
     </form>
 </ng-container>

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { ExamSessionModel } from 'src/app/models/exam-session.model';
+import { ExamTypesEnum } from '../../enums/exam-types.enum';
 import { CourseModel } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 import { SuccessDialogComponent } from '../success-dialog-template/success-dialog-template.component';
@@ -21,6 +22,11 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
   courses: CourseModel[];
   displayedColumns: string[] = ['index', 'name', 'users', 'creationDate'];
 
+  availableExamTypes = [
+    {value: ExamTypesEnum.asyncExam, viewValue: 'Asynchroniczny'},
+    {value: ExamTypesEnum.syncExam, viewValue: 'Synchroniczny'},
+  ];
+
   fileName = '';
   file:File = null;
 
@@ -35,6 +41,7 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
     name: '',
     startDate: null,
     endDate: null,
+    type: null,
     courseId: null
   };
   @Output() saveClicked: EventEmitter<{examSession: ExamSessionModel; file: File}> = new EventEmitter<{examSession: ExamSessionModel; file: File}>();
@@ -51,6 +58,7 @@ export class ExamSessionModifyTemplateComponent implements OnInit {
       examSessionName: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      type: ['', Validators.required],
       file: ['', Validators.required]
     });
 

@@ -22,15 +22,14 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(["login"]);
         return false;
       }
-      if (route.data.roles && !route.data.roles.includes(user.role)) {
+      else if (route.data.roles && !route.data.roles.includes(user.role)) {
         this.router.navigate(['/']);
         return false;
       }
-
-      return true
+      else 
+        return true
     }
     this.router.navigate(["login"]);
     return false;
   }
-
 }

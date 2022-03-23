@@ -21,6 +21,7 @@ namespace ExamPortal.IRepository
         IGenericRepository<CourseUser> CourseUsers { get; }
         IGenericRepository<ActivatedExam> ActivatedExams { get; }
         IGenericRepository<ExamAnswers> ExamAnswers { get; }
+        IGenericRepository<TaskAnswers> TaskAnswers { get; }
         IGenericRepository<SessionResult> SessionResults { get; }
         IGenericRepository<ExamResult> ExamResults { get; }
 

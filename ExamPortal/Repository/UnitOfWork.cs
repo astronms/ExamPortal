@@ -22,6 +22,7 @@ namespace ExamPortal.Repository
         private IGenericRepository<CourseUser> _courseUser;
         private IGenericRepository<ActivatedExam> _activatedExams;
         private IGenericRepository<ExamAnswers> _examAnswers;
+        private IGenericRepository<TaskAnswers> _taskAnswers;
         private IGenericRepository<SessionResult> _sessionsResults;
         private IGenericRepository<ExamResult> _examResults;
 
@@ -37,6 +38,7 @@ namespace ExamPortal.Repository
         public IGenericRepository<CourseUser> CourseUsers => _courseUser ??=new GenericRepository<CourseUser>(_context);
         public IGenericRepository<ActivatedExam> ActivatedExams => _activatedExams ??= new GenericRepository<ActivatedExam>(_context);
         public IGenericRepository<ExamAnswers> ExamAnswers => _examAnswers ??= new GenericRepository<ExamAnswers>(_context);
+        public IGenericRepository<TaskAnswers> TaskAnswers => _taskAnswers ??= new GenericRepository<TaskAnswers>(_context);
         public IGenericRepository<SessionResult> SessionResults => _sessionsResults ??= new GenericRepository<SessionResult>(_context);
         public IGenericRepository<ExamResult> ExamResults => _examResults ??= new GenericRepository<ExamResult>(_context);
 
