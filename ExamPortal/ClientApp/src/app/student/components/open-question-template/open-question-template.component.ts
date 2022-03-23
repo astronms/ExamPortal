@@ -14,12 +14,16 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
   public image: string = null;
   public _question: QuestionModel
   public formGroup = new FormGroup({});
+  public answerSent: boolean = false; 
 
   @Input() set question(questionData: QuestionModel) {
     if(this._question)
     {
       if(questionData.taskId != this._question.taskId)
+      {
+        this.answerSent = false;
         this.refreshContent(questionData);
+      }
     }
     else
       this.refreshContent(questionData);
@@ -49,6 +53,7 @@ export class OpenQuestionTemplateComponent implements AfterContentInit {
         answer.values.push(answerValue);
       });
 
+      this.answerSent = true;
       this.answerSet.emit(answer);
     }
   }
